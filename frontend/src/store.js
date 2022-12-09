@@ -1,0 +1,103 @@
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+// Reducers
+import {
+    productListReducer,
+    productDetailsReducer,
+    doctorListReducer,
+    createDoctorReducer,
+    updateDoctorReducer,
+    updateAppointmentReducer,
+    cancelAppointmentDateReducer,
+    createDoctorDataReducer
+  
+} from './reducers/productReducers'
+import {  consultationListReducer,
+    createAppointmentReducer,
+    updateConsultationReducer,
+    consultantDetailsReducer,updateConsultationLinkReducer,
+    cancelAppointmentsReducer,
+    updatePrescriptionReducer
+} from './reducers/consultationReducers'
+import { cartReducer } from './reducers/cartReducers'
+import {
+    userLoginReducer,
+    userRegisterReducer,
+    userDetailsReducer,
+    userUpdateProfileReducer,
+    userInfoDetailsReducer,
+    userResetPasswordReducer
+} from './reducers/userReducers'
+import {
+    createOrderReducer,
+    orderDetailsReducer,
+    orderListUserReducer,
+    orderPayReducer,
+    updateOrderReducer,
+    allOrdersReducer
+} from './reducers/orderReducers'
+
+
+const reducer = combineReducers({
+    productList: productListReducer,
+    doctorList: doctorListReducer,
+    updateDoctor:updateDoctorReducer,
+    consultationList:consultationListReducer,
+    updateConsultation:updateConsultationReducer,
+    consultationLink:updateConsultationLinkReducer,
+    consultantDetails: consultantDetailsReducer,
+    cancelAppointments:cancelAppointmentsReducer,
+    updatePrescriptionData:updatePrescriptionReducer,
+    productDetails: productDetailsReducer,
+    createDoctor: createDoctorReducer,
+    createDoctorData:createDoctorDataReducer,
+    cart: cartReducer,
+    userLogin: userLoginReducer,
+    userRegister: userRegisterReducer,
+    userDetails: userDetailsReducer,
+    userUpdateProfile: userUpdateProfileReducer,
+    userInfoDetails:userInfoDetailsReducer,
+    userResetPassword:userResetPasswordReducer,
+    createOrder: createOrderReducer,
+    createAppointment: createAppointmentReducer,
+    updateAppointments:updateAppointmentReducer,
+    cancelAppointmentDates:cancelAppointmentDateReducer,
+    updateOrder:updateOrderReducer,
+    orderDetails: orderDetailsReducer,
+    orderPay: orderPayReducer,
+    orderListUser: orderListUserReducer,
+    allOrders: allOrdersReducer
+})
+
+const cartItemsFromStorage = localStorage.getItem('cartItems')
+    ? JSON.parse(localStorage.getItem('cartItems'))
+    : []
+
+const userInfoFromStorage = localStorage.getItem('userInfo')
+    ? JSON.parse(localStorage.getItem('userInfo'))
+    : null
+
+const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
+    ? JSON.parse(localStorage.getItem('shippingAddress'))
+    : {}
+
+// Load initial state when the application is loaded
+const initialState = {
+    cart: {
+        cartItems: cartItemsFromStorage,
+        shippingAddress: shippingAddressFromStorage,
+    },
+    userLogin: { userInfo: userInfoFromStorage },
+}
+
+const middleware = [thunk]
+
+const store = createStore(
+    reducer,
+    initialState,
+    composeWithDevTools(applyMiddleware(...middleware))
+)
+
+export default store

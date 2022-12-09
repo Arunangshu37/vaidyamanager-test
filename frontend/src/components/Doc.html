@@ -1,0 +1,178 @@
+
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Testimonial</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+    <style>
+        h3{
+            margin: 0;
+        }
+        a:hover, a:focus{
+            text-decoration: none;
+        }
+        .testimonial{
+            background: #4D241C ;
+            padding: 30px 32px 30px 90px;
+            margin: 50px 20px 50px 120px;
+            border-radius: 0 100px 100px 0;
+            color: #fff;
+            position: relative;
+            border: 5px solid #D0AB6D;
+        }
+        .testimonial .pic{
+            width: 210px;
+            height: 210px;
+            line-height: 200px;
+            border-radius: 50%;
+            border: 14px solid #D0AB6D;
+            position: absolute;
+            top: -15px;
+            left: -120px;
+            overflow: hidden;
+        }
+        .testimonial .pic img{
+            width: 100%;
+            height: 100%;
+        }
+        .testimonial .testimonial-info{
+            display: inline-block;
+            width: 35%;
+            
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 28px 25px;
+            margin: 0;
+            border-right: 1px solid #D0AB6D;
+        }
+        .testimonial .testimonial-info small{
+            display: block;
+            font-size: 12px;
+            color: #fff;
+            margin-top: 5px;
+        }
+        .testimonial .description{
+            display: inline-block;
+            width: 65%;
+            font-size: 15px;
+            color: #fff;
+            letter-spacing: 0.5px;
+            margin-bottom: 0;
+            padding: 28px 0 28px 28px;
+            position: relative;
+        }
+        .testimonial .description:before{
+            content: "\f10d";
+            font-family: fontawesome;
+            position: absolute;
+            top: 0;
+            left: 10px;
+            font-size: 20px;
+            color: #D0AB6D;
+        }
+        .testimonial .description:after{
+            content: "\f10e";
+            font-family: fontawesome;
+            font-size: 20px;
+            color: #D0AB6D;
+            position: absolute;
+            bottom: 5px;
+        }
+        .owl-theme .owl-controls .owl-page.active span,
+        .owl-theme .owl-controls .owl-page span{
+            width: 25px !important;
+            height: 7px !important;
+            background: #4D241C !important;
+            box-sizing: content-box;
+        }
+        .owl-theme .owl-controls .owl-page span{
+            border: 4px solid transparent;
+            background: #D0AB6D !important;
+        }
+        @media only screen and (max-width: 767px){
+            .testimonial{
+                border-radius: 40px;
+                margin: 90px 15px 0;
+                padding: 100px 40px 30px 40px;
+            }
+            .testimonial .pic{
+                position: absolute;
+                top: -85px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+            }
+            .testimonial .testimonial-info{
+                width: 100%;
+                float: none;
+                border-right: none;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            }
+            .testimonial .description{
+                width: 100%;
+            }
+        }
+        @media only screen and (max-width: 480px){
+            .testimonial{ padding: 100px 30px 30px; }
+        }
+    </style>
+    
+    </head>
+    <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <div id="testimonial-slider" class="owl-carousel">
+                    <div class="testimonial">
+                        <div class="pic">
+                            <img src="https://static.pexels.com/photos/529928/pexels-photo-529928.jpeg" alt="" class="img-responsive">
+                        </div>
+                        <h3 class="testimonial-info">
+                            krystal
+                            <small>Web Developer</small>
+                        </h3>
+                        <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi facilisis.</p>
+                    </div>
+    
+                    <div class="testimonial">
+                        <div class="pic">
+                            <img src="http://www.markharwood.plus.com/images/people%20large/people8.jpg" alt="" class="img-responsive">
+                        </div>
+                        <h3 class="testimonial-info">
+                            Diana
+                            <small>Web Designer</small>
+                        </h3>
+                        <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi facilisis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#testimonial-slider").owlCarousel({
+                items:1,
+                itemsDesktop:[1000,1],
+                itemsDesktopSmall:[979,1],
+                itemsTablet:[768,1],
+                pagination:true,
+                navigation:false,
+                navigationText:["",""],
+                slideSpeed:1000,
+                singleItem:true,
+                autoPlay:true
+            });
+        });
+    </script>
+    </body>
+    </html>
