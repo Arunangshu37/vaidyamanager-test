@@ -43,12 +43,15 @@ const Header = () => {
                     <Container>
                         <LinkContainer to='/'>
                             <Navbar.Brand>
-                                <img
+                                <h1 style={{color:"white"}}>Vaidya Manager</h1>
+                                {/* <img
                                     className="logo"
                                     // src={"images/mindvein.png"}
-                                    src={"http://localhost:3000/images/mindvein.png"}
-                                    alt="mindvein Brand Logo"
-                                />
+                                    src={"http://localhost:3000/images/vaidyalogo.png"}
+                                    alt="Vaidya Brand Logo"
+                                    width="87px"
+                                    height="50px"
+                                /> */}
                               {/* <img src={'images/mindvein.png'} /> */}
                             </Navbar.Brand>
                         </LinkContainer>
@@ -59,7 +62,7 @@ const Header = () => {
                             <Nav className='me-auto'>
                                 <LinkContainer to={`/`}>
                                     <Navbar.Brand>Home
-                                        &nbsp;  |&nbsp;
+                                        {/* &nbsp;  |&nbsp; */}
                                     </Navbar.Brand>
                                 </LinkContainer>
                                 {/* <LinkContainer to={`/demoReg`}>
@@ -72,11 +75,11 @@ const Header = () => {
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer> */}
-                                <LinkContainer to={isLogin ? `/consultation` : '/login'}>
+                                {/* <LinkContainer to={isLogin ? `/consultation` : '/login'}>
                                     <Navbar.Brand> Online Consultation
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
-                                </LinkContainer>
+                                </LinkContainer> */}
                                 {
                                     isLogin && isSuperAdmin ? <>
                                         <LinkContainer to={`/Role`}>
@@ -131,7 +134,7 @@ const Header = () => {
                                     </Navbar.Brand>
                                 </LinkContainer> */}
 
-                                <NavDropdown title="Know More" id="basic-nav-dropdown" renderMenuOnMount={true}>
+                                {/* <NavDropdown title="Know More" id="basic-nav-dropdown" renderMenuOnMount={true}>
                                     <NavDropdown.Item href="/about-us" >
                                         About Us
                                     </NavDropdown.Item>
@@ -147,18 +150,18 @@ const Header = () => {
                                     <NavDropdown.Item href="/refund-policy" >
                                         Refund Policy
                                     </NavDropdown.Item>
-                                </NavDropdown>
+                                </NavDropdown> */}
                             </Nav>
                         </Navbar.Collapse>
 
                         <Navbar.Collapse id='basic-navbar-nav'>
                             <Nav className='ml-auto' >
-                                <LinkContainer to='/cart' className='nav-link'>
+                                {/* <LinkContainer to='/cart' className='nav-link'>
                                     <Nav.Link>
                                         <i className='fa fa-shopping-cart mr-2'></i>
                                         Cart
                                     </Nav.Link>
-                                </LinkContainer>
+                                </LinkContainer> */}
                                 {userInfo ? (
                                     <NavDropdown
                                         title={userInfo.name}
@@ -169,13 +172,13 @@ const Header = () => {
                                                 Profile
                                             </NavDropdown.Item>
                                         </LinkContainer>
-                                        {isSuperAdmin ?
+                                        {/* {isSuperAdmin ?
                                             <LinkContainer to='/review-order'>
                                                 <NavDropdown.Item>
                                                     Review Order
                                                 </NavDropdown.Item>
                                             </LinkContainer> : ""
-                                        }
+                                        } */}
 
                                         <NavDropdown.Item
                                             onClick={logoutHandler}

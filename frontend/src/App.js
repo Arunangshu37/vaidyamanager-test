@@ -38,7 +38,6 @@ import ContactUs from './screens/ContactUs'
 import ReviewOrder from './screens/ReviewOrder'
 import Prescription from './screens/Prescription'
 import Transaction from './screens/Transaction'
-import Observation from './screens/Observation'
 import TestRefund from './screens/TestRefund'
 
 import Role from './screens/Role'

@@ -1,4 +1,4 @@
-# Mindvein E-Commerce Store & Video Streaming
+# Vaidya Manager
 
 ## Tech
 

@@ -36,10 +36,28 @@ const userSchema = mongoose.Schema(
         DOB: {
             type: String,
         },
+        Date: {
+            type: String,
+        },
         age: {
             type: String,
         },
         gender: {
+            type: String,
+        },
+        weight: {
+            type: String,
+        },
+        presentIllness: {
+            type: String,
+        },
+        duration: {
+            type: String,
+        },
+        treatment: {
+            type: String,
+        },
+        reference: {
             type: String,
         },
         resetToken: {
@@ -53,6 +71,9 @@ const userSchema = mongoose.Schema(
             required: true,
             default: false,
         },
+        address: {
+            type: String,
+        }
     },
     {
         timestamps: true,

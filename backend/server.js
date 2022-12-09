@@ -8,6 +8,8 @@ import orderRoutes from './routes/orderRoutes.js'
 import videoRoutes from './routes/videoRoutes.js'
 import easebuzzRoutes from './routes/easebuzzRoutes.js'
 // import authRoutes from './routes/authRoutes.js'
+import therapyRoutes from './routes/therapyRoutes.js'
+import inquiryRoutes from './routes/inquiryRoutes.js'
 
 // consultant  & doctor route
 import consultantsRoutes from './routes/consultantsRoutes.js'
@@ -55,7 +57,8 @@ app.get('/api/video', (req, res) => {
 });
 app.use("/api/videos", videoRoutes);
 
-
+app.use('/api/therapy', therapyRoutes);
+app.use('/api/inquiry', inquiryRoutes);
 
 var upload = multer();
 app.use(upload.array()); 

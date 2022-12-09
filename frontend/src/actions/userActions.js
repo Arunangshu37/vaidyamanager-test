@@ -83,12 +83,12 @@ export const logout = () => (dispatch) => {
     })
 }
 
-export const register = (name, email, phone, password, DOB, age, gender,isAdmin) => async (dispatch) => {
+export const register = (name, email, phone, password, address,age, gender, isAdmin) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST,
         })
-console.log(isAdmin)
+        console.log(isAdmin)
         // Header to send with the request
         const config = {
             headers: {
@@ -99,7 +99,7 @@ console.log(isAdmin)
         // Make request to server and get the response data
         const { data } = await axios.post(
             '/api/users',
-            { name, email, phone, password, DOB, age, gender,isAdmin},
+            { name, email, phone, password, age,address, gender, isAdmin },
             config
         )
 
