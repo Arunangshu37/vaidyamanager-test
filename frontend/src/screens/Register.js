@@ -44,7 +44,13 @@ const Register = ({ location, history }) => {
     const [age, setAge] = useState();
     const [gender, setGender] = useState();
     const [address, setAddress] = useState();
+    const [weight, setWeight] = useState();
+    const [illness, setIllness] = useState();
+    const [treatment, setTreatment] = useState();
+    const [duration, setDuration] = useState();
+    const [reference, setReference] = useState();
     // const [dob, setDob] = useState();
+    const [date, setDate] = useState();
     const dispatch = useDispatch();
     const classes = useStyles();
 
@@ -109,19 +115,19 @@ const Register = ({ location, history }) => {
                                     onChange={(e) => setName(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
-                            {/* <Form.Group controlId='DOB' className='registerform-group'>
+                            <Form.Group controlId='Date' className='registerform-group'>
                                 <div >
                                     <DatePicker
-                                        selected={dob}
-                                        onChange={(date) => setDob(date)}
+                                        selected={date}
+                                        onChange={(date) => setDate(date)}
                                         peekNextMonth
                                         showMonthDropdown
                                         showYearDropdown
                                         dropdownMode="select"
-                                        placeholderText="DOB"
+                                        placeholderText="Date"
                                     />
                                 </div>
-                            </Form.Group> */}
+                            </Form.Group>
                             <Form.Group controlId='Age' className='registerform-group'>
                                 <Form.Control
                                     type='text'
@@ -143,6 +149,34 @@ const Register = ({ location, history }) => {
                                     <option value="MALE">MALE</option>
                                 </Form.Control>
                             </Form.Group>
+                            <Form.Group controlId='Weight' className='registerform-group'>
+                                <Form.Control
+                                    type='text'
+                                    placeholder='Weight in Kg'
+                                    value={weight}
+                                    onChange={(e) => setWeight(e.target.value)}
+
+                                ></Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId='Illness' className='registerform-group'>
+                                <Form.Control
+                                    type='text'
+                                    placeholder='Patient Illness'
+                                    value={illness}
+                                    onChange={(e) => setIllness(e.target.value)}
+
+                                ></Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId='Duration' className='registerform-group'>
+                                <Form.Control
+                                    type='text'
+                                    placeholder='Duration'
+                                    value={duration}
+                                    onChange={(e) => setDuration(e.target.value)}
+
+                                ></Form.Control>
+                            </Form.Group>
+                            
                             <Form.Group  controlId="address" className='registerform-group'>
 
                                 <Form.Control as="textarea" rows={2} 
@@ -152,6 +186,7 @@ const Register = ({ location, history }) => {
                                    onChange={(e) => setAddress(e.target.value)}
                                 />
                             </Form.Group>
+
                             <Form.Group controlId='email' className='registerform-group'>
                                 <Form.Control
                                     type='email'
@@ -167,6 +202,21 @@ const Register = ({ location, history }) => {
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
                                 ></Form.Control>
+                            </Form.Group>
+
+                            <Form.Group controlId='reference' className='registerform-group'>
+                                <Form.Control
+                                as="select"
+                                    type='text'
+                                    placeholder='Reference for vaidya manager?'
+                                    value={reference}
+                                    onChange={(e) => setReference(e.target.value)}
+
+                                >
+                                      <option value="">Select</option>
+                                    <option value="FEMALE">Newspaper</option>
+                                    <option value="MALE">Internet</option>
+                                </Form.Control>
                             </Form.Group>
                             <Form.Group controlId='password' className='registerform-group'>
                                 <Form.Control
