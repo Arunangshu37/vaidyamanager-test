@@ -45,6 +45,8 @@ import Appointment from './screens/Appointment'
 import DemoRegistration from './screens/DemoRegistration'
 import DemoDates from './screens/DemoDates'
 import Otpgeneration from './screens/Otpgeneration'
+import Therapy from './screens/Therapy'
+import Inquiry from './screens/Inquiry'
 
 const App = () => {
   
@@ -55,6 +57,9 @@ const App = () => {
                 <Route path='/' component={HomeScreen} exact />
                 <Route path='/demoReg'  component={DemoRegistration}/>
                 <Route path='/register' component={RegisterScreen} />
+                <Route path='/therapy' component={Therapy} />
+                <Route path='/inquiry' component={Inquiry} />
+
                 <Container>
                 
                     <Route path='/contact-us' component={ContactUs} />

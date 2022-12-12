@@ -6,6 +6,11 @@ margin-left: 137px;
 /* font-family: Roboto,sans-serif; */
 }
 
+/* body {
+ 
+  overflow-y: hidden;
+  overflow-x: hidden;
+} */
 /* .react-datepicker-wrapper,
 .react-datepicker__input-container,
 .react-datepicker__input-container input {
@@ -212,10 +217,15 @@ h2 span {
 
 .registerform{
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   flex-direction: column;
-  margin-left: -14px;
-  margin-right: 27px;
+  /* margin-left: -14px;
+  margin-right: 27px; */
+}
+
+.registerform .form-group{
+  margin-bottom: 0.5rem;
+
 }
 
 .registerform-group{
@@ -224,7 +234,7 @@ h2 span {
   /* backdrop-filter: blur( 2.5px ); */
   /* -webkit-backdrop-filter: blur( 2.5px ); */
   border-radius: 0px;
-  border: 6px solid #41494c59;
+  border: 2px solid #41494c59;
 }
 
 .registerform-group-pass{

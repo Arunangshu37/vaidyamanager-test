@@ -25,7 +25,9 @@ const Home = () => {
       <img className='center'
       src={"images/vaidyalogo3.png"} width= "546px"
        height=" 425px"/>
-      {/* Features */}
+      {/* Features
+       */}
+
       </Container>
     </>
   )
