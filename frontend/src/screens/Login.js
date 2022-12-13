@@ -39,14 +39,14 @@ const Login = ({ location, history }) => {
     const userLogin = useSelector((state) => state.userLogin)
     const { loading, error, userInfo } = userLogin
 
-    const redirect = location.search ? location.search.split('=')[1] : '/'
+    // const redirect = location.search ? location.search.split('=')[1] : '/'
 
-    useEffect(() => {
-        // If there is user info then redirect
-        if (userInfo) {
-            history.push(redirect)
-        }
-    }, [history, userInfo, redirect])
+    // useEffect(() => {
+    //     // If there is user info then redirect
+    //     if (userInfo) {
+    //         history.push(redirect)
+    //     }
+    // }, [history, userInfo, redirect])
 
     // Handler that logs in the user
     const submitHandler = (e) => {
@@ -123,13 +123,7 @@ const Login = ({ location, history }) => {
                                 <Row className='py-3'>
                                     <Col>
                                         New Customer{' '}
-                                        <Link
-                                            to={
-                                                redirect
-                                                    ? `/register?redirect=${redirect}`
-                                                    : '/register'
-                                            }
-                                        >
+                                        <Link to={"/mastertab"}>
                                             Register
                                         </Link>
                                     </Col>

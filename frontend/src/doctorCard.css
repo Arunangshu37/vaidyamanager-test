@@ -11,8 +11,8 @@
 } */
 
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
-  color: #fff ;
-  background-color: #0078D4;
+  /* color: #fff ; */
+  /* background-color: #0078D4; */
   border-color: #ccc #ccc #FCFCFC;
 }
 

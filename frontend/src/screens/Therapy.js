@@ -12,8 +12,7 @@ import { createTherapy } from '../actions/therapyActions'
 
 const Therapy = ({ location, history }) => {
 
-
-    const [therapyform, setTherapyform] = useState({
+    const defaultData = {
         patientName: "",
         contact: "",
         email: "",
@@ -22,7 +21,9 @@ const Therapy = ({ location, history }) => {
         patientreview: "",
         therapistName: "",
         reference: ""
-    })
+
+    }
+    const [therapyform, setTherapyform] = useState(defaultData);
 
     const dispatch = useDispatch();
 
@@ -42,7 +43,12 @@ const Therapy = ({ location, history }) => {
             therapyform.patientreview,
             therapyform.therapistName,
             therapyform.reference))
+        setTherapyform(defaultData)
+    }
 
+
+    const resetHandler = (e) => {
+        setTherapyform(defaultData)
     }
 
     useEffect(() => {
@@ -84,6 +90,7 @@ const Therapy = ({ location, history }) => {
                                 <Form.Group controlId='contact' className='registerform-group'>
                                     <Form.Control
                                         type='text'
+                                        maxLength="10"
                                         placeholder='10 digit mobile number'
                                         value={therapyform.contact}
                                         onChange={(e) => setTherapyform({ ...therapyform, contact: e.target.value })}
@@ -198,12 +205,13 @@ const Therapy = ({ location, history }) => {
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>  <Button type='submit' variant='primary'>
+                           <td></td>
+                            <td>  
+                                <Button type='submit' variant='primary'>
                                 Save
                             </Button>
-
-                                <Button t variant='primary'>
+                      
+                                <Button style={{marginLeft:"5px"}} onClick={resetHandler} variant='primary'>
                                     Reset
                                 </Button></td>
                         </tr>

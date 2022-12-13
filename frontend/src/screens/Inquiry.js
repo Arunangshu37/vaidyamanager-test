@@ -17,18 +17,23 @@ import Nav from 'react-bootstrap/Nav';
 
 const Inquiry = () => {
     const dispatch = useDispatch();
-    const [inquiryForm, setInquiryForm] = useState({
+    const inquiryData = {
         name: "",
         contact: "",
         email: "",
         inquirySubject: "",
         reference: ""
-    })
+    }
+    const [inquiryForm, setInquiryForm] = useState(inquiryData)
 
     const submitHandler = (e) => {
         e.preventDefault()
 
 
+    }
+
+    const resetHandler = (e) => {
+        setInquiryForm(inquiryData)
     }
 
     return (
@@ -69,6 +74,7 @@ const Inquiry = () => {
                                 <Form.Group controlId='contact' className='registerform-group'>
                                     <Form.Control
                                         type='text'
+                                        maxLength="10"
                                         placeholder='10 digit mobile number'
                                         value={inquiryForm.contact}
                                         onChange={(e) => setInquiryForm({ ...inquiryForm, contact: e.target.value })}
@@ -140,7 +146,7 @@ const Inquiry = () => {
                                 Save
                             </Button>
 
-                                <Button t variant='primary'>
+                                <Button  style={{marginLeft:"5px"}}  onClick={resetHandler} variant='primary'>
                                     Reset
                                 </Button></td>
                         </tr>

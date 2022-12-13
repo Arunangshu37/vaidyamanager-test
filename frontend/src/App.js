@@ -49,6 +49,7 @@ import Therapy from './screens/Therapy'
 import Inquiry from './screens/Inquiry'
 
 import TabComponent from './components/TabComponent'
+import MasterTab from './components/MasterTab'
 
 const App = () => {
   
@@ -65,6 +66,7 @@ const App = () => {
 
                 <Container>
                 <Route path='/tab' component={TabComponent} />
+                <Route path='/mastertab' component={MasterTab} />
                     <Route path='/contact-us' component={ContactUs} />
                     <Route path='/terms-condition' component={TermsAndConditions} />
                     <Route path='/privacy-policy' component={PrivacyPolicy} />

@@ -219,7 +219,8 @@ const Register = ({ location, history }) => {
                                 <td colSpan={5}>
                                     <Form.Group controlId='phone' className='registerform-group'>
                                         <Form.Control
-                                            type='phone'
+                                            type="phone"
+                                            maxLength="10"
                                             placeholder='10 digit mobile number'
                                             value={phone}
                                             onChange={(e) => setPhone(e.target.value)}

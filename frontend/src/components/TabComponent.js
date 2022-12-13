@@ -11,7 +11,7 @@ import Therapy from '../screens/Therapy';
 
 const TabComponent = () => {
     return (
-        <div style={{marginTop:"6rem"}}>
+        <div>
             <Tab.Container id="left-tabs-example" defaultActiveKey="Patient">
                 <Row>
                     <Col className='ms-3' sm={2}>
