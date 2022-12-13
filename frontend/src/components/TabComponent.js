@@ -5,48 +5,52 @@ import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { Link } from 'react-router-dom'
+import Inquiry from '../screens/Inquiry';
+import Register from '../screens/Register';
+import Therapy from '../screens/Therapy';
 
 const TabComponent = () => {
-
-
     return (
         <div style={{marginTop:"6rem"}}>
             <Tab.Container id="left-tabs-example" defaultActiveKey="Patient">
                 <Row>
-                    <Col sm={4}>
+                    <Col className='ms-3' sm={2}>
                         <Nav variant="pills" className="flex-column">
                             <Nav.Item>
-                                <Nav.Link eventKey="Patient">
-                                <Link to={'/register'}>
+                                <Nav.Link eventKey="Patient">Patient
+                                {/* <Link to={'/register'}>
                               Patient
-                              </Link>
+                              </Link> */}
                                 </Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link eventKey="Therapy">
-                                <Link to={'/therapy'}>
+                                <Nav.Link eventKey="Therapy">Therapy
+                                {/* <Link to={'/therapy'}>
                                 Therapy
-                             </Link>
+                             </Link> */}
                              </Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link eventKey="Inquiry">
-                                <Link to={'/inquiry'}>
+                                <Nav.Link eventKey="Inquiry">Inquiry
+                                {/* <Link to={'/inquiry'}>
                                 Inquiry
-                             </Link></Nav.Link>
+                             </Link> */}
+                             </Nav.Link>
                             </Nav.Item>
                         </Nav>
                     </Col>
-                    <Col sm={9}>
+                    <Col sm={8}>
                         <Tab.Content>
                             <Tab.Pane eventKey="Patient">
-                                
+                            <Register/>   
+                           
                             </Tab.Pane>
                             <Tab.Pane eventKey="Therapy">
-                          
+                            <Therapy/>
+                        
                             </Tab.Pane>
                             <Tab.Pane eventKey="Inquiry">
-                           
+                           <Inquiry/>
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>

@@ -8,36 +8,14 @@ import '../register.css'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { register } from '../actions/userActions'
-import { makeStyles } from "@material-ui/core/styles";
-import FormContainer from '../components/FormContainer'
-import { Container, Row, Card, Col, ListGroup, Button, Image, Form } from 'react-bootstrap';
-import TabComponent from '../components/TabComponent.js';
 
-import Nav from 'react-bootstrap/Nav';
+import { Container, Row, Card, Col, ListGroup, Button, Image, Form } from 'react-bootstrap';
+
+
 
 
 
 const Register = ({ location, history }) => {
-
-    // const [patientRegistration, setPatientRegistration] = useState({
-    //     name: "",
-    //     email: "",
-    //     phone: "",
-    //     password: "",
-    //     confirmPassword: "",
-    //     message: "",
-    //     age: "",
-    //     gender: "",
-    //     address: "",
-    //     weight: "",
-    //     illness: "",
-    //     treatment: "",
-    //     duration: "",
-    //     reference: "",
-    //     date: ""
-
-    // })
-
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
@@ -64,7 +42,7 @@ const Register = ({ location, history }) => {
     const userRegister = useSelector((state) => state.userRegister)
     const { loading, error, userInfo } = userRegister
 
-    const redirect = location.search ? location.search.split('=')[1] : '/'
+    // const redirect = location.search ? location.search.split('=')[1] : '/'
 
     //calculate the age
     // const getAge = (dob) => {
@@ -79,18 +57,15 @@ const Register = ({ location, history }) => {
     //     getAge(dob)
     // }, [dob])
 
-    useEffect(() => {
-        // If there is user info then redirect
-        if (userInfo) {
-            history.push(redirect)
-        }
-    }, [history, userInfo, redirect])
+    // useEffect(() => {
+    //     // If there is user info then redirect
+    //     if (userInfo) {
+    //         history.push(redirect)
+    //     }
+    // }, [history, userInfo, redirect])
 
-    // Handler that logs in the user
+    // // Handler that logs in the user
     const submitHandler = (e) => {
-        // const name = e.target.name;
-        // const value = e.target.value;
-
         e.preventDefault()
         // Check if passwords are the same
         if (password !== confirmPassword) {
@@ -105,18 +80,12 @@ const Register = ({ location, history }) => {
 
     return (
         <>
-        <div className='container'>
-        <div className='row' style={{marginTop: "5rem"}}>
-            <div className='col-md-2'>
-            <TabComponent />
-        
-            </div>
-            <div className='col-md-8'>
-                {/* <FormContainer> */}
+     
+                {/* <FormContainer>  */}
                     <h1 style={{ marginLeft: "44px" }}>Sign Up</h1>
-                    {error && <Message variant='danger'>{error}</Message>}
+                    {/* {error && <Message variant='danger'>{error}</Message>}
                     {message && <Message variant='danger'>{message}</Message>}
-                    {loading && <Loader />}
+                    {loading && <Loader />} */}
 
                     <Form onSubmit={submitHandler} className='registerform'>
                         <table>
@@ -383,7 +352,7 @@ const Register = ({ location, history }) => {
 
                         </table>
                     </Form >
-                    <Row className='py-3'>
+                    {/* <Row className='py-3'>
                         <Col style={{ color: "black" }}>
                             Have an Account?{' '}
 
@@ -393,11 +362,8 @@ const Register = ({ location, history }) => {
                                 Login
                             </Link>
                         </Col>
-                    </Row>
-                {/* </FormContainer> */}
-            </div>
-            </div>
-        </div>
+                    </Row> */}
+                 {/* </FormContainer>  */}
         </>
     )
 }

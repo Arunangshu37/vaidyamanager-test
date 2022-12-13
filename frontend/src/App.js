@@ -48,6 +48,8 @@ import Otpgeneration from './screens/Otpgeneration'
 import Therapy from './screens/Therapy'
 import Inquiry from './screens/Inquiry'
 
+import TabComponent from './components/TabComponent'
+
 const App = () => {
   
     return (
@@ -59,9 +61,10 @@ const App = () => {
                 <Route path='/register' component={RegisterScreen} />
                 <Route path='/therapy' component={Therapy} />
                 <Route path='/inquiry' component={Inquiry} />
+               
 
                 <Container>
-                
+                <Route path='/tab' component={TabComponent} />
                     <Route path='/contact-us' component={ContactUs} />
                     <Route path='/terms-condition' component={TermsAndConditions} />
                     <Route path='/privacy-policy' component={PrivacyPolicy} />

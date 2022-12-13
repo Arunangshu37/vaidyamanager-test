@@ -60,6 +60,8 @@ app.use("/api/videos", videoRoutes);
 app.use('/api/therapy', therapyRoutes);
 app.use('/api/inquiry', inquiryRoutes);
 
+
+
 var upload = multer();
 app.use(upload.array()); 
 app.use(express.urlencoded({ limit: '100000000',extended: true, parameterLimit:50000 })); 

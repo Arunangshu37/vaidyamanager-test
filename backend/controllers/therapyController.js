@@ -4,8 +4,37 @@ import asyncHandler from 'express-async-handler'
 import mongoose from 'mongoose'
 
 
-const addTherapyDetail = ((req,res)=>{
+const addTherapyDetail = asyncHandler(async(req,res)=>{
+    const {
+        patientName,
+        therapycontact,
+        therapyemail,
+        therapyName,
+        therapyFees,
+        patientReview,
+        therapistName,
+        therapyreference
+    } = req.body
 
+    const therapyData = new Therapy({
+        // _id: req.params.id,
+        patientName,
+        therapycontact,
+        therapyemail,
+        therapyName,
+        therapyFees,
+        patientReview,
+        therapistName,
+        therapyreference
+
+    })
+    const createdTherapyData = await therapyData.save();
+   
+    console.log("success Therapy Data");
+    //find the doctor
+    res.status(201).json(createdTherapyData)
 })
+
+
 
 export {addTherapyDetail}

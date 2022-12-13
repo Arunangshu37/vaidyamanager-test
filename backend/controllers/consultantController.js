@@ -45,7 +45,6 @@ const addConsultants = asyncHandler(async (req, res) => {
 
     } = req.body
 
-
     const consultantData = new Consultant({
         // _id: req.params.id,
         name,
@@ -67,14 +66,7 @@ const addConsultants = asyncHandler(async (req, res) => {
         // user: req.user._id,
 
     })
-    // call easebus api get payment result here
-    // createdData = async addEaseBus()
-    // consultationData.payment_deatils = createdData.paymentResult;
-    // consultationData.payment_status = createdData.isPaid;
-
     const createdConsultant = await consultantData.save();
-
-
     transporter.sendMail({
         to: createdConsultant.patientEmail_address,
         from: "info@mindvein.com",

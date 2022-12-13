@@ -504,67 +504,9 @@ const Consultation = ({ match, history }) => {
       .catch(e => console.log(e))
   }
 
-  //demo consultant
-  // const consultantpayment = () => {
-  //   const appConsultant= (consultants?.length > 0 && consultants[0] !== 'undefined' && consultants?.filter((consultantmail) => consultantmail?.patientEmail_address == userInfo?.email))
-  //   console.log("Appoint consultant",appConsultant)
-  //   // console.log("Consultant is",  consultant)
-  //   const doctorfee = doctors?.find((doc) => doc.name === doctor)
-  //   const transactionData = {
-  //     "txnid": "T" + appConsultant._id,
-  //     "amount": doctorfee?.consultation_fee,
-  //     "name":userInfo?.name,
-  //     "email":userInfo?.email,
-  //     "phone": userInfo?.phone + "",
-  //     "productinfo": "Consultation",
-  //     "surl": `http://45.250.225.44:5000/api/easebuzz/easebuzz_reponse/${appConsultant._id}`,
-  //     "furl": `http://45.250.225.44:5000/api/easebuzz/easebuzz_reponse/${appConsultant._id}`,
-  //     "udf1": "",
-  //     "udf2": "",
-  //     "udf3": "",
-  //     "udf4": "",
-  //     "udf5": "",
-  //     "address1": "",
-  //     "address2": "",
-  //     "city": "",
-  //     "state": "",
-  //     "country": "",
-  //     "zipcode": "",
-  //     "sub_merchant_id": "",
-  //     "unique_id": "",
-  //     "split_payments": "",
-  //     "customer_authentication_id": "",
-  //     "udf6": "",
-  //     "udf7": "",
-  //     "udf8": "",
-  //     "udf9": "",
-  //     "udf10": ""
-  //   }
-
-  //   const config = {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${userInfo.token}`,
-  //     },
-  //   }
-  //   console.log("object", transactionData, config)
-  //   axios.post("http://45.250.225.44:5000/api/easebuzz/initiate_payment", transactionData, config)
-  //     .then((response) => {
-  //       console.log("Set")
-  //       setPostdata(response.data)
-  //       console.log("Response is", response.data)
-
-  //       // window.location.href = response.data
-  //       window.open(`${response.data}`, '_blank');
-  //     })
-  //     .catch(e => console.log(e))
-  // }
-
-
   const placeAppointmentHandler = (doctor) => {
     const doctorfee = doctors?.find((doc) => doc.name === doctor)
     // console.log("Doctor fee",doctorfee)
-
     var name = doctor
     var payment_status = "Unpaid"
     var appointment_status = "Confirmed"

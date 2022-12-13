@@ -88,7 +88,7 @@ export const register = (name, email, phone, password, address, age, gender,weig
         dispatch({
             type: USER_REGISTER_REQUEST,
         })
-        console.log(isAdmin)
+        // console.log(isAdmin)
         // Header to send with the request
         const config = {
             headers: {

@@ -25,7 +25,7 @@ const Footer = () => {
         <Card className="text-center">
           <Card.Body>
             <Row>
-              <div class="col-md-3">
+              <div className="col-md-3">
                 <img style={{
                   width: "100%",
                   margin: "auto"
@@ -35,33 +35,33 @@ const Footer = () => {
                 />
               </div>
               {/* links */}
-              <div class='col-md-3'>
+              <div className='col-md-3'>
                 <ul style={{ listStyle: "none outside none" }}>
                   <li className='ftli'>
-                    <a href='/about-us' class="gtm-footer-link"> About Us
+                    <a href='/about-us' className="gtm-footer-link"> About Us
                     </a>
                   </li>
                   <li className='ftli'>
-                    <a href='/privacy-policy' class="gtm-footer-link">Privacy & Policy
+                    <a href='/privacy-policy' className="gtm-footer-link">Privacy & Policy
                     </a>
                   </li >
                   <li className='ftli'>
-                    <a href='/contact-us' class="gtm-footer-link">Contact Us
+                    <a href='/contact-us' className="gtm-footer-link">Contact Us
                     </a>
                   </li>
                   <li className='ftli'>
-                    <a href='/terms-condition' class="gtm-footer-link">Terms & Conditions
+                    <a href='/terms-condition' className="gtm-footer-link">Terms & Conditions
                     </a>
                   </li>
                   <li className='ftli'>
-                    <a href='/refund-policy' class="gtm-footer-link">Refund Policy
+                    <a href='/refund-policy' className="gtm-footer-link">Refund Policy
                     </a>
                   </li>
                 </ul>
               </div>
-              <div class="col-md-6">
+              <div className="col-md-6">
                 <Row>
-                  <div class="col-md-12">
+                  <div className="col-md-12">
                     <Container style={{
                       display: "flex", justifyContent: "space-around",
                       flexWrap: "wrap"
@@ -85,7 +85,7 @@ const Footer = () => {
                     </Container>
                   </div>
                   {/* images */}
-                  <div class="col-md-12" style={{ marginTop: "3rem", fontFamily: "Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol" }}>
+                  <div className="col-md-12" style={{ marginTop: "3rem", fontFamily: "Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol" }}>
                     <Row>
                       <Col className='footer-imgs'>
                         <Image
@@ -131,25 +131,25 @@ const Footer = () => {
             {/* social */}
             <div style={{ marginTop: "51px", display: "flex", justifyContent: "center" }}>
               <a href="" target="_blank">
-                <img class="gtm-footer-link" style={{ marginRight: "15px" }}
+                <img className="gtm-footer-link" style={{ marginRight: "15px" }}
                   // src="images/facebook.svg"
                   src={"http://localhost:3000/images/facebook.svg"}
                 />
               </a>
               <a href="" target="_blank">
-                <img class="gtm-footer-link" style={{ marginRight: "15px" }}
+                <img className="gtm-footer-link" style={{ marginRight: "15px" }}
                   // src="images/instagram.svg" 
                   src={"http://localhost:3000/images/instagram.svg"}
                 />
               </a>
               <a href="" target="_blank">
-                <img class="gtm-footer-link" style={{ marginRight: "15px" }}
+                <img className="gtm-footer-link" style={{ marginRight: "15px" }}
                   // src="images/linkedin.svg" 
                   src={"http://localhost:3000/images/linkedin.svg"}
                 />
               </a>
               <a href="" target="_blank">
-                <img class="gtm-footer-link" style={{ marginRight: "15px" }}
+                <img className="gtm-footer-link" style={{ marginRight: "15px" }}
                   // src="images/twitter.svg" 
                   src={"http://localhost:3000/images/twitter.svg"}
                 />

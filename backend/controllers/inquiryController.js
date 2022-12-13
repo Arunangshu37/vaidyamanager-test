@@ -4,7 +4,29 @@ import asyncHandler from 'express-async-handler'
 import mongoose from 'mongoose'
 
 
-const addInquiryDetails = ((req,res)=>{
+const addInquiryDetails = asyncHandler(async(req,res)=>{
+    const {
+        inquiryName,
+        inquirycontact,
+        inquiryemail,
+        inquirySubject,
+        inquiryreference
+    } = req.body
+
+    const inquiryData = new Inquiry({
+        // _id: req.params.id,
+        inquiryName,
+        inquirycontact,
+        inquiryemail,
+        inquirySubject,
+        inquiryreference
+
+    })
+    const createdInquiry = await inquiryData.save();
+   
+    console.log("success  Inquiry Data");
+    //find the doctor
+    res.status(201).json(createdInquiry)
 
 })
 

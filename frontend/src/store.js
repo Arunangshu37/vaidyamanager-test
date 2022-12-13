@@ -39,6 +39,13 @@ import {
     allOrdersReducer
 } from './reducers/orderReducers'
 
+import{
+    createTherapyReducer
+} from './reducers/therapyReducers'
+
+import {createInquiryReducer} from './reducers/inquiryReducers'
+
+
 
 const reducer = combineReducers({
     productList: productListReducer,
@@ -68,7 +75,9 @@ const reducer = combineReducers({
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
     orderListUser: orderListUserReducer,
-    allOrders: allOrdersReducer
+    allOrders: allOrdersReducer,
+    createTherapy:createTherapyReducer,
+    createInquiry:createInquiryReducer,
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
