@@ -16,7 +16,7 @@ import Message from '../components/Message'
 
 const ProductScreen = ({ history, match }) => {
     const [qty, setQty] = useState(1);
-    const [postalCode, setPostalCode] = useState();
+    // const [postalCode, setPostalCode] = useState();
 
     const dispatch = useDispatch()
     const productDetails = useSelector((state) => state.productDetails)
@@ -69,7 +69,7 @@ const ProductScreen = ({ history, match }) => {
                                     ></Image>
                                 </Carousel.Item>
 
-                                {product.name == "Pink Desire" ? <Carousel.Item>  
+                                {product.name === "Pink Desire" ? <Carousel.Item>  
                                      <Image
                                     src={baseUrl + "images/Pink2.png"}
                                     alt="image2"
@@ -87,7 +87,7 @@ const ProductScreen = ({ history, match }) => {
                                 }
 
                                 <Carousel.Item>
-                                    {product.name == "Pink Desire" ? <Image
+                                    {product.name === "Pink Desire" ? <Image
                                         src={baseUrl + "images/Pink3.jpg"}
 
                                         alt="image2"
@@ -103,7 +103,7 @@ const ProductScreen = ({ history, match }) => {
                                 </Carousel.Item>
 
                                 <Carousel.Item>
-                                    {product.name == "Pink Desire" ? <Image
+                                    {product.name === "Pink Desire" ? <Image
                                         src={baseUrl + "images/Pink3.jpg"}
 
                                         alt="image2"

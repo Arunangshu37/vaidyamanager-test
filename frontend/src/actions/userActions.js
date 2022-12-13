@@ -16,12 +16,7 @@ import {
     USER_INFO_DETAILS_REQUEST,
     USER_INFO_DETAILS_SUCCESS,
     USER_INFO_DETAILS_FAIL,
-    USER_INFO_DETAILS_RESET,
-    USER_UPDATE_PASSWORD_REQUEST,
-    USER_UPDATE_PASSWORD_SUCCESS,
-    USER_UPDATE_PASSWORD_FAIL,
-    USER_UPDATE_PASSWORD_RESET
-
+ 
 } from '../constants/userConstants'
 import { ORDER_LIST_USER_RESET } from '../constants/orderConstants'
 import axios from 'axios'

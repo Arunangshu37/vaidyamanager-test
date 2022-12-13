@@ -23,9 +23,7 @@ const addInquiryDetails = asyncHandler(async(req,res)=>{
 
     })
     const createdInquiry = await inquiryData.save();
-   
-    console.log("success  Inquiry Data");
-    //find the doctor
+    // console.log("success  Inquiry Data");
     res.status(201).json(createdInquiry)
 
 })

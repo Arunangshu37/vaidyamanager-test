@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import OwlCarousel from 'react-owl-carousel';
 import '../doctorDataCard.css';
 import 'owl.carousel/dist/assets/owl.carousel.css';

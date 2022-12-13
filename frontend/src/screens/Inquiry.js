@@ -1,39 +1,41 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from 'react-redux'
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import '../demoreg.css'
 import '../register.css'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import FormContainer from '../components/FormContainer'
-import { Container, Row, Card, Col, ListGroup, Button, Image, Form } from 'react-bootstrap';
-import TabComponent from '../components/TabComponent.js';
+import {Button, Form } from 'react-bootstrap';
+import { createInquiry } from '../actions/inquiryActions';
 
-import Nav from 'react-bootstrap/Nav';
 
 const Inquiry = () => {
-    const dispatch = useDispatch();
-    const inquiryData = {
+    const defaultData = {
         name: "",
         contact: "",
         email: "",
         inquirySubject: "",
         reference: ""
     }
-    const [inquiryForm, setInquiryForm] = useState(inquiryData)
+    const [inquiryForm, setInquiryForm] = useState(defaultData)
+    const dispatch = useDispatch();
+
+    const addInquiry = useSelector((state) => state.createInquiry)
+    const { loading, error, success, inquiryData } = addInquiry
 
     const submitHandler = (e) => {
         e.preventDefault()
-
+        console.log("thrapy", inquiryForm);
+        dispatch(createInquiry(
+            inquiryForm.name,
+            inquiryForm.contact,
+            inquiryForm.email,
+            inquiryForm.inquirySubject,
+            inquiryForm.reference,))
+            setInquiryForm(defaultData)
 
     }
 
     const resetHandler = (e) => {
-        setInquiryForm(inquiryData)
+        setInquiryForm(defaultData)
     }
 
     return (

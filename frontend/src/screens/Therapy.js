@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import '../demoreg.css'
 import '../register.css'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import FormContainer from '../components/FormContainer'
-import { Container, Row, Card, Col, ListGroup, Button, Image, Form } from 'react-bootstrap';
-import TabComponent from '../components/TabComponent.js';
+import {Button, Form } from 'react-bootstrap';
 import { createTherapy } from '../actions/therapyActions'
 
 const Therapy = ({ location, history }) => {
-
     const defaultData = {
         patientName: "",
         contact: "",
@@ -21,10 +15,9 @@ const Therapy = ({ location, history }) => {
         patientreview: "",
         therapistName: "",
         reference: ""
-
     }
-    const [therapyform, setTherapyform] = useState(defaultData);
 
+    const [therapyform, setTherapyform] = useState(defaultData);
     const dispatch = useDispatch();
 
     const addTherapy = useSelector((state) => state.createTherapy)
@@ -33,7 +26,7 @@ const Therapy = ({ location, history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log("thrapy", therapyform);
+        // console.log("thrapy", therapyform);
         dispatch(createTherapy(
             therapyform.patientName,
             therapyform.contact,

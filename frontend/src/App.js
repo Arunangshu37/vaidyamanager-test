@@ -28,7 +28,6 @@ import PrescriptionTemplate from './screens/PrescriptionTemplate'
 // History
 import history from './utils/history'
 import PlanScreen from './screens/Plan'
-
 import Consultation from './screens/Consultation'
 import LabTest from './screens/LabTest'
 import RefundPolicy from './screens/RefundPolicy'
@@ -38,16 +37,11 @@ import ContactUs from './screens/ContactUs'
 import ReviewOrder from './screens/ReviewOrder'
 import Prescription from './screens/Prescription'
 import Transaction from './screens/Transaction'
-import TestRefund from './screens/TestRefund'
-
 import Role from './screens/Role'
 import Appointment from './screens/Appointment'
 import DemoRegistration from './screens/DemoRegistration'
-import DemoDates from './screens/DemoDates'
-import Otpgeneration from './screens/Otpgeneration'
 import Therapy from './screens/Therapy'
 import Inquiry from './screens/Inquiry'
-
 import TabComponent from './components/TabComponent'
 import MasterTab from './components/MasterTab'
 
@@ -87,14 +81,10 @@ const App = () => {
                     <Route exact path='/reset' component={Reset} />
                     <Route path='/reset/:token' component={NewPassword} />
                     <Route path='/zoom'  component={Zoom}/>
-                
                     <Route path='/transaction'  component={Transaction}/>
                     <Route path='/prescribetemplate'  component={PrescriptionTemplate}/>
-                 
-                    <Route path='/testrefund'  component={TestRefund}/>
                     <Route path='/Role'  component={Role}/>
                     <Route path='/appointmentlist'  component={Appointment}/>
-                    <Route path='/date'  component={DemoDates}/>
                 </Container>
             </main>
             <Footer />

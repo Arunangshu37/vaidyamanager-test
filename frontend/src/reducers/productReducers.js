@@ -15,12 +15,9 @@ import {
     DOCTORS_UPDATE_SUCCESS,
     DOCTORS_UPDATE_FAIL,
     DOCTORS_UPDATE_REQUEST,
-    DOCTORS_UPDATE_RESET,
     DOCTORS_APPOINTMENT_SUCCESS,
     DOCTORS_APPOINTMENT_FAIL,
     DOCTORS_APPOINTMENT_REQUEST,
-    DOCTORS_APPOINTMENT_RESET,
-    DOCTORS_DELETE_SUCCESS,
     DOCTORS_DELETE_FAIL,
     DOCTORS_DELETE_REQUEST,
     DOCTORS_DELETE_RESET,
@@ -30,7 +27,6 @@ import {
     DOCTORS_DATA_RESET,
 
 } from '../constants/productConstants'
-import axios from 'axios'
 
 // Getting products from server
 export const productListReducer = (state = { products: [] }, action) => {

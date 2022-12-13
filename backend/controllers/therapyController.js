@@ -29,9 +29,7 @@ const addTherapyDetail = asyncHandler(async(req,res)=>{
 
     })
     const createdTherapyData = await therapyData.save();
-   
-    console.log("success Therapy Data");
-    //find the doctor
+    // console.log("success Therapy Data");
     res.status(201).json(createdTherapyData)
 })
 

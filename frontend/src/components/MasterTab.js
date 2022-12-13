@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import DocumentTab from './DocumentTab';
 import TabComponent from './TabComponent';
 
 
@@ -23,7 +24,7 @@ const MasterTab = () => {
           <h1>irhkd</h1>
           </Tab>
           <Tab eventKey="document" title="Documents">
-          <h1>irhkd</h1>
+         <DocumentTab/>
           </Tab>
         </Tabs>
       </div>

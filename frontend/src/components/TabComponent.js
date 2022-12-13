@@ -3,8 +3,6 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import { Link } from 'react-router-dom'
 import Inquiry from '../screens/Inquiry';
 import Register from '../screens/Register';
 import Therapy from '../screens/Therapy';
