@@ -25,6 +25,8 @@ import {
     DOCTORS_DATA_FAIL,
     DOCTORS_DATA_REQUEST,
     DOCTORS_DATA_RESET,
+    DOCTORS_DELETE_SUCCESS,
+ 
 
 } from '../constants/productConstants'
 

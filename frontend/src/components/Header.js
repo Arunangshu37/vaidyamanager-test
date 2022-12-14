@@ -62,14 +62,14 @@ const Header = () => {
                             <Nav className='me-auto'>
                                 <LinkContainer to={`/`}>
                                     <Navbar.Brand>Home
-                                        {/* &nbsp;  |&nbsp; */}
-                                    </Navbar.Brand>
-                                </LinkContainer>
-                                {/* <LinkContainer to={`/demoReg`}>
-                                    <Navbar.Brand>Register
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
-                                </LinkContainer> */}
+                                </LinkContainer>
+                                <LinkContainer to={`/appointmentlist`}>
+                                    <Navbar.Brand>Users
+                                        &nbsp;  |&nbsp;
+                                    </Navbar.Brand>
+                                </LinkContainer>
                                 {/* <LinkContainer to={`/date`}>
                                     <Navbar.Brand>Demo dates
                                         &nbsp;  |&nbsp;

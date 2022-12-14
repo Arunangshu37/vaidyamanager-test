@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import { listDoctors } from '../actions/productActions'
 import { getUserInfoDetails } from '../actions/userActions'
 import { listConsultants, getConsultantDetails, consultationLink } from '../actions/consultationActions.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-import Button from '@mui/material/Button';
-import { IconButton } from '@mui/material';
-import PaymentsSharpIcon from '@mui/icons-material/PaymentsSharp';
+
 
 const Appointment = () => {
 
@@ -63,17 +58,7 @@ const Appointment = () => {
 
 
 
-  // const handleChange = (event) => {
-  //   setDoctorName(event.target.value);
-  //   console.log("Event",event.target.value)
-  // };
-
-  const handleClick = (event) => {
-    // console.log(event.currentTarget.value);
-    // setDoctorName('');
-    // console.log({ doctorName })
-
-  };
+  
 
 
   const [sortModel, setSortModel] = useState([
@@ -86,55 +71,40 @@ const Appointment = () => {
   // Appointment Tab Columns
   const AppointmentColumns = [
     { field: '_id', headerName: 'ID', width: 90, hide: true },
-    { field: 'patientName', headerName: 'Patient Name', width: 120 },
+    { field: 'name', headerName: 'Patient Name', width: 120 },
     {
-      field: 'date', headerName: ' Appointment Date', width: 190,
-      type: 'dateTime', sortable: true, valueGetter: ({ value }) => value && new Date(value)
+      field: 'email', headerName: 'Email_Id', width: 190,
     },
-    { field: 'appointment_status', headerName: 'Status', width: 120 },
-    { field: 'payment_status', headerName: 'Payment Status', width: 140 },
-
-    {
-      field: 'consultation status', headerName: 'Consultation Status', width: 140,
-      renderCell: (params) => {
-        // console.log("Param is",params)
-        if (params.row.consultationLink === "") {
-          return (
-            <div className='d-flex justify-content-between align-items-center' style={{ cursor: 'pointer' }}>
-              Pending
-            </div>
-          )
-        }
-        return( <div className='d-flex justify-content-between align-items-center' style={{ cursor: 'pointer' }}>
-        Done
-      </div>)
-
-      }
-    },
+    { field: 'age', headerName: 'Age', width: 120 },
+    { field: 'weight', headerName: 'Patient Weight', width: 140 },
+    { field: 'gender', headerName: 'Gender', width: 140 },
+    { field: 'treatment', headerName: 'Treatment', width: 140 },
+    { field: 'duration', headerName: 'Duration(Months)', width: 140 },
+    { field: 'reference', headerName: 'Reference', width: 140 },
   ];
 
 
   useEffect(() => {
     // Dispatch the list doctors action and fill our state
-    dispatch(listDoctors())
-    dispatch(listConsultants())
+    // dispatch(listDoctors())
+    // dispatch(listConsultants())
     dispatch(getUserInfoDetails());
   }, [dispatch])
 
 
   useEffect(() => {
-    const data = consultants?.length > 0 && consultants[0] !== 'undefined' && consultants?.filter((consultantInfo) => consultantInfo?.name === doctorName)
+    const data = users?.length > 0 && users[0] !== 'undefined'
     // const data = consultants?.filter((consultantInfo) => consultantInfo?.name == doctorInfo?.name)
     setConsultantRowData(data)
 
-  }, [consultants, doctorName])
+  }, [users])
   // console.log({ consultantRowData })
 
   return (
     <>
-      Appointment
+
       <div style={{ marginTop: "6rem" }}>
-        <Box
+        {/* <Box
           component="form"
           sx={{
             '& .MuiTextField-root': { m: 1, width: '30ch' },
@@ -153,12 +123,12 @@ const Appointment = () => {
             {doctors?.map((option) => (
               <MenuItem key={option.value} value={option.name}>
                 {option.name}
-                {/* {console.log("name", option.name)} */}
+                {/* {console.log("name", option.name)} 
               </MenuItem>
             ))}
           </TextField>
-        </Box>
-      </div>
+        </Box>*/}
+       </div> 
 
       {/* <div style={{
         display: "flex",
@@ -177,7 +147,7 @@ const Appointment = () => {
         <Box sx={{ height: 400, width: '100%' }}>
           <DataGrid
             getRowId={(r) => r._id}
-            rows={consultantRowData}
+            rows={users}
             columns={AppointmentColumns}
             pageSize={5}
             rowsPerPageOptions={[5]}
