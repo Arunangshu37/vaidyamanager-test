@@ -29,16 +29,16 @@ const DocumentTab = () => {
                     <Col sm={8}>
                         <Tab.Content>
                             <Tab.Pane eventKey="Image">
-                              <h1>dudg</h1>
+                              <h1></h1>
                             </Tab.Pane>
                             <Tab.Pane eventKey="Video">
-                            <h1>gtrhth</h1>
+                            <h1></h1>
                             </Tab.Pane>
                             <Tab.Pane eventKey="Report">
-                            <h1>rferhfuh</h1>
+                            <h1></h1>
                             </Tab.Pane>
                             <Tab.Pane eventKey="Diet Chart">
-                            <h1>rferhfuh</h1>
+                            <h1></h1>
                             </Tab.Pane>
                         </Tab.Content>
                     </Col>

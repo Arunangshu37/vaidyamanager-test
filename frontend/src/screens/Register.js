@@ -82,7 +82,7 @@ const Register = ({ location, history }) => {
         <>
      
                 {/* <FormContainer>  */}
-                    <h1 style={{ marginLeft: "44px" }}>Sign Up</h1>
+                    <h1 style={{ marginLeft: " 127px",fontSize: "22px" }}>Sign Up</h1>
                     {/* {error && <Message variant='danger'>{error}</Message>}
                     {message && <Message variant='danger'>{message}</Message>}
                     {loading && <Loader />} */}

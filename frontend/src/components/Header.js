@@ -70,11 +70,11 @@ const Header = () => {
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
-                                {/* <LinkContainer to={`/date`}>
-                                    <Navbar.Brand>Demo dates
+                                <LinkContainer to={`/mastertab`}>
+                                    <Navbar.Brand>Register
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
-                                </LinkContainer> */}
+                                </LinkContainer>
                                 {/* <LinkContainer to={isLogin ? `/consultation` : '/login'}>
                                     <Navbar.Brand> Online Consultation
                                         &nbsp;  |&nbsp;

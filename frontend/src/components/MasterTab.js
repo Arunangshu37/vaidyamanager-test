@@ -20,12 +20,12 @@ const MasterTab = () => {
           <Tab eventKey="basic detail" title="Basic Detail">
           <TabComponent/>
           </Tab>
-          <Tab eventKey="prescription" title="Prescription">
-          <h1>irhkd</h1>
-          </Tab>
-          <Tab eventKey="document" title="Documents">
+          {/* <Tab eventKey="prescription" title="Prescription">
+          <h1></h1>
+          </Tab> */}
+          {/* <Tab eventKey="document" title="Documents">
          <DocumentTab/>
-          </Tab>
+          </Tab> */}
         </Tabs>
       </div>
   )
