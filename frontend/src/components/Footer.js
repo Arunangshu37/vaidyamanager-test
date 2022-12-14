@@ -14,8 +14,8 @@ const style = {
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const shareUrl = "www.mindvein.com";
-  const baseUrl = process.env.REACT_APP_API__BASE_URL;
+  // const shareUrl = "www.mindvein.com";
+  // const baseUrl = process.env.REACT_APP_API__BASE_URL;
 
   const title = "Title"
   return (
@@ -25,36 +25,32 @@ const Footer = () => {
         <Card className="text-center">
           <Card.Body>
             <Row>
-              <div className="col-md-3">
+              {/* <div className="col-md-3">
                 <img style={{
                   width: "100%",
                   margin: "auto"
                 }}
                   //  src="images/india-map.png" 
-                  src={"http://localhost:3000/images/image-india.png"}
+                  src={"http://localhost:2000/images/image-india.png"}
                 />
-              </div>
+              </div> */}
               {/* links */}
               <div className='col-md-3'>
                 <ul style={{ listStyle: "none outside none" }}>
                   <li className='ftli'>
-                    <a href='/about-us' className="gtm-footer-link"> About Us
+                    <a href='/' className="gtm-footer-link"> About Us
                     </a>
                   </li>
                   <li className='ftli'>
-                    <a href='/privacy-policy' className="gtm-footer-link">Privacy & Policy
+                    <a href='/' className="gtm-footer-link">Privacy & Policy
                     </a>
                   </li >
                   <li className='ftli'>
-                    <a href='/contact-us' className="gtm-footer-link">Contact Us
+                    <a href='/' className="gtm-footer-link">Contact Us
                     </a>
                   </li>
                   <li className='ftli'>
-                    <a href='/terms-condition' className="gtm-footer-link">Terms & Conditions
-                    </a>
-                  </li>
-                  <li className='ftli'>
-                    <a href='/refund-policy' className="gtm-footer-link">Refund Policy
+                    <a href='/' className="gtm-footer-link">Terms & Conditions
                     </a>
                   </li>
                 </ul>
@@ -68,19 +64,19 @@ const Footer = () => {
                     }}>
                       <img height="60px" width="115px"
                         //  src="images/fssai_1.png" 
-                        src={"http://localhost:3000/images/fssai_1.png"}
+                        src={"http://localhost:2000/images/fssai_1.png"}
                       />
                       <img height="60px" width="115px"
                         // src="images/fssai_2.png" 
-                        src={"http://localhost:3000/images/fssai_2.png"}
+                        src={"http://localhost:2000/images/fssai_2.png"}
                       />
                       <img height="65px" width="124px"
                         // src="images/makeinindia-logo.png"
-                        src={"http://localhost:3000/images/makeinindia-logo.png"}
+                        src={"http://localhost:2000/images/makeinindia-logo.png"}
                       />
                       <img height="80px" width="100px"
                         //  src="images/who-logo-vector.png" 
-                        src={"http://localhost:3000/images/who-logo-vector.png"}
+                        src={"http://localhost:2000/images/who-logo-vector.png"}
                       />
                     </Container>
                   </div>
@@ -89,7 +85,7 @@ const Footer = () => {
                     <Row>
                       <Col className='footer-imgs'>
                         <Image
-                          src={"http://localhost:3000/images/handshake.png"}
+                          src={"http://localhost:2000/images/handshake.png"}
                           // src={"images/handshake.png"}
                           alt="imagehand"
                           fluid
@@ -98,7 +94,7 @@ const Footer = () => {
                       </Col>
                       <Col className='footer-imgs'>
                         <Image
-                          src={"http://localhost:3000/images/shield.png"}
+                          src={"http://localhost:2000/images/shield.png"}
                           // src={"images/shield.png"}
                           alt="sheild"
                           fluid
@@ -107,7 +103,7 @@ const Footer = () => {
                       </Col>
                       <Col className='footer-imgs'>
                         <Image
-                          src={"http://localhost:3000/images/hidden.png"}
+                          src={"http://localhost:2000/images/hidden.png"}
                           // src={"images/hidden.png"}
                           alt="hide"
                           fluid
@@ -116,7 +112,7 @@ const Footer = () => {
                       </Col>
                       <Col className='footer-imgs'>
                         <Image
-                          src={"http://localhost:3000/images/delivery-truck.png"}
+                          src={"http://localhost:2000/images/delivery-truck.png"}
                           // src={"images/delivery-truck.png"}
                           alt="deliver"
                           fluid
@@ -133,25 +129,25 @@ const Footer = () => {
               <a href="" target="_blank">
                 <img className="gtm-footer-link" style={{ marginRight: "15px" }}
                   // src="images/facebook.svg"
-                  src={"http://localhost:3000/images/facebook.svg"}
+                  src={"http://localhost:2000/images/facebook.svg"}
                 />
               </a>
               <a href="" target="_blank">
                 <img className="gtm-footer-link" style={{ marginRight: "15px" }}
                   // src="images/instagram.svg" 
-                  src={"http://localhost:3000/images/instagram.svg"}
+                  src={"http://localhost:2000/images/instagram.svg"}
                 />
               </a>
               <a href="" target="_blank">
                 <img className="gtm-footer-link" style={{ marginRight: "15px" }}
                   // src="images/linkedin.svg" 
-                  src={"http://localhost:3000/images/linkedin.svg"}
+                  src={"http://localhost:2000/images/linkedin.svg"}
                 />
               </a>
               <a href="" target="_blank">
                 <img className="gtm-footer-link" style={{ marginRight: "15px" }}
                   // src="images/twitter.svg" 
-                  src={"http://localhost:3000/images/twitter.svg"}
+                  src={"http://localhost:2000/images/twitter.svg"}
                 />
               </a>
             </div>

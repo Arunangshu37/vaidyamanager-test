@@ -43,15 +43,15 @@ const Header = () => {
                     <Container>
                         <LinkContainer to='/'>
                             <Navbar.Brand>
-                                <h1 style={{color:"white"}}>Vaidya Manager</h1>
-                                {/* <img
+                               
+                                <img
                                     className="logo"
                                     // src={"images/mindvein.png"}
-                                    src={"http://localhost:3000/images/vaidyalogo.png"}
+                                    src={"http://localhost:2000/images/vaidya-logo-preview.png"}
                                     alt="Vaidya Brand Logo"
                                     width="87px"
                                     height="50px"
-                                /> */}
+                                />
                               {/* <img src={'images/mindvein.png'} /> */}
                             </Navbar.Brand>
                         </LinkContainer>
@@ -75,20 +75,6 @@ const Header = () => {
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
-                                {/* <LinkContainer to={isLogin ? `/consultation` : '/login'}>
-                                    <Navbar.Brand> Online Consultation
-                                        &nbsp;  |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer> */}
-                                {
-                                    isLogin && isSuperAdmin ? <>
-                                        <LinkContainer to={`/Role`}>
-                                            <Navbar.Brand>Create User
-                                                &nbsp;  |&nbsp;
-                                            </Navbar.Brand>
-                                        </LinkContainer>
-                                    </> : null
-                                }
                                 {
                                     isLogin && isSuperAdmin ? <>
                                         <LinkContainer to={`/appointmentlist`}>
