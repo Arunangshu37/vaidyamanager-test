@@ -45,11 +45,13 @@ import Inquiry from './screens/Inquiry'
 import TabComponent from './components/TabComponent'
 import MasterTab from './components/MasterTab'
 
+
 const App = () => {
   
     return (
         <Router history={history}>
             <Header />
+        
             <main className='py-3'>
                 <Route path='/' component={HomeScreen} exact />
                 <Route path='/demoReg'  component={DemoRegistration}/>

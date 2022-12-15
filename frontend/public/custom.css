@@ -1,4 +1,4 @@
-/* navbar css */
+
 .navbar {
   position: relative;
   display: flex;
@@ -9,16 +9,18 @@
   background-color: #88ccc6;
   border-width: 0px !important;
   height: 65px !important;
-  /*background-color:  rgb(126, 186, 255);  
-  background-color: rgb(122, 223, 147);*/
 }
 
 .nav-item.dropdown:hover .dropdown-menu {
   display: block;
 }
+.dropdown-menu {
+  background-color: #479591 !important;
+}
+
 
 .navbar-dark .navbar-nav .nav-link {
-  color: grey !important;
+  color: #1d4e4a !important;
 }
 /* .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
   color: orangered;
@@ -34,14 +36,14 @@
   color: gray;
 } */
 
-/* Homebanner css */
+/* / Homebanner css / */
 .homebanner {
 
   width: 100%;
   height: 80%;
   /* top: 0;
   left: 0; */
-  /* position: absolute; */
+  /* / position: absolute; / */
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
@@ -53,6 +55,18 @@
   position: absolute; */
 
 }
+
+.logo {
+  width: 150px;
+    margin: -22px 10px;
+}
+
+/* @media screen and (max-width:450px){
+  .logo{    
+    width: 105px;
+    height: 42px;
+  }
+  } */
 
 
 .responsive {
@@ -83,12 +97,12 @@
 
 
 .home-banner-bg-parten {
-  /* background-image: url(./images/consultant.png); */
-  /* height: 85vh; */
+  /* / background-image: url(./images/consultant.png); / */
+  /* / height: 85vh; / */
   text-align: center;
-  /* color: white; */
+  /* / color: white; / */
   overflow: hidden;
-  /* background: #c39797; */
+  /* / background: #c39797; / */
   background-size: cover;
   background-repeat: no-repeat;
   margin-top: 50px;
@@ -100,18 +114,18 @@
 
 
 .coronaviruswraper {
-  /* width: 980px; */
+  /* / width: 980px; / */
   margin: auto;
   height: 100%;
 }
 
 .mobileshowicons {
   position: absolute;
-  /* width: 45rem; */
+  /* / width: 45rem; / */
   left: 0;
   right: 0;
   margin: auto;
-  /* bottom: -12%; */
+  /* / bottom: -12%; / */
   bottom: 7%;
   z-index: 99;
 }
@@ -133,8 +147,8 @@
   padding: 0;
   border: 0;
   font-size: 100%;
-  /* border-bottom: 0px  !important; */
-  /* font-family: "Open Sans",sans-serif; */
+  /* / border-bottom: 0px  !important; /
+  / font-family: "Open Sans",sans-serif; / */
   line-height: 1.5;
   list-style: none;
 }
@@ -149,7 +163,7 @@
 }
 
 .mobileicons li {
-  /* width: 27%; */
+  /* / width: 27%; / */
   float: left;
   background-color: #fff;
   padding: 20px;
@@ -163,7 +177,7 @@
 
 @media screen and (max-width: 900px) {
   .mobileicons li {
-    /* width: 45%; */
+    /* / width: 45%; / */
     float: left;
     margin: 2%;
     padding: 9px;
@@ -189,7 +203,7 @@
 }
 
 
-/* testimonials css */
+/* / testimonials css / */
 #demo {
   background: linear-gradient(112deg, #ffffff 50%, #78b9ed 50%);
   max-width: 900px;
@@ -199,15 +213,10 @@
 .testimonial-caption {
   position: initial;
   z-index: 10;
-  /* padding: 5rem 8rem; */
+  /* / padding: 5rem 8rem; / */
   color: #000;
-  /* color: rgba(30, 27, 27, 86%); */
   text-align: center;
   font-size: 13px;
-  /* font-size: 1.1rem; */
-  /* font-family:  "Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol"; */
-  /* font-family: Georgia, serif; */
-  /* font-weight: bold; */
   line-height: 2rem
 }
 
@@ -220,8 +229,6 @@
     text-align: center;
     font-size: 0.7rem;
     font-family: "Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol";
-    /* font-family: Georgia, serif; */
-    /* font-weight: bold; */
     line-height: 1.5rem
   }
 }
@@ -255,7 +262,6 @@
 }
 
 #carousels-icon {
-  /* background-color: rgb(223, 56, 89); */
   background-color: rgb(16 137 233);
   color: black;
   padding: 1.4rem
@@ -285,9 +291,8 @@
   position: unset !important;
 }
 
-/* footer class */
+/* / footer class / */
 .ftrg {
-  /* background-image: url("images/wave.svg") !important; */
   background: #fff;
   padding: 5px;
   width: 100%;
@@ -315,13 +320,12 @@
   margin: 21px 0;
 }
 
-/* mindvein experts part css */
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap'); */
+/* / mindvein experts part css / */
+/* / @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap'); / */
 
 .team {
   padding-bottom: 70px;
   font-family: "Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol";
-  /* font-family: 'Poppins', sans-serif */
 }
 
 .team .section-title {
@@ -330,7 +334,6 @@
 }
 
 .team__item {
-  /* height: 480px; */
   height: 306px;
   position: relative;
   z-index: 1;
@@ -342,7 +345,6 @@
   border-radius: 9px;
   color: #0078d4;
   width: 245px;
-  /* background-color:rgba(34, 48, 96, 0.8); */
 }
 
 .team__item:hover~.t1 {
@@ -358,7 +360,6 @@
   height: 100%;
   width: 100%;
   background: rgba(45, 62, 120, 0.4);
-  /* background: rgba(34, 48, 96, 0.8); */
   content: "";
   z-index: -1;
   opacity: 2;
@@ -400,7 +401,6 @@
 
 .team__text {
   background-color: rgba(33, 47, 95, 0.9);
-  /* background-color: rgba(34, 48, 96, 0.8); */
   height: 100%;
   top: 361px;
   position: relative;
@@ -451,7 +451,7 @@
   }
 }
 
-/* footer card */
+/* / footer card / */
 .card {
   position: relative;
   display: flex;
@@ -459,12 +459,11 @@
   min-width: 0;
   word-wrap: break-word;
   background-color: #fff;
-  /* /* background-clip: border-box; */
   border: 0px !important;
   border-radius: 0.25rem;
 }
 
-/* autoplay slider */
+/* / autoplay slider / */
 
 @keyframes scroll {
   0% {
@@ -519,7 +518,7 @@
 }
 
 
-/* mindvein help */
+/* / mindvein help / */
 
 .img-container {
   display: block;
@@ -597,7 +596,6 @@
 
 
 
-/*  */
 #constant {
   text-transform: uppercase;
   color: white;
@@ -673,7 +671,7 @@
   }
 }
 
-/* footer img class */
+/* / footer img class / */
 .footer-imgs {
   display: flex;
   align-items: center;

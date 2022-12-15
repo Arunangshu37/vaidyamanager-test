@@ -43,16 +43,12 @@ const Header = () => {
                     <Container>
                         <LinkContainer to='/'>
                             <Navbar.Brand>
-                               
                                 <img
                                     className="logo"
-                                    // src={"images/mindvein.png"}
-                                    src={"http://localhost:2000/images/vaidya-logo-preview.png"}
-                                    alt="Vaidya Brand Logo"
-                                    width="87px"
-                                    height="50px"
+                                    src={"images/vaidya-logo-preview.png"}
+                                    // src={"http://localhost:2000/images/vaidya-logo-preview.resized.png"}
+                                    alt="mindvein Brand Logo"
                                 />
-                              {/* <img src={'images/mindvein.png'} /> */}
                             </Navbar.Brand>
                         </LinkContainer>
 
@@ -65,6 +61,7 @@ const Header = () => {
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
+                             
                                 <LinkContainer to={`/appointmentlist`}>
                                     <Navbar.Brand>Users
                                         &nbsp;  |&nbsp;
@@ -75,51 +72,6 @@ const Header = () => {
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
-                                {
-                                    isLogin && isSuperAdmin ? <>
-                                        <LinkContainer to={`/appointmentlist`}>
-                                            <Navbar.Brand> Appointment List
-                                                &nbsp;  |&nbsp;
-                                            </Navbar.Brand>
-                                        </LinkContainer>
-                                    </> : null
-                                }
-                                {/* <LinkContainer to='/testrefund'>
-                                    <Navbar.Brand>Refund
-                                        &nbsp;  |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer> */}
-                                {/* <LinkContainer to='/prescribetemplate'>
-                                    <Navbar.Brand>Trial
-                                        &nbsp;  |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer> */}
-                                {/* <LinkContainer to='/prescription'>
-                                    <Navbar.Brand>Prescription
-                                        &nbsp;  |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer> */}
-                                {/* <LinkContainer to='/transaction'>
-                                    <Navbar.Brand>Transaction
-                                        &nbsp;  |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer> */}
-                                {/* <LinkContainer to='/E-pharmacy'>
-                                    <Navbar.Brand>E-pharmacy
-                                        &nbsp; |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer> */}
-                                {/* <LinkContainer  to='/lab-test'>
-                                    <Navbar.Brand>Lab Test
-                                        &nbsp;  |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer> */}
-                                {/* <LinkContainer to='/Digital Therapy'>
-                                    <Navbar.Brand>Digital Therapy
-                                        &nbsp;  |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer> */}
-
                                 {/* <NavDropdown title="Know More" id="basic-nav-dropdown" renderMenuOnMount={true}>
                                     <NavDropdown.Item href="/about-us" >
                                         About Us
@@ -141,13 +93,7 @@ const Header = () => {
                         </Navbar.Collapse>
 
                         <Navbar.Collapse id='basic-navbar-nav'>
-                            <Nav className='ml-auto' >
-                                {/* <LinkContainer to='/cart' className='nav-link'>
-                                    <Nav.Link>
-                                        <i className='fa fa-shopping-cart mr-2'></i>
-                                        Cart
-                                    </Nav.Link>
-                                </LinkContainer> */}
+                            <Nav className='ml-auto'>
                                 {userInfo ? (
                                     <NavDropdown
                                         title={userInfo.name}
@@ -158,13 +104,13 @@ const Header = () => {
                                                 Profile
                                             </NavDropdown.Item>
                                         </LinkContainer>
-                                        {/* {isSuperAdmin ?
+                                        {isSuperAdmin ?
                                             <LinkContainer to='/review-order'>
                                                 <NavDropdown.Item>
                                                     Review Order
                                                 </NavDropdown.Item>
                                             </LinkContainer> : ""
-                                        } */}
+                                        }
 
                                         <NavDropdown.Item
                                             onClick={logoutHandler}
@@ -185,7 +131,8 @@ const Header = () => {
                     </Container>
                 </Navbar>
             </header>
-        </ >
+        </>
+
     )
 }
 
