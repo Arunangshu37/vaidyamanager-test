@@ -61,14 +61,13 @@ const Header = () => {
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
-                             
-                                <LinkContainer to={`/appointmentlist`}>
-                                    <Navbar.Brand>Users
+                                <LinkContainer to={`/mastertab`}>
+                                    <Navbar.Brand>New
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
-                                <LinkContainer to={`/mastertab`}>
-                                    <Navbar.Brand>Register
+                                <LinkContainer to={`/appointmentlist`}>
+                                    <Navbar.Brand>Old
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>

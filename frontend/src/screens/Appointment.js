@@ -144,6 +144,7 @@ const Appointment = () => {
       </div> */}
 
       <div style={{ marginTop: "6rem" }}>
+        <h1>Patient Data</h1>
         <Box sx={{ height: 400, width: '100%' }}>
           <DataGrid
             getRowId={(r) => r._id}
