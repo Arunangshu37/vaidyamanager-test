@@ -44,6 +44,7 @@ import Therapy from './screens/Therapy'
 import Inquiry from './screens/Inquiry'
 import TabComponent from './components/TabComponent'
 import MasterTab from './components/MasterTab'
+import Banner from './components/Banner'
 
 
 const App = () => {
@@ -87,6 +88,7 @@ const App = () => {
                     <Route path='/prescribetemplate'  component={PrescriptionTemplate}/>
                     <Route path='/Role'  component={Role}/>
                     <Route path='/appointmentlist'  component={Appointment}/>
+                    <Route path='/banner' component={Banner}/>
                 </Container>
             </main>
             <Footer />

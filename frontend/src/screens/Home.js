@@ -12,6 +12,7 @@ import ReadMoreReact from 'read-more-react';
 import SuccessStories from '../components/SuccessStories'
 import DoctorCard from '../components/DoctorCard'
 import AyurvedInfo from '../components/AyurvedInfo'
+import Banner from '../components/Banner'
 
 const Home = () => {
   const baseUrl = process.env.REACT_APP_API__BASE_URL;
@@ -22,11 +23,13 @@ const Home = () => {
 
   return (
     <>
+    
       <Container>
         {/* <img className='center'
           src={"images/vaidyalogo3.png"} width="546px"
           height=" 425px" /> */}
-        <div style={{marginTop:"5rem"}}>
+        <div style={{marginTop:"2rem"}}>
+        <Banner/>
           <AyurvedInfo/></div>
 
 

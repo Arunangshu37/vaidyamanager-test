@@ -1,0 +1,48 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    color: #fff;
+    /* background: url(https://www.dropbox.com/s/9gz5y2rjj4ttama/congruent_outline.png?dl=1); */
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+.responsive-banner-wrap {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.responsive-banner-wrap > *, .responsive-banner-wrap img, .responsive-banner-wrap h2 {
+    position: relative;
+    z-index: 9;
+}
+.responsive-banner-wrap h2 {
+    margin-bottom: 3%;
+    background: #399;
+    padding: 15px;
+    margin: 0 0 -3px 0;
+    font-weight: lighter;
+}
+.responsive-banner-wrap svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+.responsive-banner-wrap img {
+    width: 5%;
+    margin-top: 3%;
+}
+.responsive-banner-wrap a {
+    text-decoration: none;
+    color: #fff;
+    text-shadow: 2px 2px #333;
+}
+.responsive-banner-wrap a:hover {
+    text-shadow: 4px 4px #333;
+}
+.banner-svg {
+    fill: #399;
+}
