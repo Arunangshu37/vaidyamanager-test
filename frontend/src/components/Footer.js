@@ -38,7 +38,7 @@ const Footer = () => {
               <div className='col-md-3'>
                 <ul style={{ listStyle: "none outside none" }}>
                   <li className='ftli'>
-                    <a href='/' className="gtm-footer-link"> About Us
+                    <a href='/about' className="gtm-footer-link"> About Us
                     </a>
                   </li>
                   <li className='ftli'>

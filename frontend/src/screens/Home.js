@@ -1,18 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container, Card } from 'react-bootstrap'
-// Components
-import Product from '../components/Product'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
 // Redux
-import { listProducts } from '../actions/productActions'
-import Plan from '../components/Plan';
-import ReadMoreReact from 'read-more-react';
-import SuccessStories from '../components/SuccessStories'
-import DoctorCard from '../components/DoctorCard'
 import AyurvedInfo from '../components/AyurvedInfo'
 import Banner from '../components/Banner'
+import CarouselBanner from '../components/CarouselBanner'
+import SuccessStories from '../components/SuccessStories'
 
 const Home = () => {
   const baseUrl = process.env.REACT_APP_API__BASE_URL;
@@ -23,17 +16,27 @@ const Home = () => {
 
   return (
     <>
-    
-      <Container>
+
+      
         {/* <img className='center'
           src={"images/vaidyalogo3.png"} width="546px"
           height=" 425px" /> */}
-        <div style={{marginTop:"2rem"}}>
-        <Banner/>
-          <AyurvedInfo/></div>
+        <div style={{ marginTop: "2rem" }}>
+          <Banner />
+          </div>
+          {/* <div >
+          <CarouselBanner />
+          </div> */}
+          <Container>
+          <div>
+          <AyurvedInfo />
+          </div>
+          <div>
+            <SuccessStories />
+          </div>
+          </Container>
 
-
-      </Container>
+    
     </>
   )
 }

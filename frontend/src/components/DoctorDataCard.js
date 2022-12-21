@@ -73,37 +73,7 @@ const DoctorDataCard = () => {
 
                                 </p>
                             </div>
-                            {/* 2nd */}
-                            {/* <div className="testimonial">
-                                <div className="pic">
-                                    <img src={"images/datacard3.png"} alt="" className="img-responsive" />
-                                </div>
-                                <h3 className="testimonial-info">
-                                Dr. Swapnil Bhopie
-                                    <small></small>
-                                    <small>5+ Experience</small>
-                                </h3>
-                                <p className="description">
-
-                                    Consultation Charges are
-                                       <p style={{ fontSize: "15px" }}>₹ 800</p>
-                                </p>
-                            </div> */}
-                            {/* 3rd */}
-                            {/* <div className="testimonial">
-                                <div className="pic">
-                                    <img src={"images/datacard1.png"} alt="" className="img-responsive"  />
-                                </div>
-                                <h3 className="testimonial-info">
-                                    Dr.Rahul Bhatambare
-                                    <small>Psychologist</small>
-                                    <small>5+ Experience</small>
-                                </h3>
-                                <p className="description">
-                                    Consultation Charges are
-                                    <p style={{ fontSize: "15px" }}>₹ 1000</p>
-                                </p>
-                            </div> */}
+                           
                               </>
                          ))}
                         </OwlCarousel>

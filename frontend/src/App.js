@@ -45,6 +45,9 @@ import Inquiry from './screens/Inquiry'
 import TabComponent from './components/TabComponent'
 import MasterTab from './components/MasterTab'
 import Banner from './components/Banner'
+import CarouselBanner from './components/CarouselBanner'
+import Breadcrumb from './components/Breadcrumb'
+import About from './screens/Abouts'
 
 
 const App = () => {
@@ -59,7 +62,7 @@ const App = () => {
                 <Route path='/register' component={RegisterScreen} />
                 <Route path='/therapy' component={Therapy} />
                 <Route path='/inquiry' component={Inquiry} />
-               
+                <Route path='/breadcrumb' component={Breadcrumb}/>
 
                 <Container>
                 <Route path='/tab' component={TabComponent} />
@@ -89,6 +92,9 @@ const App = () => {
                     <Route path='/Role'  component={Role}/>
                     <Route path='/appointmentlist'  component={Appointment}/>
                     <Route path='/banner' component={Banner}/>
+                    <Route path='/carosel' component={CarouselBanner}/>
+                   
+                    <Route path='/about' component={About}/>
                 </Container>
             </main>
             <Footer />
