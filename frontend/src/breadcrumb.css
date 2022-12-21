@@ -1,5 +1,8 @@
 .pa-breadcrumb {
     padding: 91px 0 93px;
+    /* width: 1536px;
+    aspect-ratio: auto 1536 / 208;
+    height: 208px; */
     background: linear-gradient(45deg,rgba(0, 0, 0, 0.56),rgba(0, 0, 0, 0.56) ), url("/images/breadcrum.jpg");
     /* background-image: url("/images/breadcrum.jpg"); */
     background-size: cover;

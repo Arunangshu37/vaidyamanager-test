@@ -63,6 +63,7 @@ const App = () => {
                 <Route path='/therapy' component={Therapy} />
                 <Route path='/inquiry' component={Inquiry} />
                 <Route path='/breadcrumb' component={Breadcrumb}/>
+                <Route path='/about' component={About}/>
 
                 <Container>
                 <Route path='/tab' component={TabComponent} />
@@ -94,7 +95,7 @@ const App = () => {
                     <Route path='/banner' component={Banner}/>
                     <Route path='/carosel' component={CarouselBanner}/>
                    
-                    <Route path='/about' component={About}/>
+                   
                 </Container>
             </main>
             <Footer />

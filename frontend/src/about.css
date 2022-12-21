@@ -39,3 +39,97 @@
     margin-top: 0;
     margin-bottom: 1rem;
 } */
+.pa-counter {
+    margin-bottom: 180px;
+}
+.pa-why, .pa-counter, .pa-tesimonial, .pa-why-pure, .pa-team-home {
+    background: rgba(108, 170, 168, 0.1);
+}
+/* .pa-counter-main {
+    margin-bottom: -180px;
+} */
+.pa-counter-box {
+    text-align: center;
+    background: #fff;
+    box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 7%);
+    border-radius: 10px;
+    padding: 30px 30px 23px;
+    transition: 0.3s;
+}
+.pa-counter-box svg {
+    width: 50px;
+    height: auto;
+    fill: #6caaa8;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px;
+}
+.pa-counter-box h1 {
+    font-size: 35px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+.pa-counter-box p {
+    margin-bottom: 0;
+    font-weight: 400;
+    text-transform: capitalize;
+}
+.pa-product, .pa-blog, .pa-why-pure, .pa-team, .pa-price-plan {
+    padding-bottom: 50px;
+}
+.ps-team-box {
+    text-align: center;
+    background: #fff;
+    box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 7%);
+    border-radius: 10px;
+    padding-bottom: 13px;
+    margin-bottom: 30px;
+}
+.ps-team-box img {
+    border-radius: 10px 10px 0px 0px;
+    width: 100%;
+}
+.pa-team-social {
+    background: #fff;
+    padding: 20px 0 0 0;
+    margin: 0px 20px 0;
+    z-index: 1;
+    position: relative;
+    border-radius: 4px 4px 0px 0px;
+    transition: 0.3s;
+}
+.pa-team-social li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 10px;
+}
+.pa-team-social li a {
+    width: 28px;
+    height: 28px;
+    display: block;
+    border: 1px solid #6caaa8;
+    border-radius: 4px;
+    line-height: 25px;
+    transition: 0.3s;
+}
+/* a {
+    color: #242424;
+    transition: 0.3s;
+} */
+.pa-team-social li svg {
+    fill: #6caaa8;
+    width: 14px;
+}
+.ps-team-box h2 {
+    font-size: 20px;
+    margin: 12px 0 5px;
+    text-transform: capitalize;
+}
+.ps-team-box p {
+    margin-bottom: 0;
+    text-transform: capitalize;
+}
+a:-webkit-any-link {
+    /* color: -webkit-link; */
+    cursor: pointer;
+}

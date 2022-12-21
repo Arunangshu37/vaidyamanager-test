@@ -3,7 +3,7 @@ import '../breadcrumb.css'
 
 function Breadcrumb() {
   return (
-    <div>
+    <>
         <div className="pa-breadcrumb">
             <div className="container-fluid">
                 <div className="pa-breadcrumb-box">
@@ -18,7 +18,7 @@ function Breadcrumb() {
                 </div>
             </div>
         </div>
-    </div>
+    </>
 
   )
 }
