@@ -29,19 +29,19 @@ const Footer = () => {
                 <h2 className="pa-foot-title">Top Products</h2>
                 <ul>
                   <li>
-                    <a href="javascript:;">Black Organic Tea</a>
+                    <a href="">Black Organic Tea</a>
                   </li>
                   <li>
-                    <a href="javascript:;">Loose Leaf Tea</a>
+                    <a href="">Loose Leaf Tea</a>
                   </li>
                   <li>
-                    <a href="javascript:;">Oolong Tea</a>
+                    <a href="">Oolong Tea</a>
                   </li>
                   <li>
-                    <a href="javascript:;">Green Tea</a>
+                    <a href="">Green Tea</a>
                   </li>
                   <li>
-                    <a href="javascript:;">Sencha Tea</a>
+                    <a href="">Sencha Tea</a>
                   </li>
                 </ul>
               </div>
@@ -51,26 +51,26 @@ const Footer = () => {
                 <h2 className="pa-foot-title">Legal Information</h2>
                 <ul>
                   <li>
-                    <a href="javascript:;">About Us</a>
+                    <a href="/about">About Us</a>
                   </li>
                   <li>
-                    <a href="javascript:;">Privacy Policy</a>
+                    <a href="">Privacy Policy</a>
                   </li>
                   <li>
-                    <a href="javascript:;">Terms &amp; Conditions</a>
+                    <a href="">Terms &amp; Conditions</a>
                   </li>
                   <li>
-                    <a href="javascript:;">Customer Service</a>
+                    <a href="/contact-us">Contact us</a>
                   </li>
                   <li>
-                    <a href="javascript:;">Return Policy</a>
+                    <a href="">Return Policy</a>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="col-lg-6">
               <div className="pa-foot-box pa-foot-subscribe">
-                <img src={""} alt="image" className="img-fluid" />
+                <img src={"/images/"} alt="image" className="img-fluid" />
                 <div className="pa-newsletter">
                   <form>
                     <input type="text" placeholder="Subscribe newsletter" />
@@ -81,9 +81,49 @@ const Footer = () => {
               </div>
             </div>
           </div>
+        
+
+            <div className='row'>
+              <div class="col-md-6 offset-md-5">
+                {/* social */}
+                {/* style={{ marginTop: "51px", display: "flex", justifyContent: "center" }} */}
+                <div >
+                  <a href="" target="_blank">
+                    <img style={{ marginRight: "15px" }}
+                      // src="images/facebook.svg"
+                      src={"http://localhost:2000/images/facebook.svg"}
+                    />
+                  </a>
+                  <a href="" target="_blank">
+                    <img style={{ marginRight: "15px" }}
+                      // src="images/instagram.svg" 
+                      src={"http://localhost:2000/images/instagram.svg"}
+                    />
+                  </a>
+                  <a href="" target="_blank">
+                    <img style={{ marginRight: "15px" }}
+                      // src="images/linkedin.svg" 
+                      src={"http://localhost:2000/images/linkedin.svg"}
+                    />
+                  </a>
+                  <a href="" target="_blank">
+                    <img style={{ marginRight: "15px" }}
+                      // src="images/twitter.svg" 
+                      src={"http://localhost:2000/images/twitter.svg"}
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
-      </div>
-    </>
+        <div className="pa-copyright pa-copyright-two">
+          <div className="container">
+            <p>Copyright © 2022. All right reserved. <a href=""></a></p>
+          </div>
+        </div>
+      </>
     // <footer className='ftrg'>
     //   <>
 
@@ -128,11 +168,11 @@ const Footer = () => {
     //                   flexWrap: "wrap"
     //                 }}>
     //                   <img height="60px" width="115px"
-    //                     //  src="images/fssai_1.png" 
+    //                     //  src="images/fssai_1.png"
     //                     src={"http://localhost:2000/images/fssai_1.png"}
     //                   />
     //                   <img height="60px" width="115px"
-    //                     // src="images/fssai_2.png" 
+    //                     // src="images/fssai_2.png"
     //                     src={"http://localhost:2000/images/fssai_2.png"}
     //                   />
     //                   <img height="65px" width="124px"
@@ -140,7 +180,7 @@ const Footer = () => {
     //                     src={"http://localhost:2000/images/makeinindia-logo.png"}
     //                   />
     //                   <img height="80px" width="100px"
-    //                     //  src="images/who-logo-vector.png" 
+    //                     //  src="images/who-logo-vector.png"
     //                     src={"http://localhost:2000/images/who-logo-vector.png"}
     //                   />
     //                 </Container>

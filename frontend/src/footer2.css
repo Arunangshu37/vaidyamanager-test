@@ -85,3 +85,16 @@ input {
 .pa-foot-box ul li:last-child, .pa-foot-box p {
     margin-bottom: 0px;
 }
+.pa-copyright.pa-copyright-two {
+    background: #589a98;
+}
+.pa-copyright {
+    /* background: #6caaa8; */
+    padding: 12px 0;
+    text-align: center;
+}
+.pa-copyright p, .pa-copyright p a {
+    margin: 0;
+    color: #fff;
+    transition: 0.3s;
+}

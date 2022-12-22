@@ -133,3 +133,25 @@ a:-webkit-any-link {
     /* color: -webkit-link; */
     cursor: pointer;
 }
+.pas-testi-img:before, .pa-about-img:before, .pa-services-img:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #6caaa8;
+    z-index: -1;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.ps-team-box .pa-team-social:hover  {
+	transform: translateY(-20px);
+}
+.pa-counter-box:hover  {
+    transition: all 0.2s ease-out;
+    box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+    top: -4px;
+    border: 1px solid #cccccc;
+    background-color: white;
+  }

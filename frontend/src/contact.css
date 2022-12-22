@@ -113,3 +113,63 @@ margin-top: 36px;
 .contact-page-form form {
 padding: 20px 15px 0;
 }
+
+
+.pa-contact-form {
+    box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 7%);
+    padding: 19px;
+    border-radius: 10px;
+    transform: translate(-18px, 39px);
+    z-index: 1;
+    position: relative;
+    background: #fff;
+}
+.pa-cmnt-form input, .pa-cmnt-form textarea, .pa-contact-form input, .pa-contact-form textarea {
+    margin-bottom: 15px;
+}
+input {
+    width: 100%;
+    height: 50px;
+    padding: 0px 20px;
+    border: 1px solid #6caaa8;
+    outline: none;
+    border-radius: 50px;
+}
+.pa-cmnt-form textarea, .pa-contact-form textarea {
+    width: 100%;
+    height: 200px;
+    padding: 10px 20px;
+    border: 1px solid #6caaa8;
+    outline: none;
+    border-radius: 10px;
+    resize: none;
+}
+.pa-btn {
+    background: #6caaa8;
+    color: #fff;
+    padding: 0px 20px;
+    min-width: 160px;
+    height: 50px;
+    line-height: 46px;
+    border: none;
+    border-radius: 50px;
+    text-transform: capitalize;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid #6caaa8;
+    transition: 0.3s;
+    display: inline-block;
+}
+.response {
+    position: fixed;
+    bottom: 45px;
+    right: 40px;
+    color: #f44336;
+}
+.pa-contact-form ,.contact-heading h5 {
+    margin-bottom: 0;
+    text-transform: capitalize;
+    font-size: 20px;
+    color: #6caaa8;
+}

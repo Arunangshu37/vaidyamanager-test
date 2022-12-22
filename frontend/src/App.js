@@ -64,11 +64,11 @@ const App = () => {
                 <Route path='/inquiry' component={Inquiry} />
                 <Route path='/breadcrumb' component={Breadcrumb}/>
                 <Route path='/about' component={About}/>
-
+                <Route path='/contact-us' component={ContactUs} />
                 <Container>
                 <Route path='/tab' component={TabComponent} />
                 <Route path='/mastertab' component={MasterTab} />
-                    <Route path='/contact-us' component={ContactUs} />
+             
                     <Route path='/terms-condition' component={TermsAndConditions} />
                     <Route path='/privacy-policy' component={PrivacyPolicy} />
                     <Route path='/refund-policy' component={RefundPolicy} />
