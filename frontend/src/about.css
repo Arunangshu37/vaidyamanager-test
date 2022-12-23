@@ -155,3 +155,9 @@ a:-webkit-any-link {
     border: 1px solid #cccccc;
     background-color: white;
   }
+.pa-team-home {
+    background: rgba(108, 170, 168, 0.1);
+}
+.pa-counter{
+    background: rgba(108, 170, 168, 0.1); 
+}

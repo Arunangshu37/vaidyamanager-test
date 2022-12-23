@@ -127,7 +127,7 @@ padding: 20px 15px 0;
 .pa-cmnt-form input, .pa-cmnt-form textarea, .pa-contact-form input, .pa-contact-form textarea {
     margin-bottom: 15px;
 }
-input {
+.pa-contact-form input {
     width: 100%;
     height: 50px;
     padding: 0px 20px;
