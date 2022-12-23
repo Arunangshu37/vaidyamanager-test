@@ -6,6 +6,7 @@ import AyurvedInfo from '../components/AyurvedInfo'
 import Banner from '../components/Banner'
 import CarouselBanner from '../components/CarouselBanner'
 import SuccessStories from '../components/SuccessStories'
+import MedicineCards from '../components/MedicineCards'
 
 const Home = () => {
   const baseUrl = process.env.REACT_APP_API__BASE_URL;
@@ -24,9 +25,9 @@ const Home = () => {
         <div style={{ marginTop: "2rem" }}>
           <Banner />
           </div>
-          {/* <div >
-          <CarouselBanner />
-          </div> */}
+          <div >
+          <MedicineCards />
+          </div>
           <Container>
           <div>
           <AyurvedInfo />

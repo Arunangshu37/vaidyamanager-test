@@ -48,6 +48,7 @@ import Banner from './components/Banner'
 import CarouselBanner from './components/CarouselBanner'
 import Breadcrumb from './components/Breadcrumb'
 import About from './screens/Abouts'
+import MedicineCards from './components/MedicineCards'
 
 
 const App = () => {
@@ -94,7 +95,7 @@ const App = () => {
                     <Route path='/appointmentlist'  component={Appointment}/>
                     <Route path='/banner' component={Banner}/>
                     <Route path='/carosel' component={CarouselBanner}/>
-                   
+                    <Route path='/medicinecards' component={MedicineCards}/>
                    
                 </Container>
             </main>
