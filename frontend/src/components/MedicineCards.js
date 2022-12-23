@@ -3,8 +3,7 @@ import '../medicinecards.css'
 
 function MedicineCards() {
     return (
-        <div>MedicineCards
-
+        <div>
             <div className="pa-medicine spacer-top spacer-bottom">
                 <div className="container">
                     <div className="row">

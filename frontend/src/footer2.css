@@ -98,3 +98,19 @@ input {
     color: #fff;
     transition: 0.3s;
 }
+@media screen and (max-width: 767px){
+    .pa-footer, .pa-footer-two, .pa-footer-three {
+        padding: 52px 0 23px;
+    }
+}
+@media screen and (max-width: 767px){
+    .pa-foot-title, .pa-foot-box img {
+        margin-bottom: 20px;
+    }
+}
+@media screen and (max-width: 767px){
+    .pa-foot-title, .pa-foot-box img {
+        margin-bottom: 20px;
+    }
+}
+

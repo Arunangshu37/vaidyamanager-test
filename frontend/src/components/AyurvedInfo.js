@@ -35,38 +35,40 @@ const AyurvedInfo = () => {
 
             </div> */}
 
-            <div class="container">
-                <div class="pa-heading">
-                    <img src={"/images/herbal.svg"} alt="image" class="img-fluid"/>
+            <div class="pa-why spacer-top spacer-bottom">
+                <div class="container">
+                    <div class="pa-heading">
+                        <img src="/images/herbal.svg" alt="image" class="img-fluid" />
                         <h1>why pure Ayurveda</h1>
                         <h5>best for you</h5>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-sm-6 pr-0">
-                        <div class="pa-why-ul pa-why-left">
-                            <ul>
-                                <li>100 % Organic</li>
-                                <li>Best Quality</li>
-                                <li>hygienic product</li>
-                                <li>Quality tested</li>
-                                <li>Health Care</li>
-                            </ul>
-                        </div>
                     </div>
-                    <div class="col-md-4 p-0">
-                        <div class="pa-why-img">
-                            <img src={"/images/herbal.svg"} alt="image" class="img-fluid"/>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-6 pr-0">
+                            <div class="pa-why-ul pa-why-left">
+                                <ul>
+                                    <li>100 % Organic</li>
+                                    <li>Best Quality</li>
+                                    <li>hygienic product</li>
+                                    <li>Quality tested</li>
+                                    <li>Health Care</li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 pl-0">
-                        <div class="pa-why-ul pa-why-right">
-                            <ul>
-                                <li>100 % Organic</li>
-                                <li>Best Quality</li>
-                                <li>hygienic product</li>
-                                <li>Quality tested</li>
-                                <li>Health Care</li>
-                            </ul>
+                        <div class="col-md-4 p-0">
+                            <div class="pa-why-img">
+                                <img src="/images/herbal.svg" alt="image" class="img-fluid" />
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 pl-0">
+                            <div class="pa-why-ul pa-why-right">
+                                <ul>
+                                    <li>100 % Organic</li>
+                                    <li>Best Quality</li>
+                                    <li>hygienic product</li>
+                                    <li>Quality tested</li>
+                                    <li>Health Care</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
