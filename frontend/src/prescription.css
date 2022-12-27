@@ -1,7 +1,14 @@
-form {
-  position: relative;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-gap: 20px;
-  }
-  
+/* .prescription-select {
+  width: 150px;
+  margin: 10px;
+}
+.prescription-select:focus {
+  min-width: 150px;
+  width: auto;
+} */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}

@@ -4,7 +4,8 @@ import { getUserInfoDetails } from '../actions/userActions'
 import { listConsultants, getConsultantDetails, consultationLink } from '../actions/consultationActions.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-
+import TextField from "@mui/material/TextField";
+import UserList from '../components/UserList';
 
 const Appointment = () => {
 
@@ -35,32 +36,6 @@ const Appointment = () => {
   const { loading, error, doctors } = doctorList;
   // console.log("Doctors are", typeof doctors);
 
-  // const data = consultants?.filter((consultantInfo) => consultantInfo?.name == doctorInfo?.name)
-  // const doctorInfo = doctors?.filter((doctor) => {
-  //   users.filter((user) => {
-  //     if(doctor.email_id === user.email){
-  //       console.log("doctor",doctor)
-  //     }
-  //   });
-  // }) 
-
-
-
-  // const doctorInfo = doctors?.find((doctor) => doctor.name === doctorName)
-  // console.log("docInfo",doctorInfo)
-
-
-  // console.log(typeof(users))
-  // console.log("docInfo", doctorInfo)
-  //consultant data
-
-
-
-
-
-  
-
-
   const [sortModel, setSortModel] = useState([
     {
       field: "date",
@@ -85,9 +60,6 @@ const Appointment = () => {
 
 
   useEffect(() => {
-    // Dispatch the list doctors action and fill our state
-    // dispatch(listDoctors())
-    // dispatch(listConsultants())
     dispatch(getUserInfoDetails());
   }, [dispatch])
 
@@ -96,55 +68,36 @@ const Appointment = () => {
     const data = users?.length > 0 && users[0] !== 'undefined'
     // const data = consultants?.filter((consultantInfo) => consultantInfo?.name == doctorInfo?.name)
     setConsultantRowData(data)
-
   }, [users])
-  // console.log({ consultantRowData })
 
+
+  const [inputText, setInputText] = useState("");
+  let inputHandler = (e) => {
+    //convert input text to lower case
+    var lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+  };
   return (
     <>
-
-      <div style={{ marginTop: "6rem" }}>
-        {/* <Box
-          component="form"
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '30ch' },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            id="outlined-select-currency"
-            select
-            label="Select"
-            value={doctorName}
-            onChange={(e) => setDoctorName(e.target.value)}
-            helperText="Please select the Doctor"
-          >
-            {doctors?.map((option) => (
-              <MenuItem key={option.value} value={option.name}>
-                {option.name}
-                {/* {console.log("name", option.name)} 
-              </MenuItem>
-            ))}
-          </TextField>
-        </Box>*/}
-       </div> 
-
-      {/* <div style={{
-        display: "flex",
-        justifyContent: "center",
-        marginTop: "-5rem",
-        paddingLeft: "220px"
-      }} >
-        <Button
-          size="large"
-          variant="contained"
-          onClick={handleClick}
-        >Contained</Button>
-      </div> */}
-
       <div style={{ marginTop: "6rem" }}>
         <h1>Patient Data</h1>
+        {/* Search Bar */}
+        {/* <div className="main">
+        
+          <div className="search">
+            <TextField
+              id="outlined-basic"
+              onChange={inputHandler}
+              variant="outlined"
+              fullWidth
+              label="Search"
+            />
+          </div>
+          <UserList input={inputText} />
+        </div> */}
+
+
+        {/* Patient Data */}
         <Box sx={{ height: 400, width: '100%' }}>
           <DataGrid
             getRowId={(r) => r._id}

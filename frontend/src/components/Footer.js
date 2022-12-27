@@ -70,7 +70,7 @@ const Footer = () => {
             </div>
             <div className="col-lg-6">
               <div className="pa-foot-box pa-foot-subscribe">
-                <img src={"/images/"} alt="image" className="img-fluid" />
+                <img src={"/images/herbal.svg"} alt="image" className="img-fluid" />
                 <div className="pa-newsletter">
                   <form>
                     <input type="text" placeholder="Subscribe newsletter" />
