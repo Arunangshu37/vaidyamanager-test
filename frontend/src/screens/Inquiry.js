@@ -23,7 +23,7 @@ const Inquiry = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log("thrapy", inquiryForm);
+        // console.log("thrapy", inquiryForm);
         dispatch(createInquiry(
             inquiryForm.name,
             inquiryForm.contact,
