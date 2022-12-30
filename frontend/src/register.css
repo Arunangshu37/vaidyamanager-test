@@ -23,7 +23,7 @@
   }
 
   .fr{
-    background-image: url("/images/rbackground.png");
+    /* background-image: url("/images/rbackground.png"); */
     /* background-image: url("/images/clean-medical-background_53876-97927.webp"); */
     background-repeat: no-repeat;
     margin-top: 50px;

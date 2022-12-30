@@ -6,7 +6,8 @@ import {
     updateUserProfile,
     getUserInfoDetails,
     resetPassword,
-    newPassword  
+    newPassword , 
+    getUserDesc
 } from '../controllers/userController.js'
 import { protect } from '../middleware/authMiddleware.js'
 
@@ -22,6 +23,7 @@ router
 router.route('/userInfo').get(getUserInfoDetails)
 router.route('/resetpassword').post(resetPassword)
 router.route('/new-password').post(newPassword)
+router.route('/latest-patient').get(getUserDesc)
 
 
 export default router

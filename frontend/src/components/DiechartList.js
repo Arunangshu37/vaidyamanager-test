@@ -9,21 +9,30 @@
 // export default DiechartList
 export const DiechartList = [
     {
-      name: "Capsicum",
-      price: 1.2
+      id: 1,
+      category:'Milk Products',
+      name: "Milk",
+      
     },
     {
-      name: "Paneer",
-      price: 2.0
+      id: 2,
+      category:'Milk Products',
+      name: " Butter Milk",
+      
     },
     {
+      id: 3,
+      category:'vegetables',
       name: "Red Paprika",
-      price: 2.5
+    
     },
-    {
-      name: "Onions",
-      price: 3.0
+    {  id: 4,
+      category:'vegetables',
+      name: "Green Paprika",
+    
+ 
     },
+   
   
   ];
   

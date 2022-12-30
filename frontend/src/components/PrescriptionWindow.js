@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Autocomplete from '@mui/material/Autocomplete';
 import AddIcon from '@mui/icons-material/Add';
 import { DiechartList } from './DiechartList';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { BsSquare, BsCheckSquare, BsXSquare, BsInfoLg } from "react-icons/bs";
 
 
 const PrescriptionWindow = () => {
@@ -87,6 +89,39 @@ const PrescriptionWindow = () => {
   }, [dispatch])
 
 
+  //payment states
+  const [inputVal, setInputVal] = useState({
+    consult: "",
+    medicine: "",
+    paid: "",
+    debitcredit: "",
+    discount: ""
+  });
+
+
+  const updateInputVal = (pairs) =>
+    setInputVal((prevInputVal) => ({ ...prevInputVal, ...pairs }));
+
+  const onValueChange = (event) => {
+    const { name, value } = event.target;
+    console.log("NameVal", name, value);
+
+    if (name === "consult") {
+      const newPaid = Number(value) + Number(inputVal.medicine);
+      updateInputVal({ paid: newPaid });
+    }
+    if (name === "medicine") {
+      const newPaid = Number(value) + Number(inputVal.consult);
+      updateInputVal({ paid: newPaid });
+    }
+    // if(name === "discount"){
+    //   const newPaid = Number(value) - Number(inputVal.discount);
+    //   updateInputVal({ paid: newPaid });
+    //   console.log("paid")
+    // }
+    updateInputVal({ [name]: value });
+  };
+
   const [inputFields, setInputFields] = useState([
     { Dose: '' }
   ])
@@ -107,57 +142,128 @@ const PrescriptionWindow = () => {
   const handleShow = () => setShow(true);
 
   //checkboxes
-  // const [checked, setChecked] = useState(false);
-  const [first, setfirst] = useState({
-    dos: false,
-    dont: false,
-    occasional: false
-  });
-  const [permissions, setPermissions] = useState([]);
-  const [dontarray, setDontarray] = useState([]);
-  const [ocassionalarray, setOcassionalarray] = useState([])
+  const [allowanceState, setAllowanceState] = React.useState("1");
+  const [dosImport, setDosImport] = useState([]);
+  const [dontImport, setDontImport] = useState([]);
+  const [occasionalImport, setOccasionalImport] = useState([]);
 
-  const { dos, dont, occasional } = first
-  // const handleCheckBoxChange = (event) => {
-  //     var permissions_array = [...permissions];
-  //     var dont_array = [...dontarray];
-  //     var ocassionaly_array = [...ocassionalarray];
-  //     if (event.target.checked === 'dos') {
-  //         permissions_array = [...permissions, event.target.value];
-  //     }
-  //     if(event.target.checked === 'dont'){
-  //         dont_array = [...dontarray,event.target.value];
 
-  //     }
-  //     if(event.target.checked === 'ocassional')
-  //     {
 
-  //     }
-  //     else {
-  //         permissions_array.splice(permissions.indexOf(event.target.value), 1);
-  //     }
-  //     setPermissions(permissions_array);
-
-  // };
-  // useEffect(()=>{
-
-  //     console.log("permissions");
-
-  //   }, [permissions]);
-
-  const headerChange = (event) => {
-    setfirst({
-      // ...first,
-      // for(let x in first){
-      //   if (x === event.target.name){
-      //     event.target.checked
-      //   }
-      // }
-      // first.map((f)= f.event.target.checked)
-      // [event.target.name]: event.target.checked
-    });
+  function getUniCodeFromId(id) {
+    switch (id) {
+      case "1": {
+        return "&#10003;";
+      }
+      case "2": {
+        return "&#10799;";
+      }
+      case "3": {
+        return "!";
+      }
+      default: {
+        return "&#9634;";
+      }
+    }
   }
-  console.log({ first })
+
+  const [dietArray] = React.useState([]);
+
+  const getDietArray = (e) => {
+    DiechartList.forEach((element) => {
+      let inputId = "diet" + element.id;
+      let val = document.getElementById(inputId).value;
+      console.log('lopcal', val)
+      if (val != "0") {
+        dietArray.push({ diet: element, allowance: val });
+      }
+    });
+    console.log("dietArray", dietArray);
+  };
+
+
+  // const handleImport = () => {
+  //   switch (dietArray.allowance) {
+  //     case '1':
+  //       setDosImport(dietArray.filter(e => e.allowance === '1'))
+  //       break;
+  //     case '2':
+  //       setDontImport(dietArray.filter(e => e.allowance === '2'))
+  //       break;
+  //     case '3':
+  //       setOccasionalImport(dietArray.filter(e => e.allowance === '3'))
+  //       break;
+
+  //     default:
+  //       break;
+  //   }
+  //   handleModalImport()
+
+  // }
+
+  // const handleModalImport = () => {
+  //   console.log(dosImport)
+  //   console.log(dontImport)
+  //   console.log(occasionalImport)
+  // }
+  // console.log(dosImport)
+  // console.log(dontImport)
+  // console.log(occasionalImport)
+
+
+  // get all funtion
+  const handelAllButtonClick = (e) => {
+    if (allowanceState === "4") {
+      DiechartList.forEach((element) => {
+        let id = "lb" + element.id;
+        let inputId = "diet" + element.id;
+        document.getElementById(id).innerHTML = getUniCodeFromId(
+          allowanceState
+        );
+        document.getElementById(inputId).value = allowanceState;
+      });
+      return
+    }
+    DiechartList.forEach((element) => {
+      let id = "lb" + element.id;
+      let inputId = "diet" + element.id;
+      console.log(document.getElementById(id).innerHTML);
+      if (document.getElementById(id).innerHTML === "▢") {
+        document.getElementById(id).innerHTML = getUniCodeFromId(
+          allowanceState
+        );
+        document.getElementById(inputId).value = allowanceState;
+      }
+
+    });
+  };
+
+  const headerChange = (e) => {
+    if (e.target.value == '5') {
+      console.log(e.target.value)
+    }
+    setAllowanceState(e.target.value);
+  }
+  console.log({ allowanceState })
+
+  const handelMarkState = (e) => {
+    // console.log("hello", e.target);
+    let index = e.target.id.replace("lb", "");
+
+    if (allowanceState === "1") {
+      e.target.innerHTML = "&#10003;";
+      document.getElementById("diet" + index).value = "1";
+    } else if (allowanceState === "2") {
+      e.target.innerHTML = "&#10799;";
+      document.getElementById("diet" + index).value = "2";
+    } else if (allowanceState === "3") {
+      document.getElementById("diet" + index).value = "3";
+      e.target.innerHTML = "!";
+    } else {
+      document.getElementById("diet" + index).value = "0";
+      e.target.innerHTML = "&#9634;";
+    }
+  };
+
   return (
     <>
       <div className="card">
@@ -341,9 +447,7 @@ const PrescriptionWindow = () => {
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" placeholder='Ayurveda'
-
-                    />
+                    <input type="text" placeholder='Ayurveda' />
                   </td>
                   <td>
                     <div style={{
@@ -384,7 +488,13 @@ const PrescriptionWindow = () => {
                       <td>Document</td>
                       <tr>
                         <td> Consultation</td>
-                        <td> 0</td>
+                        <td>
+                          <input
+                            type="text"
+                            name="consult"
+                            value={inputVal.consult}
+                            onChange={onValueChange}
+                          /></td>
                         <td> Image
                           <div class="image-upload">
                             <img src='images/upload.png' />
@@ -394,7 +504,13 @@ const PrescriptionWindow = () => {
                       </tr>
                       <tr>
                         <td> Medicines</td>
-                        <td> 0</td>
+                        <td>
+                          <input
+                            type="text"
+                            name="medicine"
+                            value={inputVal.medicine}
+                            onChange={onValueChange}
+                          /> </td>
                         <td> Video
                           <div class="image-upload">
                             <img src='images/video.png' />
@@ -405,7 +521,12 @@ const PrescriptionWindow = () => {
                       </tr>
                       <tr>
                         <td> Paid</td>
-                        <td> 0</td>
+                        <td>
+                          <input
+                            type="text"
+                            name="paid"
+                            value={inputVal.paid}
+                            onChange={onValueChange} /></td>
                         <td> Report
                           <div class="image-upload">
                             <img src='images/medical-report.png' />
@@ -415,8 +536,25 @@ const PrescriptionWindow = () => {
                       </tr>
                       <tr>
                         <td> Debit/Credit</td>
-                        <td> 0</td>
-                        <td> Diet
+                        <td>
+                          <input
+                            type="text"
+                            name="debitcredit"
+                            value={inputVal.debitcredit}
+                            onChange={onValueChange} readOnly />
+                        </td>
+                        <tr>
+                        <td> </td>
+                        <td>      
+                          <input
+                            type="text"
+                            name="discount"
+                            value={inputVal.discount}
+                            onChange={onValueChange}  /> </td>
+                        <td> </td>
+                      </tr>
+                        <td>
+                           Diet
                           <div class="image-upload">
                             &nbsp;&nbsp;
                             <img src='images/cereal.png' onClick={handleShow} />
@@ -435,104 +573,83 @@ const PrescriptionWindow = () => {
                                 <div>
                                   <div class="row align-items-center">
                                     <div class="col">
-                                      <Checkbox checked={dos} color="success" name='dos'
-                                        onChange={headerChange} />Do's
+                                      <input
+                                        id="dos"
+                                        defaultChecked
+                                        type="radio"
+                                        value="1"
+                                        name="allowance"
+                                        onChange={headerChange}
+                                      />
+                                      <label htmlFor="dos">Do's</label>
                                     </div>
                                     <div class="col">
-                                      <Checkbox checked={dont} color="secondary" name='dont'
-                                        onChange={headerChange} />Don't
+                                      <input
+                                        id="dont"
+                                        type="radio"
+                                        value="2"
+                                        name="allowance"
+                                        onChange={headerChange}
+                                      />
+                                      <label htmlFor="dont">Dont's</label>
                                     </div>
                                     <div class="col">
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Occasional
+                                      <input
+                                        id="Occasional"
+                                        type="radio"
+                                        value="3"
+                                        name="allowance"
+                                        onChange={headerChange}
+                                      />
+                                      <label htmlFor="Occasional">Occasional</label>
                                     </div>
                                     <div class="col">
-                                      Omit
+                                      <input
+                                        id="Omit"
+                                        type="radio"
+                                        value="4"
+                                        name="allowance"
+                                        onChange={headerChange}
+                                      />
+                                      <label htmlFor="Omit">Omit</label>
                                     </div>
                                     <div class="col">
-                                      All
+                                      <input
+                                        id="all"
+                                        type="button"
+                                        value="all"
+                                        name="allowance"
+                                        onClick={handelAllButtonClick}
+                                      />
+                                      <label htmlFor="all">All</label>
                                     </div>
                                     <div class="col">
-                                      <Button variant="success">Import</Button>
+                                      <Button variant="success" >Import</Button>
                                     </div>
                                   </div>
                                 </div>
 
                                 <div>
-                                  <div class="row align-items-center">
-                                    <div class="col">
-                                      Milk Products
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Mik
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} /> Butter Milk
-
-                                
+                                  {DiechartList.map((diet, index) => (
+                                    <div key={index}>
+                                      {
+                                        <span
+                                          onClick={handelMarkState}
+                                          id={"lb" + diet.id}
+                                          style={{ fontSize: "1.5rem", cursor: "pointer" }}
+                                        >
+                                          &#x25A2;
+                                        </span>
+                                      }
+                                      <input
+                                        type="hidden"
+                                        id={"diet" + diet.id}
+                                        name={"diet" + diet.id}
+                                        value="0"
+                                      />
+                                      <label htmlFor={"lb" + diet.id}> {diet.name}</label>
                                     </div>
-                                    <div class="col">
-                                      Vegetables
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Onion
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Carrot
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Tomato
-                                    </div>
-                                    <div class="col">
-                                      Vegetables
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Potato
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Cabbage
-
-                                    </div>
-                                    <div class="col">
-                                      Grain and Pulses
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Wheat
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Rice
-                                    </div>
-                                    <div class="col">
-                                      Spices
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Curry Leaves
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Mustered seeds
-
-                                    </div>
-                                    <div class="col">
-                                      Fruites
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Grapes
-                                      <Checkbox checked={occasional} color="default" name='occasional'
-                                        onChange={headerChange} />Apple
-                                    </div>
-
-                                  </div>
-                                  {/* <table>
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>#</th>
-                                                                                <th>#</th>
-                                                                                <th>#</th>
-                                                                                <th>First Name</th>
-                                                                                <th>Last Name</th>
-                                                                                <th>Username</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td>M</td>
-                                                                                <td>V</td>
-                                                                                <td>g</td>
-                                                                                <td>g</td>
-                                                                                <td>f</td>
-                                                                                <td>upload</td>
-                                                                            </tr>
-                                                                        </tbody>
-
-                                                                    </table> */}
+                                  ))}
 
                                 </div>
 
@@ -543,21 +660,17 @@ const PrescriptionWindow = () => {
                                 </Button>
                                 <Button
                                   variant="primary"
-                                // onClick={() => { updateAppointmentDoctorDates(doctorInfo, from, to); handleClose(); }}
+                                  onClick={getDietArray}
                                 >
                                   Save Changes
                                 </Button>
                               </Modal.Footer>
                             </Modal>
 
-
-
-
-
-
                           </div>
                         </td>
                       </tr>
+                      
                       <tr>
                         <td>Mode </td>
                         <td> Cash</td>
