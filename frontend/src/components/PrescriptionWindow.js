@@ -104,7 +104,7 @@ const PrescriptionWindow = () => {
 
   const onValueChange = (event) => {
     const { name, value } = event.target;
-    console.log("NameVal", name, value);
+    // console.log("NameVal", name, value);
 
     if (name === "consult") {
       const newPaid = Number(value) + Number(inputVal.medicine);
@@ -114,11 +114,12 @@ const PrescriptionWindow = () => {
       const newPaid = Number(value) + Number(inputVal.consult);
       updateInputVal({ paid: newPaid });
     }
-    // if(name === "discount"){
-    //   const newPaid = Number(value) - Number(inputVal.discount);
-    //   updateInputVal({ paid: newPaid });
-    //   console.log("paid")
-    // }
+    if (name === "discount") {
+      // console.log("value",value)
+      const newPaid = Number(inputVal.paid) - Number(value);
+      updateInputVal({ debitcredit: newPaid });
+      // console.log("paid",inputVal)
+    }
     updateInputVal({ [name]: value });
   };
 
@@ -300,11 +301,6 @@ const PrescriptionWindow = () => {
                   </option>
                 ))}
               </select>
-              {/* <tr>
-                            <td><AddIcon /></td>
-                        </tr> */}
-              {/* <input type="text" placeholder='Add Symptoms here' onChange={onSelectChange} />
-                        {selectValue && <h2 className="mt-3">{selectValue}</h2>} */}
             </td>
             <td>
               <select name="medicine" id="medicine" style={{
@@ -321,41 +317,6 @@ const PrescriptionWindow = () => {
                 ))}
 
               </select>
-
-              {/* Autocomplete */}
-              {/* <div>
-                            <Autocomplete
-                                getOptionLabel={option => option.text}
-                                disablePortal
-                                id="combo-box-demo"
-                                options={dummyData}
-                                // sx={{
-                                //     width: 300, p: "10px", mx: "21px", borderRadius: 1,
-                                //     mt: "-18px",
-
-                                // }}
-                                placeholder="Add Medicines here"
-                                renderInput={(params) => <TextField {...params} text="Movie" />}
-                            />
-                        </div> */}
-              {/* <input type="text" placeholder='Add Medicines here' onChange={onSelectChange} />
-                        {selectValue && <h2 className="mt-3">{selectValue}</h2>} */}
-              {/* 
-                        {inputFields.map((input, index) => {
-                            return (
-                                <div key={index}>
-                                    <input type="text" placeholder='Add Medicines here' />
-                                    {/* <input type="text" placeholder='Ayurveda Diagnosis' /> 
-
-                                    <Button variant="contained"
-                                        onClick={() => removeFields(index)}
-
-
-                                    >  <DeleteIcon fontSize='medium' />  </Button>
-                                </div>
-                            )
-                        })} */}
-
             </td>
             <td>
               Dose
@@ -377,20 +338,6 @@ const PrescriptionWindow = () => {
                 <option value="0-0-1-1">0-0-1-1</option>
                 <option value="1-0-1-1">1-0-1-1</option>
               </select>
-              {/* {inputFields.map((input, index) => {
-                            return (
-                                <div key={index}>
-                                    <input type="text" placeholder='' />
-
-
-                                    <Button variant="contained"
-                                        onClick={() => removeFields(index)}
-
-
-                                    >  <DeleteIcon fontSize='medium' />  </Button>
-                                </div>
-                            )
-                        })}   */}
             </td>
             <td>
               Qty
@@ -482,10 +429,14 @@ const PrescriptionWindow = () => {
                 <tr>
                   <td colSpan={'2'}>
                     <table className="table table-bordered border-primary" border={"1px"} style={{ width: "100%" }}>
+                      
+                      <tr>
                       <td>Payment
                       </td>
-                      <td>Rupee</td>
-                      <td>Document</td>
+                      <td > Rupee</td>
+                      <td style={{width: "30%"}}>Document</td>
+                      </tr>
+                      
                       <tr>
                         <td> Consultation</td>
                         <td>
@@ -543,18 +494,8 @@ const PrescriptionWindow = () => {
                             value={inputVal.debitcredit}
                             onChange={onValueChange} readOnly />
                         </td>
-                        <tr>
-                        <td> </td>
-                        <td>      
-                          <input
-                            type="text"
-                            name="discount"
-                            value={inputVal.discount}
-                            onChange={onValueChange}  /> </td>
-                        <td> </td>
-                      </tr>
                         <td>
-                           Diet
+                          Diet
                           <div class="image-upload">
                             &nbsp;&nbsp;
                             <img src='images/cereal.png' onClick={handleShow} />
@@ -670,7 +611,17 @@ const PrescriptionWindow = () => {
                           </div>
                         </td>
                       </tr>
-                      
+                      <tr>
+                      <td>Discount</td>
+                        <td>
+                          <input
+                            type="text"
+                            name="discount"
+                            value={inputVal.discount}
+                            onChange={onValueChange} />
+                        </td>
+                      </tr>
+
                       <tr>
                         <td>Mode </td>
                         <td> Cash</td>

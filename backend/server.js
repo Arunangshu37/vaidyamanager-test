@@ -10,6 +10,7 @@ import easebuzzRoutes from './routes/easebuzzRoutes.js'
 // import authRoutes from './routes/authRoutes.js'
 import therapyRoutes from './routes/therapyRoutes.js'
 import inquiryRoutes from './routes/inquiryRoutes.js'
+import prescriptionRoutes from './routes/prescriptionRoutes.js'
 
 // consultant  & doctor route
 import consultantsRoutes from './routes/consultantsRoutes.js'
@@ -60,6 +61,7 @@ app.use("/api/videos", videoRoutes);
 app.use('/api/therapy', therapyRoutes);
 app.use('/api/inquiry', inquiryRoutes);
 
+app.use('/api/prescription',prescriptionRoutes)
 
 
 var upload = multer();

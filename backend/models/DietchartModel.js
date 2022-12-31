@@ -1,29 +1,31 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 
-const prescriptionSchema = mongoose.Schema(
+const dietchartSchema = mongoose.Schema(
     {
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
+        pateientDietChart : [
+            { 
+                diet : {
+                    diet_id: String,
+                    Name:String,
+                    Category : String
+                },
+                Permit:String
+            },        
+        ],
+        wtodo: {
+            type: String
         },
-        Dos: [String],
-        Donts:[String],
-        Occasional:[String],
-        all:[String],
-        todo:{
-            type:String
-        },
-        to_dont:{
-            type:String
+        wto_dont: {
+            type: String
         },
     },
-   
+
     {
         timestamps: true,
     }
 )
 
-const Prescription = mongoose.model('Prescription', prescriptionSchema)
+const DietChart = mongoose.model('DietChart', dietchartSchema)
 
-export default Prescription
+export default DietChart
