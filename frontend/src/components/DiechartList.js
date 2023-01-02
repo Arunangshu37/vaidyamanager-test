@@ -29,8 +29,7 @@ export const DiechartList = [
     {  id: 4,
       category:'vegetables',
       name: "Green Paprika",
-    
- 
+
     },
    
   

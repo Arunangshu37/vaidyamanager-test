@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, Modal, ListGroup } from 'react-bootstrap'
+import { Form, Button, Modal, ListGroup, InputGroup } from 'react-bootstrap'
 import { Checkbox, IconButton } from '@mui/material'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -12,6 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { DiechartList } from './DiechartList';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BsSquare, BsCheckSquare, BsXSquare, BsInfoLg } from "react-icons/bs";
+import e from 'cors';
 
 
 const PrescriptionWindow = () => {
@@ -24,7 +25,7 @@ const PrescriptionWindow = () => {
     mDiagnosis: "",
     modernSystem: "",
     treatement: "",
-    panchkarma: ""
+    panchkarma: []
 
   }
   const [prescription, setPrescription] = useState(defaultData);
@@ -53,12 +54,6 @@ const PrescriptionWindow = () => {
     });
   }
 
-  const handleFormChange = (index, event) => {
-    let data = [...inputFields];
-    data[index][event.target.name] = event.target.value;
-    setInputFields(data);
-  }
-
   const symptomsOptions = [
     { value: '', text: '--Add Symptoms--' },
     { value: 'Dry skin', text: 'Dry skin' },
@@ -73,11 +68,7 @@ const PrescriptionWindow = () => {
     { value: 'Brahmi', text: 'Brahmi' },
   ]
 
-  const removeFields = (index) => {
-    let data = [...inputFields];
-    data.splice(index, 1)
-    setInputFields(data)
-  }
+
 
   // UserList
   const userLists = useSelector((state) => state.userInfoDetails)
@@ -131,11 +122,7 @@ const PrescriptionWindow = () => {
     console.log(event.target.value);
   }
 
-  const addFields = (event) => {
-    console.log(event.target.value);
-    let newfield = { Dose: '', }
-    setInputFields([...inputFields, newfield])
-  }
+
 
   // Modal
   const [show, setShow] = useState(false);
@@ -240,7 +227,7 @@ const PrescriptionWindow = () => {
 
   const headerChange = (e) => {
     if (e.target.value == '5') {
-      console.log(e.target.value)
+      // console.log(e.target.value)
     }
     setAllowanceState(e.target.value);
   }
@@ -264,6 +251,38 @@ const PrescriptionWindow = () => {
       e.target.innerHTML = "&#9634;";
     }
   };
+
+
+  //panchkarma toggle
+  // window.onload = toggleSelect();
+  const toggleSelect = () => {
+    var isChecked = document.getElementById("stone").checked;
+    document.getElementById("panchkarma").disabled = !isChecked;
+    // console.log("set");
+  }
+
+  //add input box on selection
+  const selectPanchkarma = (e) => {
+    if (prescription.panchkarma.every((el) => el.name !== e.target.value)) {
+      const tempData = { name: e.target.value, days: 0 }
+      setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempData] })
+    }
+  }
+  console.log("panchkarma", prescription)
+
+  const removeDays = (pname) => {
+    // console.log("object is",prescription.panchkarma.filter((v) => v.name !== pname))
+    const a = prescription.panchkarma.filter((v) => v.name !== pname)
+    setPrescription({ ...prescription, panchkarma: a })
+
+  }
+
+  const handlePanchkarmaDay = (e)=>{
+    const tempDay = prescription.panchkarma.find((el) => el.name === e.target.name)
+    tempDay.days=e.target.value
+      setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempDay] })
+    console.log("temp day",tempDay)
+  }
 
   return (
     <>
@@ -404,8 +423,10 @@ const PrescriptionWindow = () => {
                       <Form.Check
                         inline
                         label="Panchkarma"
-                        name="group1"
+                        name="stone"
+                        id='stone'
                         style={{ marginBotto: "-18px" }}
+                        onClick={toggleSelect}
 
                       />
                       <select style={{
@@ -413,8 +434,10 @@ const PrescriptionWindow = () => {
                         margin: "21px 0 0 4px"
                       }}
                         id="panchkarma"
+                        name='panchkarma'
                         value={prescription.panchkarma}
-                        onChange={(e) => setPrescription({ ...prescription, panchkarma: e.target.value })}
+                        onChange={selectPanchkarma}
+                      // onChange={(e) => setPrescription({ ...prescription, panchkarma: e.target.value })}
                       >
                         <option selected value=""></option>
                         <option value="Vaman">Vaman</option>
@@ -423,20 +446,34 @@ const PrescriptionWindow = () => {
                         <option value="Nasya">Nasya</option>
                         <option value="Raktamokshana">Raktamokshana</option>
                       </select>
+
                     </div>
                   </td>
+
+                </tr>
+                <tr>
+                  <div>
+                    {
+                      prescription.panchkarma.map((item) => (
+                        <>
+                          <h5>{item.name}</h5>
+
+                          <input type="text" name={item.name} placeholder='days'  onChange={handlePanchkarmaDay}/>
+                          <Button onClick={() => removeDays(item.name)}>-</Button>
+                        </>
+                      ))
+                    }
+                  </div>
                 </tr>
                 <tr>
                   <td colSpan={'2'}>
                     <table className="table table-bordered border-primary" border={"1px"} style={{ width: "100%" }}>
-                      
                       <tr>
-                      <td>Payment
-                      </td>
-                      <td > Rupee</td>
-                      <td style={{width: "30%"}}>Document</td>
+                        <td>Payment
+                        </td>
+                        <td > Rupee</td>
+                        <td style={{ width: "30%" }}>Document</td>
                       </tr>
-                      
                       <tr>
                         <td> Consultation</td>
                         <td>
@@ -593,6 +630,21 @@ const PrescriptionWindow = () => {
                                   ))}
 
                                 </div>
+                                <div>
+                                  <div class="row">
+                                    <div class="col">
+                                      <InputGroup>
+                                        <InputGroup.Text>What to do</InputGroup.Text>
+                                        <Form.Control as="textarea" aria-label="With textarea" />
+                                      </InputGroup></div>
+                                    <div class="col">
+                                      <InputGroup>
+                                        <InputGroup.Text>What to don't</InputGroup.Text>
+                                        <Form.Control as="textarea" aria-label="With textarea" />
+                                      </InputGroup></div>
+                                  </div>
+
+                                </div>
 
                               </Modal.Body>
                               <Modal.Footer>
@@ -612,7 +664,7 @@ const PrescriptionWindow = () => {
                         </td>
                       </tr>
                       <tr>
-                      <td>Discount</td>
+                        <td>Discount</td>
                         <td>
                           <input
                             type="text"
