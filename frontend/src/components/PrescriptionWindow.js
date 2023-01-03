@@ -12,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { DiechartList } from './DiechartList';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BsSquare, BsCheckSquare, BsXSquare, BsInfoLg } from "react-icons/bs";
-import e from 'cors';
+import jsPDF from 'jspdf'
 
 
 const PrescriptionWindow = () => {
@@ -88,8 +88,6 @@ const PrescriptionWindow = () => {
     debitcredit: "",
     discount: ""
   });
-
-
   const updateInputVal = (pairs) =>
     setInputVal((prevInputVal) => ({ ...prevInputVal, ...pairs }));
 
@@ -113,29 +111,43 @@ const PrescriptionWindow = () => {
     }
     updateInputVal({ [name]: value });
   };
-
-  const [inputFields, setInputFields] = useState([
-    { Dose: '' }
-  ])
-
-  const handleChange = (event) => {
-    console.log(event.target.value);
-  }
-
-
+  // payment code ends
 
   // Modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setAllowanceState("1");
+    setShow(true);
+
+  };
 
   //checkboxes
-  const [allowanceState, setAllowanceState] = React.useState("1");
+  const [allowanceState, setAllowanceState] = React.useState("");
   const [dosImport, setDosImport] = useState([]);
   const [dontImport, setDontImport] = useState([]);
   const [occasionalImport, setOccasionalImport] = useState([]);
 
+  const dietCategories = [...new Set(DiechartList.map((item) => item.category))];
 
+    //getIDFromUnicode
+    function getIdFromUnicode(unicode) {
+      switch (unicode) {
+        case "✓": {
+          return "1";
+        }
+        case "✕": {
+          return "2";
+        }
+        case "!": {
+          return "3";
+        }
+        default: {
+          return "0";
+        }
+      }
+    }
 
   function getUniCodeFromId(id) {
     switch (id) {
@@ -154,48 +166,32 @@ const PrescriptionWindow = () => {
     }
   }
 
-  const [dietArray] = React.useState([]);
 
-  const getDietArray = (e) => {
+  const [dietArray, setDietArray] = React.useState([]);
+
+  
+  const setDietArrayLocally = (e) => {
+    const tempArray = [];
+    if (dietArray.length != 0) {
+      dietArray.splice(0, dietArray.length)
+      setDietArray([...dietArray]);
+    }
     DiechartList.forEach((element) => {
-      let inputId = "diet" + element.id;
-      let val = document.getElementById(inputId).value;
-      console.log('lopcal', val)
-      if (val != "0") {
-        dietArray.push({ diet: element, allowance: val });
+      let inputId = "lb" + element.id;
+      let unicode = document.getElementById(inputId).textContent.toString();
+      console.log('local', unicode, inputId)
+
+      if (unicode !== "▢") {
+        setDietArray(dietArray => [...dietArray, { diet: element, allowance: getIdFromUnicode(unicode) }]);
       }
+
     });
-    console.log("dietArray", dietArray);
+       console.log("dietArray",dietArray);
+    document.getElementById('dos').checked = true;
+    setAllowanceState("1");
   };
 
 
-  // const handleImport = () => {
-  //   switch (dietArray.allowance) {
-  //     case '1':
-  //       setDosImport(dietArray.filter(e => e.allowance === '1'))
-  //       break;
-  //     case '2':
-  //       setDontImport(dietArray.filter(e => e.allowance === '2'))
-  //       break;
-  //     case '3':
-  //       setOccasionalImport(dietArray.filter(e => e.allowance === '3'))
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  //   handleModalImport()
-
-  // }
-
-  // const handleModalImport = () => {
-  //   console.log(dosImport)
-  //   console.log(dontImport)
-  //   console.log(occasionalImport)
-  // }
-  // console.log(dosImport)
-  // console.log(dontImport)
-  // console.log(occasionalImport)
 
 
   // get all funtion
@@ -203,27 +199,28 @@ const PrescriptionWindow = () => {
     if (allowanceState === "4") {
       DiechartList.forEach((element) => {
         let id = "lb" + element.id;
-        let inputId = "diet" + element.id;
         document.getElementById(id).innerHTML = getUniCodeFromId(
           allowanceState
         );
-        document.getElementById(inputId).value = allowanceState;
+        // document.getElementById(inputId).value = allowanceState;
       });
       return
     }
     DiechartList.forEach((element) => {
       let id = "lb" + element.id;
-      let inputId = "diet" + element.id;
       console.log(document.getElementById(id).innerHTML);
       if (document.getElementById(id).innerHTML === "▢") {
         document.getElementById(id).innerHTML = getUniCodeFromId(
           allowanceState
         );
-        document.getElementById(inputId).value = allowanceState;
+        // document.getElementById(inputId).value = allowanceState;
       }
 
     });
   };
+
+
+
 
   const headerChange = (e) => {
     if (e.target.value == '5') {
@@ -239,19 +236,36 @@ const PrescriptionWindow = () => {
 
     if (allowanceState === "1") {
       e.target.innerHTML = "&#10003;";
-      document.getElementById("diet" + index).value = "1";
+      // document.getElementById("diet" + index).value = "1";
     } else if (allowanceState === "2") {
       e.target.innerHTML = "&#10799;";
-      document.getElementById("diet" + index).value = "2";
+      // document.getElementById("diet" + index).value = "2";
     } else if (allowanceState === "3") {
-      document.getElementById("diet" + index).value = "3";
+      // document.getElementById("diet" + index).value = "3";
       e.target.innerHTML = "!";
     } else {
-      document.getElementById("diet" + index).value = "0";
+      // document.getElementById("diet" + index).value = "0";
       e.target.innerHTML = "&#9634;";
     }
   };
 
+
+  const [showInstruction, setShowInstruction] = useState(false);
+  const handelInstructionShow = (e) => {
+    setShowInstruction(true)
+  }
+  const handelInstructionclose = (e) => {
+    setShowInstruction(false)
+  }
+
+  const generatePdf = () => {
+    var doc = new jsPDF('p', 'pt', 'a4');
+    doc.html(document.getElementById("instructions"), {
+      callback: function (pdf) {
+        pdf.save("Instructions.pdf");
+      }
+    })
+  }
 
   //panchkarma toggle
   // window.onload = toggleSelect();
@@ -268,7 +282,7 @@ const PrescriptionWindow = () => {
       setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempData] })
     }
   }
-  console.log("panchkarma", prescription)
+  // console.log("panchkarma", prescription)
 
   const removeDays = (pname) => {
     // console.log("object is",prescription.panchkarma.filter((v) => v.name !== pname))
@@ -277,12 +291,14 @@ const PrescriptionWindow = () => {
 
   }
 
-  const handlePanchkarmaDay = (e)=>{
+  const handlePanchkarmaDay = (e) => {
     const tempDay = prescription.panchkarma.find((el) => el.name === e.target.name)
-    tempDay.days=e.target.value
-      setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempDay] })
-    console.log("temp day",tempDay)
+    tempDay.days = e.target.value
+    setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempDay] })
+    console.log("temp day", tempDay)
   }
+
+
 
   return (
     <>
@@ -458,7 +474,7 @@ const PrescriptionWindow = () => {
                         <>
                           <h5>{item.name}</h5>
 
-                          <input type="text" name={item.name} placeholder='days'  onChange={handlePanchkarmaDay}/>
+                          <input type="text" name={item.name} placeholder='days' onChange={handlePanchkarmaDay} />
                           <Button onClick={() => removeDays(item.name)}>-</Button>
                         </>
                       ))
@@ -483,7 +499,8 @@ const PrescriptionWindow = () => {
                             value={inputVal.consult}
                             onChange={onValueChange}
                           /></td>
-                        <td> Image
+                        <td>
+                          Image
                           <div class="image-upload">
                             <img src='images/upload.png' />
                             <input id="file-input" type="file" />
@@ -536,13 +553,11 @@ const PrescriptionWindow = () => {
                           <div class="image-upload">
                             &nbsp;&nbsp;
                             <img src='images/cereal.png' onClick={handleShow} />
-
                             <Modal
                               show={show}
                               size="lg"
                               aria-labelledby="contained-modal-title-vcenter"
                               centered
-                              // dialogClassName="modal-50w"
                               onHide={handleClose}>
                               <Modal.Header closeButton>
                                 <Modal.Title>Diet Chart</Modal.Title>
@@ -602,46 +617,39 @@ const PrescriptionWindow = () => {
                                       <label htmlFor="all">All</label>
                                     </div>
                                     <div class="col">
-                                      <Button variant="success" >Import</Button>
+                                      <Button variant="success" onClick={()=>handelInstructionShow()} >Import</Button>
                                     </div>
                                   </div>
                                 </div>
 
                                 <div>
-                                  {DiechartList.map((diet, index) => (
-                                    <div key={index}>
-                                      {
-                                        <span
-                                          onClick={handelMarkState}
-                                          id={"lb" + diet.id}
-                                          style={{ fontSize: "1.5rem", cursor: "pointer" }}
-                                        >
-                                          &#x25A2;
-                                        </span>
-                                      }
-                                      <input
-                                        type="hidden"
-                                        id={"diet" + diet.id}
-                                        name={"diet" + diet.id}
-                                        value="0"
-                                      />
-                                      <label htmlFor={"lb" + diet.id}> {diet.name}</label>
-                                    </div>
-                                  ))}
 
-                                </div>
-                                <div>
-                                  <div class="row">
-                                    <div class="col">
-                                      <InputGroup>
-                                        <InputGroup.Text>What to do</InputGroup.Text>
-                                        <Form.Control as="textarea" aria-label="With textarea" />
-                                      </InputGroup></div>
-                                    <div class="col">
-                                      <InputGroup>
-                                        <InputGroup.Text>What to don't</InputGroup.Text>
-                                        <Form.Control as="textarea" aria-label="With textarea" />
-                                      </InputGroup></div>
+
+                                  <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                                    {
+                                      dietCategories.map((category, index) => {
+                                        return <div className='categoryClass' style={{ display: 'flex', flexDirection: 'column', margin: '0 10px' }}>
+                                          {category}
+                                          {/* <div style={{display:'flex', flexDirection:'column', width:'fit-content'}}> */}
+                                          {
+                                            DiechartList.filter((elem) => { return elem.category == category }).map((diet, index) => (
+                                              <div key={index}>
+                                                {
+                                                  <span
+                                                    onClick={handelMarkState}
+                                                    id={"lb" + diet.id}
+                                                    style={{ fontSize: "1.5rem", cursor: "pointer" }}
+                                                    dangerouslySetInnerHTML={{ __html: getUniCodeFromId(dietArray.find((elem) => { return diet.id == elem.diet.id })?.allowance) }}
+                                                  ></span>
+                                                }
+
+                                                <label htmlFor={"lb" + diet.id}> {diet.name}</label>
+                                              </div>
+                                            ))
+                                          }
+                                        </div>
+                                      })
+                                    }
                                   </div>
 
                                 </div>
@@ -653,13 +661,12 @@ const PrescriptionWindow = () => {
                                 </Button>
                                 <Button
                                   variant="primary"
-                                  onClick={getDietArray}
+                                  onClick={setDietArrayLocally}
                                 >
                                   Save Changes
                                 </Button>
                               </Modal.Footer>
                             </Modal>
-
                           </div>
                         </td>
                       </tr>
@@ -693,6 +700,79 @@ const PrescriptionWindow = () => {
           Save
         </Button>
       </Form>
+      <Modal
+        show={showInstruction}
+        size='lg'
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Diet chart instructions</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div id="instructions" style={{ padding: '15px 10px' }}>
+            <dl>
+              <dt>What to take ? </dt>
+              <dd>
+                <ul>
+                  {
+                    dietCategories.map((category) => {
+                      return <li>
+                        {
+                          dietArray.filter((_) => { return _.diet.category == category && _.allowance == '1' })
+                            .map((element) => element.diet.name).join(", ")
+                        }
+                      </li>
+                    })
+                  }
+                </ul>
+              </dd>
+              <dt>What to avoid ?</dt>
+              <dd>
+                <ul>
+                  {
+                    dietCategories.map((category) => {
+                      return <li>
+                        {
+                          dietArray.filter((_) => { return _.diet.category == category && _.allowance == '2' })
+                            .map((element) => element.diet.name).join(", ")
+
+                        }
+                      </li>
+                    })
+                  }
+                </ul>
+              </dd>
+              <dt>Take occasionally.</dt>
+              <dd>
+                <ul>
+                  {
+                    dietCategories.map((category) => {
+                      return <li>
+                        {
+                          dietArray.filter((_) => { return _.diet.category == category && _.allowance == '3' })
+                            .map((element) => element.diet.name).join(", ")
+                        }
+                      </li>
+                    })
+                  }
+                </ul>
+              </dd>
+            </dl>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handelInstructionclose}>
+            Close
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => generatePdf()}
+          >
+            Get pdf
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
 
   )

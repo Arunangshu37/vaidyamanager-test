@@ -31,6 +31,41 @@ export const DiechartList = [
       name: "Green Paprika",
 
     },
+    {
+      id: 5,
+      category:'Milk Products',
+      name: "Paneer",
+    },
+    {
+      id: 6,
+      category:'vegetables',
+      name: "Spinach",
+    },
+    {
+      id: 7,
+      category:'protein',
+      name: "Chickpea",
+    },
+    {
+      id: 8,
+      category:'protein',
+      name: "Walnuts ",
+    },
+    {
+      id: 9,
+      category:'protein',
+      name: "Eggs",
+    },
+    {
+      id: 10,
+      category:'protein',
+      name: "Almonds",
+    },
+    {
+      id: 11,
+      category:'vegetables',
+      name: "cucumber",
+    },
    
   
   ];
