@@ -28,7 +28,8 @@ import {
     userDetailsReducer,
     userUpdateProfileReducer,
     userInfoDetailsReducer,
-    userResetPasswordReducer
+    userResetPasswordReducer,
+    userInfoDescReducer
 } from './reducers/userReducers'
 import {
     createOrderReducer,
@@ -78,6 +79,8 @@ const reducer = combineReducers({
     allOrders: allOrdersReducer,
     createTherapy:createTherapyReducer,
     createInquiry:createInquiryReducer,
+    getLatestUSer:userInfoDescReducer
+
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')

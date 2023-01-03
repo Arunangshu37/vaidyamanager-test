@@ -234,8 +234,10 @@ const newPassword= asyncHandler(async(req,res)=>{
 
 //get users in descending order
 const  getUserDesc = asyncHandler(async (req, res) => {
-    const users = await User.find();
-    res.json(users)
+    const userDesc = await User.find({}).sort({_id:-1}).limit(1);
+    // console.log(userDesc)
+
+    res.json(userDesc)
 })
 
 

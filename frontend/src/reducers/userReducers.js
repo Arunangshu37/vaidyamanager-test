@@ -19,6 +19,10 @@ import {
     USER_UPDATE_PASSWORD_REQUEST,
     USER_UPDATE_PASSWORD_SUCCESS,
     USER_UPDATE_PASSWORD_FAIL,
+    USER_LATEST_REQUEST,
+    USER_LATEST_SUCCESS,
+    USER_LATEST_FAIL,
+    USER_LATEST_RESET
 
 } from '../constants/userConstants'
 
@@ -174,6 +178,39 @@ export const userResetPasswordReducer = (state = { users: [] }, action) => {
                 userspassword: action.payload,
             }
         case USER_UPDATE_PASSWORD_FAIL:
+            return {
+                loadingUsers: false,
+                errorUsers: action.payload,
+            }
+        default:
+            return state
+    }
+}
+
+//to get all users
+export const userInfoDescReducer = (state = { users: [] }, action) => {
+    switch (action.type) {
+        case USER_LATEST_REQUEST:
+            return {
+                loadingUsers: true,
+                userdesc: [],
+            }
+        case USER_LATEST_SUCCESS:
+            return {
+                loadingUsers: false,
+                userdesc: action.payload,
+            }
+        case USER_LATEST_FAIL:
+            return {
+                loadingUsers: false,
+                errorUsers: action.payload,
+            }
+        case USER_LATEST_SUCCESS:
+            return {
+                loadingUsers: false,
+                userdesc: action.payload,
+            }
+        case USER_LATEST_FAIL:
             return {
                 loadingUsers: false,
                 errorUsers: action.payload,

@@ -22,5 +22,49 @@ const addDietChartDetails = asyncHandler(async(req,res)=>{
 
 })
 
+const addPrescriptionDetails = asyncHandler(async(req,res)=>{
+    const {
+        prescriptionUser,
+        diet_chart,
+        Symptoms_name,
+        medicines,
+        days,
+        ayurveda_diagnosis,
+        modernSystem,
+        mDiagnosis,
+        prescriptionTreatment,
+        ayurveda,
+        panchkarma,
+        Image,
+        Video,
+        report,
+        Payment
 
-export {addDietChartDetails }
+    } = req.body
+
+    const PrescripionData = new Prescription({
+        prescriptionUser,
+        diet_chart,
+        Symptoms_name,
+        medicines,
+        days,
+        ayurveda_diagnosis,
+        modernSystem,
+        mDiagnosis,
+        prescriptionTreatment,
+        ayurveda,
+        panchkarma,
+        Image,
+        Video,
+        report,
+        Payment
+        
+    })
+    const createdPrescription = await PrescripionData.save();
+    console.log("success  Prescription");
+    res.status(201).json(createdPrescription)
+
+})
+
+
+export {addDietChartDetails,addPrescriptionDetails}

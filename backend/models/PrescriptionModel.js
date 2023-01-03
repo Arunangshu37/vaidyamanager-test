@@ -3,15 +3,15 @@ import bcrypt from 'bcryptjs'
 
 const prescriptionSchema = mongoose.Schema(
     {
-        user: {
+        prescriptionUser: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         },
         diet_chart: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Dietchart'
+            ref: 'DietChart'
         },
-        Symptoms_name: [String],
+        Symptoms_name: String,
         medicines: [{
             medicine_name: {
                 type: String,
@@ -59,12 +59,13 @@ const prescriptionSchema = mongoose.Schema(
         report: {
             type: String
         },
-        Payement: {
-            Consulting: String,
-            Medicine: String,
-            Paid: String,
-            Debit_Credit: String,
-            Mode: String
+        Payment: {
+            Consulting: Number,
+            Medicine: Number,
+            Paid: Number,
+            Debit_Credit: Number,
+            Discount:Number,
+            // Mode: String
         },
 
     },

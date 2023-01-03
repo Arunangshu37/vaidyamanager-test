@@ -16,7 +16,10 @@ import {
     USER_INFO_DETAILS_REQUEST,
     USER_INFO_DETAILS_SUCCESS,
     USER_INFO_DETAILS_FAIL,
- 
+    USER_LATEST_REQUEST,
+    USER_LATEST_SUCCESS,
+    USER_LATEST_FAIL,
+
 } from '../constants/userConstants'
 import { ORDER_LIST_USER_RESET } from '../constants/orderConstants'
 import axios from 'axios'
@@ -78,7 +81,7 @@ export const logout = () => (dispatch) => {
     })
 }
 
-export const register = (name, email, phone, password, address, age, gender,weight,illness,treatment,duration,reference,date, isAdmin) => async (dispatch) => {
+export const register = (name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, isAdmin) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST,
@@ -94,7 +97,7 @@ export const register = (name, email, phone, password, address, age, gender,weig
         // Make request to server and get the response data
         const { data } = await axios.post(
             '/api/users',
-            { name, email, phone, password, address, age, gender,weight,illness,treatment,duration,reference,date,isAdmin },
+            { name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, isAdmin },
             config
         )
 
@@ -220,4 +223,30 @@ export const getUserInfoDetails = () => async (dispatch) => {
                     : error.message,
         })
     }
+}
+
+//GET USER DETAILS IN DESCENDING ORDER
+export const getUserDesc = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: USER_LATEST_REQUEST,
+        })
+        const { data } = await axios.get('/api/users/latest-patient')
+
+        dispatch({
+            type: USER_LATEST_SUCCESS,
+            payload: data,
+        })
+        console.log("get latest user")
+    } catch (error) {
+        dispatch({
+            type: USER_LATEST_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+        console.log("get latest user Failed")
+    }
+
 }

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, Modal, ListGroup, InputGroup } from 'react-bootstrap'
+import { Form, Button, Modal, ListGroup, InputGroup,Card } from 'react-bootstrap'
 import { Checkbox, IconButton } from '@mui/material'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../prescription.css'
-import { getUserInfoDetails } from '../actions/userActions'
+import { getUserDesc } from '../actions/userActions'
 import { useDispatch, useSelector } from 'react-redux'
 import Autocomplete from '@mui/material/Autocomplete';
 import AddIcon from '@mui/icons-material/Add';
@@ -13,6 +13,7 @@ import { DiechartList } from './DiechartList';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BsSquare, BsCheckSquare, BsXSquare, BsInfoLg } from "react-icons/bs";
 import jsPDF from 'jspdf'
+import dayjs from 'dayjs'
 
 
 const PrescriptionWindow = () => {
@@ -25,6 +26,7 @@ const PrescriptionWindow = () => {
     mDiagnosis: "",
     modernSystem: "",
     treatement: "",
+    days:"",
     panchkarma: []
 
   }
@@ -70,13 +72,14 @@ const PrescriptionWindow = () => {
 
 
 
-  // UserList
-  const userLists = useSelector((state) => state.userInfoDetails)
-  const { users } = userLists;
+  // Latest User(Patient)
+  const Patient= useSelector((state) => state.getLatestUSer)
+  const { loadingUsers, errorUsers, userdesc } = Patient;
+  console.log("latest user is",Patient)
 
 
   useEffect(() => {
-    dispatch(getUserInfoDetails());
+    dispatch(getUserDesc());
   }, [dispatch])
 
 
@@ -131,23 +134,23 @@ const PrescriptionWindow = () => {
 
   const dietCategories = [...new Set(DiechartList.map((item) => item.category))];
 
-    //getIDFromUnicode
-    function getIdFromUnicode(unicode) {
-      switch (unicode) {
-        case "✓": {
-          return "1";
-        }
-        case "✕": {
-          return "2";
-        }
-        case "!": {
-          return "3";
-        }
-        default: {
-          return "0";
-        }
+  //getIDFromUnicode
+  function getIdFromUnicode(unicode) {
+    switch (unicode) {
+      case "✓": {
+        return "1";
+      }
+      case "✕": {
+        return "2";
+      }
+      case "!": {
+        return "3";
+      }
+      default: {
+        return "0";
       }
     }
+  }
 
   function getUniCodeFromId(id) {
     switch (id) {
@@ -169,7 +172,7 @@ const PrescriptionWindow = () => {
 
   const [dietArray, setDietArray] = React.useState([]);
 
-  
+
   const setDietArrayLocally = (e) => {
     const tempArray = [];
     if (dietArray.length != 0) {
@@ -186,7 +189,7 @@ const PrescriptionWindow = () => {
       }
 
     });
-       console.log("dietArray",dietArray);
+    console.log("dietArray", dietArray);
     document.getElementById('dos').checked = true;
     setAllowanceState("1");
   };
@@ -228,7 +231,7 @@ const PrescriptionWindow = () => {
     }
     setAllowanceState(e.target.value);
   }
-  console.log({ allowanceState })
+  // console.log({ allowanceState })
 
   const handelMarkState = (e) => {
     // console.log("hello", e.target);
@@ -294,7 +297,7 @@ const PrescriptionWindow = () => {
   const handlePanchkarmaDay = (e) => {
     const tempDay = prescription.panchkarma.find((el) => el.name === e.target.name)
     tempDay.days = e.target.value
-    setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempDay] })
+    // setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempDay] })
     console.log("temp day", tempDay)
   }
 
@@ -304,18 +307,22 @@ const PrescriptionWindow = () => {
     <>
       <div className="card">
         <div className="card-body">
+        {userdesc?.map((option) => (                        
           <div class="row align-items-start">
+
             <div class="col">
-              Patien Name
+            {option.name}
             </div>
             <div class="col">
-              Age/Weight
+            {option.age}
             </div>
             <div class="col">
-              Date
+          {dayjs(option.createdAt).format('MM/DD/YYYY')}
             </div>
           </div>
+           ))}
         </div>
+       
       </div>
 
       <Form onSubmit={submitHandler}>
@@ -362,14 +369,14 @@ const PrescriptionWindow = () => {
                 onChange={(e) => setPrescription({ ...prescription, dose: e.target.value })}
               >
                 <option value="1-0-0-0">1-0-0-0</option>
-                <option value="1-1-0-0<">1-1-0-0</option>
+                <option value="1-1-0-0">1-1-0-0</option>
                 <option value="1-1-1-0">1-1-1-0</option>
                 <option value="1-1-1-1">1-1-1-1</option>
                 <option value="0-1-0-0">0-1-0-0</option>
                 <option value="0-1-1-0">0-1-1-0</option>
                 <option value="0-1-1-1">0-1-1-1</option>
                 <option value="0-0-0-0">0-0-0-0</option>
-                <option value="0-0-0-1<">0-0-0-1</option>
+                <option value="0-0-0-1">0-0-0-1</option>
                 <option value="0-0-1-1">0-0-1-1</option>
                 <option value="1-0-1-1">1-0-1-1</option>
               </select>
@@ -418,7 +425,10 @@ const PrescriptionWindow = () => {
                       <select style={{
                         width: "150px",
                         margin: "21px 0 0 4px"
-                      }}>
+                      }}
+                      value={prescription.days}
+                      onChange={(e) => setPrescription({ ...prescription, days: e.target.value })}
+                      >
                         <option selected value="Month">Month</option>
                         <option value="Years">Years</option>
                         <option value="Days">Days</option>
@@ -469,16 +479,19 @@ const PrescriptionWindow = () => {
                 </tr>
                 <tr>
                   <div>
-                    {
-                      prescription.panchkarma.map((item) => (
-                        <>
-                          <h5>{item.name}</h5>
-
-                          <input type="text" name={item.name} placeholder='days' onChange={handlePanchkarmaDay} />
-                          <Button onClick={() => removeDays(item.name)}>-</Button>
-                        </>
-                      ))
-                    }
+                    <Card>
+                      {
+                        prescription.panchkarma.map((item) => (
+                          <>
+                            <Card.Body>
+                              {item.name}
+                              <input type="text" name={item.name} placeholder='days' onChange={handlePanchkarmaDay} />
+                              <Button onClick={() => removeDays(item.name)}>-</Button>
+                            </Card.Body>
+                          </>
+                        ))
+                      }
+                    </Card>
                   </div>
                 </tr>
                 <tr>
@@ -617,7 +630,7 @@ const PrescriptionWindow = () => {
                                       <label htmlFor="all">All</label>
                                     </div>
                                     <div class="col">
-                                      <Button variant="success" onClick={()=>handelInstructionShow()} >Import</Button>
+                                      <Button variant="success" onClick={() => handelInstructionShow()} >Import</Button>
                                     </div>
                                   </div>
                                 </div>
@@ -711,6 +724,9 @@ const PrescriptionWindow = () => {
         </Modal.Header>
         <Modal.Body>
           <div id="instructions" style={{ padding: '15px 10px' }}>
+            <div>
+              <Button>Send Email</Button>
+            </div>
             <dl>
               <dt>What to take ? </dt>
               <dd>
