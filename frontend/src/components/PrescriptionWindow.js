@@ -65,25 +65,31 @@ const PrescriptionWindow = () => {
 
   //use state for dynamic input fields for medicines
   const [inputFields, setInputFields] = useState([
-    { dose: '' }
+    { Dose: '' }
   ])
 
-  const selectMedicines = () => {
-    let newfield = { dose: ''}
+  const addFields = (event) => {
+    console.log(event.target.value);
+    let newfield = { Dose: '', }
     setInputFields([...inputFields, newfield])
   }
 
-const removeFields = (index) => {
+  const removeFields = (index) => {
     let data = [...inputFields];
     data.splice(index, 1)
     setInputFields(data)
-}
-//   const handleFormChange = (index, event) => {
-//     let data = [...inputFields];
-//     data[index][event.target.name] = event.target.value;
-//     setInputFields(data);
-// }
+  }
+  const handleFormChange = (index, event) => {
+    let data = [...inputFields];
+    data[index][event.target.name] = event.target.value;
+    setInputFields(data);
+  }
 
+  const [selectValue, setSelectValue] = React.useState("");
+  const onSelectChange = (event) => {
+    const value = event.target.value;
+    setSelectValue(value);
+  };
 
   const symptomsOptions = [
     { value: '', text: '--Add Symptoms--' },
@@ -372,13 +378,13 @@ const removeFields = (index) => {
                 id="highlights-demo"
                 sx={{ width: 300 }}
                 options={allMedicines?.medicinesList}
-                style={{ width: 100, marginRight: 25 }}
+                style={{ width: 119, marginRight: 25 }}
                 getOptionLabel={(option) => option?.medicineName}
                 renderInput={(params) => (
                   <TextField {...params} label="Highlights"
                     margin="normal" />
                 )}
-                onChange={selectMedicines}
+                onChange={handleFormChange}
                 renderOption={(props, option, { inputValue }) => {
                   const matches = match(option?.medicineName, inputValue, { insideWords: true });
                   const parts = parse(option?.medicineName, matches);
@@ -401,6 +407,34 @@ const removeFields = (index) => {
                   );
                 }}
               />
+              <input type="text" placeholder='Add Medicines here' onChange={onSelectChange} />
+              {selectValue && <h2 className="mt-3">{selectValue}</h2>}
+
+              {inputFields.map((input, index) => {
+                return (
+                  <div key={index}>
+                    <input type="text" placeholder='Add Medicines here' />
+                    <Button variant="contained"
+                      onClick={() => removeFields(index)}
+                    >  <DeleteIcon fontSize='medium' />  </Button>
+                  </div>
+                )
+              })}
+
+              {/* {inputFields.map((input, index) => {
+                return (
+                  <div key={index}>
+                    <input type="text" placeholder='Add Medicines here' />
+                    <input type="text" placeholder='Ayurveda Diagnosis' />
+                    <Button variant="contained"
+                      onClick={() => removeFields(index)}
+                    >  <DeleteIcon fontSize='medium' />  </Button>
+                  </div>
+                )
+              })} */}
+
+
+
             </td>
             {/* <td>
               Dose
