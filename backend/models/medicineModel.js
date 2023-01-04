@@ -28,6 +28,9 @@ const medicineSchema = mongoose.Schema(
             type: String
         },
 
+    },
+    {
+        timestamps: true,
     }
 
 )

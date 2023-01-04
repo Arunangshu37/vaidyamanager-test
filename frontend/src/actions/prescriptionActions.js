@@ -1,56 +1,28 @@
 import {
-    INQUIRY_ADD_REQUEST,
-    INQUIRY_ADD_SUCCESS,
-    INQUIRY_ADD_FAIL,
+    MEDICINE_REQUEST,
+    MEDICINE_SUCCESS,
+    MEDICINE_FAIL,
+    MEDICINE_RESET,
 }
- from '../constants/inquiryConstants'
+ from '../constants/prescriptionConstants'
 import axios from 'axios'
 
-export const createInquiry = (  
-    inquiryName,
-    inquirycontact,
-    inquiryemail,
-    inquirySubject,
-    inquiryreference) => async (dispatch) => {
+//getting medicines list
+export const getMedicines = () => async (dispatch) => {
 
     try {
         dispatch({
-            type: INQUIRY_ADD_REQUEST,
+            type: MEDICINE_SUCCESS,
         })
-       
-        // Header to send with the request
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }
+        const { data } = await axios.get('/api/prescription/get_medicines')
 
-        // Make request to server and get the response data
-        const { data } = await axios.post(
-            '/api/inquiry/',
-            { inquiryName,
-                inquirycontact,
-                inquiryemail,
-                inquirySubject,
-                inquiryreference},
-            config
-        )
-
-        // Dispatch user register success after making the request
         dispatch({
-            type: INQUIRY_ADD_SUCCESS,
+            type: MEDICINE_SUCCESS,
             payload: data,
         })
-        alert('Inquiry Data Successfully!');
-        // Login in the user as well after registering
-        dispatch({
-            type: INQUIRY_ADD_SUCCESS,
-            payload: data,
-        })
-
     } catch (error) {
         dispatch({
-            type: INQUIRY_ADD_FAIL,
+            type: MEDICINE_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

@@ -12,19 +12,12 @@ const prescriptionSchema = mongoose.Schema(
             ref: 'DietChart'
         },
         Symptoms_name: String,
-        medicines: [{
-            medicine_name: {
-                type: String,
-                
-            },
-            dose: {
-                type: String,
-                
-            },
-            qty: {
-                type: Number,  
-            },
-        
+        medicineData: [{
+            dose: String,
+            medicineDetails: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Medicine'
+            }
         }],
         days: {
             type: String,
@@ -38,8 +31,8 @@ const prescriptionSchema = mongoose.Schema(
         mDiagnosis: {
             type: String
         },
-        prescriptionTreatment:{
-            type:String
+        prescriptionTreatment: {
+            type: String
         },
         ayurveda: {
             type: String
@@ -64,7 +57,7 @@ const prescriptionSchema = mongoose.Schema(
             Medicine: Number,
             Paid: Number,
             Debit_Credit: Number,
-            Discount:Number,
+            Discount: Number,
             // Mode: String
         },
 

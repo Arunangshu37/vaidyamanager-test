@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, Modal, ListGroup, InputGroup,Card } from 'react-bootstrap'
+import { Form, Button, Modal, ListGroup, InputGroup, Card } from 'react-bootstrap'
 import { Checkbox, IconButton } from '@mui/material'
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../prescription.css'
 import { getUserDesc } from '../actions/userActions'
 import { useDispatch, useSelector } from 'react-redux'
-import Autocomplete from '@mui/material/Autocomplete';
 import AddIcon from '@mui/icons-material/Add';
 import { DiechartList } from './DiechartList';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { BsSquare, BsCheckSquare, BsXSquare, BsInfoLg } from "react-icons/bs";
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import parse from 'autosuggest-highlight/parse';
+import match from 'autosuggest-highlight/match';
 import jsPDF from 'jspdf'
 import dayjs from 'dayjs'
-
+import { getMedicines } from '../actions/prescriptionActions'
 
 const PrescriptionWindow = () => {
   const [medicineList, setMedicineList] = useState([]);
@@ -26,7 +27,7 @@ const PrescriptionWindow = () => {
     mDiagnosis: "",
     modernSystem: "",
     treatement: "",
-    days:"",
+    days: "",
     panchkarma: []
 
   }
@@ -48,13 +49,41 @@ const PrescriptionWindow = () => {
 
   }
 
-  const getMedicines = () => {
-    console.log("Medicine is", medicineList)
-    return medicineList.map((medicine) => {
-      return <option value={medicine.id}>{medicine.text}
-      </option>;
-    });
+  // const getMedicines = () => {
+  //   console.log("Medicine is", medicineList)
+  //   return medicineList.map((medicine) => {
+  //     return <option value={medicine.id}>{medicine.text}
+  //     </option>;
+  //   });
+  // }
+
+  //fetching medicines
+
+  const allMedicines = useSelector((state) => state.getallMedicineList)
+  const { loadingMedicine, errorMedicine, medicinesList } = allMedicines;
+  console.log("Medicine List", allMedicines)
+
+  //use state for dynamic input fields for medicines
+  const [inputFields, setInputFields] = useState([
+    { dose: '' }
+  ])
+
+  const selectMedicines = () => {
+    let newfield = { dose: ''}
+    setInputFields([...inputFields, newfield])
   }
+
+const removeFields = (index) => {
+    let data = [...inputFields];
+    data.splice(index, 1)
+    setInputFields(data)
+}
+//   const handleFormChange = (index, event) => {
+//     let data = [...inputFields];
+//     data[index][event.target.name] = event.target.value;
+//     setInputFields(data);
+// }
+
 
   const symptomsOptions = [
     { value: '', text: '--Add Symptoms--' },
@@ -63,23 +92,16 @@ const PrescriptionWindow = () => {
     { value: 'Weight gain', text: 'Weight gain' },
   ]
 
-  const medicineOptions = [
-    { value: '', text: '--Add medicines here--' },
-    { value: 'Ashwagandha', text: 'Ashwagandha' },
-    { value: 'Boswellia', text: 'Boswellia' },
-    { value: 'Brahmi', text: 'Brahmi' },
-  ]
-
-
 
   // Latest User(Patient)
-  const Patient= useSelector((state) => state.getLatestUSer)
+  const Patient = useSelector((state) => state.getLatestUSer)
   const { loadingUsers, errorUsers, userdesc } = Patient;
-  console.log("latest user is",Patient)
+
 
 
   useEffect(() => {
     dispatch(getUserDesc());
+    dispatch(getMedicines());
   }, [dispatch])
 
 
@@ -307,22 +329,22 @@ const PrescriptionWindow = () => {
     <>
       <div className="card">
         <div className="card-body">
-        {userdesc?.map((option) => (                        
-          <div class="row align-items-start">
+          {userdesc?.map((option) => (
+            <div class="row align-items-start">
 
-            <div class="col">
-            {option.name}
+              <div class="col">
+                {option.name}
+              </div>
+              <div class="col">
+                {option.age}
+              </div>
+              <div class="col">
+                {dayjs(option.createdAt).format('MM/DD/YYYY')}
+              </div>
             </div>
-            <div class="col">
-            {option.age}
-            </div>
-            <div class="col">
-          {dayjs(option.createdAt).format('MM/DD/YYYY')}
-            </div>
-          </div>
-           ))}
+          ))}
         </div>
-       
+
       </div>
 
       <Form onSubmit={submitHandler}>
@@ -345,22 +367,42 @@ const PrescriptionWindow = () => {
               </select>
             </td>
             <td>
-              <select name="medicine" id="medicine" style={{
-                width: "195px",
-                margin: "0px 0 0 4px"
-              }}
-                value={prescription.medicine}
-                onChange={(e) => setPrescription({ ...prescription, medicine: e.target.value })}>
 
-                {medicineOptions.map(medioption => (
-                  <option key={medioption.value} value={medioption.value}>
-                    {medioption.text}
-                  </option>
-                ))}
+              <Autocomplete
+                id="highlights-demo"
+                sx={{ width: 300 }}
+                options={allMedicines?.medicinesList}
+                style={{ width: 100, marginRight: 25 }}
+                getOptionLabel={(option) => option?.medicineName}
+                renderInput={(params) => (
+                  <TextField {...params} label="Highlights"
+                    margin="normal" />
+                )}
+                onChange={selectMedicines}
+                renderOption={(props, option, { inputValue }) => {
+                  const matches = match(option?.medicineName, inputValue, { insideWords: true });
+                  const parts = parse(option?.medicineName, matches);
 
-              </select>
+                  return (
+                    <li {...props}>
+                      <div>
+                        {parts.map((part, index) => (
+                          <span
+                            key={index}
+                            style={{
+                              fontWeight: part.highlight ? 400 : 200,
+                            }}
+                          >
+                            {part.text}
+                          </span>
+                        ))}
+                      </div>
+                    </li>
+                  );
+                }}
+              />
             </td>
-            <td>
+            {/* <td>
               Dose
               <br />
               <br />
@@ -380,7 +422,7 @@ const PrescriptionWindow = () => {
                 <option value="0-0-1-1">0-0-1-1</option>
                 <option value="1-0-1-1">1-0-1-1</option>
               </select>
-            </td>
+            </td> */}
             <td>
               Qty
               <input type="text" placeholder='00' />
@@ -426,8 +468,8 @@ const PrescriptionWindow = () => {
                         width: "150px",
                         margin: "21px 0 0 4px"
                       }}
-                      value={prescription.days}
-                      onChange={(e) => setPrescription({ ...prescription, days: e.target.value })}
+                        value={prescription.days}
+                        onChange={(e) => setPrescription({ ...prescription, days: e.target.value })}
                       >
                         <option selected value="Month">Month</option>
                         <option value="Years">Years</option>

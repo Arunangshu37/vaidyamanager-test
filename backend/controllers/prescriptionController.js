@@ -1,4 +1,5 @@
 import Prescription from '../models/PrescriptionModel.js'
+import Medicine from '../models/medicineModel.js'
 import asyncHandler from 'express-async-handler'
 import mongoose from 'mongoose'
 import DietChart from '../models/DietchartModel.js';
@@ -17,7 +18,7 @@ const addDietChartDetails = asyncHandler(async(req,res)=>{
         wto_dont
     })
     const createdDietchart = await DietChartData.save();
-    console.log("success  createdDietchart");
+    // console.log("success  createdDietchart");
     res.status(201).json(createdDietchart)
 
 })
@@ -27,7 +28,7 @@ const addPrescriptionDetails = asyncHandler(async(req,res)=>{
         prescriptionUser,
         diet_chart,
         Symptoms_name,
-        medicines,
+        medicineData,
         days,
         ayurveda_diagnosis,
         modernSystem,
@@ -46,7 +47,7 @@ const addPrescriptionDetails = asyncHandler(async(req,res)=>{
         prescriptionUser,
         diet_chart,
         Symptoms_name,
-        medicines,
+        medicineData,
         days,
         ayurveda_diagnosis,
         modernSystem,
@@ -61,10 +62,47 @@ const addPrescriptionDetails = asyncHandler(async(req,res)=>{
         
     })
     const createdPrescription = await PrescripionData.save();
-    console.log("success  Prescription");
+    // console.log("success  Prescription");
     res.status(201).json(createdPrescription)
 
 })
 
 
-export {addDietChartDetails,addPrescriptionDetails}
+const addMedicineDetails = asyncHandler(async(req,res)=>{
+    const {
+        medicineName,
+        Qty,
+        Unit,
+        Gram,
+        supplierName,
+        contactNo,
+        amount,
+        medicine_reciver_name,
+    } = req.body
+
+    const MedicineData = new Medicine({
+        medicineName,
+        Qty,
+        Unit,
+        Gram,
+        supplierName,
+        contactNo,
+        amount,
+        medicine_reciver_name,
+        
+    })
+    const createdMedicine = await MedicineData.save();
+    console.log("success  Medicines");
+    res.status(201).json(createdMedicine)
+
+})
+
+const  getAllMedicines= asyncHandler(async(req,res)=>{
+    const allmedicines = await Medicine.find({})
+    res.json(allmedicines)
+
+})
+
+
+export {addDietChartDetails,addPrescriptionDetails,addMedicineDetails,
+    getAllMedicines}

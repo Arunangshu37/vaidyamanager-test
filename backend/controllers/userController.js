@@ -236,7 +236,6 @@ const newPassword= asyncHandler(async(req,res)=>{
 const  getUserDesc = asyncHandler(async (req, res) => {
     const userDesc = await User.find({}).sort({_id:-1}).limit(1);
     // console.log(userDesc)
-
     res.json(userDesc)
 })
 

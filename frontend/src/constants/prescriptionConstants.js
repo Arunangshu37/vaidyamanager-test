@@ -1,0 +1,5 @@
+//medicine constants
+export const MEDICINE_REQUEST = 'MEDICINE_REQUEST'
+export const  MEDICINE_SUCCESS = 'MEDICINE_SUCCESS'
+export const MEDICINE_FAIL = 'MEDICINE_FAIL'
+export const MEDICINE_RESET = 'MEDICINE_RESET'
