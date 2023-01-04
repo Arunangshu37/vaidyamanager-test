@@ -63,6 +63,33 @@ const PrescriptionWindow = () => {
   const { loadingMedicine, errorMedicine, medicinesList } = allMedicines;
   console.log("Medicine List", allMedicines)
 
+  
+
+  // const [selectValue, setSelectValue] = React.useState("");
+  // const onSelectChange = (event) => {
+  //   const value = event.target.value;
+  //   setSelectValue(value);
+  // };
+
+  const symptomsOptions = [
+    { value: '', text: '--Add Symptoms--' },
+    { value: 'Dry skin', text: 'Dry skin' },
+    { value: 'Coarse hair and skin', text: 'Coarse hair and skin' },
+    { value: 'Weight gain', text: 'Weight gain' },
+  ]
+
+
+  // Latest User(Patient)
+  const Patient = useSelector((state) => state.getLatestUSer)
+  const { loadingUsers, errorUsers, userdesc } = Patient;
+
+
+
+  useEffect(() => {
+    dispatch(getUserDesc());
+    dispatch(getMedicines());
+  }, [dispatch])
+
   //use state for dynamic input fields for medicines
   const [inputFields, setInputFields] = useState([
     { Dose: '' }
@@ -85,30 +112,10 @@ const PrescriptionWindow = () => {
     setInputFields(data);
   }
 
-  const [selectValue, setSelectValue] = React.useState("");
-  const onSelectChange = (event) => {
-    const value = event.target.value;
-    setSelectValue(value);
-  };
-
-  const symptomsOptions = [
-    { value: '', text: '--Add Symptoms--' },
-    { value: 'Dry skin', text: 'Dry skin' },
-    { value: 'Coarse hair and skin', text: 'Coarse hair and skin' },
-    { value: 'Weight gain', text: 'Weight gain' },
-  ]
-
-
-  // Latest User(Patient)
-  const Patient = useSelector((state) => state.getLatestUSer)
-  const { loadingUsers, errorUsers, userdesc } = Patient;
 
 
 
-  useEffect(() => {
-    dispatch(getUserDesc());
-    dispatch(getMedicines());
-  }, [dispatch])
+
 
 
   //payment states
@@ -199,8 +206,6 @@ const PrescriptionWindow = () => {
 
 
   const [dietArray, setDietArray] = React.useState([]);
-
-
   const setDietArrayLocally = (e) => {
     const tempArray = [];
     if (dietArray.length != 0) {
@@ -259,23 +264,16 @@ const PrescriptionWindow = () => {
     }
     setAllowanceState(e.target.value);
   }
-  // console.log({ allowanceState })
 
   const handelMarkState = (e) => {
-    // console.log("hello", e.target);
     let index = e.target.id.replace("lb", "");
-
     if (allowanceState === "1") {
       e.target.innerHTML = "&#10003;";
-      // document.getElementById("diet" + index).value = "1";
     } else if (allowanceState === "2") {
       e.target.innerHTML = "&#10799;";
-      // document.getElementById("diet" + index).value = "2";
     } else if (allowanceState === "3") {
-      // document.getElementById("diet" + index).value = "3";
       e.target.innerHTML = "!";
     } else {
-      // document.getElementById("diet" + index).value = "0";
       e.target.innerHTML = "&#9634;";
     }
   };
@@ -313,7 +311,6 @@ const PrescriptionWindow = () => {
       setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempData] })
     }
   }
-  // console.log("panchkarma", prescription)
 
   const removeDays = (pname) => {
     // console.log("object is",prescription.panchkarma.filter((v) => v.name !== pname))
@@ -378,19 +375,20 @@ const PrescriptionWindow = () => {
                 id="highlights-demo"
                 sx={{ width: 300 }}
                 options={allMedicines?.medicinesList}
-                style={{ width: 119, marginRight: 25 }}
+                style={{ width: 130, marginRight: 25 }}
                 getOptionLabel={(option) => option?.medicineName}
                 renderInput={(params) => (
                   <TextField {...params} label="Highlights"
                     margin="normal" />
                 )}
-                onChange={handleFormChange}
+                onChange = {handleFormChange}
+                // onChange={(e, value) => console.log(e.target, value.medicineName)}
                 renderOption={(props, option, { inputValue }) => {
                   const matches = match(option?.medicineName, inputValue, { insideWords: true });
                   const parts = parse(option?.medicineName, matches);
 
                   return (
-                    <li {...props}>
+                    <li {...props}  onClick = {addFields}   >
                       <div>
                         {parts.map((part, index) => (
                           <span
@@ -407,13 +405,11 @@ const PrescriptionWindow = () => {
                   );
                 }}
               />
-              <input type="text" placeholder='Add Medicines here' onChange={onSelectChange} />
-              {selectValue && <h2 className="mt-3">{selectValue}</h2>}
 
               {inputFields.map((input, index) => {
                 return (
                   <div key={index}>
-                    <input type="text" placeholder='Add Medicines here' />
+                    <input type="text" placeholder='Dose' />
                     <Button variant="contained"
                       onClick={() => removeFields(index)}
                     >  <DeleteIcon fontSize='medium' />  </Button>
