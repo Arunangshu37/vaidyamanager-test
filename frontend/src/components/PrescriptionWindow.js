@@ -91,9 +91,7 @@ const PrescriptionWindow = () => {
   }, [dispatch])
 
   //use state for dynamic input fields for medicines
-  const [inputFields, setInputFields] = useState([
-    { Dose: '' }
-  ])
+  const [inputFields, setInputFields] = useState([]);
 
   const addFields = (event) => {
     console.log(event.target.value);
@@ -107,8 +105,11 @@ const PrescriptionWindow = () => {
     setInputFields(data)
   }
   const handleFormChange = (index, event) => {
-    let data = [...inputFields];
+    // let data = [...inputFields];
+    console.log("first")
+    let data;
     data[index][event.target.name] = event.target.value;
+    console.log("data",data)
     setInputFields(data);
   }
 
@@ -381,14 +382,14 @@ const PrescriptionWindow = () => {
                   <TextField {...params} label="Highlights"
                     margin="normal" />
                 )}
-                onChange = {handleFormChange}
-                // onChange={(e, value) => console.log(e.target, value.medicineName)}
+                // onChange = {handleFormChange}
+                onChange={(e) => console.log(e)}
                 renderOption={(props, option, { inputValue }) => {
-                  const matches = match(option?.medicineName, inputValue, { insideWords: true });
-                  const parts = parse(option?.medicineName, matches);
+                  const matches = match(option.medicineName, inputValue, { insideWords: true });
+                  const parts = parse(option.medicineName, matches);
 
                   return (
-                    <li {...props}  onClick = {addFields}   >
+                    <li {...props}  onClick = {addFields}>
                       <div>
                         {parts.map((part, index) => (
                           <span
@@ -405,8 +406,8 @@ const PrescriptionWindow = () => {
                   );
                 }}
               />
-
-              {inputFields.map((input, index) => {
+          
+                {inputFields.map((input, index) => {
                 return (
                   <div key={index}>
                     <input type="text" placeholder='Dose' />
@@ -416,19 +417,8 @@ const PrescriptionWindow = () => {
                   </div>
                 )
               })}
-
-              {/* {inputFields.map((input, index) => {
-                return (
-                  <div key={index}>
-                    <input type="text" placeholder='Add Medicines here' />
-                    <input type="text" placeholder='Ayurveda Diagnosis' />
-                    <Button variant="contained"
-                      onClick={() => removeFields(index)}
-                    >  <DeleteIcon fontSize='medium' />  </Button>
-                  </div>
-                )
-              })} */}
-
+  
+              {console.log("inputfields",inputFields)}
 
 
             </td>
