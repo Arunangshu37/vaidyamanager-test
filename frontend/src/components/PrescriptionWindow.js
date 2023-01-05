@@ -16,6 +16,7 @@ import match from 'autosuggest-highlight/match';
 import jsPDF from 'jspdf'
 import dayjs from 'dayjs'
 import { getMedicines } from '../actions/prescriptionActions'
+import '../prescriptionWindow.css'
 
 const PrescriptionWindow = () => {
   const [medicineList, setMedicineList] = useState([]);
@@ -63,7 +64,7 @@ const PrescriptionWindow = () => {
   const { loadingMedicine, errorMedicine, medicinesList } = allMedicines;
   console.log("Medicine List", allMedicines)
 
-  
+
 
   // const [selectValue, setSelectValue] = React.useState("");
   // const onSelectChange = (event) => {
@@ -90,13 +91,37 @@ const PrescriptionWindow = () => {
     dispatch(getMedicines());
   }, [dispatch])
 
+
+  //sanskrit search
+  const [englishWord, setEnglishWord] = useState('');
+  const [sanskritWord, setSanskritWord] = useState('');
+
+
+
+  const handleWordChange = (event) => {
+    setEnglishWord(event.target.value);
+    // Translate the English word to Sanskrit using an API or some other method
+    // const sanskritTranslation = translateToSanskrit(englishWord);
+    // setSanskritWord(sanskritTranslation);
+  }
+
+
   //use state for dynamic input fields for medicines
   const [inputFields, setInputFields] = useState([]);
 
+
+
+
   const addFields = (event) => {
-    console.log(event.target.value);
-    let newfield = { Dose: '', }
+    // if require do trimming check "how to trim in java script"
+    console.log("textconetect",event.target.textContent);
+    // const doctorInfo = doctors?.find((doctor) => doctor.email_id == userInfo?.email)
+    let med = allMedicines.medicineList?.find((med) => {console.log(med);return med.medicineName === 'Chandanasava'} )
+    let newfield = { Dose: '', med: med }
     setInputFields([...inputFields, newfield])
+    console.log("all medic",med);
+    // let newfield = { Dose: '' }
+    // setInputFields([...inputFields, newfield])
   }
 
   const removeFields = (index) => {
@@ -104,12 +129,12 @@ const PrescriptionWindow = () => {
     data.splice(index, 1)
     setInputFields(data)
   }
-  const handleFormChange = (index, event) => {
+  const handleFormChange = (e) => {
     // let data = [...inputFields];
     console.log("first")
     let data;
-    data[index][event.target.name] = event.target.value;
-    console.log("data",data)
+    // data[index][e.target.name] = e.target.value;
+    console.log("data", data)
     setInputFields(data);
   }
 
@@ -357,7 +382,7 @@ const PrescriptionWindow = () => {
           <tr>
             <td style={{ borderRight: "1px solid " }}>
 
-              <select name="symptoms" id="symptoms"
+              {/* <select name="symptoms" id="symptoms"
                 //  onChange={handleChange}
                 style={{ width: "195px", margin: "0px 0 0 4px" }}
                 value={prescription.symptoms}
@@ -368,7 +393,11 @@ const PrescriptionWindow = () => {
                     {option.text}
                   </option>
                 ))}
-              </select>
+              </select> */}
+              <label>
+                Symptoms:
+                <input type="text" value={englishWord} onChange={handleWordChange} />
+              </label>
             </td>
             <td>
 
@@ -379,46 +408,57 @@ const PrescriptionWindow = () => {
                 style={{ width: 130, marginRight: 25 }}
                 getOptionLabel={(option) => option?.medicineName}
                 renderInput={(params) => (
-                  <TextField {...params} label="Highlights"
+                  <TextField {...params} label="Medicines"
                     margin="normal" />
                 )}
                 // onChange = {handleFormChange}
-                onChange={(e) => console.log(e)}
+                // onChange={(e) => console.log(e)}
                 renderOption={(props, option, { inputValue }) => {
                   const matches = match(option.medicineName, inputValue, { insideWords: true });
                   const parts = parse(option.medicineName, matches);
 
                   return (
-                    <li {...props}  onClick = {addFields}>
+                    <li {...props} onClick={addFields} >
                       <div>
                         {parts.map((part, index) => (
                           <span
                             key={index}
+
                             style={{
                               fontWeight: part.highlight ? 400 : 200,
                             }}
                           >
+
                             {part.text}
                           </span>
                         ))}
+
                       </div>
                     </li>
                   );
                 }}
               />
-          
-                {inputFields.map((input, index) => {
+
+              {/* {inputFields.map((input, index) => {
                 return (
                   <div key={index}>
-                    <input type="text" placeholder='Dose' />
-                    <Button variant="contained"
-                      onClick={() => removeFields(index)}
-                    >  <DeleteIcon fontSize='medium' />  </Button>
+                    <div id="divOuter">
+                      <div id="divInner">
+                        
+                        <h6>{input.med.medicineName}</h6>
+                        <input type="hidden" value={input.med.id} name="medId[]" />
+                        <input id="partitioned" type="text" placeholder='Dose' name='dose[]' maxlength="4" value={input.Dose} />
+                        <Button variant="contained"
+                          onClick={() => removeFields(index)}
+                        >  <DeleteIcon fontSize='medium' />  </Button>
+                      </div>
+                    </div>
+
                   </div>
                 )
-              })}
-  
-              {console.log("inputfields",inputFields)}
+              })} */}
+
+              {/* {console.log("inputfields", inputFields)} */}
 
 
             </td>
@@ -444,8 +484,8 @@ const PrescriptionWindow = () => {
               </select>
             </td> */}
             <td>
-              Qty
-              <input type="text" placeholder='00' />
+              {/* Qty
+              <input type="text" placeholder='00' /> */}
             </td>
 
             <td style={{ width: "40%" }}>
@@ -725,6 +765,19 @@ const PrescriptionWindow = () => {
                                         </div>
                                       })
                                     }
+                                  </div>
+                                  <div class="row">
+                                    <div class="col">
+                                      <InputGroup>
+                                        <InputGroup.Text>What to do</InputGroup.Text>
+                                        <Form.Control as="textarea" aria-label="With textarea" />
+                                      </InputGroup></div>
+                                    <div class="col">
+                                      <InputGroup>
+                                        <InputGroup.Text>What to don't</InputGroup.Text>
+                                        <Form.Control as="textarea" aria-label="With textarea" />
+                                      </InputGroup>
+                                    </div>
                                   </div>
 
                                 </div>
