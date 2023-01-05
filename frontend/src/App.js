@@ -49,6 +49,7 @@ import CarouselBanner from './components/CarouselBanner'
 import Breadcrumb from './components/Breadcrumb'
 import About from './screens/Abouts'
 import MedicineCards from './components/MedicineCards'
+import SearchSymptom from './screens/SearchSymptom'
 
 
 const App = () => {
@@ -96,7 +97,7 @@ const App = () => {
                     <Route path='/banner' component={Banner}/>
                     <Route path='/carosel' component={CarouselBanner}/>
                     <Route path='/medicinecards' component={MedicineCards}/>
-                   
+                    <Route path='/seach' component={SearchSymptom}/>
                 </Container>
             </main>
             <Footer />

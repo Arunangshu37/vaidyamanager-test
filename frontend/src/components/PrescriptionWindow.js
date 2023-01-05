@@ -28,8 +28,9 @@ const PrescriptionWindow = () => {
     mDiagnosis: "",
     modernSystem: "",
     treatement: "",
-    days: "",
-    panchkarma: []
+    treatmentdays: "",
+    panchkarma: [],
+    ayurveda:""
 
   }
   const [prescription, setPrescription] = useState(defaultData);
@@ -114,14 +115,13 @@ const PrescriptionWindow = () => {
 
   const addFields = (event) => {
     // if require do trimming check "how to trim in java script"
-    console.log("textconetect",event.target.textContent);
-    // const doctorInfo = doctors?.find((doctor) => doctor.email_id == userInfo?.email)
-    let med = allMedicines.medicineList?.find((med) => {console.log(med);return med.medicineName === 'Chandanasava'} )
-    let newfield = { Dose: '', med: med }
-    setInputFields([...inputFields, newfield])
-    console.log("all medic",med);
-    // let newfield = { Dose: '' }
+    // console.log("textconetect",event.target.textContent);
+    // let med = allMedicines.medicineList?.find((med) => {console.log(med);return med.medicineName === 'Chandanasava'} )
+    // let newfield = { Dose: '', med: med }
     // setInputFields([...inputFields, newfield])
+    // console.log("all medic",med);
+    let newfield = { Dose: '' }
+    setInputFields([...inputFields, newfield])
   }
 
   const removeFields = (index) => {
@@ -528,8 +528,8 @@ const PrescriptionWindow = () => {
                         width: "150px",
                         margin: "21px 0 0 4px"
                       }}
-                        value={prescription.days}
-                        onChange={(e) => setPrescription({ ...prescription, days: e.target.value })}
+                        value={prescription.treatmentdays}
+                        onChange={(e) => setPrescription({ ...prescription, treatmentdays: e.target.value })}
                       >
                         <option selected value="Month">Month</option>
                         <option value="Years">Years</option>
