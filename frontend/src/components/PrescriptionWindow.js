@@ -115,9 +115,9 @@ const PrescriptionWindow = () => {
   const [inputFields, setInputFields] = useState([]);
   const addFields = (event) => {
     // if require do trimming check "how to trim in java script"
-    console.log("textconetect",event.target.textContent);
+    console.log("textconetect", event.target.textContent);
     // const doctorInfo = doctors?.find((doctor) => doctor.email_id == userInfo?.email)
-    let med = allMedicines.medicinesList?.find((med) => { return med.medicineName === event.target.textContent.trim() } )
+    let med = allMedicines.medicinesList?.find((med) => { return med.medicineName === event.target.textContent.trim() })
     let newfield = { Dose: '', med: med }
     setInputFields([...inputFields, newfield])
     console.log(med)
@@ -338,29 +338,29 @@ const PrescriptionWindow = () => {
 
 
   const [medicineAndDoseArray, setMedicineAndDoseArray] = React.useState([]);
-  
-  const handelFormSubmit  = (e) =>{
+
+  const handelFormSubmit = (e) => {
     e.preventDefault();
     //line no 344 to 354 code is going to require on save button
-    if(medicineAndDoseArray.length !=0){
+    if (medicineAndDoseArray.length != 0) {
       medicineAndDoseArray.splice(0, medicineAndDoseArray.length);
     }
     // console.log(inputFields);
     inputFields.map((obj) => {
       //setDietArray(dietArray => [...dietArray, { diet: element, allowance: getIdFromUnicode(unicode) }]);
-        medicineAndDoseArray.push({ Dose: obj.Dose, med: obj.med._id } )
-        //  setMedicineAndDoseArray(medicineAndDoseArray => [...medicineAndDoseArray, { Dose: obj.Dose, med: obj.med._id } ]);
+      medicineAndDoseArray.push({ Dose: obj.Dose, med: obj.med._id })
+      //  setMedicineAndDoseArray(medicineAndDoseArray => [...medicineAndDoseArray, { Dose: obj.Dose, med: obj.med._id } ]);
     });
-    
+
     console.log(medicineAndDoseArray);
   }
-  const updateDose = (e) =>{
+  const updateDose = (e) => {
     // getmedicine name using the id
-    let medicineName = document.getElementById('me'+e.target.id).textContent.trim();
+    let medicineName = document.getElementById('me' + e.target.id).textContent.trim();
     // first find the index where of the medicine whose dose is to be set
     const newState = inputFields.map((obj) => {
       if (obj.med.medicineName === medicineName) {
-        return {...obj, Dose: e.target.value};
+        return { ...obj, Dose: e.target.value };
       }
       return obj;
     });
@@ -386,14 +386,15 @@ const PrescriptionWindow = () => {
             </div>
           ))}
         </div>
-
       </div>
 
-      <Form onSubmit={submitHandler}>
-        {/* table Starts */}
-        <table className="table table-borderless" bordercolor="black">
-          <tr>
-            <td style={{ borderRight: "1px solid " }}>
+      {/* second Card */}
+      <div className="symptomcard">
+        <div className="card-body">
+
+          <div class="row align-items-start">
+
+            <div class="col">
               <input
                 id="lan"
                 type="text"
@@ -403,6 +404,88 @@ const PrescriptionWindow = () => {
                 placeholder="add symptoms"
               />
               <button type="button" onClick={addSymptomArray}>Add</button>
+              {/* {symptomList.map(item => (
+                <div key={item}>
+                  {item}
+                  <button onClick={() => removeSymptomArray(item)}>Remove</button>
+                </div>
+              ))}
+              <input id="translatedvalue" value={translatedValue} type="hidden" /> */}
+            </div>
+            <div class="col">
+              <Autocomplete
+                id="highlights-demo"
+                // sx={{ width: 300 }}
+                sx={{
+                  "& fieldset": { border: 'none' },
+                }}
+                freeSolo
+                options={allMedicines?.medicinesList}
+                style={{ width: 130, marginRight: 25 }}
+                getOptionLabel={(option) => option?.medicineName}
+                renderInput={(params) => (
+                  <TextField {...params} label="Medicines"
+                    margin="normal" />
+                )}
+                // onChange = {handleFormChange}
+                // onChange={(e) => console.log(e)}
+                renderOption={(props, option, { inputValue }) => {
+                  const matches = match(option.medicineName, inputValue, { insideWords: true });
+                  const parts = parse(option.medicineName, matches);
+
+                  return (
+                    <li {...props} onClick={addFields} >
+                      <div>
+                        {parts.map((part, index) => (
+                          <span
+                            key={index}
+
+                            style={{
+                              fontWeight: part.highlight ? 400 : 200,
+                            }}
+                          >
+
+                            {part.text}
+                          </span>
+                        ))}
+
+                      </div>
+                    </li>
+                  );
+                }}
+              />
+            </div>
+            <div class="col">
+            <h5 align="center">Dose</h5>
+            </div>
+            <div class="col">
+            <h5 align="center">Other Details</h5>
+            </div>
+            <div class="col">
+              <input type="text" placeholder="00"/>
+            <h5 align="center">Days</h5>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <Form onSubmit={submitHandler}>
+        {/* table Starts */}
+        <table className="table table-borderless" bordercolor="black">
+          <tr>
+            <td style={{ borderRight: "1px solid " }}>
+              {/* <input
+                id="lan"
+                type="text"
+                name="symptoms"
+                onChange={onSymptomChange}
+                value={prescription.translateinputValue}
+                placeholder="add symptoms"
+              />
+              <button type="button" onClick={addSymptomArray}>Add</button> */}
               {symptomList.map(item => (
                 <div key={item}>
                   {item}
@@ -506,7 +589,7 @@ const PrescriptionWindow = () => {
 
             <td style={{ width: "40%" }}>
               <table border="1px" bordercolor="black" cellspacing="5px" cellpadding="5%" align="center" >
-                <h4 align="center">Other Details</h4>
+
                 <tr>
 
                   <td colspan="2">

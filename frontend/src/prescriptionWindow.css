@@ -21,4 +21,8 @@
     overflow: hidden;
   }
 
-  
+
+  .symptomcard{
+    color:black;
+    background-color: #8888Ac;
+  }
