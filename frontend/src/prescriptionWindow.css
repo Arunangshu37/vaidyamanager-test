@@ -1,4 +1,4 @@
-#partitioned {
+.partitioned {
     padding-left: 15px;
     letter-spacing: 42px;
     border: 0;
@@ -7,8 +7,8 @@
     background-size: 50px 1px;
     background-repeat: repeat-x;
     background-position-x: 35px;
-    width: 220px;
-    min-width: 220px;
+    width: 245px;
+    min-width: 241px;
   }
   
   #divInner{
@@ -20,3 +20,5 @@
     width: 190px; 
     overflow: hidden;
   }
+
+  

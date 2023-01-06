@@ -17,11 +17,13 @@ import jsPDF from 'jspdf'
 import dayjs from 'dayjs'
 import { getMedicines } from '../actions/prescriptionActions'
 import '../prescriptionWindow.css'
+import SearchSymptom from '../screens/SearchSymptom';
+let googleTransliterate = require("google-input-tool");
 
 const PrescriptionWindow = () => {
   const [medicineList, setMedicineList] = useState([]);
   const defaultData = {
-    symptoms: "",
+    symptoms: [],
     medicine: "",
     dose: "",
     ayurvedaDiagnosis: "",
@@ -30,7 +32,7 @@ const PrescriptionWindow = () => {
     treatement: "",
     treatmentdays: "",
     panchkarma: [],
-    ayurveda:""
+    ayurveda: ""
 
   }
   const [prescription, setPrescription] = useState(defaultData);
@@ -38,8 +40,9 @@ const PrescriptionWindow = () => {
 
   const submitHandler = (e) => {
     console.log("Submit")
-    e.preventDefault()
+    e.preventDefault();
     alert("Prescription Saved Successfully")
+    setPrescription({ ...prescription, symptoms: [...prescription.symptoms, symptomList] })
     console.log("Prescription", prescription);
     // dispatch(createInquiry(
     //     prescription.name,
@@ -51,77 +54,74 @@ const PrescriptionWindow = () => {
 
   }
 
-  // const getMedicines = () => {
-  //   console.log("Medicine is", medicineList)
-  //   return medicineList.map((medicine) => {
-  //     return <option value={medicine.id}>{medicine.text}
-  //     </option>;
-  //   });
-  // }
-
-  //fetching medicines
 
   const allMedicines = useSelector((state) => state.getallMedicineList)
   const { loadingMedicine, errorMedicine, medicinesList } = allMedicines;
-  console.log("Medicine List", allMedicines)
-
-
-
-  // const [selectValue, setSelectValue] = React.useState("");
-  // const onSelectChange = (event) => {
-  //   const value = event.target.value;
-  //   setSelectValue(value);
-  // };
-
-  const symptomsOptions = [
-    { value: '', text: '--Add Symptoms--' },
-    { value: 'Dry skin', text: 'Dry skin' },
-    { value: 'Coarse hair and skin', text: 'Coarse hair and skin' },
-    { value: 'Weight gain', text: 'Weight gain' },
-  ]
+  // console.log("Medicine List", allMedicines)
 
 
   // Latest User(Patient)
   const Patient = useSelector((state) => state.getLatestUSer)
   const { loadingUsers, errorUsers, userdesc } = Patient;
-
-
-
   useEffect(() => {
     dispatch(getUserDesc());
     dispatch(getMedicines());
   }, [dispatch])
 
 
-  //sanskrit search
-  const [englishWord, setEnglishWord] = useState('');
-  const [sanskritWord, setSanskritWord] = useState('');
+  //translation code
+  let maxResult = 8;
+  let request = new XMLHttpRequest();
+  const [translateinputValue, setTranslateInputValue] = React.useState("");
+  const [translatedValue, setTranslatedValue] = React.useState("");
+  const [selectValue, setSelectValue] = React.useState("");
+  const [symptomList, setSymptomList] = useState([]);
+  const handleSelectChange = (event) => {
+    setSelectValue(event.target.value);
+  };
+  const onSymptomChange = (event) => {
+    setTranslateInputValue(event.target.value);
+  };
+  React.useEffect(() => {
+    googleTransliterate(request, translateinputValue, selectValue, maxResult).then(
+      function (response) {
+        // console.log(response, "response");
+        setTranslatedValue(response[0][0]);
+      }
+    );
+  }, [translateinputValue]);
 
+  const addSymptomArray = () => {
+    // Add an item to the array
 
+    // if (translatedValue === '') {
+    //   console.log("nsjkds")
+    //   alert("Do you want to add symptoms?")
+    //   return
+    // }
+    setTranslateInputValue('');
+    setSymptomList(prevItems => prevItems.concat(document.getElementById("translatedvalue").value));
 
-  const handleWordChange = (event) => {
-    setEnglishWord(event.target.value);
-    // Translate the English word to Sanskrit using an API or some other method
-    // const sanskritTranslation = translateToSanskrit(englishWord);
-    // setSanskritWord(sanskritTranslation);
   }
 
 
+
+  const removeSymptomArray = item => {
+    // Remove an item from the array using `filter`
+    setSymptomList(prevItems => prevItems.filter(i => i !== item));
+  };
+
   //use state for dynamic input fields for medicines
   const [inputFields, setInputFields] = useState([]);
-
-
-
-
   const addFields = (event) => {
     // if require do trimming check "how to trim in java script"
-    // console.log("textconetect",event.target.textContent);
-    // let med = allMedicines.medicineList?.find((med) => {console.log(med);return med.medicineName === 'Chandanasava'} )
-    // let newfield = { Dose: '', med: med }
-    // setInputFields([...inputFields, newfield])
-    // console.log("all medic",med);
-    let newfield = { Dose: '' }
+    console.log("textconetect",event.target.textContent);
+    // const doctorInfo = doctors?.find((doctor) => doctor.email_id == userInfo?.email)
+    let med = allMedicines.medicinesList?.find((med) => { return med.medicineName === event.target.textContent.trim() } )
+    let newfield = { Dose: '', med: med }
     setInputFields([...inputFields, newfield])
+    console.log(med)
+    // setInputFields([...inputFields, newfield])
   }
 
   const removeFields = (index) => {
@@ -137,12 +137,6 @@ const PrescriptionWindow = () => {
     console.log("data", data)
     setInputFields(data);
   }
-
-
-
-
-
-
 
   //payment states
   const [inputVal, setInputVal] = useState({
@@ -192,10 +186,8 @@ const PrescriptionWindow = () => {
   const [dosImport, setDosImport] = useState([]);
   const [dontImport, setDontImport] = useState([]);
   const [occasionalImport, setOccasionalImport] = useState([]);
-
   const dietCategories = [...new Set(DiechartList.map((item) => item.category))];
 
-  //getIDFromUnicode
   function getIdFromUnicode(unicode) {
     switch (unicode) {
       case "✓": {
@@ -253,9 +245,6 @@ const PrescriptionWindow = () => {
     setAllowanceState("1");
   };
 
-
-
-
   // get all funtion
   const handelAllButtonClick = (e) => {
     if (allowanceState === "4") {
@@ -270,7 +259,7 @@ const PrescriptionWindow = () => {
     }
     DiechartList.forEach((element) => {
       let id = "lb" + element.id;
-      console.log(document.getElementById(id).innerHTML);
+      // console.log(document.getElementById(id).innerHTML);
       if (document.getElementById(id).innerHTML === "▢") {
         document.getElementById(id).innerHTML = getUniCodeFromId(
           allowanceState
@@ -280,9 +269,6 @@ const PrescriptionWindow = () => {
 
     });
   };
-
-
-
 
   const headerChange = (e) => {
     if (e.target.value == '5') {
@@ -327,7 +313,6 @@ const PrescriptionWindow = () => {
   const toggleSelect = () => {
     var isChecked = document.getElementById("stone").checked;
     document.getElementById("panchkarma").disabled = !isChecked;
-    // console.log("set");
   }
 
   //add input box on selection
@@ -339,7 +324,6 @@ const PrescriptionWindow = () => {
   }
 
   const removeDays = (pname) => {
-    // console.log("object is",prescription.panchkarma.filter((v) => v.name !== pname))
     const a = prescription.panchkarma.filter((v) => v.name !== pname)
     setPrescription({ ...prescription, panchkarma: a })
 
@@ -353,6 +337,35 @@ const PrescriptionWindow = () => {
   }
 
 
+  const [medicineAndDoseArray, setMedicineAndDoseArray] = React.useState([]);
+  
+  const handelFormSubmit  = (e) =>{
+    e.preventDefault();
+    //line no 344 to 354 code is going to require on save button
+    if(medicineAndDoseArray.length !=0){
+      medicineAndDoseArray.splice(0, medicineAndDoseArray.length);
+    }
+    // console.log(inputFields);
+    inputFields.map((obj) => {
+      //setDietArray(dietArray => [...dietArray, { diet: element, allowance: getIdFromUnicode(unicode) }]);
+        medicineAndDoseArray.push({ Dose: obj.Dose, med: obj.med._id } )
+        //  setMedicineAndDoseArray(medicineAndDoseArray => [...medicineAndDoseArray, { Dose: obj.Dose, med: obj.med._id } ]);
+    });
+    
+    console.log(medicineAndDoseArray);
+  }
+  const updateDose = (e) =>{
+    // getmedicine name using the id
+    let medicineName = document.getElementById('me'+e.target.id).textContent.trim();
+    // first find the index where of the medicine whose dose is to be set
+    const newState = inputFields.map((obj) => {
+      if (obj.med.medicineName === medicineName) {
+        return {...obj, Dose: e.target.value};
+      }
+      return obj;
+    });
+    setInputFields(newState);
+  }
 
   return (
     <>
@@ -381,29 +394,32 @@ const PrescriptionWindow = () => {
         <table className="table table-borderless" bordercolor="black">
           <tr>
             <td style={{ borderRight: "1px solid " }}>
-
-              {/* <select name="symptoms" id="symptoms"
-                //  onChange={handleChange}
-                style={{ width: "195px", margin: "0px 0 0 4px" }}
-                value={prescription.symptoms}
-                onChange={(e) => setPrescription({ ...prescription, symptoms: e.target.value })}
-              >
-                {symptomsOptions.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.text}
-                  </option>
-                ))}
-              </select> */}
-              <label>
-                Symptoms:
-                <input type="text" value={englishWord} onChange={handleWordChange} />
-              </label>
+              <input
+                id="lan"
+                type="text"
+                name="symptoms"
+                onChange={onSymptomChange}
+                value={prescription.translateinputValue}
+                placeholder="add symptoms"
+              />
+              <button type="button" onClick={addSymptomArray}>Add</button>
+              {symptomList.map(item => (
+                <div key={item}>
+                  {item}
+                  <button onClick={() => removeSymptomArray(item)}>Remove</button>
+                </div>
+              ))}
+              <input id="translatedvalue" value={translatedValue} type="hidden" />
             </td>
             <td>
 
               <Autocomplete
                 id="highlights-demo"
-                sx={{ width: 300 }}
+                // sx={{ width: 300 }}
+                sx={{
+                  "& fieldset": { border: 'none' },
+                }}
+                freeSolo
                 options={allMedicines?.medicinesList}
                 style={{ width: 130, marginRight: 25 }}
                 getOptionLabel={(option) => option?.medicineName}
@@ -458,31 +474,31 @@ const PrescriptionWindow = () => {
                 )
               })} */}
 
+
+              {inputFields.map((input, index) => {
+                return (
+                  <div key={index}>
+                    <div id="divOuter">
+                      <div id="divInner">
+
+                        <h6 id={'med' + index} >{input.med.medicineName}</h6>
+                        <input type="hidden" value={input.med.id} name="medId[]" />
+                        <input id={'d' + index} className='partitioned' type="text" placeholder='Dose' name='dose[]' maxlength="4" onChange={updateDose} />
+                        <Button variant="contained"
+                          onClick={() => removeFields(index)}
+                        >  <DeleteIcon fontSize='medium' />  </Button>
+                      </div>
+                    </div>
+
+                  </div>
+                )
+              })}
+
               {/* {console.log("inputfields", inputFields)} */}
 
 
             </td>
-            {/* <td>
-              Dose
-              <br />
-              <br />
-              <select name="Dose" id="dose" style={{ width: "100px" }}
-                value={prescription.dose}
-                onChange={(e) => setPrescription({ ...prescription, dose: e.target.value })}
-              >
-                <option value="1-0-0-0">1-0-0-0</option>
-                <option value="1-1-0-0">1-1-0-0</option>
-                <option value="1-1-1-0">1-1-1-0</option>
-                <option value="1-1-1-1">1-1-1-1</option>
-                <option value="0-1-0-0">0-1-0-0</option>
-                <option value="0-1-1-0">0-1-1-0</option>
-                <option value="0-1-1-1">0-1-1-1</option>
-                <option value="0-0-0-0">0-0-0-0</option>
-                <option value="0-0-0-1">0-0-0-1</option>
-                <option value="0-0-1-1">0-0-1-1</option>
-                <option value="1-0-1-1">1-0-1-1</option>
-              </select>
-            </td> */}
+
             <td>
               {/* Qty
               <input type="text" placeholder='00' /> */}
@@ -812,7 +828,17 @@ const PrescriptionWindow = () => {
                       <tr>
                         <td>Mode </td>
                         <td> Cash</td>
-                        <td> </td>
+                        <td>
+                          <label>
+                            Select a value:
+                            <select value={selectValue} onChange={handleSelectChange}>
+                              <option value="">English</option>
+                              <option value="gu-t-i0-und">Gujarati</option>
+                              <option value="mr-t-i0-und">Marathi</option>
+                              <option value="sa-t-i0-und">Sanskrit</option>
+                            </select>
+                          </label>
+                          <br /></td>
                       </tr>
 
                     </table>
