@@ -39,10 +39,29 @@ const PrescriptionWindow = () => {
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
-    console.log("Submit")
+    // console.log("Submit")
     e.preventDefault();
-    alert("Prescription Saved Successfully")
-    setPrescription({ ...prescription, symptoms: [...prescription.symptoms, symptomList] })
+    if (medicineAndDoseArray.length != 0) {
+      medicineAndDoseArray.splice(0, medicineAndDoseArray.length);
+    }
+    // console.log(inputFields);
+    inputFields.map((obj) => {
+      medicineAndDoseArray.push({ Dose: obj.Dose, med: obj.med._id })
+    });
+    let mainPrescription={
+      symptoms: symptomList,
+      diet: dietArray,
+      medicine: medicineAndDoseArray,
+      ayurvedaDiagnosis: prescription.ayurvedaDiagnosis,
+      mDiagnosis: prescription.mDiagnosis,
+      modernSystem: prescription.modernSystem,
+      treatement: prescription.treatement,
+      treatmentdays: prescription.treatmentdays,
+      panchkarma: prescription.panchkarma,
+      ayurveda: prescription.ayurveda
+    }
+    // setPrescription({ ...prescription, symptoms: [...prescription.symptoms, symptomList] })
+    console.log("Prescription", mainPrescription);
     console.log("Prescription", prescription);
     // dispatch(createInquiry(
     //     prescription.name,
@@ -50,7 +69,7 @@ const PrescriptionWindow = () => {
     //     prescription.email,
     //     prescription.inquirySubject,
     //     prescription.reference,))
-    setPrescription(defaultData)
+    // setPrescription(defaultData)
 
   }
 
@@ -91,19 +110,28 @@ const PrescriptionWindow = () => {
     );
   }, [translateinputValue]);
 
-  const addSymptomArray = () => {
-    // Add an item to the array
+  // const addSymptomArray = () => {
+  //   // Add an item to the array
 
-    // if (translatedValue === '') {
-    //   console.log("nsjkds")
-    //   alert("Do you want to add symptoms?")
-    //   return
-    // }
+  //   // if (translatedValue === '') {
+  //   //   console.log("nsjkds")
+  //   //   alert("Do you want to add symptoms?")
+  //   //   return
+  //   // }
+  //   setTranslateInputValue('');
+  //   setSymptomList(prevItems => prevItems.concat(document.getElementById("translatedvalue").value));
+
+  // }
+  const addSymptomArray = () => {
+    
     setTranslateInputValue('');
+    if(selectValue == ""){
+      setSymptomList(prevItems => prevItems.concat(document.getElementById("lan").value));
+      return
+    }
     setSymptomList(prevItems => prevItems.concat(document.getElementById("translatedvalue").value));
 
   }
-
 
 
   const removeSymptomArray = item => {
