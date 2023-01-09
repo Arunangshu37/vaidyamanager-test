@@ -27,9 +27,9 @@ const addPrescriptionDetails = asyncHandler(async(req,res)=>{
     const {
         prescriptionUser,
         diet_chart,
-        Symptoms_name,
+        Symptoms,
         medicineData,
-        days,
+        prescriptiondays,
         ayurveda_diagnosis,
         modernSystem,
         mDiagnosis,
@@ -46,9 +46,9 @@ const addPrescriptionDetails = asyncHandler(async(req,res)=>{
     const PrescripionData = new Prescription({
         prescriptionUser,
         diet_chart,
-        Symptoms_name,
+        Symptoms,
         medicineData,
-        days,
+        prescriptiondays,
         ayurveda_diagnosis,
         modernSystem,
         mDiagnosis,

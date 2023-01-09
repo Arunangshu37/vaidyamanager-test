@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../prescription.css'
 import { getUserDesc } from '../actions/userActions'
+import { addPrescriptionUser, addDietChart } from '../actions/prescriptionActions'
 import { useDispatch, useSelector } from 'react-redux'
 import AddIcon from '@mui/icons-material/Add';
 import { DiechartList } from './DiechartList';
@@ -17,25 +18,31 @@ import jsPDF from 'jspdf'
 import dayjs from 'dayjs'
 import { getMedicines } from '../actions/prescriptionActions'
 import '../prescriptionWindow.css'
-import SearchSymptom from '../screens/SearchSymptom';
 let googleTransliterate = require("google-input-tool");
 
+
+
+
 const PrescriptionWindow = () => {
-  const [medicineList, setMedicineList] = useState([]);
   const defaultData = {
-    symptoms: [],
-    medicine: "",
-    dose: "",
+    // symptoms: [],
+    // medicine: "",
+    diet: "",
+    prescriptiondays: "",
+    ayurveda: "",
     ayurvedaDiagnosis: "",
     mDiagnosis: "",
     modernSystem: "",
     treatement: "",
     treatmentdays: "",
     panchkarma: [],
-    ayurveda: ""
-
+    image: "",
+    video: "",
+    report: "",
+    payment: {}
   }
   const [prescription, setPrescription] = useState(defaultData);
+  // console.log("Pres",prescription)
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
@@ -48,7 +55,7 @@ const PrescriptionWindow = () => {
     inputFields.map((obj) => {
       medicineAndDoseArray.push({ Dose: obj.Dose, med: obj.med._id })
     });
-    let mainPrescription={
+    let mainPrescription = {
       symptoms: symptomList,
       diet: dietArray,
       medicine: medicineAndDoseArray,
@@ -58,20 +65,28 @@ const PrescriptionWindow = () => {
       treatement: prescription.treatement,
       treatmentdays: prescription.treatmentdays,
       panchkarma: prescription.panchkarma,
-      ayurveda: prescription.ayurveda
+      ayurveda: prescription.ayurveda,
+      image: imagefile,
+      video: videofile,
+      report: reportfile,
+      payment: inputVal,
+      prescriptiondays: prescription.prescriptiondays
+
     }
-    // setPrescription({ ...prescription, symptoms: [...prescription.symptoms, symptomList] })
     console.log("Prescription", mainPrescription);
-    console.log("Prescription", prescription);
-    // dispatch(createInquiry(
-    //     prescription.name,
-    //     prescription.contact,
-    //     prescription.email,
-    //     prescription.inquirySubject,
-    //     prescription.reference,))
-    // setPrescription(defaultData)
+    // console.log("Prescription", prescription);
 
   }
+
+  //dietchart API
+  const DietchartDetails = useSelector((state) => state.addPatientDietChart)
+  const { loadingDiet, errorDiet, patientdiet } = DietchartDetails;
+  console.log("Patient Diet Chart is", DietchartDetails)
+
+  //prescription add api
+  const PrescriptionDetails = useSelector((state) => state.addPatientPrescription)
+  const { loadingprescription, errorprescription, patientPrescription } = PrescriptionDetails;
+  console.log("prescription of patient is", PrescriptionDetails)
 
 
   const allMedicines = useSelector((state) => state.getallMedicineList)
@@ -110,29 +125,16 @@ const PrescriptionWindow = () => {
     );
   }, [translateinputValue]);
 
-  // const addSymptomArray = () => {
-  //   // Add an item to the array
 
-  //   // if (translatedValue === '') {
-  //   //   console.log("nsjkds")
-  //   //   alert("Do you want to add symptoms?")
-  //   //   return
-  //   // }
-  //   setTranslateInputValue('');
-  //   setSymptomList(prevItems => prevItems.concat(document.getElementById("translatedvalue").value));
-
-  // }
   const addSymptomArray = () => {
-    
     setTranslateInputValue('');
-    if(selectValue == ""){
+    if (selectValue === "") {
+
       setSymptomList(prevItems => prevItems.concat(document.getElementById("lan").value));
       return
     }
     setSymptomList(prevItems => prevItems.concat(document.getElementById("translatedvalue").value));
-
   }
-
 
   const removeSymptomArray = item => {
     // Remove an item from the array using `filter`
@@ -143,12 +145,12 @@ const PrescriptionWindow = () => {
   const [inputFields, setInputFields] = useState([]);
   const addFields = (event) => {
     // if require do trimming check "how to trim in java script"
-    console.log("textconetect", event.target.textContent);
+    // console.log("textconetect", event.target.textContent);
     // const doctorInfo = doctors?.find((doctor) => doctor.email_id == userInfo?.email)
     let med = allMedicines.medicinesList?.find((med) => { return med.medicineName === event.target.textContent.trim() })
     let newfield = { Dose: '', med: med }
     setInputFields([...inputFields, newfield])
-    console.log(med)
+    // console.log(med)
     // setInputFields([...inputFields, newfield])
   }
 
@@ -211,9 +213,6 @@ const PrescriptionWindow = () => {
 
   //checkboxes
   const [allowanceState, setAllowanceState] = React.useState("");
-  const [dosImport, setDosImport] = useState([]);
-  const [dontImport, setDontImport] = useState([]);
-  const [occasionalImport, setOccasionalImport] = useState([]);
   const dietCategories = [...new Set(DiechartList.map((item) => item.category))];
 
   function getIdFromUnicode(unicode) {
@@ -239,7 +238,7 @@ const PrescriptionWindow = () => {
         return "&#10003;";
       }
       case "2": {
-        return "&#10799;";
+        return "U+02718;";
       }
       case "3": {
         return "!";
@@ -252,8 +251,13 @@ const PrescriptionWindow = () => {
 
 
   const [dietArray, setDietArray] = React.useState([]);
+  const [preDiet, setPreDiet] = useState({
+    whatToDo:"",
+    whatNotToDo:"",
+    dietArray:[]
+  });
+
   const setDietArrayLocally = (e) => {
-    const tempArray = [];
     if (dietArray.length != 0) {
       dietArray.splice(0, dietArray.length)
       setDietArray([...dietArray]);
@@ -262,7 +266,6 @@ const PrescriptionWindow = () => {
       let inputId = "lb" + element.id;
       let unicode = document.getElementById(inputId).textContent.toString();
       console.log('local', unicode, inputId)
-
       if (unicode !== "▢") {
         setDietArray(dietArray => [...dietArray, { diet: element, allowance: getIdFromUnicode(unicode) }]);
       }
@@ -271,7 +274,22 @@ const PrescriptionWindow = () => {
     console.log("dietArray", dietArray);
     document.getElementById('dos').checked = true;
     setAllowanceState("1");
+    setPreDiet({...preDiet,whatToDo: document.getElementById('what_todo'), whatNotToDo: document.getElementById('what_todont') , dietArray : dietArray});
+    console.log("diet",preDiet)
+   
+    // dispatch(
+    //   addDietChart(dietArray)
+    // ).then((response) => {
+    //   console.log("Response is", response.data)
+
+    // })
+    //   .catch(e => console.log(e))
   };
+
+  // useEffect(() => {
+  //   dispatch(addDietChart());
+  // }, [dispatch])
+
 
   // get all funtion
   const handelAllButtonClick = (e) => {
@@ -361,7 +379,7 @@ const PrescriptionWindow = () => {
     const tempDay = prescription.panchkarma.find((el) => el.name === e.target.name)
     tempDay.days = e.target.value
     // setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempDay] })
-    console.log("temp day", tempDay)
+    // console.log("temp day", tempDay)
   }
 
 
@@ -395,6 +413,44 @@ const PrescriptionWindow = () => {
     setInputFields(newState);
   }
 
+  //image upload 
+  const [imagefile, setImageFile] = useState();
+  const handleImageUpload = (file) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file)
+    fileReader.onload = () => {
+      console.log(fileReader.result)
+      setImageFile(fileReader.result)
+      setPrescription({ ...prescription, image: imagefile })
+    }
+  }
+
+  const [videofile, setVideoFile] = useState();
+  const handleVideoUpload = (video) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(video)
+    fileReader.onload = () => {
+      console.log(fileReader.result)
+      setVideoFile(fileReader.result)
+      setPrescription({ ...prescription, video: videofile })
+
+    }
+  }
+
+  const [reportfile, setReportFile] = useState();
+  const handleReportUpload = (report) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(report)
+    fileReader.onload = () => {
+      console.log(fileReader.result)
+      setReportFile(fileReader.result)
+      setPrescription({ ...prescription, report: reportfile })
+
+    }
+  }
+
+
+
   return (
     <>
       <div className="card">
@@ -419,26 +475,19 @@ const PrescriptionWindow = () => {
       {/* second Card */}
       <div className="symptomcard">
         <div className="card-body">
-
           <div class="row align-items-start">
-
             <div class="col">
               <input
                 id="lan"
                 type="text"
                 name="symptoms"
+                className='p-input'
                 onChange={onSymptomChange}
                 value={prescription.translateinputValue}
-                placeholder="add symptoms"
+                placeholder="Add symptoms"
+                required
               />
-              <button type="button" onClick={addSymptomArray}>Add</button>
-              {/* {symptomList.map(item => (
-                <div key={item}>
-                  {item}
-                  <button onClick={() => removeSymptomArray(item)}>Remove</button>
-                </div>
-              ))}
-              <input id="translatedvalue" value={translatedValue} type="hidden" /> */}
+              <Button onClick={addSymptomArray}>Add</Button>
             </div>
             <div class="col">
               <Autocomplete
@@ -449,14 +498,17 @@ const PrescriptionWindow = () => {
                 }}
                 freeSolo
                 options={allMedicines?.medicinesList}
-                style={{ width: 130, marginRight: 25 }}
+                style={{
+                  width: 130,
+                  margin: "-24px 15px 0px 54px",
+                  fontWeight: "bold"
+                }}
                 getOptionLabel={(option) => option?.medicineName}
                 renderInput={(params) => (
                   <TextField {...params} label="Medicines"
                     margin="normal" />
                 )}
-                // onChange = {handleFormChange}
-                // onChange={(e) => console.log(e)}
+                // onChange = {handleFormChange
                 renderOption={(props, option, { inputValue }) => {
                   const matches = match(option.medicineName, inputValue, { insideWords: true });
                   const parts = parse(option.medicineName, matches);
@@ -470,34 +522,32 @@ const PrescriptionWindow = () => {
 
                             style={{
                               fontWeight: part.highlight ? 400 : 200,
-                            }}
-                          >
-
+                            }}>
                             {part.text}
                           </span>
                         ))}
-
                       </div>
                     </li>
                   );
                 }}
               />
             </div>
+            {/* <div class="col">
+              <h5 align="center">Dose</h5>
+            </div> */}
+            {/* <div class="col">
+              <h5 align="center">Other Details</h5>
+            </div> */}
             <div class="col">
-            <h5 align="center">Dose</h5>
-            </div>
-            <div class="col">
-            <h5 align="center">Other Details</h5>
-            </div>
-            <div class="col">
-              <input type="text" placeholder="00"/>
-            <h5 align="center">Days</h5>
+              <input type="text" className='p-input' placeholder="00"
+                value={prescription.prescriptiondays}
+                onChange={(e) => setPrescription({ ...prescription, prescriptiondays: e.target.value })}
+              />
+              <h5 align="center">Days</h5>
             </div>
           </div>
-
         </div>
       </div>
-
 
 
       <Form onSubmit={submitHandler}>
@@ -505,87 +555,15 @@ const PrescriptionWindow = () => {
         <table className="table table-borderless" bordercolor="black">
           <tr>
             <td style={{ borderRight: "1px solid " }}>
-              {/* <input
-                id="lan"
-                type="text"
-                name="symptoms"
-                onChange={onSymptomChange}
-                value={prescription.translateinputValue}
-                placeholder="add symptoms"
-              />
-              <button type="button" onClick={addSymptomArray}>Add</button> */}
               {symptomList.map(item => (
                 <div key={item}>
                   {item}
                   <button onClick={() => removeSymptomArray(item)}>Remove</button>
                 </div>
               ))}
-              <input id="translatedvalue" value={translatedValue} type="hidden" />
+              <input id="translatedvalue" className='p-input' value={translatedValue} type="hidden" />
             </td>
             <td>
-
-              <Autocomplete
-                id="highlights-demo"
-                // sx={{ width: 300 }}
-                sx={{
-                  "& fieldset": { border: 'none' },
-                }}
-                freeSolo
-                options={allMedicines?.medicinesList}
-                style={{ width: 130, marginRight: 25 }}
-                getOptionLabel={(option) => option?.medicineName}
-                renderInput={(params) => (
-                  <TextField {...params} label="Medicines"
-                    margin="normal" />
-                )}
-                // onChange = {handleFormChange}
-                // onChange={(e) => console.log(e)}
-                renderOption={(props, option, { inputValue }) => {
-                  const matches = match(option.medicineName, inputValue, { insideWords: true });
-                  const parts = parse(option.medicineName, matches);
-
-                  return (
-                    <li {...props} onClick={addFields} >
-                      <div>
-                        {parts.map((part, index) => (
-                          <span
-                            key={index}
-
-                            style={{
-                              fontWeight: part.highlight ? 400 : 200,
-                            }}
-                          >
-
-                            {part.text}
-                          </span>
-                        ))}
-
-                      </div>
-                    </li>
-                  );
-                }}
-              />
-
-              {/* {inputFields.map((input, index) => {
-                return (
-                  <div key={index}>
-                    <div id="divOuter">
-                      <div id="divInner">
-                        
-                        <h6>{input.med.medicineName}</h6>
-                        <input type="hidden" value={input.med.id} name="medId[]" />
-                        <input id="partitioned" type="text" placeholder='Dose' name='dose[]' maxlength="4" value={input.Dose} />
-                        <Button variant="contained"
-                          onClick={() => removeFields(index)}
-                        >  <DeleteIcon fontSize='medium' />  </Button>
-                      </div>
-                    </div>
-
-                  </div>
-                )
-              })} */}
-
-
               {inputFields.map((input, index) => {
                 return (
                   <div key={index}>
@@ -593,7 +571,7 @@ const PrescriptionWindow = () => {
                       <div id="divInner">
 
                         <h6 id={'med' + index} >{input.med.medicineName}</h6>
-                        <input type="hidden" value={input.med.id} name="medId[]" />
+                        <input type="hidden" className='p-input' value={input.med.id} name="medId[]" />
                         <input id={'d' + index} className='partitioned' type="text" placeholder='Dose' name='dose[]' maxlength="4" onChange={updateDose} />
                         <Button variant="contained"
                           onClick={() => removeFields(index)}
@@ -604,24 +582,17 @@ const PrescriptionWindow = () => {
                   </div>
                 )
               })}
-
               {/* {console.log("inputfields", inputFields)} */}
-
-
             </td>
-
             <td>
               {/* Qty
               <input type="text" placeholder='00' /> */}
             </td>
-
             <td style={{ width: "40%" }}>
               <table border="1px" bordercolor="black" cellspacing="5px" cellpadding="5%" align="center" >
-
                 <tr>
-
                   <td colspan="2">
-                    <input type="text" id="ayurvedaDiagnosis" placeholder='Ayurveda Diagnosis'
+                    <input type="text" id="ayurvedaDiagnosis" className='p-input' placeholder='Ayurveda Diagnosis'
                       value={prescription.ayurvedaDiagnosis}
                       onChange={(e) => setPrescription({ ...prescription, ayurvedaDiagnosis: e.target.value })}
                     />
@@ -629,13 +600,13 @@ const PrescriptionWindow = () => {
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" id="mDiagnosis" placeholder='M Diagnosis'
+                    <input type="text" id="mDiagnosis" className='p-input' placeholder='M Diagnosis'
                       value={prescription.mDiagnosis}
                       onChange={(e) => setPrescription({ ...prescription, mDiagnosis: e.target.value })}
                     />
                   </td>
                   <td>
-                    <input type="text" id="modernSystem" placeholder='Modern System'
+                    <input type="text" id="modernSystem" placeholder='Modern System' className='p-input'
                       value={prescription.modernSystem}
                       onChange={(e) => setPrescription({ ...prescription, modernSystem: e.target.value })}
                     />
@@ -643,32 +614,30 @@ const PrescriptionWindow = () => {
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" id="treatement" placeholder='Treatment'
+                    <input type="text" id="treatement" placeholder='Treatment' className='p-input'
                       value={prescription.treatement}
                       onChange={(e) => setPrescription({ ...prescription, treatement: e.target.value })}
                     />
                   </td>
                   <td>
-
-                    <div>
-                      <select style={{
-                        width: "150px",
-                        margin: "21px 0 0 4px"
-                      }}
-                        value={prescription.treatmentdays}
-                        onChange={(e) => setPrescription({ ...prescription, treatmentdays: e.target.value })}
-                      >
-                        <option selected value="Month">Month</option>
-                        <option value="Years">Years</option>
-                        <option value="Days">Days</option>
-
-                      </select>
-                    </div>
+                    <select
+                      className='p-input'
+                      value={prescription.treatmentdays}
+                      onChange={(e) => setPrescription({ ...prescription, treatmentdays: e.target.value })}
+                    >
+                      <option selected value="">Select</option>
+                      <option value="Month">Month</option>
+                      <option value="Years">Years</option>
+                      <option value="Days">Days</option>
+                    </select>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <input type="text" placeholder='Ayurveda' />
+                    <input type="text" className='p-input' placeholder='Ayurveda'
+                      value={prescription.ayurveda}
+                      onChange={(e) => setPrescription({ ...prescription, ayurveda: e.target.value })}
+                    />
                   </td>
                   <td>
                     <div style={{
@@ -684,10 +653,8 @@ const PrescriptionWindow = () => {
                         onClick={toggleSelect}
 
                       />
-                      <select style={{
-                        width: "150px",
-                        margin: "21px 0 0 4px"
-                      }}
+                      <select style={{ width: "150px" }}
+                        className='p-input'
                         id="panchkarma"
                         name='panchkarma'
                         value={prescription.panchkarma}
@@ -707,21 +674,19 @@ const PrescriptionWindow = () => {
 
                 </tr>
                 <tr>
-                  <div>
-                    <Card>
-                      {
-                        prescription.panchkarma.map((item) => (
-                          <>
-                            <Card.Body>
-                              {item.name}
-                              <input type="text" name={item.name} placeholder='days' onChange={handlePanchkarmaDay} />
-                              <Button onClick={() => removeDays(item.name)}>-</Button>
-                            </Card.Body>
-                          </>
-                        ))
-                      }
-                    </Card>
-                  </div>
+                  <Card>
+                    {
+                      prescription.panchkarma.map((item) => (
+                        <>
+                          <Card.Body>
+                            {item.name}
+                            <input className='p-input' type="text" name={item.name} placeholder='days' onChange={handlePanchkarmaDay} />
+                            <Button onClick={() => removeDays(item.name)}>-</Button>
+                          </Card.Body>
+                        </>
+                      ))
+                    }
+                  </Card>
                 </tr>
                 <tr>
                   <td colSpan={'2'}>
@@ -738,6 +703,7 @@ const PrescriptionWindow = () => {
                           <input
                             type="text"
                             name="consult"
+                            className='p-input'
                             value={inputVal.consult}
                             onChange={onValueChange}
                           /></td>
@@ -745,7 +711,9 @@ const PrescriptionWindow = () => {
                           Image
                           <div class="image-upload">
                             <img src='images/upload.png' />
-                            <input id="file-input" type="file" />
+                            <input id="file-input" type="file" className='p-input'
+                              value={prescription.image}
+                              onChange={(e) => handleImageUpload(e.target.files[0])} />
                           </div>
                         </td>
                       </tr>
@@ -755,13 +723,17 @@ const PrescriptionWindow = () => {
                           <input
                             type="text"
                             name="medicine"
+                            className='p-input'
                             value={inputVal.medicine}
                             onChange={onValueChange}
                           /> </td>
                         <td> Video
                           <div class="image-upload">
                             <img src='images/video.png' />
-                            <input id="video-file-input" type="file" />
+                            <input id="video-file-input"
+                              value={prescription.video}
+                              onChange={(e) => handleVideoUpload(e.target.files[0])}
+                              type="file" />
                           </div>
                         </td>
 
@@ -772,12 +744,17 @@ const PrescriptionWindow = () => {
                           <input
                             type="text"
                             name="paid"
+                            className='p-input'
                             value={inputVal.paid}
+
                             onChange={onValueChange} /></td>
                         <td> Report
                           <div class="image-upload">
                             <img src='images/medical-report.png' />
-                            <input id="report-file-input" type="file" />
+                            <input id="report-file-input"
+                              value={prescription.report}
+                              onChange={(e) => handleReportUpload(e.target.files[0])}
+                              type="file" />
                           </div>
                         </td>
                       </tr>
@@ -785,6 +762,7 @@ const PrescriptionWindow = () => {
                         <td> Debit/Credit</td>
                         <td>
                           <input
+                            className='p-input'
                             type="text"
                             name="debitcredit"
                             value={inputVal.debitcredit}
@@ -814,12 +792,14 @@ const PrescriptionWindow = () => {
                                         type="radio"
                                         value="1"
                                         name="allowance"
+
                                         onChange={headerChange}
                                       />
                                       <label htmlFor="dos">Do's</label>
                                     </div>
                                     <div class="col">
                                       <input
+
                                         id="dont"
                                         type="radio"
                                         value="2"
@@ -830,6 +810,7 @@ const PrescriptionWindow = () => {
                                     </div>
                                     <div class="col">
                                       <input
+
                                         id="Occasional"
                                         type="radio"
                                         value="3"
@@ -840,6 +821,7 @@ const PrescriptionWindow = () => {
                                     </div>
                                     <div class="col">
                                       <input
+
                                         id="Omit"
                                         type="radio"
                                         value="4"
@@ -896,13 +878,14 @@ const PrescriptionWindow = () => {
                                   <div class="row">
                                     <div class="col">
                                       <InputGroup>
-                                        <InputGroup.Text>What to do</InputGroup.Text>
-                                        <Form.Control as="textarea" aria-label="With textarea" />
-                                      </InputGroup></div>
+                                        <InputGroup.Text >What to do</InputGroup.Text>
+                                        <Form.Control id={'what_todo'} as="textarea" aria-label="With textarea" />
+                                      </InputGroup>
+                                    </div>
                                     <div class="col">
                                       <InputGroup>
                                         <InputGroup.Text>What to don't</InputGroup.Text>
-                                        <Form.Control as="textarea" aria-label="With textarea" />
+                                        <Form.Control id={'what_todont'} as="textarea" aria-label="With textarea" />
                                       </InputGroup>
                                     </div>
                                   </div>
@@ -929,6 +912,7 @@ const PrescriptionWindow = () => {
                         <td>Discount</td>
                         <td>
                           <input
+                            className='p-input'
                             type="text"
                             name="discount"
                             value={inputVal.discount}
@@ -941,8 +925,8 @@ const PrescriptionWindow = () => {
                         <td> Cash</td>
                         <td>
                           <label>
-                            Select a value:
-                            <select value={selectValue} onChange={handleSelectChange}>
+                            Select a Language:
+                            <select value={selectValue} onChange={handleSelectChange} className='p-input'>
                               <option value="">English</option>
                               <option value="gu-t-i0-und">Gujarati</option>
                               <option value="mr-t-i0-und">Marathi</option>

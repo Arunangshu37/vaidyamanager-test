@@ -237,7 +237,7 @@ export const getUserDesc = () => async (dispatch) => {
             type: USER_LATEST_SUCCESS,
             payload: data,
         })
-        console.log("get latest user")
+        // console.log("get latest user")
     } catch (error) {
         dispatch({
             type: USER_LATEST_FAIL,
@@ -246,7 +246,7 @@ export const getUserDesc = () => async (dispatch) => {
                     ? error.response.data.message
                     : error.message,
         })
-        console.log("get latest user Failed")
+        // console.log("get latest user Failed")
     }
 
 }

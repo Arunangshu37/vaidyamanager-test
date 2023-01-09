@@ -21,8 +21,33 @@
     overflow: hidden;
   }
 
-
   .symptomcard{
-    color:black;
-    background-color: #8888Ac;
+    color: black;
+    background-color: #d2fffa;
+    border: 1px solid;
   }
+
+
+.p-input {
+    /* width: 100%;
+    height: 50px;
+    padding: 0px 20px;
+    border: 1px solid #6caaa8;
+    outline: none;
+    border-radius: 50px; */
+    width: 100%;
+    height: 36px;
+    padding: 1px 6px;
+    border: 1px solid #6caaa8;
+    outline: none;
+    border-radius: 6px;
+}
+
+button, .p-input {
+    /* border: none; */
+    outline: none;
+    overflow: visible;
+}
+.react-datepicker-wrapper,.react-datepicker__input-container{
+  border: none;
+}
