@@ -35,6 +35,7 @@ const addPrescriptionDetails = asyncHandler(async(req,res)=>{
         modernSystem,
         mDiagnosis,
         prescriptionTreatment,
+        treatmentdays,
         ayurveda,
         panchkarma,
         Image,
@@ -54,6 +55,7 @@ const addPrescriptionDetails = asyncHandler(async(req,res)=>{
         modernSystem,
         mDiagnosis,
         prescriptionTreatment,
+        treatmentdays,
         ayurveda,
         panchkarma,
         Image,
@@ -63,7 +65,7 @@ const addPrescriptionDetails = asyncHandler(async(req,res)=>{
         
     })
     const createdPrescription = await PrescripionData.save();
-    // console.log("success  Prescription");
+    console.log("success  Prescription");
     res.status(201).json(createdPrescription)
 
 })

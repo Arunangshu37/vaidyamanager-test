@@ -39,34 +39,34 @@ export const getMedicines = () => async (dispatch) => {
 }
 
 //ADD PRESCRIPTION
-export const addPrescriptionUser = () => async (dispatch, getState) => {
+export const addPrescriptionUser = (prescriptionData) => async (dispatch, getState) => {
     try {
         dispatch({
             type: PRESCRIPTION_REQUEST,
         })
 
         // Get user login and user info
-        const {
-            userLogin: { userInfo },
-        } = getState()
+        // const {
+        //     userLogin: { userInfo },
+        // } = getState()
 
         // Header to send with the request
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`,
-            },
-        }
+        // const config = {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         Authorization: `Bearer ${userInfo.token}`,
+        //     },
+        // }
 
         // Make request to server and get the response data
-        const { data } = await axios.post(`/api/prescription/add_prescription`, config)
+        const { data } = await axios.post(`/api/prescription/add_prescription`, prescriptionData)
 
         // Dispatch  success after making the request
         dispatch({
             type: PRESCRIPTION_SUCCESS,
             payload: data,
         })
-
+        return data    
     } catch (error) {
         dispatch({
             type: PRESCRIPTION_FAIL,
@@ -99,7 +99,7 @@ export const addDietChart = (diet) => async (dispatch, getState) => {
         // }
 
         // Make request to server and get the response data
-        const { data } = await axios.post(`/api/prescription/add_dietchart`,diet)
+        const { data } = await axios.post(`/api/prescription/add_dietchart`, diet)
 
         // Dispatch  success after making the request
         dispatch({

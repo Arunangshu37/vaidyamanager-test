@@ -85,7 +85,7 @@ export const prescriptionDetailReducer = (state = {}, action) => {
         case PRESCRIPTION_SUCCESS:
             return {
                 loadingprescription: false,
-                success: true,
+                successpresc: true,
                 patientPrescription: action.payload,
             }
         case PRESCRIPTION_FAIL:

@@ -39,52 +39,60 @@ const PrescriptionWindow = () => {
     image: "",
     video: "",
     report: "",
-    payment: {}
+    payment: {},
   }
+
   const [prescription, setPrescription] = useState(defaultData);
   // console.log("Pres",prescription)
   const dispatch = useDispatch();
 
+
+  //Prescription API Data
+  const PrescriptionDetails = useSelector((state) => state.addPatientPrescription)
+  const { successpresc, errorprescription, patientPrescription } = PrescriptionDetails;
+  console.log("prescription of patient is", PrescriptionDetails)
+
+
   const submitHandler = (e) => {
     // console.log("Submit")
     e.preventDefault();
-    if (medicineAndDoseArray.length != 0) {
-      medicineAndDoseArray.splice(0, medicineAndDoseArray.length);
-    }
-    // console.log(inputFields);
-    inputFields.map((obj) => {
-      medicineAndDoseArray.push({ Dose: obj.Dose, med: obj.med._id })
-    });
-    // console.log("Prescription", mainPrescription);
     console.log("check prediet now", preDiet);
     // console.log("Prescription", prescription);
     dispatch(addDietChart(preDiet))
     .then((response) => {
+      if (medicineAndDoseArray.length != 0) {
+        medicineAndDoseArray.splice(0, medicineAndDoseArray.length);
+      }
+      // console.log(inputFields);
+      inputFields.map((obj) => {
+        medicineAndDoseArray.push({ Dose: obj.Dose, med: obj.med._id })
+      });
       console.log("Response is", response)
       let mainPrescription = {
-        symptoms: symptomList,
-        diet: response._id,
-        medicine: medicineAndDoseArray,
-        ayurvedaDiagnosis: prescription.ayurvedaDiagnosis,
+        prescriptionUser:userdesc[0]._id,
+        Symptoms: symptomList,
+        diet_chart: response._id,
+        medicineData: medicineAndDoseArray,
+        ayurveda_diagnosis: prescription.ayurvedaDiagnosis,
         mDiagnosis: prescription.mDiagnosis,
         modernSystem: prescription.modernSystem,
-        treatement: prescription.treatement,
+        prescriptionTreatment: prescription.treatement,
         treatmentdays: prescription.treatmentdays,
         panchkarma: prescription.panchkarma,
         ayurveda: prescription.ayurveda,
-        image: imagefile,
-        video: videofile,
+        Image: imagefile,
+        Video: videofile,
         report: reportfile,
-        payment: inputVal,
+        Payment: inputVal,
         prescriptiondays: prescription.prescriptiondays
   
       }
-      
-      
-
+      dispatch(addPrescriptionUser(mainPrescription))
+     
+      console.log("Prescription", mainPrescription);
     })
     .catch(e => console.log(e))
-     
+
   }
 
   //dietchart API
@@ -92,10 +100,7 @@ const PrescriptionWindow = () => {
   const { success, errorDiet, patientdiet } = DietchartDetails;
   console.log("Patient Diet Chart is", DietchartDetails)
 
-  //prescription add api
-  const PrescriptionDetails = useSelector((state) => state.addPatientPrescription)
-  const { loadingprescription, errorprescription, patientPrescription } = PrescriptionDetails;
-  console.log("prescription of patient is", PrescriptionDetails)
+ 
 
 
   const allMedicines = useSelector((state) => state.getallMedicineList)
@@ -106,6 +111,7 @@ const PrescriptionWindow = () => {
   // Latest User(Patient)
   const Patient = useSelector((state) => state.getLatestUSer)
   const { loadingUsers, errorUsers, userdesc } = Patient;
+
   useEffect(() => {
     dispatch(getUserDesc());
     dispatch(getMedicines());

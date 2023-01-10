@@ -12,7 +12,7 @@ const prescriptionSchema = mongoose.Schema(
             ref: 'DietChart'
         },
         Symptoms: [{
-            Symptoms_name:String
+            type:String
         }],
         medicineData: [{
             dose: String,
@@ -36,10 +36,12 @@ const prescriptionSchema = mongoose.Schema(
         prescriptionTreatment: {
             type: String
         },
+        treatmentdays:{
+            type: String
+        },
         ayurveda: {
             type: String
         },
-
         panchkarma: [{
             panchkarma_name: String,
             panchkarma_days: String
