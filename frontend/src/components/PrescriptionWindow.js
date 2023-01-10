@@ -55,32 +55,41 @@ const PrescriptionWindow = () => {
     inputFields.map((obj) => {
       medicineAndDoseArray.push({ Dose: obj.Dose, med: obj.med._id })
     });
-    let mainPrescription = {
-      symptoms: symptomList,
-      diet: dietArray,
-      medicine: medicineAndDoseArray,
-      ayurvedaDiagnosis: prescription.ayurvedaDiagnosis,
-      mDiagnosis: prescription.mDiagnosis,
-      modernSystem: prescription.modernSystem,
-      treatement: prescription.treatement,
-      treatmentdays: prescription.treatmentdays,
-      panchkarma: prescription.panchkarma,
-      ayurveda: prescription.ayurveda,
-      image: imagefile,
-      video: videofile,
-      report: reportfile,
-      payment: inputVal,
-      prescriptiondays: prescription.prescriptiondays
-
-    }
-    console.log("Prescription", mainPrescription);
+    // console.log("Prescription", mainPrescription);
+    console.log("check prediet now", preDiet);
     // console.log("Prescription", prescription);
+    dispatch(addDietChart(preDiet))
+    .then((response) => {
+      console.log("Response is", response)
+      let mainPrescription = {
+        symptoms: symptomList,
+        diet: response._id,
+        medicine: medicineAndDoseArray,
+        ayurvedaDiagnosis: prescription.ayurvedaDiagnosis,
+        mDiagnosis: prescription.mDiagnosis,
+        modernSystem: prescription.modernSystem,
+        treatement: prescription.treatement,
+        treatmentdays: prescription.treatmentdays,
+        panchkarma: prescription.panchkarma,
+        ayurveda: prescription.ayurveda,
+        image: imagefile,
+        video: videofile,
+        report: reportfile,
+        payment: inputVal,
+        prescriptiondays: prescription.prescriptiondays
+  
+      }
+      
+      
 
+    })
+    .catch(e => console.log(e))
+     
   }
 
   //dietchart API
   const DietchartDetails = useSelector((state) => state.addPatientDietChart)
-  const { loadingDiet, errorDiet, patientdiet } = DietchartDetails;
+  const { success, errorDiet, patientdiet } = DietchartDetails;
   console.log("Patient Diet Chart is", DietchartDetails)
 
   //prescription add api
@@ -220,7 +229,7 @@ const PrescriptionWindow = () => {
       case "✓": {
         return "1";
       }
-      case "✕": {
+      case "✗": {
         return "2";
       }
       case "!": {
@@ -238,7 +247,7 @@ const PrescriptionWindow = () => {
         return "&#10003;";
       }
       case "2": {
-        return "U+02718;";
+        return "&#x2717;";
       }
       case "3": {
         return "!";
@@ -252,9 +261,9 @@ const PrescriptionWindow = () => {
 
   const [dietArray, setDietArray] = React.useState([]);
   const [preDiet, setPreDiet] = useState({
-    whatToDo:"",
-    whatNotToDo:"",
-    dietArray:[]
+    wtodo:"",
+    wto_dont:"",
+    pateientDietChart:[]
   });
 
   const setDietArrayLocally = (e) => {
@@ -274,22 +283,17 @@ const PrescriptionWindow = () => {
     console.log("dietArray", dietArray);
     document.getElementById('dos').checked = true;
     setAllowanceState("1");
-    setPreDiet({...preDiet,whatToDo: document.getElementById('what_todo'), whatNotToDo: document.getElementById('what_todont') , dietArray : dietArray});
-    console.log("diet",preDiet)
-   
-    // dispatch(
-    //   addDietChart(dietArray)
-    // ).then((response) => {
-    //   console.log("Response is", response.data)
-
-    // })
-    //   .catch(e => console.log(e))
+    setPreDiet( preDiet => ({...preDiet, wtodo: document.getElementById('what_todo').value, wto_dont: document.getElementById('what_todont').value}));
+    console.log("check prediet now", preDiet);
   };
 
-  // useEffect(() => {
-  //   dispatch(addDietChart());
-  // }, [dispatch])
 
+  useEffect(()=>{
+    setPreDiet(preDiet => ({...preDiet,  pateientDietChart : dietArray}))
+  }, [dietArray])
+
+  
+ 
 
   // get all funtion
   const handelAllButtonClick = (e) => {
@@ -328,7 +332,7 @@ const PrescriptionWindow = () => {
     if (allowanceState === "1") {
       e.target.innerHTML = "&#10003;";
     } else if (allowanceState === "2") {
-      e.target.innerHTML = "&#10799;";
+      e.target.innerHTML = "&#x2717;";
     } else if (allowanceState === "3") {
       e.target.innerHTML = "!";
     } else {

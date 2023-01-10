@@ -86,27 +86,29 @@ export const addDietChart = (diet) => async (dispatch, getState) => {
         })
 
         // Get user login and user info
-        const {
-            userLogin: { userInfo },
-        } = getState()
+        // const {
+        //     userLogin: { userInfo },
+        // } = getState()
 
         // Header to send with the request
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`,
-            },
-        }
+        // const config = {
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         Authorization: `Bearer ${userInfo.token}`,
+        //     },
+        // }
 
         // Make request to server and get the response data
-        const { data } = await axios.post(`/api/prescription/add_prescription`,diet, config)
+        const { data } = await axios.post(`/api/prescription/add_dietchart`,diet)
 
         // Dispatch  success after making the request
         dispatch({
             type: DIETCHART_SUCCESS,
             payload: data,
         })
-        console.log("Diet chart data entered sucessfully",data)
+
+        return data
+        // console.log("Diet chart data entered sucessfully",diet)
     } catch (error) {
         dispatch({
             type: DIETCHART_FAIL,

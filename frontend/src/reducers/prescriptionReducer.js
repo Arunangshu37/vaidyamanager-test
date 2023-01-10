@@ -50,6 +50,7 @@ export const medicinesListReducer = (state = { medicinesList: [] }, action) => {
 //dietchart add
 export const dietChartDetailReducer = (state = {}, action) => {
     switch (action.type) {
+      
         case DIETCHART_REQUEST:
             return {
                 loadingDiet: true,
@@ -59,11 +60,13 @@ export const dietChartDetailReducer = (state = {}, action) => {
                 loadingDiet: false,
                 success: true,
                 patientdiet: action.payload,
+                
             }
         case DIETCHART_FAIL:
             return {
                 loadingDiet: false,
                 errorDiet: action.payload,
+            
             }
         case DIETCHART_RESET:
             return {}

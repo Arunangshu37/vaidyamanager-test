@@ -10,7 +10,7 @@ const dietchartSchema = mongoose.Schema(
                     Name:String,
                     Category : String
                 },
-                Permit:String
+                allowance:String
             },        
         ],
         wtodo: {
