@@ -50,24 +50,22 @@ const PrescriptionWindow = () => {
   //Prescription API Data
   const PrescriptionDetails = useSelector((state) => state.addPatientPrescription)
   const { successpresc, errorprescription, patientPrescription } = PrescriptionDetails;
-  console.log("prescription of patient is", PrescriptionDetails)
-
 
   const submitHandler = (e) => {
-    // console.log("Submit")
     e.preventDefault();
-    console.log("check prediet now", preDiet);
-    // console.log("Prescription", prescription);
+    // console.log("check prediet now", preDiet);
     dispatch(addDietChart(preDiet))
     .then((response) => {
       if (medicineAndDoseArray.length != 0) {
         medicineAndDoseArray.splice(0, medicineAndDoseArray.length);
+        
       }
       // console.log(inputFields);
       inputFields.map((obj) => {
-        medicineAndDoseArray.push({ Dose: obj.Dose, med: obj.med._id })
+        medicineAndDoseArray.push({ dose: obj.dose, medicineDetails: obj.med._id })
       });
       console.log("Response is", response)
+      console.log("medicine ",medicineAndDoseArray)
       let mainPrescription = {
         prescriptionUser:userdesc[0]._id,
         Symptoms: symptomList,
@@ -90,6 +88,7 @@ const PrescriptionWindow = () => {
       dispatch(addPrescriptionUser(mainPrescription))
      
       console.log("Prescription", mainPrescription);
+      console.log("attay",prescription.panchkarma)
     })
     .catch(e => console.log(e))
 
@@ -98,19 +97,15 @@ const PrescriptionWindow = () => {
   //dietchart API
   const DietchartDetails = useSelector((state) => state.addPatientDietChart)
   const { success, errorDiet, patientdiet } = DietchartDetails;
-  console.log("Patient Diet Chart is", DietchartDetails)
-
- 
-
 
   const allMedicines = useSelector((state) => state.getallMedicineList)
   const { loadingMedicine, errorMedicine, medicinesList } = allMedicines;
   // console.log("Medicine List", allMedicines)
 
-
   // Latest User(Patient)
   const Patient = useSelector((state) => state.getLatestUSer)
   const { loadingUsers, errorUsers, userdesc } = Patient;
+  console.log("Patient is",Patient)
 
   useEffect(() => {
     dispatch(getUserDesc());
@@ -163,9 +158,9 @@ const PrescriptionWindow = () => {
     // console.log("textconetect", event.target.textContent);
     // const doctorInfo = doctors?.find((doctor) => doctor.email_id == userInfo?.email)
     let med = allMedicines.medicinesList?.find((med) => { return med.medicineName === event.target.textContent.trim() })
-    let newfield = { Dose: '', med: med }
+    let newfield = { dose: '', med: med }
     setInputFields([...inputFields, newfield])
-    // console.log(med)
+    console.log(med)
     // setInputFields([...inputFields, newfield])
   }
 
@@ -280,17 +275,14 @@ const PrescriptionWindow = () => {
     DiechartList.forEach((element) => {
       let inputId = "lb" + element.id;
       let unicode = document.getElementById(inputId).textContent.toString();
-      console.log('local', unicode, inputId)
       if (unicode !== "▢") {
         setDietArray(dietArray => [...dietArray, { diet: element, allowance: getIdFromUnicode(unicode) }]);
       }
 
     });
-    console.log("dietArray", dietArray);
     document.getElementById('dos').checked = true;
     setAllowanceState("1");
     setPreDiet( preDiet => ({...preDiet, wtodo: document.getElementById('what_todo').value, wto_dont: document.getElementById('what_todont').value}));
-    console.log("check prediet now", preDiet);
   };
 
 
@@ -315,12 +307,10 @@ const PrescriptionWindow = () => {
     }
     DiechartList.forEach((element) => {
       let id = "lb" + element.id;
-      // console.log(document.getElementById(id).innerHTML);
       if (document.getElementById(id).innerHTML === "▢") {
         document.getElementById(id).innerHTML = getUniCodeFromId(
           allowanceState
         );
-        // document.getElementById(inputId).value = allowanceState;
       }
 
     });
@@ -328,7 +318,6 @@ const PrescriptionWindow = () => {
 
   const headerChange = (e) => {
     if (e.target.value == '5') {
-      // console.log(e.target.value)
     }
     setAllowanceState(e.target.value);
   }
@@ -371,52 +360,56 @@ const PrescriptionWindow = () => {
     document.getElementById("panchkarma").disabled = !isChecked;
   }
 
+
+// useEffect(() => {
+  
+//   setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempData] })
+// }, [prescription])
+
+
+
   //add input box on selection
   const selectPanchkarma = (e) => {
-    if (prescription.panchkarma.every((el) => el.name !== e.target.value)) {
-      const tempData = { name: e.target.value, days: 0 }
+    if (prescription.panchkarma.every((el) => el.panchkarma_name !== e.target.value)) {
+      const tempData = { panchkarma_name: e.target.value, panchkarma_days: '0'}
       setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempData] })
     }
   }
 
+
+
   const removeDays = (pname) => {
-    const a = prescription.panchkarma.filter((v) => v.name !== pname)
+    const a = prescription.panchkarma.filter((v) => v.panchkarma_name !== pname)
     setPrescription({ ...prescription, panchkarma: a })
 
   }
+  console.log("panchkarma",prescription.panchkarma)
 
   const handlePanchkarmaDay = (e) => {
-    const tempDay = prescription.panchkarma.find((el) => el.name === e.target.name)
-    tempDay.days = e.target.value
-    // setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempDay] })
-    // console.log("temp day", tempDay)
+    const tempDay = prescription.panchkarma.map((el) => {
+      if(el.panchkarma_name === e.target.name){
+       return {panchkarma_name: e.target.name, panchkarma_days: e.target.value}
+      }
+      else{
+        return {...el}
+      }
+      // return {...el, panchkarma_days: e.target.value}
+    })
+    console.log("pdays",tempDay)
+    // tempDay.panchkarma_days = e.target.value
+    
+    setPrescription({ ...prescription, panchkarma: tempDay })
   }
 
 
   const [medicineAndDoseArray, setMedicineAndDoseArray] = React.useState([]);
-
-  const handelFormSubmit = (e) => {
-    e.preventDefault();
-    //line no 344 to 354 code is going to require on save button
-    if (medicineAndDoseArray.length != 0) {
-      medicineAndDoseArray.splice(0, medicineAndDoseArray.length);
-    }
-    // console.log(inputFields);
-    inputFields.map((obj) => {
-      //setDietArray(dietArray => [...dietArray, { diet: element, allowance: getIdFromUnicode(unicode) }]);
-      medicineAndDoseArray.push({ Dose: obj.Dose, med: obj.med._id })
-      //  setMedicineAndDoseArray(medicineAndDoseArray => [...medicineAndDoseArray, { Dose: obj.Dose, med: obj.med._id } ]);
-    });
-
-    console.log(medicineAndDoseArray);
-  }
   const updateDose = (e) => {
     // getmedicine name using the id
     let medicineName = document.getElementById('me' + e.target.id).textContent.trim();
     // first find the index where of the medicine whose dose is to be set
     const newState = inputFields.map((obj) => {
       if (obj.med.medicineName === medicineName) {
-        return { ...obj, Dose: e.target.value };
+        return { ...obj, dose: e.target.value };
       }
       return obj;
     });
@@ -582,7 +575,7 @@ const PrescriptionWindow = () => {
 
                         <h6 id={'med' + index} >{input.med.medicineName}</h6>
                         <input type="hidden" className='p-input' value={input.med.id} name="medId[]" />
-                        <input id={'d' + index} className='partitioned' type="text" placeholder='Dose' name='dose[]' maxlength="4" onChange={updateDose} />
+                        <input id={'d' + index} className='partitioned' type="text" placeholder='Dose' name='dose' maxlength="4" onChange={updateDose} />
                         <Button variant="contained"
                           onClick={() => removeFields(index)}
                         >  <DeleteIcon fontSize='medium' />  </Button>
@@ -678,10 +671,8 @@ const PrescriptionWindow = () => {
                         <option value="Nasya">Nasya</option>
                         <option value="Raktamokshana">Raktamokshana</option>
                       </select>
-
                     </div>
                   </td>
-
                 </tr>
                 <tr>
                   <Card>
@@ -689,9 +680,9 @@ const PrescriptionWindow = () => {
                       prescription.panchkarma.map((item) => (
                         <>
                           <Card.Body>
-                            {item.name}
-                            <input className='p-input' type="text" name={item.name} placeholder='days' onChange={handlePanchkarmaDay} />
-                            <Button onClick={() => removeDays(item.name)}>-</Button>
+                            {item.panchkarma_name}
+                            <input className='p-input' type="text" name={item.panchkarma_name} placeholder='days' onChange={(e) => handlePanchkarmaDay(e)} />
+                            <Button onClick={() => removeDays(item.panchkarma_name)}>-</Button>
                           </Card.Body>
                         </>
                       ))
@@ -1006,6 +997,36 @@ const PrescriptionWindow = () => {
                 </ul>
               </dd>
               <dt>Take occasionally.</dt>
+              <dd>
+                <ul>
+                  {
+                    dietCategories.map((category) => {
+                      return <li>
+                        {
+                          dietArray.filter((_) => { return _.diet.category == category && _.allowance == '3' })
+                            .map((element) => element.diet.name).join(", ")
+                        }
+                      </li>
+                    })
+                  }
+                </ul>
+              </dd>
+              <dt>What to Do</dt>
+              <dd>
+                <ul>
+                  {
+                    dietCategories.map((category) => {
+                      return <li>
+                        {
+                          dietArray.filter((_) => { return _.diet.category == category && _.allowance == '3' })
+                            .map((element) => element.diet.name).join(", ")
+                        }
+                      </li>
+                    })
+                  }
+                </ul>
+              </dd>
+              <dt>What to Don't</dt>
               <dd>
                 <ul>
                   {

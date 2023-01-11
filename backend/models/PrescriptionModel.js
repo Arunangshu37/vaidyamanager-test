@@ -15,7 +15,9 @@ const prescriptionSchema = mongoose.Schema(
             type:String
         }],
         medicineData: [{
-            dose: String,
+            dose: {
+             type: String
+            },
             medicineDetails: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Medicine'
@@ -43,8 +45,12 @@ const prescriptionSchema = mongoose.Schema(
             type: String
         },
         panchkarma: [{
-            panchkarma_name: String,
-            panchkarma_days: String
+            panchkarma_name:  {
+                type: String
+               },
+            panchkarma_days:  {
+                type: String
+               }
 
         }],
         Image: {
