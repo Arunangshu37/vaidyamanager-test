@@ -10,11 +10,15 @@ import {
     DIETCHART_REQUEST,
     DIETCHART_SUCCESS,
     DIETCHART_FAIL,
-    DIETCHART_RESET
+    DIETCHART_RESET,
+    GET_PRESCRIPTION_REQUEST,
+    GET_PRESCRIPTION_SUCCESS,
+    GET_PRESCRIPTION_FAIL,
+    GET_PRESCRIPTION_RESET,
 }
- from '../constants/prescriptionConstants'
+    from '../constants/prescriptionConstants'
 
-//medicines add
+//medicines get
 export const medicinesListReducer = (state = { medicinesList: [] }, action) => {
     switch (action.type) {
         case MEDICINE_REQUEST:
@@ -50,7 +54,7 @@ export const medicinesListReducer = (state = { medicinesList: [] }, action) => {
 //dietchart add
 export const dietChartDetailReducer = (state = {}, action) => {
     switch (action.type) {
-      
+
         case DIETCHART_REQUEST:
             return {
                 loadingDiet: true,
@@ -60,13 +64,13 @@ export const dietChartDetailReducer = (state = {}, action) => {
                 loadingDiet: false,
                 success: true,
                 patientdiet: action.payload,
-                
+
             }
         case DIETCHART_FAIL:
             return {
                 loadingDiet: false,
                 errorDiet: action.payload,
-            
+
             }
         case DIETCHART_RESET:
             return {}
@@ -100,4 +104,36 @@ export const prescriptionDetailReducer = (state = {}, action) => {
     }
 }
 
+//get prescription
+export const getPrescriptionDataReducer = (state = { prescriptionList: [] }, action) => {
+    switch (action.type) {
+        case GET_PRESCRIPTION_REQUEST:
+            return {
+                loading: true,
+                prescriptionList: [],
+            }
+        case GET_PRESCRIPTION_SUCCESS:
+            return {
+                loading: false,
+                prescriptionList: action.payload,
+            }
+        case GET_PRESCRIPTION_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
+            }
+        case GET_PRESCRIPTION_SUCCESS:
+            return {
+                loading: false,
+                prescriptionList: action.payload,
+            }
+        case GET_PRESCRIPTION_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
+            }
+        default:
+            return state
+    }
+}
 

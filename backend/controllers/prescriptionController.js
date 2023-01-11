@@ -5,26 +5,27 @@ import mongoose from 'mongoose'
 import DietChart from '../models/DietchartModel.js';
 import crypto from 'crypto';
 
-const addDietChartDetails = asyncHandler(async(req,res)=>{
+
+//add diet chart details
+const addDietChartDetails = asyncHandler(async (req, res) => {
     const {
         pateientDietChart,
         wtodo,
         wto_dont
     } = req.body
 
-    // console.log("request is",req.body)
     const DietChartData = new DietChart({
         pateientDietChart,
         wtodo,
         wto_dont
     })
     const createdDietchart = await DietChartData.save();
-    // console.log("success  createdDietchart",createdDietchart);
     res.status(201).json(createdDietchart)
 
 })
 
-const addPrescriptionDetails = asyncHandler(async(req,res)=>{
+//add prescription
+const addPrescriptionDetails = asyncHandler(async (req, res) => {
     const {
         prescriptionUser,
         diet_chart,
@@ -62,16 +63,15 @@ const addPrescriptionDetails = asyncHandler(async(req,res)=>{
         Video,
         report,
         Payment
-        
+
     })
     const createdPrescription = await PrescripionData.save();
-    console.log("success  Prescription");
     res.status(201).json(createdPrescription)
 
 })
 
-
-const addMedicineDetails = asyncHandler(async(req,res)=>{
+//add medicines
+const addMedicineDetails = asyncHandler(async (req, res) => {
     const {
         medicineName,
         Qty,
@@ -92,20 +92,28 @@ const addMedicineDetails = asyncHandler(async(req,res)=>{
         contactNo,
         amount,
         medicine_reciver_name,
-        
+
     })
     const createdMedicine = await MedicineData.save();
-    console.log("success  Medicines");
     res.status(201).json(createdMedicine)
 
 })
 
-const  getAllMedicines= asyncHandler(async(req,res)=>{
+//get all medicines
+const getAllMedicines = asyncHandler(async (req, res) => {
     const allmedicines = await Medicine.find({})
     res.json(allmedicines)
+})
 
+//get all prescription
+const getAllPrescriptions = asyncHandler(async (req, res) => {
+    const allprescriptions = await Prescription.find({})
+    res.json(allprescriptions)
 })
 
 
-export {addDietChartDetails,addPrescriptionDetails,addMedicineDetails,
-    getAllMedicines}
+
+export {
+    addDietChartDetails, addPrescriptionDetails, addMedicineDetails,
+    getAllMedicines, getAllPrescriptions
+}

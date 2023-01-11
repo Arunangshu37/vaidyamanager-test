@@ -1,14 +1,14 @@
 import {
-    MEDICINE_REQUEST,
     MEDICINE_SUCCESS,
     MEDICINE_FAIL,
-    MEDICINE_RESET,
     PRESCRIPTION_REQUEST,
     PRESCRIPTION_SUCCESS,
     PRESCRIPTION_FAIL,
     DIETCHART_REQUEST,
     DIETCHART_SUCCESS,
     DIETCHART_FAIL,
+    GET_PRESCRIPTION_SUCCESS,
+    GET_PRESCRIPTION_FAIL,
 
 }
     from '../constants/prescriptionConstants'
@@ -112,6 +112,30 @@ export const addDietChart = (diet) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: DIETCHART_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
+//getting prescription list
+export const getPrescription = () => async (dispatch) => {
+
+    try {
+        dispatch({
+            type: GET_PRESCRIPTION_SUCCESS,
+        })
+        const { data } = await axios.get('/api/prescription/get_prescription')
+
+        dispatch({
+            type: GET_PRESCRIPTION_SUCCESS,
+            payload: data,
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_PRESCRIPTION_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

@@ -22,11 +22,8 @@ let googleTransliterate = require("google-input-tool");
 
 
 
-
 const PrescriptionWindow = () => {
   const defaultData = {
-    // symptoms: [],
-    // medicine: "",
     diet: "",
     prescriptiondays: "",
     ayurveda: "",
@@ -43,9 +40,7 @@ const PrescriptionWindow = () => {
   }
 
   const [prescription, setPrescription] = useState(defaultData);
-  // console.log("Pres",prescription)
   const dispatch = useDispatch();
-
 
   //Prescription API Data
   const PrescriptionDetails = useSelector((state) => state.addPatientPrescription)
@@ -53,44 +48,42 @@ const PrescriptionWindow = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log("check prediet now", preDiet);
     dispatch(addDietChart(preDiet))
-    .then((response) => {
-      if (medicineAndDoseArray.length != 0) {
-        medicineAndDoseArray.splice(0, medicineAndDoseArray.length);
-        
-      }
-      // console.log(inputFields);
-      inputFields.map((obj) => {
-        medicineAndDoseArray.push({ dose: obj.dose, medicineDetails: obj.med._id })
-      });
-      console.log("Response is", response)
-      console.log("medicine ",medicineAndDoseArray)
-      let mainPrescription = {
-        prescriptionUser:userdesc[0]._id,
-        Symptoms: symptomList,
-        diet_chart: response._id,
-        medicineData: medicineAndDoseArray,
-        ayurveda_diagnosis: prescription.ayurvedaDiagnosis,
-        mDiagnosis: prescription.mDiagnosis,
-        modernSystem: prescription.modernSystem,
-        prescriptionTreatment: prescription.treatement,
-        treatmentdays: prescription.treatmentdays,
-        panchkarma: prescription.panchkarma,
-        ayurveda: prescription.ayurveda,
-        Image: imagefile,
-        Video: videofile,
-        report: reportfile,
-        Payment: inputVal,
-        prescriptiondays: prescription.prescriptiondays
-  
-      }
-      dispatch(addPrescriptionUser(mainPrescription))
-     
-      console.log("Prescription", mainPrescription);
-      console.log("attay",prescription.panchkarma)
-    })
-    .catch(e => console.log(e))
+      .then((response) => {
+        if (medicineAndDoseArray.length != 0) {
+          medicineAndDoseArray.splice(0, medicineAndDoseArray.length);
+
+        }
+        inputFields.map((obj) => {
+          medicineAndDoseArray.push({ dose: obj.dose, medicineDetails: obj.med._id })
+        });
+        console.log("Response is", response)
+        console.log("medicine ", medicineAndDoseArray)
+        let mainPrescription = {
+          prescriptionUser: userdesc[0]._id,
+          Symptoms: symptomList,
+          diet_chart: response._id,
+          medicineData: medicineAndDoseArray,
+          ayurveda_diagnosis: prescription.ayurvedaDiagnosis,
+          mDiagnosis: prescription.mDiagnosis,
+          modernSystem: prescription.modernSystem,
+          prescriptionTreatment: prescription.treatement,
+          treatmentdays: prescription.treatmentdays,
+          panchkarma: prescription.panchkarma,
+          ayurveda: prescription.ayurveda,
+          Image: imagefile,
+          Video: videofile,
+          report: reportfile,
+          Payment: inputVal,
+          prescriptiondays: prescription.prescriptiondays
+
+        }
+        dispatch(addPrescriptionUser(mainPrescription))
+
+        console.log("Prescription", mainPrescription);
+        console.log("attay", prescription.panchkarma)
+      })
+      .catch(e => console.log(e))
 
   }
 
@@ -105,7 +98,6 @@ const PrescriptionWindow = () => {
   // Latest User(Patient)
   const Patient = useSelector((state) => state.getLatestUSer)
   const { loadingUsers, errorUsers, userdesc } = Patient;
-  console.log("Patient is",Patient)
 
   useEffect(() => {
     dispatch(getUserDesc());
@@ -154,28 +146,17 @@ const PrescriptionWindow = () => {
   //use state for dynamic input fields for medicines
   const [inputFields, setInputFields] = useState([]);
   const addFields = (event) => {
-    // if require do trimming check "how to trim in java script"
-    // console.log("textconetect", event.target.textContent);
-    // const doctorInfo = doctors?.find((doctor) => doctor.email_id == userInfo?.email)
     let med = allMedicines.medicinesList?.find((med) => { return med.medicineName === event.target.textContent.trim() })
     let newfield = { dose: '', med: med }
     setInputFields([...inputFields, newfield])
-    console.log(med)
-    // setInputFields([...inputFields, newfield])
+    // console.log(med)
+
   }
 
   const removeFields = (index) => {
     let data = [...inputFields];
     data.splice(index, 1)
     setInputFields(data)
-  }
-  const handleFormChange = (e) => {
-    // let data = [...inputFields];
-    console.log("first")
-    let data;
-    // data[index][e.target.name] = e.target.value;
-    console.log("data", data)
-    setInputFields(data);
   }
 
   //payment states
@@ -191,8 +172,6 @@ const PrescriptionWindow = () => {
 
   const onValueChange = (event) => {
     const { name, value } = event.target;
-    // console.log("NameVal", name, value);
-
     if (name === "consult") {
       const newPaid = Number(value) + Number(inputVal.medicine);
       updateInputVal({ paid: newPaid });
@@ -209,7 +188,6 @@ const PrescriptionWindow = () => {
     }
     updateInputVal({ [name]: value });
   };
-  // payment code ends
 
   // Modal
   const [show, setShow] = useState(false);
@@ -262,9 +240,9 @@ const PrescriptionWindow = () => {
 
   const [dietArray, setDietArray] = React.useState([]);
   const [preDiet, setPreDiet] = useState({
-    wtodo:"",
-    wto_dont:"",
-    pateientDietChart:[]
+    wtodo: "",
+    wto_dont: "",
+    pateientDietChart: []
   });
 
   const setDietArrayLocally = (e) => {
@@ -282,16 +260,15 @@ const PrescriptionWindow = () => {
     });
     document.getElementById('dos').checked = true;
     setAllowanceState("1");
-    setPreDiet( preDiet => ({...preDiet, wtodo: document.getElementById('what_todo').value, wto_dont: document.getElementById('what_todont').value}));
+    setPreDiet(preDiet => ({ ...preDiet, wtodo: document.getElementById('what_todo').value, wto_dont: document.getElementById('what_todont').value }));
+
   };
 
 
-  useEffect(()=>{
-    setPreDiet(preDiet => ({...preDiet,  pateientDietChart : dietArray}))
+  useEffect(() => {
+    setPreDiet(preDiet => ({ ...preDiet, pateientDietChart: dietArray }))
   }, [dietArray])
 
-  
- 
 
   // get all funtion
   const handelAllButtonClick = (e) => {
@@ -353,29 +330,20 @@ const PrescriptionWindow = () => {
     })
   }
 
+  const [isPanchkarmaChecked, setIsPanchkarmaChecked] = useState(true);
   //panchkarma toggle
-  // window.onload = toggleSelect();
   const toggleSelect = () => {
-    var isChecked = document.getElementById("stone").checked;
-    document.getElementById("panchkarma").disabled = !isChecked;
+    setIsPanchkarmaChecked(!isPanchkarmaChecked)
   }
-
-
-// useEffect(() => {
-  
-//   setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempData] })
-// }, [prescription])
-
 
 
   //add input box on selection
   const selectPanchkarma = (e) => {
     if (prescription.panchkarma.every((el) => el.panchkarma_name !== e.target.value)) {
-      const tempData = { panchkarma_name: e.target.value, panchkarma_days: '0'}
+      const tempData = { panchkarma_name: e.target.value, panchkarma_days: '0' }
       setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempData] })
     }
   }
-
 
 
   const removeDays = (pname) => {
@@ -383,21 +351,16 @@ const PrescriptionWindow = () => {
     setPrescription({ ...prescription, panchkarma: a })
 
   }
-  console.log("panchkarma",prescription.panchkarma)
 
   const handlePanchkarmaDay = (e) => {
     const tempDay = prescription.panchkarma.map((el) => {
-      if(el.panchkarma_name === e.target.name){
-       return {panchkarma_name: e.target.name, panchkarma_days: e.target.value}
+      if (el.panchkarma_name === e.target.name) {
+        return { panchkarma_name: e.target.name, panchkarma_days: e.target.value }
       }
-      else{
-        return {...el}
+      else {
+        return { ...el }
       }
-      // return {...el, panchkarma_days: e.target.value}
     })
-    console.log("pdays",tempDay)
-    // tempDay.panchkarma_days = e.target.value
-    
     setPrescription({ ...prescription, panchkarma: tempDay })
   }
 
@@ -453,21 +416,20 @@ const PrescriptionWindow = () => {
   }
 
 
-
   return (
     <>
       <div className="card">
         <div className="card-body">
           {userdesc?.map((option) => (
-            <div class="row align-items-start">
+            <div className="row align-items-start">
 
-              <div class="col">
+              <div className="col">
                 {option.name}
               </div>
-              <div class="col">
+              <div className="col">
                 {option.age}
               </div>
-              <div class="col">
+              <div className="col">
                 {dayjs(option.createdAt).format('MM/DD/YYYY')}
               </div>
             </div>
@@ -478,21 +440,21 @@ const PrescriptionWindow = () => {
       {/* second Card */}
       <div className="symptomcard">
         <div className="card-body">
-          <div class="row align-items-start">
-            <div class="col">
+          <div className="row align-items-start">
+            <div className="col">
               <input
                 id="lan"
                 type="text"
                 name="symptoms"
-                className='p-input'
+                className='sym-input'
                 onChange={onSymptomChange}
                 value={prescription.translateinputValue}
                 placeholder="Add symptoms"
                 required
               />
-              <Button onClick={addSymptomArray}>Add</Button>
+              <Button style={{margin: "-4px 0 0 11px"}}onClick={addSymptomArray}>Add</Button>
             </div>
-            <div class="col">
+            <div className="col">
               <Autocomplete
                 id="highlights-demo"
                 // sx={{ width: 300 }}
@@ -511,7 +473,6 @@ const PrescriptionWindow = () => {
                   <TextField {...params} label="Medicines"
                     margin="normal" />
                 )}
-                // onChange = {handleFormChange
                 renderOption={(props, option, { inputValue }) => {
                   const matches = match(option.medicineName, inputValue, { insideWords: true });
                   const parts = parse(option.medicineName, matches);
@@ -541,12 +502,12 @@ const PrescriptionWindow = () => {
             {/* <div class="col">
               <h5 align="center">Other Details</h5>
             </div> */}
-            <div class="col">
-              <input type="text" className='p-input' placeholder="00"
+            <div className="col">
+              <input type="text" className='d-input' placeholder="00"
                 value={prescription.prescriptiondays}
                 onChange={(e) => setPrescription({ ...prescription, prescriptiondays: e.target.value })}
               />
-              <h5 align="center">Days</h5>
+              <h5 align="center" style={{fontWeiight: "300",margin: "-25px 107px 0 0"}}>Days</h5>
             </div>
           </div>
         </div>
@@ -651,8 +612,9 @@ const PrescriptionWindow = () => {
                         inline
                         label="Panchkarma"
                         name="stone"
+                        
                         id='stone'
-                        style={{ marginBotto: "-18px" }}
+                        style={{ marginBottom: "-18px" }}
                         onClick={toggleSelect}
 
                       />
@@ -660,6 +622,7 @@ const PrescriptionWindow = () => {
                         className='p-input'
                         id="panchkarma"
                         name='panchkarma'
+                        disabled = {isPanchkarmaChecked}
                         value={prescription.panchkarma}
                         onChange={selectPanchkarma}
                       // onChange={(e) => setPrescription({ ...prescription, panchkarma: e.target.value })}
@@ -710,7 +673,7 @@ const PrescriptionWindow = () => {
                           /></td>
                         <td>
                           Image
-                          <div class="image-upload">
+                          <div className="image-upload">
                             <img src='images/upload.png' />
                             <input id="file-input" type="file" className='p-input'
                               value={prescription.image}
@@ -729,7 +692,7 @@ const PrescriptionWindow = () => {
                             onChange={onValueChange}
                           /> </td>
                         <td> Video
-                          <div class="image-upload">
+                          <div className="image-upload">
                             <img src='images/video.png' />
                             <input id="video-file-input"
                               value={prescription.video}
@@ -750,7 +713,7 @@ const PrescriptionWindow = () => {
 
                             onChange={onValueChange} /></td>
                         <td> Report
-                          <div class="image-upload">
+                          <div className="image-upload">
                             <img src='images/medical-report.png' />
                             <input id="report-file-input"
                               value={prescription.report}
@@ -771,7 +734,7 @@ const PrescriptionWindow = () => {
                         </td>
                         <td>
                           Diet
-                          <div class="image-upload">
+                          <div className="image-upload">
                             &nbsp;&nbsp;
                             <img src='images/cereal.png' onClick={handleShow} />
                             <Modal
@@ -785,8 +748,8 @@ const PrescriptionWindow = () => {
                               </Modal.Header>
                               <Modal.Body>
                                 <div>
-                                  <div class="row align-items-center">
-                                    <div class="col">
+                                  <div className="row align-items-center">
+                                    <div className="col">
                                       <input
                                         id="dos"
                                         defaultChecked
@@ -798,7 +761,7 @@ const PrescriptionWindow = () => {
                                       />
                                       <label htmlFor="dos">Do's</label>
                                     </div>
-                                    <div class="col">
+                                    <div className="col">
                                       <input
 
                                         id="dont"
@@ -809,7 +772,7 @@ const PrescriptionWindow = () => {
                                       />
                                       <label htmlFor="dont">Dont's</label>
                                     </div>
-                                    <div class="col">
+                                    <div className="col">
                                       <input
 
                                         id="Occasional"
@@ -820,7 +783,7 @@ const PrescriptionWindow = () => {
                                       />
                                       <label htmlFor="Occasional">Occasional</label>
                                     </div>
-                                    <div class="col">
+                                    <div className="col">
                                       <input
 
                                         id="Omit"
@@ -831,7 +794,7 @@ const PrescriptionWindow = () => {
                                       />
                                       <label htmlFor="Omit">Omit</label>
                                     </div>
-                                    <div class="col">
+                                    <div className="col">
                                       <input
                                         id="all"
                                         type="button"
@@ -841,7 +804,7 @@ const PrescriptionWindow = () => {
                                       />
                                       <label htmlFor="all">All</label>
                                     </div>
-                                    <div class="col">
+                                    <div className="col">
                                       <Button variant="success" onClick={() => handelInstructionShow()} >Import</Button>
                                     </div>
                                   </div>
@@ -876,14 +839,14 @@ const PrescriptionWindow = () => {
                                       })
                                     }
                                   </div>
-                                  <div class="row">
-                                    <div class="col">
+                                  <div className="row">
+                                    <div className="col">
                                       <InputGroup>
                                         <InputGroup.Text >What to do</InputGroup.Text>
                                         <Form.Control id={'what_todo'} as="textarea" aria-label="With textarea" />
                                       </InputGroup>
                                     </div>
-                                    <div class="col">
+                                    <div className="col">
                                       <InputGroup>
                                         <InputGroup.Text>What to don't</InputGroup.Text>
                                         <Form.Control id={'what_todont'} as="textarea" aria-label="With textarea" />
@@ -1014,16 +977,16 @@ const PrescriptionWindow = () => {
               <dt>What to Do</dt>
               <dd>
                 <ul>
-                  {
-                    dietCategories.map((category) => {
+                  {/* {
+                    preDiet?.map((category) => {
                       return <li>
-                        {
+                       {
                           dietArray.filter((_) => { return _.diet.category == category && _.allowance == '3' })
-                            .map((element) => element.diet.name).join(", ")
+                            .map((element) => element.diet.wtodo).join(", ")
                         }
                       </li>
                     })
-                  }
+                  } */}
                 </ul>
               </dd>
               <dt>What to Don't</dt>
