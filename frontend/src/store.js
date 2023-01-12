@@ -45,7 +45,7 @@ import{
 } from './reducers/therapyReducers'
 
 import {medicinesListReducer,dietChartDetailReducer,prescriptionDetailReducer,
-    getPrescriptionDataReducer} from './reducers/prescriptionReducer'
+    getPrescriptionDataReducer,getDietChartDataReducer} from './reducers/prescriptionReducer'
 import {createInquiryReducer} from './reducers/inquiryReducers'
 
 
@@ -86,7 +86,7 @@ const reducer = combineReducers({
     addPatientDietChart:dietChartDetailReducer,
     addPatientPrescription:prescriptionDetailReducer,
     getPrescriptionDetails:getPrescriptionDataReducer,
-
+    getDietData:getDietChartDataReducer
 
 })
 

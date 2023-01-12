@@ -64,3 +64,18 @@ button, .p-input {
 .react-datepicker-wrapper,.react-datepicker__input-container{
   border: none;
 }
+.form-check-inline .form-check-input {
+  position: static;
+  margin-top: 0px;
+  margin-right: 0.3125rem;
+  margin-left: 0;
+}
+
+/* card body */
+/* display: flex;
+align-items: center;
+flex-direction: row;
+/* align-content: space-between; 
+padding: 0px 1px 0px 1px;
+margin: 2px 2px 2px 0 5px;
+justify-content: space-between; */

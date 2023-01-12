@@ -3,15 +3,23 @@ import bcrypt from 'bcryptjs'
 
 const dietchartSchema = mongoose.Schema(
     {
-        pateientDietChart : [
-            { 
-                diet : {
-                    diet_id: String,
-                    Name:String,
-                    Category : String
+        pateientDietChart: [
+            {
+                diet: {
+                    id: {
+                        type: String
+                    },
+                    name:  {
+                        type: String
+                    },
+                    category: {
+                        type: String
+                    }
                 },
-                allowance:String
-            },        
+                allowance: {
+                    type: String
+                }
+            },
         ],
         wtodo: {
             type: String

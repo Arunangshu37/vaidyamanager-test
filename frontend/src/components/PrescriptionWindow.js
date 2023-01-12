@@ -48,6 +48,7 @@ const PrescriptionWindow = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log("PreDiet",preDiet)
     dispatch(addDietChart(preDiet))
       .then((response) => {
         if (medicineAndDoseArray.length != 0) {
@@ -57,8 +58,9 @@ const PrescriptionWindow = () => {
         inputFields.map((obj) => {
           medicineAndDoseArray.push({ dose: obj.dose, medicineDetails: obj.med._id })
         });
+
         console.log("Response is", response)
-        console.log("medicine ", medicineAndDoseArray)
+        // console.log("medicine ", medicineAndDoseArray)
         let mainPrescription = {
           prescriptionUser: userdesc[0]._id,
           Symptoms: symptomList,
@@ -79,9 +81,7 @@ const PrescriptionWindow = () => {
 
         }
         dispatch(addPrescriptionUser(mainPrescription))
-
         console.log("Prescription", mainPrescription);
-        console.log("attay", prescription.panchkarma)
       })
       .catch(e => console.log(e))
 
@@ -263,7 +263,7 @@ const PrescriptionWindow = () => {
     setPreDiet(preDiet => ({ ...preDiet, wtodo: document.getElementById('what_todo').value, wto_dont: document.getElementById('what_todont').value }));
 
   };
-
+console.log("diet and prediet",preDiet)
 
   useEffect(() => {
     setPreDiet(preDiet => ({ ...preDiet, pateientDietChart: dietArray }))
@@ -424,10 +424,10 @@ const PrescriptionWindow = () => {
             <div className="row align-items-start">
 
               <div className="col">
-                {option.name}
+                {option.name}/{option.age} -- {option.gender}
               </div>
               <div className="col">
-                {option.age}
+                {option.weight}
               </div>
               <div className="col">
                 {dayjs(option.createdAt).format('MM/DD/YYYY')}
@@ -452,7 +452,7 @@ const PrescriptionWindow = () => {
                 placeholder="Add symptoms"
                 required
               />
-              <Button style={{margin: "-4px 0 0 11px"}}onClick={addSymptomArray}>Add</Button>
+              <Button style={{ margin: "-4px 0 0 11px" }} onClick={addSymptomArray}>Add</Button>
             </div>
             <div className="col">
               <Autocomplete
@@ -507,7 +507,7 @@ const PrescriptionWindow = () => {
                 value={prescription.prescriptiondays}
                 onChange={(e) => setPrescription({ ...prescription, prescriptiondays: e.target.value })}
               />
-              <h5 align="center" style={{fontWeiight: "300",margin: "-25px 107px 0 0"}}>Days</h5>
+              <h5 align="center" style={{ fontWeiight: "300", margin: "-25px 107px 0 0" }}>Days</h5>
             </div>
           </div>
         </div>
@@ -612,7 +612,7 @@ const PrescriptionWindow = () => {
                         inline
                         label="Panchkarma"
                         name="stone"
-                        
+
                         id='stone'
                         style={{ marginBottom: "-18px" }}
                         onClick={toggleSelect}
@@ -622,10 +622,10 @@ const PrescriptionWindow = () => {
                         className='p-input'
                         id="panchkarma"
                         name='panchkarma'
-                        disabled = {isPanchkarmaChecked}
+                        disabled={isPanchkarmaChecked}
                         value={prescription.panchkarma}
                         onChange={selectPanchkarma}
-                      // onChange={(e) => setPrescription({ ...prescription, panchkarma: e.target.value })}
+
                       >
                         <option selected value=""></option>
                         <option value="Vaman">Vaman</option>
@@ -763,7 +763,6 @@ const PrescriptionWindow = () => {
                                     </div>
                                     <div className="col">
                                       <input
-
                                         id="dont"
                                         type="radio"
                                         value="2"
@@ -774,7 +773,6 @@ const PrescriptionWindow = () => {
                                     </div>
                                     <div className="col">
                                       <input
-
                                         id="Occasional"
                                         type="radio"
                                         value="3"
@@ -785,7 +783,6 @@ const PrescriptionWindow = () => {
                                     </div>
                                     <div className="col">
                                       <input
-
                                         id="Omit"
                                         type="radio"
                                         value="4"
@@ -812,13 +809,11 @@ const PrescriptionWindow = () => {
 
                                 <div>
 
-
                                   <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                                     {
                                       dietCategories.map((category, index) => {
                                         return <div className='categoryClass' style={{ display: 'flex', flexDirection: 'column', margin: '0 10px' }}>
                                           {category}
-                                          {/* <div style={{display:'flex', flexDirection:'column', width:'fit-content'}}> */}
                                           {
                                             DiechartList.filter((elem) => { return elem.category == category }).map((diet, index) => (
                                               <div key={index}>
@@ -977,31 +972,13 @@ const PrescriptionWindow = () => {
               <dt>What to Do</dt>
               <dd>
                 <ul>
-                  {/* {
-                    preDiet?.map((category) => {
-                      return <li>
-                       {
-                          dietArray.filter((_) => { return _.diet.category == category && _.allowance == '3' })
-                            .map((element) => element.diet.wtodo).join(", ")
-                        }
-                      </li>
-                    })
-                  } */}
+                  {preDiet.wtodo}
                 </ul>
               </dd>
               <dt>What to Don't</dt>
               <dd>
                 <ul>
-                  {
-                    dietCategories.map((category) => {
-                      return <li>
-                        {
-                          dietArray.filter((_) => { return _.diet.category == category && _.allowance == '3' })
-                            .map((element) => element.diet.name).join(", ")
-                        }
-                      </li>
-                    })
-                  }
+                {preDiet.wto_dont}
                 </ul>
               </dd>
             </dl>

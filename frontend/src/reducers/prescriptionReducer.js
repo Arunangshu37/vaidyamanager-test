@@ -15,6 +15,10 @@ import {
     GET_PRESCRIPTION_SUCCESS,
     GET_PRESCRIPTION_FAIL,
     GET_PRESCRIPTION_RESET,
+    GET_DIETCHART_REQUEST,
+    GET_DIETCHART_SUCCESS,
+    GET_DIETCHART_FAIL,
+    GET_DIETCHART_RESET
 }
     from '../constants/prescriptionConstants'
 
@@ -137,3 +141,35 @@ export const getPrescriptionDataReducer = (state = { prescriptionList: [] }, act
     }
 }
 
+//get Diet Chart 
+export const getDietChartDataReducer = (state = { DietList: [] }, action) => {
+    switch (action.type) {
+        case GET_DIETCHART_REQUEST:
+            return {
+                loadingDiet: true,
+                DietList: [],
+            }
+        case GET_DIETCHART_SUCCESS:
+            return {
+                loadingDiet: false,
+                DietList: action.payload,
+            }
+        case GET_DIETCHART_FAIL:
+            return {
+                loadingDiet: false,
+                errorDiet: action.payload,
+            }
+        case GET_DIETCHART_SUCCESS:
+            return {
+                loadingDiet: false,
+                DietList: action.payload,
+            }
+        case GET_DIETCHART_FAIL:
+            return {
+                loadingDiet: false,
+                errorDiet: action.payload,
+            }
+        default:
+            return state
+    }
+}

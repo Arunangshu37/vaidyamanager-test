@@ -50,6 +50,7 @@ import Breadcrumb from './components/Breadcrumb'
 import About from './screens/Abouts'
 import MedicineCards from './components/MedicineCards'
 import SearchSymptom from './screens/SearchSymptom'
+import OldMasterTab from './components/OldMasterTab'
 
 
 const App = () => {
@@ -70,7 +71,7 @@ const App = () => {
                 <Container>
                 <Route path='/tab' component={TabComponent} />
                 <Route path='/mastertab' component={MasterTab} />
-             
+                <Route path='/oldmastertab' component={OldMasterTab} />
                     <Route path='/terms-condition' component={TermsAndConditions} />
                     <Route path='/privacy-policy' component={PrivacyPolicy} />
                     <Route path='/refund-policy' component={RefundPolicy} />

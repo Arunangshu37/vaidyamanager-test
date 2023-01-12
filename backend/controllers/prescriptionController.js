@@ -13,13 +13,15 @@ const addDietChartDetails = asyncHandler(async (req, res) => {
         wtodo,
         wto_dont
     } = req.body
-
+    console.log("Request body", req.body)
     const DietChartData = new DietChart({
         pateientDietChart,
         wtodo,
         wto_dont
     })
+    console.log("Diet chat Data", DietChartData)
     const createdDietchart = await DietChartData.save();
+    console.log("Created Diet",createdDietchart);
     res.status(201).json(createdDietchart)
 
 })
@@ -66,6 +68,7 @@ const addPrescriptionDetails = asyncHandler(async (req, res) => {
 
     })
     const createdPrescription = await PrescripionData.save();
+    console.log("suceess")
     res.status(201).json(createdPrescription)
 
 })
@@ -107,13 +110,19 @@ const getAllMedicines = asyncHandler(async (req, res) => {
 
 //get all prescription
 const getAllPrescriptions = asyncHandler(async (req, res) => {
-    const allprescriptions = await Prescription.find({})
+    const allprescriptions = await Prescription.find({}).sort({ _id: -1 }).limit(1);
     res.json(allprescriptions)
 })
 
 
+//get  Diet Chart Data
+const getDietChartDetails = asyncHandler(async (req, res) => {
+    const DietchartList = await DietChart.find({}).sort({ _id: -1 }).limit(1);
+    res.json(DietchartList)
+})
+
 
 export {
     addDietChartDetails, addPrescriptionDetails, addMedicineDetails,
-    getAllMedicines, getAllPrescriptions
+    getAllMedicines, getAllPrescriptions, getDietChartDetails
 }
