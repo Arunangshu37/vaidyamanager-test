@@ -1,7 +1,10 @@
 import express from 'express'
 import { protect } from '../middleware/authMiddleware.js'
-import { addDietChartDetails,addPrescriptionDetails,addMedicineDetails,
-    getAllMedicines,getAllPrescriptions,getDietChartDetails} from '../controllers/prescriptionController.js'
+import {
+    addDietChartDetails, addPrescriptionDetails, addMedicineDetails,
+    getAllMedicines, getAllPrescriptions, getDietChartDetails,
+    getPrescriptions
+} from '../controllers/prescriptionController.js'
 
 const router = express.Router()
 
@@ -11,5 +14,6 @@ router.route('/add_medicines').post(addMedicineDetails)
 router.route('/get_medicines').get(getAllMedicines)
 router.route('/get_prescription').get(getAllPrescriptions)
 router.route('/get_dietchart').get(getDietChartDetails)
+router.route('/getallPrescription').get(getPrescriptions)
 
 export default router

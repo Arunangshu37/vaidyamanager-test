@@ -108,12 +108,17 @@ const getAllMedicines = asyncHandler(async (req, res) => {
     res.json(allmedicines)
 })
 
-//get all prescription
+//get latest prescription
 const getAllPrescriptions = asyncHandler(async (req, res) => {
     const allprescriptions = await Prescription.find({}).sort({ _id: -1 }).limit(1);
     res.json(allprescriptions)
 })
 
+//get latest prescription
+const getPrescriptions = asyncHandler(async (req, res) => {
+    const prescriptionData = await Prescription.find({})
+    res.json(prescriptionData)
+})
 
 //get  Diet Chart Data
 const getDietChartDetails = asyncHandler(async (req, res) => {
@@ -124,5 +129,5 @@ const getDietChartDetails = asyncHandler(async (req, res) => {
 
 export {
     addDietChartDetails, addPrescriptionDetails, addMedicineDetails,
-    getAllMedicines, getAllPrescriptions, getDietChartDetails
+    getAllMedicines, getAllPrescriptions, getDietChartDetails,getPrescriptions
 }

@@ -2,7 +2,6 @@ import {
     MEDICINE_REQUEST,
     MEDICINE_SUCCESS,
     MEDICINE_FAIL,
-    MEDICINE_RESET,
     PRESCRIPTION_REQUEST,
     PRESCRIPTION_SUCCESS,
     PRESCRIPTION_FAIL,
@@ -14,11 +13,13 @@ import {
     GET_PRESCRIPTION_REQUEST,
     GET_PRESCRIPTION_SUCCESS,
     GET_PRESCRIPTION_FAIL,
-    GET_PRESCRIPTION_RESET,
     GET_DIETCHART_REQUEST,
     GET_DIETCHART_SUCCESS,
     GET_DIETCHART_FAIL,
-    GET_DIETCHART_RESET
+    DATA_PRESCRIPTION_REQUEST,
+    DATA_PRESCRIPTION_SUCCESS,
+    DATA_PRESCRIPTION_FAIL,
+
 }
     from '../constants/prescriptionConstants'
 
@@ -168,6 +169,39 @@ export const getDietChartDataReducer = (state = { DietList: [] }, action) => {
             return {
                 loadingDiet: false,
                 errorDiet: action.payload,
+            }
+        default:
+            return state
+    }
+}
+
+//get prescription
+export const getPrescriptionDetailsReducer = (state = { prescriptionData: [] }, action) => {
+    switch (action.type) {
+        case DATA_PRESCRIPTION_REQUEST:
+            return {
+                loading: true,
+                prescriptionData: [],
+            }
+        case DATA_PRESCRIPTION_SUCCESS:
+            return {
+                loading: false,
+                prescriptionData: action.payload,
+            }
+        case DATA_PRESCRIPTION_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
+            }
+        case DATA_PRESCRIPTION_SUCCESS:
+            return {
+                loading: false,
+                prescriptionData: action.payload,
+            }
+        case DATA_PRESCRIPTION_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
             }
         default:
             return state
