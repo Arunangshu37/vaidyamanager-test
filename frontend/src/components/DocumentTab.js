@@ -19,6 +19,7 @@ const DocumentTab = () => {
   const GetPrescription = useSelector((state) => state.getPrescriptionDetails)
   const { loading, error, prescriptionList } = GetPrescription;
 
+  console.log("prescription is",prescriptionList)
   //Diet Chart Get API Call
   const getDietDetails = useSelector((state) => state.getDietData)
   const { loadingDiet, errorDiet, DietList } = getDietDetails;
@@ -75,7 +76,7 @@ const DocumentTab = () => {
                   <Tab.Pane eventKey="Image">
                     <h1>Image</h1>
                     <div>
-                      <img src={p.Image} /></div>
+                      <img src={p?.Image} /></div>
 
                   </Tab.Pane>
                   <Tab.Pane eventKey="Video">
@@ -98,7 +99,7 @@ const DocumentTab = () => {
               {DietList?.map((d) => (
                 <>
                   <Tab.Pane eventKey="Diet Chart">
-                    <div >
+                    <div>
                       {/* dispaly the diet chart pdf */}
 
                       <Button onClick={handelInstructionShow}> Diet Chart Pdf</Button>
@@ -111,9 +112,9 @@ const DocumentTab = () => {
                       >
                         <Modal.Header closeButton>
                           <Modal.Title>Diet chart instructions</Modal.Title>
-                          <div>
+                        
                             <Button>Send Email</Button>
-                          </div>
+                       
                         </Modal.Header>
                         <Modal.Body>
 
@@ -139,7 +140,7 @@ const DocumentTab = () => {
                               <dd>
                                 <ul>
                                   {
-                                    dietCategories.map((category) => {
+                                    dietCategories?.map((category) => {
                                       return <li>
                                         {
                                           DietList[0].pateientDietChart.filter((_) => { return _.diet.category == category && _.allowance == '2' })

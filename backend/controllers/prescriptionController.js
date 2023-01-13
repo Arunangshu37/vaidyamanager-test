@@ -13,15 +13,12 @@ const addDietChartDetails = asyncHandler(async (req, res) => {
         wtodo,
         wto_dont
     } = req.body
-    console.log("Request body", req.body)
     const DietChartData = new DietChart({
         pateientDietChart,
         wtodo,
         wto_dont
     })
-    console.log("Diet chat Data", DietChartData)
     const createdDietchart = await DietChartData.save();
-    console.log("Created Diet",createdDietchart);
     res.status(201).json(createdDietchart)
 
 })

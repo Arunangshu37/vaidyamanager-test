@@ -48,7 +48,6 @@ const PrescriptionWindow = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("PreDiet",preDiet)
     dispatch(addDietChart(preDiet))
       .then((response) => {
         if (medicineAndDoseArray.length != 0) {
@@ -263,7 +262,6 @@ const PrescriptionWindow = () => {
     setPreDiet(preDiet => ({ ...preDiet, wtodo: document.getElementById('what_todo').value, wto_dont: document.getElementById('what_todont').value }));
 
   };
-console.log("diet and prediet",preDiet)
 
   useEffect(() => {
     setPreDiet(preDiet => ({ ...preDiet, pateientDietChart: dietArray }))

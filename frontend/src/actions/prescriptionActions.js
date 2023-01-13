@@ -70,6 +70,7 @@ export const addPrescriptionUser = (prescriptionData) => async (dispatch, getSta
             type: PRESCRIPTION_SUCCESS,
             payload: data,
         })
+        console.log("prescription added")
         return data
     } catch (error) {
         dispatch({
@@ -137,6 +138,7 @@ export const getPrescription = () => async (dispatch) => {
             type: GET_PRESCRIPTION_SUCCESS,
             payload: data,
         })
+        console.log("Get Prescription")
     } catch (error) {
         dispatch({
             type: GET_PRESCRIPTION_FAIL,

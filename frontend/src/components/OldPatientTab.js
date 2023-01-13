@@ -43,21 +43,24 @@ const OldPatientTab = () => {
                     <td style={{ borderRight: "1px solid " }}>
                         Full Detail
                     </td>
-                   
+
                 </tr>
                 <tr>
-                        <Card>
-                            {prescriptionData?.map((option) => (
+                    {prescriptionData?.map((option) => (
+                        <td>
 
 
-                                <Card.Body>
-                                    {option.
-                                        ayurveda_diagnosis
-                                    }
-                                </Card.Body>
-                            ))}
-                        </Card>
-                    </tr>
+
+                            <>       <td>  {option.ayurveda_diagnosis}</td>
+                                <td>{option.modernSystem}</td>
+                                <td>View</td>
+                                <td>Status</td>
+
+                            </>
+
+                        </td>
+                    ))}
+                </tr>
             </table>
             {/* table End */}
 
