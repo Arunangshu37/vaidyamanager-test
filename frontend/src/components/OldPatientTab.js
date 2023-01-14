@@ -1,64 +1,102 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPrescriptionDetail } from '../actions/prescriptionActions'
+import { getPrescriptionDetail, getPatientDetail } from '../actions/prescriptionActions'
 
 const OldPatientTab = () => {
     const dispatch = useDispatch();
 
     const prescription = useSelector((state) => state.getPrescripionList)
     const { loading, error, prescriptionData } = prescription;
-    console.log("Prescription is", prescriptionData);
+    // console.log("Prescription is", prescriptionData);
+
+
+    const prescriptionDetail = useSelector((state) => state.getPatientPrescriptionList)
+    const { loadingp, errorp, patientPrescriptionData } = prescriptionDetail;
+    console.log("Prescription is", patientPrescriptionData);
 
 
     useEffect(() => {
         dispatch(getPrescriptionDetail());
-
+        dispatch(getPatientDetail());
     }, [dispatch])
 
-    const ptName = prescriptionData?.filter(x => x.id === x.prescriptionUser);
-    console.log("first")
+    // const ptName = prescriptionData?.filter(x => x.id === x.prescriptionUser);
+    // console.log("first",ptName);
+    const searchPatient = (e) => {
+        var input, filter, table, tr, td, i, txtValue;
+        input = e.target.value;
+        // console.log("input",input)
+        filter = input.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          }       
+        }
+      }
+
+
+
     return (
         <div>
 
             {/* table Starts */}
-            <table className="table table-borderless" bordercolor="black">
+            <table className="table table-borderless" bordercolor="black" id="myTable">
                 <tr>
-                    <td style={{ borderRight: "1px solid " }}>
-                        Search  Patient here
+                    <td>
+                        <Form.Control
+                            type="search"
+                            placeholder="Search  Patient here"
+                            className="me-2"
+                            aria-label="Search"
+                            onChange ={ searchPatient}
+                        />
+               
                     </td>
-                    <td style={{ borderRight: "1px solid " }}>
+                    <td >
 
                         Ayurveda Diagnosis
                     </td>
-                    <td style={{ borderRight: "1px solid " }}>
+                    <td >
                         Modern Diagnosis
                     </td>
-                    <td style={{ borderRight: "1px solid " }}>
+                    <td >
                         Contact
                     </td>
-                    <td style={{ borderRight: "1px solid " }}>
+                    <td >
                         Status
                     </td>
-                    <td style={{ borderRight: "1px solid " }}>
+                    <td >
                         Full Detail
                     </td>
 
                 </tr>
                 <tr>
-                    {prescriptionData?.map((option) => (
-                        <td>
+                    {patientPrescriptionData?.map((data) => (
+
+                        <>
+                            <td>  {data.Patient[0].name}</td>
+                            <td>{data.ayurveda_diagnosis}</td>
+                            <td>{data.mDiagnosis
+                            }</td>
+                            <td>{data.Patient[0].phone}</td>
+                            <td>Active</td>
+                            <td>
+                                <Button>View</Button>
+                            </td>
 
 
+                        </>
 
-                            <>       <td>  {option.ayurveda_diagnosis}</td>
-                                <td>{option.modernSystem}</td>
-                                <td>View</td>
-                                <td>Status</td>
 
-                            </>
-
-                        </td>
                     ))}
                 </tr>
             </table>

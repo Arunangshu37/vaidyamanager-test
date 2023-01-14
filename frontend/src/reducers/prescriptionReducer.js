@@ -19,7 +19,10 @@ import {
     DATA_PRESCRIPTION_REQUEST,
     DATA_PRESCRIPTION_SUCCESS,
     DATA_PRESCRIPTION_FAIL,
-
+    PATIENT_PRESCRIPTION_REQUEST,
+    PATIENT_PRESCRIPTION_SUCCESS,
+    PATIENT_PRESCRIPTION_FAIL,
+    PATIENT_PRESCRIPTION_RESET,
 }
     from '../constants/prescriptionConstants'
 
@@ -202,6 +205,39 @@ export const getPrescriptionDetailsReducer = (state = { prescriptionData: [] }, 
             return {
                 loading: false,
                 error: action.payload,
+            }
+        default:
+            return state
+    }
+}
+
+//get prescription
+export const getPatientPrescriptionDetailReducer = (state = { patientPrescriptionData: [] }, action) => {
+    switch (action.type) {
+        case PATIENT_PRESCRIPTION_REQUEST:
+            return {
+                loadingp: true,
+                patientPrescriptionData: [],
+            }
+        case PATIENT_PRESCRIPTION_SUCCESS:
+            return {
+                loadingp: false,
+                patientPrescriptionData: action.payload,
+            }
+        case PATIENT_PRESCRIPTION_FAIL:
+            return {
+                loadingp: false,
+                errorp: action.payload,
+            }
+        case PATIENT_PRESCRIPTION_SUCCESS:
+            return {
+                loadingp: false,
+                patientPrescriptionData: action.payload,
+            }
+        case PATIENT_PRESCRIPTION_FAIL:
+            return {
+                loadingp: false,
+                errorp: action.payload,
             }
         default:
             return state

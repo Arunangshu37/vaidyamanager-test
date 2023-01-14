@@ -123,8 +123,26 @@ const getDietChartDetails = asyncHandler(async (req, res) => {
     res.json(DietchartList)
 })
 
+//get  patient and prescription
+const getPatientPrescription = asyncHandler(async (req, res) => {
+    const patient = await Prescription.aggregate([
+
+        {
+            $lookup:{
+                from:"users",
+                localField:"prescriptionUser",
+                foreignField:"_id",
+                as:"Patient"
+            }
+        }
+    ])
+
+    res.json(patient)
+})
+
+
 
 export {
     addDietChartDetails, addPrescriptionDetails, addMedicineDetails,
-    getAllMedicines, getAllPrescriptions, getDietChartDetails,getPrescriptions
+    getAllMedicines, getAllPrescriptions, getDietChartDetails,getPrescriptions,getPatientPrescription
 }

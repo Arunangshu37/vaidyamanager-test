@@ -4,8 +4,8 @@ import Tabs from 'react-bootstrap/Tabs';
 import OldPatientTab from './OldPatientTab';
 
 
-const  OldMasterTab = () => {
-    const [key, setKey] = useState('old-Patient');
+const OldMasterTab = () => {
+  const [key, setKey] = useState('old-Patient');
   return (
     <div style={{ marginTop: "4rem" }}>
       <Tabs
@@ -18,11 +18,14 @@ const  OldMasterTab = () => {
           <OldPatientTab />
         </Tab>
         <Tab eventKey="old-Therapy" title="Therapy">
-        
+
         </Tab>
         <Tab eventKey="old-inquiry" title="Inquiry">
 
-          </Tab>
+        </Tab>
+        <Tab eventKey="patient-visit" title="Patient Visits">
+
+        </Tab>
       </Tabs>
     </div>
   )

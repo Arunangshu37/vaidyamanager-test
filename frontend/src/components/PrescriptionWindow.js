@@ -4,7 +4,7 @@ import { Checkbox, IconButton } from '@mui/material'
 import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../prescription.css'
-import { getUserDesc } from '../actions/userActions'
+import { getUserInfoDetails } from '../actions/userActions'
 import { addPrescriptionUser, addDietChart } from '../actions/prescriptionActions'
 import { useDispatch, useSelector } from 'react-redux'
 import AddIcon from '@mui/icons-material/Add';
@@ -40,6 +40,7 @@ const PrescriptionWindow = () => {
   }
 
   const [prescription, setPrescription] = useState(defaultData);
+
   const dispatch = useDispatch();
 
   //Prescription API Data
@@ -61,7 +62,7 @@ const PrescriptionWindow = () => {
         console.log("Response is", response)
         // console.log("medicine ", medicineAndDoseArray)
         let mainPrescription = {
-          prescriptionUser: userdesc[0]._id,
+          prescriptionUser: patient?._id,
           Symptoms: symptomList,
           diet_chart: response._id,
           medicineData: medicineAndDoseArray,
@@ -95,11 +96,12 @@ const PrescriptionWindow = () => {
   // console.log("Medicine List", allMedicines)
 
   // Latest User(Patient)
-  const Patient = useSelector((state) => state.getLatestUSer)
-  const { loadingUsers, errorUsers, userdesc } = Patient;
+  const Patient = useSelector((state) => state.userInfoDetails)
+  const { loadingUsers, errorUsers, users } = Patient;
+  console.log("All users", users)
 
   useEffect(() => {
-    dispatch(getUserDesc());
+    dispatch(getUserInfoDetails());
     dispatch(getMedicines());
   }, [dispatch])
 
@@ -413,25 +415,75 @@ const PrescriptionWindow = () => {
     }
   }
 
+  //patient list
+  const [patient, setPatient] = useState();
+
+  const setUser = (e) => {
+    // console.log(e)
+    const selectedUserPhone = e.target.innerText.split("-")?.[1].trim()
+    const user = users.find((user) => user.phone.toString() === selectedUserPhone)
+
+    setPatient(user);
+    // console.log(selectedUserId)
+    console.log("this is ", patient, user);
+  }
+
+  // useEffect(() => {
+  //   // setPatient({});
+
+
+
+  // }, [patient])
+
 
   return (
     <>
       <div className="card">
         <div className="card-body">
-          {userdesc?.map((option) => (
-            <div className="row align-items-start">
+          <Autocomplete
+            id="highlights-demo"
+            // sx={{ width: 300 }}
+            sx={{
+              "& fieldset": { border: 'none' },
+            }}
+            freeSolo
+            options={users}
+            style={{
+              width: 150,
+              margin: "-24px 15px 0px 54px",
+              fontWeight: "bold"
+            }}
+            getOptionLabel={(option) => `${option?.name} - ${option?.phone}`}
+            renderInput={(params) => (
+              <TextField {...params} label="Patient"
+                margin="normal" />
+            )}
+            renderOption={(props, option, { inputValue }) => {
+              const matches = match(`${option?.name} - ${option?.phone}`, inputValue, { insideWords: true });
+              const parts = parse(`${option?.name} - ${option?.phone}`, matches);
 
-              <div className="col">
-                {option.name}/{option.age} -- {option.gender}
-              </div>
-              <div className="col">
-                {option.weight}
-              </div>
-              <div className="col">
-                {dayjs(option.createdAt).format('MM/DD/YYYY')}
-              </div>
-            </div>
-          ))}
+              return (
+                <li {...props} onClick={setUser} >
+                  <div>
+                    {parts.map((part, index) => (
+                      <span
+                        key={index}
+
+                        style={{
+                          fontWeight: part.highlight ? 400 : 200,
+                        }}>
+                        {part.text}
+                      </span>
+                    ))}
+                  </div>
+                </li>
+              );
+            }}
+          />
+          <div className="col">
+
+            <h5>{patient?.name}</h5>
+          </div>
         </div>
       </div>
 
@@ -976,7 +1028,7 @@ const PrescriptionWindow = () => {
               <dt>What to Don't</dt>
               <dd>
                 <ul>
-                {preDiet.wto_dont}
+                  {preDiet.wto_dont}
                 </ul>
               </dd>
             </dl>
