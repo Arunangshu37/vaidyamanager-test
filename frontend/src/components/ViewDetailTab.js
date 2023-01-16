@@ -1,8 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { getPrescriptionDetail } from '../actions/prescriptionActions'
+import { getUserInfoDetails } from '../actions/userActions'
 
 const ViewDetailTab = () => {
+  const dispatch = useDispatch();
+  //Prescription API to fetch Prescription List
+  const GetAllPrescription = useSelector((state) => state.getPrescripionList)
+  const { loading, error, prescriptionData } = GetAllPrescription;
+  console.log("Prescription list of patient",prescriptionData)
+
+  const Patient = useSelector((state) => state.userInfoDetails)
+  const { loadingUsers, errorUsers, users } = Patient;
+  console.log("All users", users)
+
+  const newPatientData = prescriptionData?.filter((patientuser) => patientuser.prescriptionUser === users[0]._id);
+  console.log("newPatientData",newPatientData);
+  
+  useEffect(() => {
+    dispatch(getPrescriptionDetail());
+    dispatch(getUserInfoDetails());
+  }, [dispatch])
+
   return (
     <div>
       {/*  fisrt Card */}

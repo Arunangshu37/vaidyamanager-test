@@ -59,7 +59,7 @@ const PrescriptionWindow = () => {
           medicineAndDoseArray.push({ dose: obj.dose, medicineDetails: obj.med._id })
         });
 
-        console.log("Response is", response)
+        // console.log("Response is", response)
         // console.log("medicine ", medicineAndDoseArray)
         let mainPrescription = {
           prescriptionUser: patient?._id,
@@ -81,7 +81,7 @@ const PrescriptionWindow = () => {
 
         }
         dispatch(addPrescriptionUser(mainPrescription))
-        console.log("Prescription", mainPrescription);
+        // console.log("Prescription", mainPrescription);
       })
       .catch(e => console.log(e))
 
@@ -95,7 +95,7 @@ const PrescriptionWindow = () => {
   const { loadingMedicine, errorMedicine, medicinesList } = allMedicines;
   // console.log("Medicine List", allMedicines)
 
-  // Latest User(Patient)
+  // User(Patient)
   const Patient = useSelector((state) => state.userInfoDetails)
   const { loadingUsers, errorUsers, users } = Patient;
   // console.log("All users", users)
@@ -147,11 +147,15 @@ const PrescriptionWindow = () => {
   //use state for dynamic input fields for medicines
   const [inputFields, setInputFields] = useState([]);
   const addFields = (event) => {
-    let med = allMedicines.medicinesList?.find((med) => { return med.medicineName === event.target.textContent.trim() })
-    let newfield = { dose: '', med: med }
-    setInputFields([...inputFields, newfield])
-    // console.log(med)
-
+    let medicineName = event.target.textContent.trim();
+    let isMedicineAdded = inputFields.find((_)=>{ return _.med.medicineName == medicineName })?.med._id !== undefined
+    if(!isMedicineAdded){
+      let med = allMedicines.medicinesList?.find((med) => { return med.medicineName === medicineName })
+      let newfield = { Dose: '', med: med }
+      setInputFields([...inputFields, newfield])
+      return
+    }
+    alert(`${medicineName} is already added.`);
   }
 
   const removeFields = (index) => {
@@ -428,12 +432,12 @@ const PrescriptionWindow = () => {
     console.log("this is ", patient, user);
   }
 
-  // useEffect(() => {
-  //   // setPatient({});
-
-
-
-  // }, [patient])
+  useEffect(() => {
+    if (imagefile != null) document.getElementById("markImageAttached").innerHTML = "✓";
+    if (videofile != null) document.getElementById("markVideoAttached").innerHTML = "✓";
+    if (reportfile !== null) document.getElementById("markReportAttached").innerHTML = "✓";
+    // if (dietArray.length != 0) document.getElementById("markDietChartAttached").innerHTML = "✓";
+  }, [imagefile, videofile, reportfile])
 
 
   return (
@@ -728,6 +732,7 @@ const PrescriptionWindow = () => {
                             <input id="file-input" type="file" className='p-input'
                               value={prescription.image}
                               onChange={(e) => handleImageUpload(e.target.files[0])} />
+                            <label id="markImageAttached" ></label>
                           </div>
                         </td>
                       </tr>
@@ -748,6 +753,8 @@ const PrescriptionWindow = () => {
                               value={prescription.video}
                               onChange={(e) => handleVideoUpload(e.target.files[0])}
                               type="file" />
+                            <label id="markVideoAttached" ></label>
+
                           </div>
                         </td>
 
@@ -769,6 +776,8 @@ const PrescriptionWindow = () => {
                               value={prescription.report}
                               onChange={(e) => handleReportUpload(e.target.files[0])}
                               type="file" />
+                            <label id="markReportAttached" ></label>
+
                           </div>
                         </td>
                       </tr>

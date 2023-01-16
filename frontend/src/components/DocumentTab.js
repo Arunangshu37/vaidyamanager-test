@@ -19,7 +19,7 @@ const DocumentTab = () => {
   const GetPrescription = useSelector((state) => state.getPrescriptionDetails)
   const { loading, error, prescriptionList } = GetPrescription;
 
-  console.log("prescription is", prescriptionList)
+  // console.log("prescription is", prescriptionList)
   //Diet Chart Get API Call
   const getDietDetails = useSelector((state) => state.getDietData)
   const { loadingDiet, errorDiet, DietList } = getDietDetails;
