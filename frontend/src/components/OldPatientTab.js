@@ -2,24 +2,24 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPrescriptionDetail, getPatientDetail } from '../actions/prescriptionActions'
+import { Link } from 'react-router-dom'
 
 const OldPatientTab = () => {
     const dispatch = useDispatch();
-
     const prescription = useSelector((state) => state.getPrescripionList)
     const { loading, error, prescriptionData } = prescription;
     // console.log("Prescription is", prescriptionData);
 
-
     const prescriptionDetail = useSelector((state) => state.getPatientPrescriptionList)
     const { loadingp, errorp, patientPrescriptionData } = prescriptionDetail;
-    console.log("Prescription is", patientPrescriptionData);
-
+    
 
     useEffect(() => {
         dispatch(getPrescriptionDetail());
         dispatch(getPatientDetail());
     }, [dispatch])
+
+   
 
     // const ptName = prescriptionData?.filter(x => x.id === x.prescriptionUser);
     // console.log("first",ptName);
@@ -31,17 +31,17 @@ const OldPatientTab = () => {
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");
         for (i = 1; i < tr.length; i++) {
-          td = tr[i].getElementsByTagName("td")[0];
-          if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              tr[i].style.display = "";
-            } else {
-              tr[i].style.display = "none";
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
             }
-          }       
         }
-      }
+    }
 
 
 
@@ -57,9 +57,9 @@ const OldPatientTab = () => {
                             placeholder="Search  Patient here"
                             className="me-2"
                             aria-label="Search"
-                            onChange ={ searchPatient}
+                            onChange={searchPatient}
                         />
-               
+
                     </td>
                     <td >
 
@@ -79,9 +79,8 @@ const OldPatientTab = () => {
                     </td>
 
                 </tr>
-                <tr>
-                    {patientPrescriptionData?.map((data) => (
-
+                {patientPrescriptionData?.map((data) => (
+                    <tr key={data.id}>
                         <>
                             <td>  {data.Patient[0].name}</td>
                             <td>{data.ayurveda_diagnosis}</td>
@@ -90,15 +89,18 @@ const OldPatientTab = () => {
                             <td>{data.Patient[0].phone}</td>
                             <td>Active</td>
                             <td>
-                                <Button>View</Button>
+                                <div>
+                                    <Link to={'/viewpatient'}>
+                                    <Button>View</Button>
+                                    </Link>
+                              
+                               
+                                </div>
+                              
                             </td>
-
-
                         </>
-
-
-                    ))}
-                </tr>
+                    </tr>
+                ))}
             </table>
             {/* table End */}
 

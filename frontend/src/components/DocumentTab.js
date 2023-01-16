@@ -19,13 +19,14 @@ const DocumentTab = () => {
   const GetPrescription = useSelector((state) => state.getPrescriptionDetails)
   const { loading, error, prescriptionList } = GetPrescription;
 
-  console.log("prescription is",prescriptionList)
+  console.log("prescription is", prescriptionList)
   //Diet Chart Get API Call
   const getDietDetails = useSelector((state) => state.getDietData)
   const { loadingDiet, errorDiet, DietList } = getDietDetails;
 
   useEffect(() => {
     dispatch(getDietChartList());
+    dispatch(getPrescription());
   }, [dispatch])
 
   const dietCategories = [...new Set(DiechartList.map((item) => item.category))];
@@ -74,31 +75,37 @@ const DocumentTab = () => {
               {prescriptionList?.map((p) => (
                 <>
                   <Tab.Pane eventKey="Image">
-                    <h1>Image</h1>
-                    <div>
-                      <img src={p?.Image} /></div>
-
+                    <div><h1>Image</h1>
+                    <img src={p?.Image} /></div>
+                    
                   </Tab.Pane>
+                  <br />
                   <Tab.Pane eventKey="Video">
+                    <div>
                     <h1>Video</h1>
                     <video src={p.Video} controls width="50%" height="50%">
 
                     </video>
+                    </div>
+                   
                     {/* <video width="300px" controls height="500px" src={p.Video}/> */}
                   </Tab.Pane>
+                  <br />
                   <Tab.Pane eventKey="Report">
                     <h1></h1>
                     <a alt="StackExchange"
                       href={p.report}
-                      download>
+                      download >
                       <img height={"80px"} src={"images/pdf-file.png"} />
                     </a>
                   </Tab.Pane>
 
-                </>))}
+                </>
+
+              ))}
               {DietList?.map((d) => (
                 <>
-                  <Tab.Pane eventKey="Diet Chart">
+                  <Tab.Pane eventKey="Diet Chart" key={d.id}>
                     <div>
                       {/* dispaly the diet chart pdf */}
 
@@ -112,9 +119,9 @@ const DocumentTab = () => {
                       >
                         <Modal.Header closeButton>
                           <Modal.Title>Diet chart instructions</Modal.Title>
-                        
-                            <Button>Send Email</Button>
-                       
+
+                          <Button>Send Email</Button>
+
                         </Modal.Header>
                         <Modal.Body>
 

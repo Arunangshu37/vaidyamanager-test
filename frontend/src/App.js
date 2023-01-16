@@ -52,6 +52,8 @@ import MedicineCards from './components/MedicineCards'
 import SearchSymptom from './screens/SearchSymptom'
 import OldMasterTab from './components/OldMasterTab'
 import OldPatientTab from './components/OldPatientTab'
+import ViewDetailTab from './components/ViewDetailTab'
+import VisitingCalender from './components/VisitingCalender'
 
 
 const App = () => {
@@ -69,12 +71,14 @@ const App = () => {
                 <Route path='/breadcrumb' component={Breadcrumb}/>
                 <Route path='/about' component={About}/>
                 <Route path='/contact-us' component={ContactUs} />
-                {/* <Route path='/patientab' component={OldPatientTab} /> */}
-                
+             
+              
                 <Container>
                 <Route path='/tab' component={TabComponent} />
                 <Route path='/mastertab' component={MasterTab} />
                 <Route path='/oldmastertab' component={OldMasterTab} />
+                <Route path='/viewpatient' component={ViewDetailTab} />
+                <Route path='/visitlist' component={VisitingCalender} />
                     <Route path='/terms-condition' component={TermsAndConditions} />
                     <Route path='/privacy-policy' component={PrivacyPolicy} />
                     <Route path='/refund-policy' component={RefundPolicy} />

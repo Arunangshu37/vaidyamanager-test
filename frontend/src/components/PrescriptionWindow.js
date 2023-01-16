@@ -98,7 +98,7 @@ const PrescriptionWindow = () => {
   // Latest User(Patient)
   const Patient = useSelector((state) => state.userInfoDetails)
   const { loadingUsers, errorUsers, users } = Patient;
-  console.log("All users", users)
+  // console.log("All users", users)
 
   useEffect(() => {
     dispatch(getUserInfoDetails());
@@ -963,6 +963,7 @@ const PrescriptionWindow = () => {
         size='lg'
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        onHide={handelInstructionclose}
       >
         <Modal.Header closeButton>
           <Modal.Title>Diet chart instructions</Modal.Title>

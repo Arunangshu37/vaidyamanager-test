@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import OldPatientTab from './OldPatientTab';
+import ViewDetailTab from './ViewDetailTab';
+import VisitingCalender from './VisitingCalender';
+import BillHistoryTab from './BillHistoryTab';
 
 
 const OldMasterTab = () => {
@@ -23,8 +26,14 @@ const OldMasterTab = () => {
         <Tab eventKey="old-inquiry" title="Inquiry">
 
         </Tab>
-        <Tab eventKey="patient-visit" title="Patient Visits">
-
+        <Tab eventKey="patient-visit" title="Visiting Calender">
+          <VisitingCalender />
+        </Tab>
+        <Tab eventKey="Bill" title="Bill history">
+          <BillHistoryTab />
+        </Tab>
+        <Tab eventKey="view" title="View">
+          <ViewDetailTab />
         </Tab>
       </Tabs>
     </div>
