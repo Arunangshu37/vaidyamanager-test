@@ -5,6 +5,7 @@ import OldPatientTab from './OldPatientTab';
 import ViewDetailTab from './ViewDetailTab';
 import VisitingCalender from './VisitingCalender';
 import BillHistoryTab from './BillHistoryTab';
+import OldPrescriptions from './OldPrescriptions';
 
 
 const OldMasterTab = () => {
@@ -19,6 +20,9 @@ const OldMasterTab = () => {
       >
         <Tab eventKey="old-Patient" title="Patient">
           <OldPatientTab />
+        </Tab>
+        <Tab eventKey="old-prescription" title="Prescription">
+          <OldPrescriptions />
         </Tab>
         <Tab eventKey="old-Therapy" title="Therapy">
 

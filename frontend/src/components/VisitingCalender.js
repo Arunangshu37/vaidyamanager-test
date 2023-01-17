@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import '../visitingcalender.css'
 
 const VisitingCalender = () => {
+  const dispatch = useDispatch();
+
   return (
     <div>
       VisitingCalender
 
       <Card>
-        <Card.Body>This is some text within a card body.</Card.Body>
+        <Card.Body></Card.Body>
       </Card>
       <table className="striped bordered visiting" bordercolor="black">
         <thead>
