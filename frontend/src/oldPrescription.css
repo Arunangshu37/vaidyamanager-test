@@ -1,0 +1,14 @@
+.date-card-container {
+    display: flex;
+    justify-content: center;
+  }
+  .symptoms-medicines-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 300px;
+  }
+  .symptoms-medicines-card {
+    width: 45%;
+  }
+  

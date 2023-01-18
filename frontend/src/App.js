@@ -54,6 +54,7 @@ import OldMasterTab from './components/OldMasterTab'
 import OldPatientTab from './components/OldPatientTab'
 import ViewDetailTab from './components/ViewDetailTab'
 import VisitingCalender from './components/VisitingCalender'
+import OldPrescriptions from './components/OldPrescriptions'
 
 
 const App = () => {
@@ -79,6 +80,7 @@ const App = () => {
                 <Route path='/oldmastertab' component={OldMasterTab} />
                 <Route path='/viewpatient' component={ViewDetailTab} />
                 <Route path='/visitlist' component={VisitingCalender} />
+                <Route path='/oldprescriptions' component={OldPrescriptions} />
                     <Route path='/terms-condition' component={TermsAndConditions} />
                     <Route path='/privacy-policy' component={PrivacyPolicy} />
                     <Route path='/refund-policy' component={RefundPolicy} />

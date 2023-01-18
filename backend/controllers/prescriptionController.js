@@ -134,7 +134,16 @@ const getPatientPrescription = asyncHandler(async (req, res) => {
                 foreignField:"_id",
                 as:"Patient"
             }
+        },
+        {
+            $lookup:{
+                from:"Medicine",
+                localField:"medicineDetails",
+                foreignField:"_id",
+                as:"MedicineDetail"
+            }
         }
+
     ])
 
     res.json(patient)

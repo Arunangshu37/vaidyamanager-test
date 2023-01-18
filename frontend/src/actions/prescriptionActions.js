@@ -75,6 +75,7 @@ export const addPrescriptionUser = (prescriptionData) => async (dispatch, getSta
             payload: data,
         })
         console.log("prescription added")
+        alert("Prescription added Successfully");
         return data
     } catch (error) {
         dispatch({
@@ -191,7 +192,7 @@ export const getPrescriptionDetail = () => async (dispatch) => {
             type: DATA_PRESCRIPTION_SUCCESS,
             payload: data,
         })
-        console.log("sucess data")
+        // console.log("sucess data")
     } catch (error) {
         dispatch({
             type: DATA_PRESCRIPTION_FAIL,
@@ -216,7 +217,7 @@ export const getPatientDetail = () => async (dispatch) => {
             type: PATIENT_PRESCRIPTION_SUCCESS,
             payload: data,
         })
-        console.log("sucess patient")
+        // console.log("sucess patient")
     } catch (error) {
         dispatch({
             type: PATIENT_PRESCRIPTION_FAIL,

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getPrescriptionDetail, getPatientDetail } from '../actions/prescriptionActions'
 import { Link } from 'react-router-dom'
 
+
 const OldPatientTab = () => {
     const dispatch = useDispatch();
     const prescription = useSelector((state) => state.getPrescripionList)
@@ -12,17 +13,20 @@ const OldPatientTab = () => {
 
     const prescriptionDetail = useSelector((state) => state.getPatientPrescriptionList)
     const { loadingp, errorp, patientPrescriptionData } = prescriptionDetail;
-    
+
+
+    const uniqueData = Array.from(new Set(patientPrescriptionData?.map(item => item.Patient[0]._id))).map(id => {
+        return patientPrescriptionData?.filter(dataItem => dataItem.Patient[0]._id === id)[0];
+    });
+
+    // console.log("uniqueData", uniqueData);
 
     useEffect(() => {
         dispatch(getPrescriptionDetail());
         dispatch(getPatientDetail());
     }, [dispatch])
 
-   
 
-    // const ptName = prescriptionData?.filter(x => x.id === x.prescriptionUser);
-    // console.log("first",ptName);
     const searchPatient = (e) => {
         var input, filter, table, tr, td, i, txtValue;
         input = e.target.value;
@@ -44,10 +48,8 @@ const OldPatientTab = () => {
     }
 
 
-
     return (
         <div>
-
             {/* table Starts */}
             <table className="table table-borderless" bordercolor="black" id="myTable">
                 <tr>
@@ -79,8 +81,8 @@ const OldPatientTab = () => {
                     </td>
 
                 </tr>
-                {patientPrescriptionData?.map((data) => (
-                    <tr key={data.id}>
+                {/* {uniqueData?.map((data) => (
+                    <tr>
                         <>
                             <td>  {data.Patient[0].name}</td>
                             <td>{data.ayurveda_diagnosis}</td>
@@ -90,17 +92,39 @@ const OldPatientTab = () => {
                             <td>Active</td>
                             <td>
                                 <div>
-                                    <Link to={'/viewpatient'}>
-                                    <Button>View</Button>
+                                    <Link to={'/oldprescriptions'}>
+                                        <Button>View</Button>
                                     </Link>
-                              
-                               
+
+
                                 </div>
-                              
+
                             </td>
                         </>
                     </tr>
-                ))}
+                ))} */}
+                {uniqueData.map((data, index) => (
+                    <tr key={index}>
+                        <>
+                            <td>  {data.Patient[0].name}</td>
+                            <td>{data.ayurveda_diagnosis}</td>
+                            <td>{data.mDiagnosis
+                            }</td>
+                            <td>{data.Patient[0].phone}</td>
+                            <td>Active</td>
+                            <td>
+                                <div>
+                                    <Link to={'/oldprescriptions'}>
+                                        <Button>View</Button>
+                                    </Link>
+
+
+                                </div>
+
+                            </td>
+                        </>
+                    </tr>
+                ))} 
             </table>
             {/* table End */}
 

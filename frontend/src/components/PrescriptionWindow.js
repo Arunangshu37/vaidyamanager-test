@@ -81,6 +81,7 @@ const PrescriptionWindow = () => {
 
         }
         dispatch(addPrescriptionUser(mainPrescription))
+
         // console.log("Prescription", mainPrescription);
       })
       .catch(e => console.log(e))
@@ -435,7 +436,7 @@ const PrescriptionWindow = () => {
   useEffect(() => {
     if (imagefile != null) document.getElementById("markImageAttached").innerHTML = "✓";
     if (videofile != null) document.getElementById("markVideoAttached").innerHTML = "✓";
-    if (reportfile !== null) document.getElementById("markReportAttached").innerHTML = "✓";
+    if (reportfile != null) document.getElementById("markReportAttached").innerHTML = "✓";
     // if (dietArray.length != 0) document.getElementById("markDietChartAttached").innerHTML = "✓";
   }, [imagefile, videofile, reportfile])
 

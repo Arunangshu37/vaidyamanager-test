@@ -16,12 +16,13 @@ const ViewDetailTab = () => {
   // console.log("All users", users)
 
   const newPatientData = prescriptionData?.filter((patientuser) => patientuser.prescriptionUser === users[0]._id);
-  console.log("newPatientData", newPatientData);
+  // console.log("newPatientData", newPatientData);
 
   useEffect(() => {
     dispatch(getPrescriptionDetail());
     dispatch(getUserInfoDetails());
   }, [dispatch])
+  
 
   return (
     <div style={{ marginTop: "3rem" }}>
@@ -42,19 +43,16 @@ const ViewDetailTab = () => {
           <Card.Title>Basic Detail</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
           <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            
           </Card.Text>
 
         </Card.Body>
       </Card>
 
       <table className="table table-borderless" bordercolor="black" style={{ backgroundColor: "aliceblue" }}>
-        {newPatientData?.map((data) => (
+        {newPatientData?.map((data,index) => (
           <>
-            <tr key={data.i}>
-
-
+            <tr key={index}>
               <td>
                 <Card style={{ width: '18rem' }}>
                   <Card.Body>
