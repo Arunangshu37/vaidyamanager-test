@@ -2,9 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import '../visitingcalender.css'
+import { useLocation } from 'react-router-dom'
 
 const VisitingCalender = () => {
   const dispatch = useDispatch();
+
+  const { state } = useLocation();
+  const patientVisit = state ? state.data : null;
+  console.log("patientVisit", patientVisit);
+
 
   return (
     <div>

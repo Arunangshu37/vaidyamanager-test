@@ -135,14 +135,14 @@ const getPatientPrescription = asyncHandler(async (req, res) => {
                 as:"Patient"
             }
         },
-        {
-            $lookup:{
-                from:"Medicine",
-                localField:"medicineDetails",
-                foreignField:"_id",
-                as:"MedicineDetail"
-            }
-        }
+        // {
+        //     $lookup:{
+        //         from:"Medicine",
+        //         localField:"medicineData.medicineDetails",
+        //         foreignField:"_id",
+        //         as:"MedicineDetail"
+        //     }
+        // }
 
     ])
 

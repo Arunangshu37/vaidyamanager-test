@@ -15,7 +15,7 @@ const ViewDetailTab = () => {
   const { loadingUsers, errorUsers, users } = Patient;
   // console.log("All users", users)
 
-  const newPatientData = prescriptionData?.filter((patientuser) => patientuser.prescriptionUser === users[0]._id);
+  // const newPatientData = prescriptionData?.filter((patientuser) => patientuser.prescriptionUser === users[0]._id);
   // console.log("newPatientData", newPatientData);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const ViewDetailTab = () => {
       </Card>
 
       <table className="table table-borderless" bordercolor="black" style={{ backgroundColor: "aliceblue" }}>
-        {newPatientData?.map((data,index) => (
+        {/* {newPatientData?.map((data,index) => (
           <>
             <tr key={index}>
               <td>
@@ -92,7 +92,7 @@ const ViewDetailTab = () => {
                     <Card.Title>Symptoms</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
                     <Card.Text>
-                    {/* {{data['Symptoms']}} */}
+                    {/* {{data['Symptoms']}} 
                    {data.Symptoms.join(' ')}
                     </Card.Text>
 
@@ -115,7 +115,7 @@ const ViewDetailTab = () => {
             </tr>
           </>
 
-        ))}
+        ))} */}
       </table>
 
 

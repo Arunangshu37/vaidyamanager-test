@@ -5,50 +5,101 @@ import { useDispatch, useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 import * as _ from 'lodash'
 import CardGroup from 'react-bootstrap/CardGroup';
-import { Col, Button, Row, Card,ListGroup } from 'react-bootstrap'
+import { Col, Button, Row, Card, ListGroup } from 'react-bootstrap'
 import '../oldPrescription.css'
-
+import { useLocation } from 'react-router-dom'
 
 
 const OldPrescriptions = () => {
   const dispatch = useDispatch();
 
-  const [expanded, setExpanded] = React.useState(false);
-  const [result, setResult] = useState([]);
-  const [prevTableId, setPrevTableId] = useState("");
   const [selectedVisit, setSelectedVisit] = useState(null);
+  const [createdAtDates, setCreatedAtDates] = useState([]);
+  const [patientDataPrescription, setPatientDataPrescription] = useState({
+    createdAtDates: [],
+    patientInfo: {}
+  });
+
+  const { state } = useLocation();
+  const patientData = state ? state.data : null;
+  // console.log("patientData", patientData);
+
 
   const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
   // console.log("Old prescription", patientPrescriptionData);
 
   const PrescriptionDates = _.orderBy(patientPrescriptionData, [item => item.lastModified], ['desc']);
-  console.log("PrescriptionDates", PrescriptionDates);
+  // console.log("PrescriptionDates", PrescriptionDates);
 
 
   useEffect(() => {
     dispatch(getPatientDetail());
   }, [dispatch])
 
+  useEffect(() => {
+    const patientId = patientData;
+    const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]._id === patientId);
+    // console.log("patientPrescriptions",patientPrescriptions)
+    // const uniqueDates = patientPrescriptions?.map(item => item.createdAt);
+    // console.log(uniqueDates)
+    // setCreatedAtDates(uniqueDates);
+    // setPatientInfo({
+    //   name: patientPrescriptions[0]?.Patient[0].name,
+    //   weight: patientPrescriptions[0]?.Patient[0].weight,
+    //   age: patientPrescriptions[0]?.Patient[0].age,
+    // });
 
-  const visits = PrescriptionDates?.map((prescription) => {
+    setPatientDataPrescription({
+      createdAtDates: patientPrescriptions?.map(prescription => prescription.createdAt),
+      patientInfo: {
+        name: patientPrescriptions[0]?.Patient[0].name,
+        weight: patientPrescriptions[0]?.Patient[0].weight,
+        age: patientPrescriptions[0]?.Patient[0].age,
+      }
+    });
+
+  }, [patientData]);
+
+ 
+
+  // const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.PrescriptionDates?.Patient[0]._id === patientData?._id);
+  // console.log("patientPrescriptions", patientPrescriptions)
+
+  // const uniqueDates = PrescriptionDates?.map(item => item.PrescriptionDates?.Patient[0]._id === patientData?._id);
+  // console.log("Unique Date",uniqueDates)
+
+  // const uniqueDates = Array.from(new Set(patientPrescriptions?.map(item => item.PrescriptionDates?.Patient[0]._id === patientData?._id)));
+  // console.log("Unique Date",uniqueDates)
+
+  // const visits = createdAtDates?.map((date) => {
+  //   return {
+  //     visitDate: dayjs(date).format('DD/MM/YYYY'),
+  //     medicinePrescribed: date.medicineData,
+  //     symptomObserved: date.Symptoms
+  //   };
+  // });
+
+  const patientId = patientData;
+    const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]._id === patientId);
+  // const patientId = patientData && state.patientData;
+  // const patientPrescriptions = patientDataPrescription?.filter(prescription => prescription.Patient[0]._id === patientId);
+  const visits = patientDataPrescription.createdAtDates?.map((date) => {
+    const prescriptionD = patientPrescriptions?.filter(p => p.createdAt === date);
     return {
-      visitDate: dayjs(prescription?.createdAt).format('DD/MM/YYYY'),
-      medicinePrescribed: prescription.medicineData,
-      symptomObserved: prescription.Symptoms
+      visitDate: dayjs(date).format('DD/MM/YYYY'),
+      medicinePrescribed: prescriptionD[0]?.medicineData,
+      symptomObserved: prescriptionD[0]?.Symptoms
     };
   });
 
 
+  console.log("VIsits",visits)
+
   const handleDateClick = (visit) => {
     setSelectedVisit(visit);
   };
-  // const handelDateSelected = (e) => {
-  //   // document.getElementById(prevTableId).style.display = "none";
-  //   setPrevTableId(e.target.id + "li");
-  //   // document.getElementById(e.target.id + "Table").style.display = "";
-  // };
-  console.log(visits);
+
 
   return (
     <div>
@@ -58,12 +109,12 @@ const OldPrescriptions = () => {
           <div className="col">
 
             <h5>Patient Details</h5>
-            {/* <h5>Name:{patientPrescriptionData ? patientPrescriptionData[0]?.Patient[0].name : null}</h5> */}
-            {/* <h1>Date:{patientPrescriptionData ? dayjs(patientPrescriptionData[0]?.updatedAt).format('DD/MM/YYYY') : null}</h1> */}
+           <h6> Patient Name: {patientDataPrescription.patientInfo.name}</h6>
+           <h6> {patientDataPrescription.patientInfo.weight}</h6>
+        
           </div>
         </div>
       </div>
-
 
 
       <CardGroup>
@@ -84,7 +135,7 @@ const OldPrescriptions = () => {
               <Card className="symptoms-medicines-card">
                 <Card.Header>Symptoms</Card.Header>
                 <ListGroup variant="flush">
-                  {selectedVisit.symptomObserved.map((symptom, index) => (
+                  {selectedVisit.symptomObserved?.map((symptom, index) => (
                     <ListGroup.Item key={index}>{symptom}</ListGroup.Item>
                   ))}
                 </ListGroup>
@@ -92,7 +143,7 @@ const OldPrescriptions = () => {
               <Card className="symptoms-medicines-card">
                 <Card.Header>Medicines</Card.Header>
                 <ListGroup variant="flush">
-                  {selectedVisit.medicinePrescribed.map((medicine, index) => (
+                  {selectedVisit.medicinePrescribed?.map((medicine, index) => (
                     <ListGroup.Item key={index}>
                       {medicine.medicineDetails.medicineName} ({medicine.dose})
                     </ListGroup.Item>
