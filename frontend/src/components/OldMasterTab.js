@@ -22,7 +22,7 @@ const OldMasterTab = () => {
           <OldPatientTab />
         </Tab>
         <Tab eventKey="old-prescription" title="Prescription">
-          <OldPrescriptions />
+          <OldPrescriptions  />
         </Tab>
         <Tab eventKey="old-Therapy" title="Therapy">
 

@@ -8,11 +8,12 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import { Col, Button, Row, Card, ListGroup } from 'react-bootstrap'
 import '../oldPrescription.css'
 import { useLocation } from 'react-router-dom'
+import VisitingCalender from './VisitingCalender';
 
 
 const OldPrescriptions = () => {
   const dispatch = useDispatch();
-
+  // let data = props.location.state.data;
   const [selectedVisit, setSelectedVisit] = useState(null);
   const [createdAtDates, setCreatedAtDates] = useState([]);
   const [patientDataPrescription, setPatientDataPrescription] = useState({
@@ -36,6 +37,8 @@ const OldPrescriptions = () => {
   useEffect(() => {
     dispatch(getPatientDetail());
   }, [dispatch])
+
+
 
   useEffect(() => {
     const patientId = patientData;
@@ -94,7 +97,7 @@ const OldPrescriptions = () => {
   });
 
 
-  console.log("VIsits",visits)
+  // console.log("VIsits",visits)
 
   const handleDateClick = (visit) => {
     setSelectedVisit(visit);
@@ -211,7 +214,9 @@ const OldPrescriptions = () => {
 
 
       </CardGroup>
-
+      <div style={{ display: "none" }}>
+      <VisitingCalender visits={visits} />
+    </div>
 
     </div>
   )

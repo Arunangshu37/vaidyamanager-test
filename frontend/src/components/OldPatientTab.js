@@ -89,11 +89,12 @@ const OldPatientTab = () => {
               <td>Active</td>
               <td>
                 <div>
-                  <Link to={{ pathname: '/oldprescriptions', state: { data: data.Patient[0]._id}}}>
-                    <Button>View</Button>
+                  <Link to={{ pathname: '/oldprescription', state: { data: data.Patient[0]._id}}}>
+                    {/* <Button onClick={() => props.setKey("old-prescription")}>View</Button>  */}
+                    <Button >View</Button>
                   </Link>
                 </div>
-
+             
               </td>
             </>
           </tr>

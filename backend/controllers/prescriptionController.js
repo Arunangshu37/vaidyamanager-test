@@ -135,15 +135,39 @@ const getPatientPrescription = asyncHandler(async (req, res) => {
                 as:"Patient"
             }
         },
-        // {
-        //     $lookup:{
-        //         from:"Medicine",
-        //         localField:"medicineData.medicineDetails",
-        //         foreignField:"_id",
-        //         as:"MedicineDetail"
-        //     }
-        // }
-
+    //    {
+    //     $lookup: {
+    //         from: "Medicines",
+    //         localField: "medicineData.medicineDetails",
+    //         foreignField: "_id",
+    //         as: "medicine"
+    //       }
+    //    }
+    // {
+    //     $addFields: {
+    //       medicineData: {
+    //         $map: {
+    //           input: "$medicineData",
+    //           as: "med",
+    //           in: {
+    //             _id: { $concat: [ "$$med._id"] },
+    //             dose: "$$med.dose",
+    //             medicineDetails: "$$med.medicineDetails"
+    //           }
+    //         }
+    //       }
+    //     }
+    //   },
+    //   {
+    //     $lookup:
+    //       {
+    //         from: "Medicines",
+    //         localField: "medicineData.medicineDetails",
+    //         foreignField: "_id",
+    //         as: "medicine_detail"
+    //       }
+    //    }
+       
     ])
 
     res.json(patient)
