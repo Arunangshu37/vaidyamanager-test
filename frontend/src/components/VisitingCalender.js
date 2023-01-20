@@ -6,21 +6,33 @@ import { useLocation } from 'react-router-dom'
 import * as _ from 'lodash'
 import { getPatientDetail } from '../actions/prescriptionActions';
 
-const VisitingCalender = ({ visits }) => {
+const VisitingCalender = ({ patientId }) => {
   const dispatch = useDispatch();
+  // const { patientId, visitHistory } = props;
+  // const { patientId = '', visitHistory = [] } = props;
+  console.log("patientId", patientId)
 
   const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
 
   const PrescriptionVisitData = _.orderBy(patientPrescriptionData, [item => item.lastModified], ['desc']);
-  console.log("PrescriptionVisitData", PrescriptionVisitData);
+  // console.log("PrescriptionVisitData", PrescriptionVisitData);
 
+  // filter visits based on patientId
+  // const filteredVisits = visitHistory.filter(visit => visit.patientId === patientId);
+  // console.log("visitcalender", filteredVisits)
 
   useEffect(() => {
     dispatch(getPatientDetail());
   }, [dispatch])
 
-
+  // const [filteredVisits, setFilteredVisits] = useState([]);
+  // useEffect(() => {
+  //   if (patientId) {
+  //     const filteredData = visitHistory.filter(visit => visit.patientId === patientId);
+  //     setFilteredVisits(filteredData);
+  //   }
+  // }, [patientId, visitHistory]);
 
   return (
     <div>

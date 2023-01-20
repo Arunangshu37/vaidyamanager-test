@@ -35,16 +35,16 @@ const AyurvedInfo = () => {
 
             </div> */}
 
-            <div class="pa-why spacer-top spacer-bottom">
-                <div class="container">
-                    <div class="pa-heading">
-                        <img src="/images/herbal.svg" alt="image" class="img-fluid" />
+            <div className="pa-why spacer-top spacer-bottom">
+                <div className="container">
+                    <div className="pa-heading">
+                        <img src="/images/herbal.svg" alt="image" className="img-fluid" />
                         <h1>why pure Ayurveda</h1>
                         <h5>best for you</h5>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 col-sm-6 pr-0">
-                            <div class="pa-why-ul pa-why-left">
+                    <div className="row">
+                        <div className="col-md-4 col-sm-6 pr-0">
+                            <div className="pa-why-ul pa-why-left">
                                 <ul>
                                     <li>100 % Organic</li>
                                     <li>Best Quality</li>
@@ -54,13 +54,13 @@ const AyurvedInfo = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-4 p-0">
-                            <div class="pa-why-img">
-                                <img src="/images/herbal.svg" alt="image" class="img-fluid" />
+                        <div className="col-md-4 p-0">
+                            <div className="pa-why-img">
+                                <img src="/images/herbal.svg" alt="image" className="img-fluid" />
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-6 pl-0">
-                            <div class="pa-why-ul pa-why-right">
+                        <div className="col-md-4 col-sm-6 pl-0">
+                            <div className="pa-why-ul pa-why-right">
                                 <ul>
                                     <li>100 % Organic</li>
                                     <li>Best Quality</li>

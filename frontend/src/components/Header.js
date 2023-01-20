@@ -66,7 +66,7 @@ const Header = () => {
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
-                                <LinkContainer to={`/oldmastertab`}>
+                                <LinkContainer to={`/old-mastertab`}>
                                     <Navbar.Brand>Old
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>

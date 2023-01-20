@@ -77,10 +77,13 @@ const App = () => {
                 <Container>
                 <Route path='/tab' component={TabComponent} />
                 <Route path='/mastertab' component={MasterTab} />
-                <Route path='/oldmastertab' component={OldMasterTab} />
-                <Route path='/viewpatient' component={ViewDetailTab} />
-                <Route path='/visitlist' component={VisitingCalender} />
-                <Route path='/oldprescription' component={OldPrescriptions} />
+                <Route path='/old-mastertab' component={OldMasterTab} />
+                {/* <Route path='/viewpatient' component={ViewDetailTab} /> */}
+                {/* <Route path='/visitlist' component={VisitingCalender} /> */}
+                {/* <Route path='/oldprescription' component={OldPrescriptions} />
+                <Route path='/oldpatient' component={OldPatientTab} /> */}
+           <Route path='/oldprescription' component={OldPrescriptions} />
+                {/* <Route path='/oldprescription' render={(props) => <OldPrescriptions patientId={props.location.state?.patientId} />} /> */}
                     <Route path='/terms-condition' component={TermsAndConditions} />
                     <Route path='/privacy-policy' component={PrivacyPolicy} />
                     <Route path='/refund-policy' component={RefundPolicy} />

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect} from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPrescriptionDetail, getPatientDetail } from '../actions/prescriptionActions'
 import { Link } from 'react-router-dom'
+import OldPrescriptions from './OldPrescriptions'
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
-
-const OldPatientTab = () => {
+const OldPatientTab = (props) => {
   const dispatch = useDispatch();
   const prescription = useSelector((state) => state.getPrescripionList)
   const { loading, error, prescriptionData } = prescription;
@@ -26,6 +28,10 @@ const OldPatientTab = () => {
     dispatch(getPrescriptionDetail());
     dispatch(getPatientDetail());
   }, [dispatch])
+
+  const handleViewClick = (patientId) => {
+  
+  }
 
 
   const searchPatient = (e) => {
@@ -89,18 +95,23 @@ const OldPatientTab = () => {
               <td>Active</td>
               <td>
                 <div>
-                  <Link to={{ pathname: '/oldprescription', state: { data: data.Patient[0]._id}}}>
-                    {/* <Button onClick={() => props.setKey("old-prescription")}>View</Button>  */}
+                  <Link to={{ pathname: '/oldprescription', state: { data: data.Patient[0]._id } }}>
                     <Button >View</Button>
                   </Link>
                 </div>
-             
+                {/* <Button onClick={() => props.handleViewClick(data.Patient[0]._id)}>View</Button> */}
+                <div style={{ display: "none" }}>
+                  {/* <OldPrescriptions patientId={data.Patient[0]._id} /> */}
+
+                </div>
+
               </td>
             </>
           </tr>
         ))}
       </table>
       {/* table End */}
+
 
     </div>
   )
