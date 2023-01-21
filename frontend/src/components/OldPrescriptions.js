@@ -7,12 +7,11 @@ import * as _ from 'lodash'
 import CardGroup from 'react-bootstrap/CardGroup';
 import { Col, Button, Row, Card, ListGroup } from 'react-bootstrap'
 import '../oldPrescription.css'
-import { useLocation } from 'react-router-dom'
 import VisitingCalender from './VisitingCalender';
-import OldMasterTab from './OldMasterTab';
 
 
-const OldPrescriptions = () => {
+
+const OldPrescriptions = ({ patientIds }) => {
   const dispatch = useDispatch();
   const [selectedVisit, setSelectedVisit] = useState(null);
   const [createdAtDates, setCreatedAtDates] = useState([]);
@@ -21,10 +20,8 @@ const OldPrescriptions = () => {
     patientInfo: {}
   });
 
-  const { state } = useLocation();
-  const patientData = state ? state.data : null;
-  // console.log("patientData", patientData);
-
+ 
+  const patientData = patientIds;
   const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
   const PrescriptionDates = _.orderBy(patientPrescriptionData, [item => item.lastModified], ['desc']);
@@ -59,6 +56,7 @@ const OldPrescriptions = () => {
 
   const handleDateClick = (visit) => {
     setSelectedVisit(visit);
+    
   };
 
   return (
@@ -111,9 +109,7 @@ const OldPrescriptions = () => {
         </div>
       </CardGroup>
       <div style={{ display: "none" }}>
-      <VisitingCalender patientId={patientId} />
-        {/* <VisitingCalender visits={visits} /> */}
-        {/* <VisitingCalender patientId={props.patientId} visitHistory={visits} /> */}
+      <VisitingCalender patientId={patientIds} />
       </div>
 
     </div>

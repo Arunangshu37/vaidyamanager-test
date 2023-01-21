@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
+import * as _ from 'lodash'
+import { getPatientDetail } from '../actions/prescriptionActions';
+import { useDispatch, useSelector } from 'react-redux'
 
-const BillHistoryTab = ()=> {
+const BillHistoryTab = ({ PatientId }) => {
+    const dispatch = useDispatch();
+
+
+    const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
+    const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
+
+    const PrescriptionVisitData = _.orderBy(patientPrescriptionData, [item => item.lastModified], ['desc']);
+    console.log("PrescriptionVisitData", PrescriptionVisitData);
+
+    const filterbill =  PrescriptionVisitData?.filter(visit => visit.prescriptionUser === PatientId);
+    console.log("visitcalender",filterbill )
+
     return (
         <div>BillHistoryTab
-
             <Card>
                 <Card.Body>This is some text within a card body.</Card.Body>
             </Card>
@@ -21,16 +35,17 @@ const BillHistoryTab = ()=> {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
+                        {filterbill?.map((v, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{v.createdAt}</td>
+                                    <td>{v.payment?.Consulting}</td>
+                                    <td>{console.log(v.payment?.Consulting)}</td>
+                                
+                                </tr>
+                            );
+                        })}
                     </tr>
                 </tbody>
             </table>

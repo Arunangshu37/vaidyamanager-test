@@ -9,13 +9,13 @@ import OldPrescriptions from './OldPrescriptions';
 import { withRouter } from 'react-router-dom';
 
 const OldMasterTab = () => {
-  const [key, setKey] = useState('old-Patient');
-  // const handleViewClick = (patientId) => {
-  //   props.history.push({
-  //     pathname: '/oldprescription',
-  //     search: `?patientId=${patientId}`
-  //   });
-  // }
+  const [key, setKey] = useState('oldPatient')
+  const [selectedPatientId, setSelectedPatientId] = useState();
+  // const [activeTab, setActiveTab] = useState("oldPatient");
+  const choosePatient = (oldPatient) => {
+    setSelectedPatientId(oldPatient);
+    setKey("oldprescription");
+  };
 
   return (
     <div style={{ marginTop: "4rem" }}>
@@ -25,24 +25,24 @@ const OldMasterTab = () => {
         onSelect={(k) => setKey(k)}
         className="mb-3"
       >
-        <Tab eventKey="old-Patient" title="Patient">
-        <OldPatientTab  />
+        <Tab eventKey="oldPatient" title="Patient">
+        <OldPatientTab choosePatient={choosePatient}/>
           {/* <OldPatientTab  handleViewClick={handleViewClick}/> */}
         </Tab>
-        <Tab eventKey="old-prescription" title="Prescription">
-          <OldPrescriptions />
+        <Tab eventKey="oldprescription" title="Prescription">
+          <OldPrescriptions patientIds={selectedPatientId} />
         </Tab>
-        <Tab eventKey="old-Therapy" title="Therapy">
+        <Tab eventKey="oldTherapy" title="Therapy">
 
         </Tab>
-        <Tab eventKey="old-inquiry" title="Inquiry">
+        <Tab eventKey="oldinquiry" title="Inquiry">
 
         </Tab>
-        <Tab eventKey="patient-visit" title="Visiting Calender">
-          <VisitingCalender />
+        <Tab eventKey="patientvisit" title="Visiting Calender">
+          <VisitingCalender patientId={selectedPatientId}/>
         </Tab>
         <Tab eventKey="Bill" title="Bill history">
-          <BillHistoryTab />
+          <BillHistoryTab PatientId = {selectedPatientId}/>
         </Tab>
         <Tab eventKey="view" title="View">
           <ViewDetailTab />

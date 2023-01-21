@@ -76,7 +76,7 @@ const PrescriptionWindow = () => {
           Image: imagefile,
           Video: videofile,
           report: reportfile,
-          Payment: inputVal,
+          payment: inputVal,
           prescriptiondays: prescription.prescriptiondays
 
         }
@@ -167,10 +167,10 @@ const PrescriptionWindow = () => {
 
   //payment states
   const [inputVal, setInputVal] = useState({
-    consult: "",
+    Consulting: "",
     medicine: "",
     paid: "",
-    debitcredit: "",
+    Debit_Credit: "",
     discount: ""
   });
   const updateInputVal = (pairs) =>
@@ -178,18 +178,18 @@ const PrescriptionWindow = () => {
 
   const onValueChange = (event) => {
     const { name, value } = event.target;
-    if (name === "consult") {
+    if (name === "Consulting") {
       const newPaid = Number(value) + Number(inputVal.medicine);
       updateInputVal({ paid: newPaid });
     }
     if (name === "medicine") {
-      const newPaid = Number(value) + Number(inputVal.consult);
+      const newPaid = Number(value) + Number(inputVal.Consulting);
       updateInputVal({ paid: newPaid });
     }
     if (name === "discount") {
       // console.log("value",value)
       const newPaid = Number(inputVal.paid) - Number(value);
-      updateInputVal({ debitcredit: newPaid });
+      updateInputVal({ Debit_Credit: newPaid });
       // console.log("paid",inputVal)
     }
     updateInputVal({ [name]: value });
@@ -721,9 +721,9 @@ const PrescriptionWindow = () => {
                         <td>
                           <input
                             type="text"
-                            name="consult"
+                            name="Consulting"
                             className='p-input'
-                            value={inputVal.consult}
+                            value={inputVal.Consulting}
                             onChange={onValueChange}
                           /></td>
                         <td>
@@ -788,8 +788,8 @@ const PrescriptionWindow = () => {
                           <input
                             className='p-input'
                             type="text"
-                            name="debitcredit"
-                            value={inputVal.debitcredit}
+                            name="Debit_Credit"
+                            value={inputVal.Debit_Credit}
                             onChange={onValueChange} readOnly />
                         </td>
                         <td>

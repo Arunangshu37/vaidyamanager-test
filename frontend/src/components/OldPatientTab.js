@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPrescriptionDetail, getPatientDetail } from '../actions/prescriptionActions'
@@ -7,7 +7,7 @@ import OldPrescriptions from './OldPrescriptions'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-const OldPatientTab = (props) => {
+const OldPatientTab = ({ choosePatient }) => {
   const dispatch = useDispatch();
   const prescription = useSelector((state) => state.getPrescripionList)
   const { loading, error, prescriptionData } = prescription;
@@ -16,7 +16,7 @@ const OldPatientTab = (props) => {
   const prescriptionDetail = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = prescriptionDetail;
 
-  // console.log("prescriptionDetail",prescriptionDetail)
+  // console.log("prescriptionDetail", prescriptionDetail)
 
   const uniqueData = Array.from(new Set(patientPrescriptionData?.map(item => item.Patient[0]._id))).map(id => {
     return patientPrescriptionData?.filter(dataItem => dataItem.Patient[0]._id === id)[0];
@@ -29,9 +29,11 @@ const OldPatientTab = (props) => {
     dispatch(getPatientDetail());
   }, [dispatch])
 
-  const handleViewClick = (patientId) => {
-  
-  }
+  const setPatientDetail = (e) => {
+    choosePatient(e.target.id);
+    // console.log("setpatient id",e.target.id);
+    // console.log("holg")
+  };
 
 
   const searchPatient = (e) => {
@@ -87,17 +89,17 @@ const OldPatientTab = (props) => {
         {uniqueData.map((data, index) => (
           <tr key={index}>
             <>
-              <td>  {data.Patient[0].name}</td>
+              <td> {data.Patient[0].name}</td>
               <td>{data.ayurveda_diagnosis}</td>
-              <td>{data.mDiagnosis
-              }</td>
+              <td>{data.mDiagnosis}</td>
               <td>{data.Patient[0].phone}</td>
               <td>Active</td>
               <td>
                 <div>
-                  <Link to={{ pathname: '/oldprescription', state: { data: data.Patient[0]._id } }}>
+                  {/* <Link to={{ pathname: '/oldprescription', state: { data: data.Patient[0]._id } }}>
                     <Button >View</Button>
-                  </Link>
+                  </Link> */}
+                  <Button onClick={setPatientDetail} id={data.Patient[0]._id } >View</Button>
                 </div>
                 {/* <Button onClick={() => props.handleViewClick(data.Patient[0]._id)}>View</Button> */}
                 <div style={{ display: "none" }}>

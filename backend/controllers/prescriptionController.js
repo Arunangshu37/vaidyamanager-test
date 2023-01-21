@@ -41,7 +41,7 @@ const addPrescriptionDetails = asyncHandler(async (req, res) => {
         Image,
         Video,
         report,
-        Payment
+        payment
 
     } = req.body
 
@@ -61,7 +61,7 @@ const addPrescriptionDetails = asyncHandler(async (req, res) => {
         Image,
         Video,
         report,
-        Payment
+        payment
 
     })
     const createdPrescription = await PrescripionData.save();

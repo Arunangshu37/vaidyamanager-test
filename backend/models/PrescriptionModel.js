@@ -62,12 +62,22 @@ const prescriptionSchema = mongoose.Schema(
         report: {
             type: String
         },
-        Payment: {
-            Consulting: String,
-            Medicine: String,
-            Paid: Number,
-            Debit_Credit: Number,
-            Discount: String,
+        payment: {
+            Consulting: {
+                type: String
+            },
+            medicine:{
+                type: String
+            },
+            paid: {
+                type: Number
+            },
+            Debit_Credit: {
+                type: Number
+            },
+            discount: {
+                type: String
+            },
             // Mode: String
         },
 

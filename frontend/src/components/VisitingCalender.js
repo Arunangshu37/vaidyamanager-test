@@ -2,38 +2,30 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import '../visitingcalender.css'
-import { useLocation } from 'react-router-dom'
 import * as _ from 'lodash'
 import { getPatientDetail } from '../actions/prescriptionActions';
+import BillHistoryTab from './BillHistoryTab'
 
 const VisitingCalender = ({ patientId }) => {
   const dispatch = useDispatch();
   // const { patientId, visitHistory } = props;
   // const { patientId = '', visitHistory = [] } = props;
-  console.log("patientId", patientId)
+  // console.log("visit", patientId)
 
   const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
 
   const PrescriptionVisitData = _.orderBy(patientPrescriptionData, [item => item.lastModified], ['desc']);
-  // console.log("PrescriptionVisitData", PrescriptionVisitData);
 
   // filter visits based on patientId
-  // const filteredVisits = visitHistory.filter(visit => visit.patientId === patientId);
+  const filteredVisits = PrescriptionVisitData?.filter(visit => visit.prescriptionUser === patientId);
   // console.log("visitcalender", filteredVisits)
 
   useEffect(() => {
     dispatch(getPatientDetail());
   }, [dispatch])
 
-  // const [filteredVisits, setFilteredVisits] = useState([]);
-  // useEffect(() => {
-  //   if (patientId) {
-  //     const filteredData = visitHistory.filter(visit => visit.patientId === patientId);
-  //     setFilteredVisits(filteredData);
-  //   }
-  // }, [patientId, visitHistory]);
-
+ 
   return (
     <div>
       VisitingCalender
@@ -56,25 +48,21 @@ const VisitingCalender = ({ patientId }) => {
         </thead>
 
         <tbody>
-
-        </tbody>
-
-
-        {/* {visits?.map((v, index) => {
+        {filteredVisits?.map((v, index) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{v.visitDate}</td>
-                <td>{v.medicinePrescribed}</td>
-                <td>{v.symptomObserved}</td>
+                <td>{v.createdAt}</td>
+                {/* <td>{v.}</td>
+                <td>{v.}</td> */}
               </tr>
             );
-          })} */}
-
-
-
-
+          })}
+        </tbody>
       </table>
+      <div style={{ display: "none" }}>
+      <BillHistoryTab PatientId = {patientId} />
+      </div>
     </div>
   )
 }
