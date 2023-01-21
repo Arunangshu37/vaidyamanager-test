@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import * as _ from 'lodash'
+import dayjs from 'dayjs'
 import { getPatientDetail } from '../actions/prescriptionActions';
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -14,8 +15,8 @@ const BillHistoryTab = ({ PatientId }) => {
     const PrescriptionVisitData = _.orderBy(patientPrescriptionData, [item => item.lastModified], ['desc']);
     console.log("PrescriptionVisitData", PrescriptionVisitData);
 
-    const filterbill =  PrescriptionVisitData?.filter(visit => visit.prescriptionUser === PatientId);
-    console.log("visitcalender",filterbill )
+    const filterbill = PrescriptionVisitData?.filter(visit => visit.prescriptionUser === PatientId);
+    // console.log("visitcalender", filterbill)
 
     return (
         <div>BillHistoryTab
@@ -34,19 +35,30 @@ const BillHistoryTab = ({ PatientId }) => {
                     </tr>
                 </thead>
                 <tbody>
+
+                    {filterbill?.map((v, index) => {
+                        return (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{dayjs(v.createdAt).format('DD/MM/YYYY')}</td>
+                                <td>{v.payment?.Consulting}</td>
+                                <td>{v.payment?.medicine}</td>
+                                <td>{v.payment?.Debit_Credit}</td>
+                                <td>{v.payment?.paid}</td>
+                            </tr>
+                        );
+                    })}
                     <tr>
-                        {filterbill?.map((v, index) => {
-                            return (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{v.createdAt}</td>
-                                    <td>{v.payment?.Consulting}</td>
-                                    <td>{console.log(v.payment?.Consulting)}</td>
-                                
-                                </tr>
-                            );
-                        })}
+                        <td>Total</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Paid</td>
+                        <td>Paid</td>
+
+
                     </tr>
+
                 </tbody>
             </table>
         </div>

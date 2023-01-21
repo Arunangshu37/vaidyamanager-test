@@ -5,6 +5,8 @@ import '../visitingcalender.css'
 import * as _ from 'lodash'
 import { getPatientDetail } from '../actions/prescriptionActions';
 import BillHistoryTab from './BillHistoryTab'
+import dayjs from 'dayjs'
+
 
 const VisitingCalender = ({ patientId }) => {
   const dispatch = useDispatch();
@@ -52,7 +54,7 @@ const VisitingCalender = ({ patientId }) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{v.createdAt}</td>
+                <td>{dayjs(v.createdAt).format('DD/MM/YYYY')}</td>
                 {/* <td>{v.}</td>
                 <td>{v.}</td> */}
               </tr>

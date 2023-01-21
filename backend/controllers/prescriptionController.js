@@ -128,46 +128,55 @@ const getPatientPrescription = asyncHandler(async (req, res) => {
     const patient = await Prescription.aggregate([
 
         {
-            $lookup:{
-                from:"users",
-                localField:"prescriptionUser",
-                foreignField:"_id",
-                as:"Patient"
+            $lookup: {
+                from: "users",
+                localField: "prescriptionUser",
+                foreignField: "_id",
+                as: "Patient"
             }
         },
-    //    {
-    //     $lookup: {
-    //         from: "Medicines",
-    //         localField: "medicineData.medicineDetails",
-    //         foreignField: "_id",
-    //         as: "medicine"
-    //       }
-    //    }
-    // {
-    //     $addFields: {
-    //       medicineData: {
-    //         $map: {
-    //           input: "$medicineData",
-    //           as: "med",
-    //           in: {
-    //             _id: { $concat: [ "$$med._id"] },
-    //             dose: "$$med.dose",
-    //             medicineDetails: "$$med.medicineDetails"
-    //           }
-    //         }
-    //       }
-    //     }
-    //   },
-    //   {
-    //     $lookup:
-    //       {
-    //         from: "Medicines",
-    //         localField: "medicineData.medicineDetails",
-    //         foreignField: "_id",
-    //         as: "medicine_detail"
-    //       }
-    //    }
-       
+        //    {
+        //     $lookup: {
+        //         from: "Medicines",
+        //         localField: "medicineData.medicineDetails",
+        //         foreignField: "_id",
+        //         as: "medicine"
+        //       }
+        //    }
+        // {
+        //     $addFields: {
+        //       medicineData: {
+        //         $map: {
+        //           input: "$medicineData",
+        //           as: "med",
+        //           in: {
+        //             _id: { $concat: [ "$$med._id"] },
+        //             dose: "$$med.dose",
+        //             medicineDetails: "$$med.medicineDetails"
+        //           }
+        //         }
+        //       }
+        //     }
+        //   },
+        {
+            $lookup:
+            {
+                from: "medicines",
+                localField: "medicineData[0].medicineDetails",
+                foreignField: "_id",
+                as: "PatientMedicines"
+            }
+        },
+        {
+            $lookup:
+            {
+                from: "dietcharts",
+                localField: "diet_chart",
+                foreignField: "_id",
+                as: "Diet_Chart"
+            }
+        }
+
     ])
 
     res.json(patient)
@@ -177,5 +186,5 @@ const getPatientPrescription = asyncHandler(async (req, res) => {
 
 export {
     addDietChartDetails, addPrescriptionDetails, addMedicineDetails,
-    getAllMedicines, getAllPrescriptions, getDietChartDetails,getPrescriptions,getPatientPrescription
+    getAllMedicines, getAllPrescriptions, getDietChartDetails, getPrescriptions, getPatientPrescription
 }
