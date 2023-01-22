@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-// import { getPrescriptionDetail } from '../actions/prescriptionActions'
-
+import { getPatientDetail } from '../actions/prescriptionActions';
+import * as _ from 'lodash'
 
 const ViewDetailTab = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,14 @@ const ViewDetailTab = () => {
   // useEffect(() => {
   //   dispatch(getPrescriptionDetail());
   // }, [dispatch])
-  
+
+  const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
+  const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
+
+
+  const PrescriptionVisitData = _.orderBy(patientPrescriptionData, [item => item.lastModified], ['desc']);
+
+
 
   return (
     <div style={{ marginTop: "3rem" }}>

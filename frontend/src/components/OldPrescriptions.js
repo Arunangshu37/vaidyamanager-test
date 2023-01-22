@@ -20,7 +20,7 @@ const OldPrescriptions = ({ patientIds }) => {
     patientInfo: {}
   });
 
- 
+
   const patientData = patientIds;
   const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
@@ -38,6 +38,7 @@ const OldPrescriptions = ({ patientIds }) => {
         name: patientPrescriptions[0]?.Patient[0].name,
         weight: patientPrescriptions[0]?.Patient[0].weight,
         age: patientPrescriptions[0]?.Patient[0].age,
+        gender: patientPrescriptions[0]?.Patient[0].gender,
       }
     });
 
@@ -56,7 +57,7 @@ const OldPrescriptions = ({ patientIds }) => {
 
   const handleDateClick = (visit) => {
     setSelectedVisit(visit);
-    
+
   };
 
   return (
@@ -100,7 +101,7 @@ const OldPrescriptions = ({ patientIds }) => {
                 <ListGroup variant="flush">
                   {selectedVisit.medicinePrescribed?.map((medicine, index) => (
                     <ListGroup.Item key={index}>
-                      {medicine.medicineDetails.medicineName} ({medicine.dose})
+                      {medicine.medicineDetails} ({medicine.dose})
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
@@ -110,7 +111,7 @@ const OldPrescriptions = ({ patientIds }) => {
         </div>
       </CardGroup>
       <div style={{ display: "none" }}>
-      <VisitingCalender patientId={patientIds} />
+        <VisitingCalender patientId={patientIds} />
       </div>
 
     </div>

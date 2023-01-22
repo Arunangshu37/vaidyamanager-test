@@ -10,9 +10,10 @@ import dayjs from 'dayjs'
 
 const VisitingCalender = ({ patientId }) => {
   const dispatch = useDispatch();
-  // const { patientId, visitHistory } = props;
-  // const { patientId = '', visitHistory = [] } = props;
   // console.log("visit", patientId)
+  // const [patientVisits, setPatientVisits] = useState({
+  //    patientInfoDetail:{}
+  // })
 
   const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
@@ -27,15 +28,13 @@ const VisitingCalender = ({ patientId }) => {
     dispatch(getPatientDetail());
   }, [dispatch])
 
- 
+
   return (
     <div>
-      VisitingCalender
-
       <Card>
         <Card.Body>
-        <h6> Patient Name: </h6>
-            <h6>Weight: </h6>
+          <h6> Patient Name:{filteredVisits[0]?.Patient[0].name}</h6>
+          <h6>Weight:{filteredVisits[0]?.Patient[0].weight} </h6>
         </Card.Body>
       </Card>
       <table className="striped bordered visiting" bordercolor="black">
@@ -51,7 +50,7 @@ const VisitingCalender = ({ patientId }) => {
         </thead>
 
         <tbody>
-        {filteredVisits?.map((v, index) => {
+          {filteredVisits?.map((v, index) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
@@ -64,7 +63,7 @@ const VisitingCalender = ({ patientId }) => {
         </tbody>
       </table>
       <div style={{ display: "none" }}>
-      <BillHistoryTab PatientId = {patientId} />
+        <BillHistoryTab PatientId={patientId} />
       </div>
     </div>
   )

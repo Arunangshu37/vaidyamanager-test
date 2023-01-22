@@ -19,9 +19,9 @@ const BillHistoryTab = ({ PatientId }) => {
     // console.log("visitcalender", filterbill)
 
     return (
-        <div>BillHistoryTab
+        <div>
             <Card>
-                <Card.Body>This is some text within a card body.</Card.Body>
+                <Card.Body>Patient Name:{filterbill[0]?.Patient[0].name}</Card.Body>
             </Card>
             <table className="striped bordered visiting" bordercolor="#1d4e4a">
                 <thead>
