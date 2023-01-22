@@ -34,7 +34,8 @@ const VisitingCalender = ({ patientId }) => {
 
       <Card>
         <Card.Body>
-
+        <h6> Patient Name: </h6>
+            <h6>Weight: </h6>
         </Card.Body>
       </Card>
       <table className="striped bordered visiting" bordercolor="black">

@@ -67,7 +67,8 @@ const OldPrescriptions = ({ patientIds }) => {
           <div className="col">
             <h5>Patient Details</h5>
             <h6> Patient Name: {patientDataPrescription.patientInfo.name}</h6>
-            <h6> {patientDataPrescription.patientInfo.weight}</h6>
+            <h6>Weight: {patientDataPrescription.patientInfo.weight}</h6>
+            {/* <h6>Sex: {patientDataPrescription.patientInfo.gender}</h6> */}
           </div>
         </div>
       </div>

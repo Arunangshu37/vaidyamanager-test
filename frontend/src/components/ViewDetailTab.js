@@ -31,16 +31,7 @@ const ViewDetailTab = () => {
 
 
 
-      <Card style={{ width: '18rem' }}>
-        <Card.Body>
-          <Card.Title>Basic Detail</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
-          <Card.Text>
-            
-          </Card.Text>
-
-        </Card.Body>
-      </Card>
+     
 
       <table className="table table-borderless" bordercolor="black" style={{ backgroundColor: "aliceblue" }}>
        
