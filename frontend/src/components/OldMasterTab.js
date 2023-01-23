@@ -1,4 +1,4 @@
-import React, { useState,useEffect,useLocation } from 'react';
+import React, { useState, useEffect, useLocation } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import OldPatientTab from './OldPatientTab';
@@ -10,42 +10,63 @@ import { withRouter } from 'react-router-dom';
 
 const OldMasterTab = () => {
   const [key, setKey] = useState('oldPatient')
-  const [selectedPatientId, setSelectedPatientId] = useState();
-  // const [activeTab, setActiveTab] = useState("oldPatient");
+  const [selectedPatientId, setSelectedPatientId] = useState(null);
+  const [isSelectedTab, setIsSelectedTab] = useState(false);
+
+  const SetTab = (tabkey) => {
+    if ((tabkey === "oldprescription" || tabkey === "oldTherapy" || tabkey === "oldinquiry"
+      || tabkey === "patientvisit" || tabkey === "Bill" || tabkey === "view" || tabkey === "oldPatient")
+      && selectedPatientId !== null) {
+      setKey(tabkey);
+      setIsSelectedTab(false);
+    }
+    else {
+      alert("Please select a Patient");
+    }
+  }
+
   const choosePatient = (oldPatient) => {
     setSelectedPatientId(oldPatient);
-    setKey("oldprescription");
+    setIsSelectedTab(true);
   };
+
+  useEffect(() => {
+    if (isSelectedTab) {
+      SetTab("oldprescription")
+    }
+  }, [isSelectedTab])
+
+
+
 
   return (
     <div style={{ marginTop: "4rem" }}>
       <Tabs
         id="controlled-tab-example"
         activeKey={key}
-        onSelect={(k) => setKey(k)}
+        onSelect={(k) => SetTab(k)}
         className="mb-3"
       >
         <Tab eventKey="oldPatient" title="Patient">
-        <OldPatientTab choosePatient={choosePatient}/>
-          {/* <OldPatientTab  handleViewClick={handleViewClick}/> */}
+          <OldPatientTab choosePatient={choosePatient} />
         </Tab>
         <Tab eventKey="oldprescription" title="Prescription">
           <OldPrescriptions patientIds={selectedPatientId} />
         </Tab>
-        <Tab eventKey="oldTherapy" title="Therapy">
+        {/* <Tab eventKey="oldTherapy" title="Therapy">
 
         </Tab>
         <Tab eventKey="oldinquiry" title="Inquiry">
 
-        </Tab>
+        </Tab> */}
         <Tab eventKey="patientvisit" title="Visiting Calender">
-          <VisitingCalender patientId={selectedPatientId}/>
+          <VisitingCalender patientId={selectedPatientId} />
         </Tab>
         <Tab eventKey="Bill" title="Bill history">
-          <BillHistoryTab PatientId = {selectedPatientId}/>
+          <BillHistoryTab PatientId={selectedPatientId} />
         </Tab>
         <Tab eventKey="view" title="View">
-          <ViewDetailTab />
+          <ViewDetailTab PatientIds={selectedPatientId} />
         </Tab>
       </Tabs>
     </div>

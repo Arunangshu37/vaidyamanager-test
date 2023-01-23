@@ -40,12 +40,16 @@ const VisitingCalender = ({ patientId }) => {
       <table className="striped bordered visiting" bordercolor="black">
         <thead>
           <tr>
-            <th>No</th>
-            <th>Visit Date</th>
-            <th>Next Visit</th>
-            <th>Days</th>
-            <th>Days</th>
-            <th>Remark</th>
+            <th>
+            <h4>No</h4>
+            </th>
+            <th>
+           <h4>   Visit Date</h4>
+              </th>
+            {/* <th>Next Visit</th> */}
+            <th> Prescription Days</th>
+            {/* <th> Lapse Days</th> */}
+            {/* <th>Remark</th> */}
           </tr>
         </thead>
 
@@ -55,8 +59,9 @@ const VisitingCalender = ({ patientId }) => {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{dayjs(v.createdAt).format('DD/MM/YYYY')}</td>
-                {/* <td>{v.}</td>
-                <td>{v.}</td> */}
+                {/* <td></td> */}
+                 <td>{v.prescriptiondays}</td>
+                {/* <td>{v.}</td>  */}
               </tr>
             );
           })}

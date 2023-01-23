@@ -48,12 +48,17 @@ const OldPrescriptions = ({ patientIds }) => {
   const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]._id === patientId);
   const visits = patientDataPrescription.createdAtDates?.map((date) => {
     const prescriptionD = patientPrescriptions?.filter(p => p.createdAt === date);
+    const newMedicineData = prescriptionD[0]?.medicineData.map((v) => {
+      const p = prescriptionD[0]?.PatientMedicines.find(e => e._id === v.medicineDetails)
+      return { ...v, medicineData: p }
+    })
     return {
       visitDate: dayjs(date).format('DD/MM/YYYY'),
-      medicinePrescribed: prescriptionD[0]?.medicineData,
+      medicinePrescribed: newMedicineData,
       symptomObserved: prescriptionD[0]?.Symptoms
     };
   });
+
 
   const handleDateClick = (visit) => {
     setSelectedVisit(visit);
@@ -101,7 +106,7 @@ const OldPrescriptions = ({ patientIds }) => {
                 <ListGroup variant="flush">
                   {selectedVisit.medicinePrescribed?.map((medicine, index) => (
                     <ListGroup.Item key={index}>
-                      {medicine.medicineDetails} ({medicine.dose})
+                      {medicine.medicineData.medicineName} ({medicine.dose})
                     </ListGroup.Item>
                   ))}
                 </ListGroup>

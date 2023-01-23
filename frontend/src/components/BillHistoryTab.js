@@ -48,7 +48,7 @@ const BillHistoryTab = ({ PatientId }) => {
                             </tr>
                         );
                     })}
-                    <tr>
+                    {/* <tr>
                         <td>Total</td>
                         <td></td>
                         <td></td>
@@ -57,7 +57,7 @@ const BillHistoryTab = ({ PatientId }) => {
                         <td>Paid</td>
 
 
-                    </tr>
+                    </tr> */}
 
                 </tbody>
             </table>

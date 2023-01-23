@@ -58,32 +58,32 @@ import OldPrescriptions from './components/OldPrescriptions'
 
 
 const App = () => {
-  
+
     return (
         <Router history={history}>
             <Header />
-        
+
             <main className='py-3'>
                 <Route path='/' component={HomeScreen} exact />
-                <Route path='/demoReg'  component={DemoRegistration}/>
+                <Route path='/demoReg' component={DemoRegistration} />
                 <Route path='/register' component={RegisterScreen} />
                 <Route path='/therapy' component={Therapy} />
                 <Route path='/inquiry' component={Inquiry} />
-                <Route path='/breadcrumb' component={Breadcrumb}/>
-                <Route path='/about' component={About}/>
+                <Route path='/breadcrumb' component={Breadcrumb} />
+                <Route path='/about' component={About} />
                 <Route path='/contact-us' component={ContactUs} />
-             
-              
+
+
                 <Container>
-                <Route path='/tab' component={TabComponent} />
-                <Route path='/mastertab' component={MasterTab} />
-                <Route path='/old-mastertab' component={OldMasterTab} />
-                {/* <Route path='/viewpatient' component={ViewDetailTab} /> */}
-                {/* <Route path='/visitlist' component={VisitingCalender} /> */}
-                {/* <Route path='/oldprescription' component={OldPrescriptions} />
+                    <Route path='/tab' component={TabComponent} />
+                    <Route path='/mastertab' component={MasterTab} />
+                    <Route path='/old-mastertab' component={OldMasterTab} />
+                    {/* <Route path='/viewpatient' component={ViewDetailTab} /> */}
+                    {/* <Route path='/visitlist' component={VisitingCalender} /> */}
+                    {/* <Route path='/oldprescription' component={OldPrescriptions} />
                 <Route path='/oldpatient' component={OldPatientTab} /> */}
-           <Route path='/oldprescription' component={OldPrescriptions} />
-                {/* <Route path='/oldprescription' render={(props) => <OldPrescriptions patientId={props.location.state?.patientId} />} /> */}
+                    <Route path='/oldprescription' component={OldPrescriptions} />
+                    {/* <Route path='/oldprescription' render={(props) => <OldPrescriptions patientId={props.location.state?.patientId} />} /> */}
                     <Route path='/terms-condition' component={TermsAndConditions} />
                     <Route path='/privacy-policy' component={PrivacyPolicy} />
                     <Route path='/refund-policy' component={RefundPolicy} />
@@ -102,15 +102,15 @@ const App = () => {
                     <Route path='/prescription/:id' component={Prescription} />
                     <Route exact path='/reset' component={Reset} />
                     <Route path='/reset/:token' component={NewPassword} />
-                    <Route path='/zoom'  component={Zoom}/>
-                    <Route path='/transaction'  component={Transaction}/>
-                    <Route path='/prescribetemplate'  component={PrescriptionTemplate}/>
-                    <Route path='/Role'  component={Role}/>
-                    <Route path='/appointmentlist'  component={Appointment}/>
-                    <Route path='/banner' component={Banner}/>
-                    <Route path='/carosel' component={CarouselBanner}/>
-                    <Route path='/medicinecards' component={MedicineCards}/>
-                    <Route path='/seach' component={SearchSymptom}/>
+                    <Route path='/zoom' component={Zoom} />
+                    <Route path='/transaction' component={Transaction} />
+                    <Route path='/prescribetemplate' component={PrescriptionTemplate} />
+                    <Route path='/Role' component={Role} />
+                    <Route path='/appointmentlist' component={Appointment} />
+                    <Route path='/banner' component={Banner} />
+                    <Route path='/carosel' component={CarouselBanner} />
+                    <Route path='/medicinecards' component={MedicineCards} />
+                    <Route path='/seach' component={SearchSymptom} />
                 </Container>
             </main>
             <Footer />
