@@ -73,6 +73,9 @@ const userSchema = mongoose.Schema(
         },
         address: {
             type: String,
+        },
+        profilePictureURL: {
+            type: String
         }
     },
     {

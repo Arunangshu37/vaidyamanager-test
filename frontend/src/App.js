@@ -55,6 +55,7 @@ import OldPatientTab from './components/OldPatientTab'
 import ViewDetailTab from './components/ViewDetailTab'
 import VisitingCalender from './components/VisitingCalender'
 import OldPrescriptions from './components/OldPrescriptions'
+import Dashboard from './screens/Dashboard'
 
 
 const App = () => {
@@ -72,7 +73,7 @@ const App = () => {
                 <Route path='/breadcrumb' component={Breadcrumb} />
                 <Route path='/about' component={About} />
                 <Route path='/contact-us' component={ContactUs} />
-
+                <Route path='/dashboard' component={Dashboard} />
 
                 <Container>
                     <Route path='/tab' component={TabComponent} />
@@ -111,6 +112,7 @@ const App = () => {
                     <Route path='/carosel' component={CarouselBanner} />
                     <Route path='/medicinecards' component={MedicineCards} />
                     <Route path='/seach' component={SearchSymptom} />
+                    {/* <Route path='/dashboard' component={Dashboard} /> */}
                 </Container>
             </main>
             <Footer />

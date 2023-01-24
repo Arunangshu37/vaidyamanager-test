@@ -18,10 +18,10 @@ const VisitingCalender = ({ patientId }) => {
   const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
 
-  const PrescriptionVisitData = _.orderBy(patientPrescriptionData, [item => item.lastModified], ['desc']);
+  const PrescriptionVisitData1 = _.orderBy(patientPrescriptionData, [item => item.createdAt], ['desc']);
 
   // filter visits based on patientId
-  const filteredVisits = PrescriptionVisitData?.filter(visit => visit.prescriptionUser === patientId);
+  const filteredVisits = PrescriptionVisitData1?.filter(visit => visit.prescriptionUser === patientId);
   // console.log("visitcalender", filteredVisits)
 
   useEffect(() => {

@@ -12,8 +12,8 @@ const BillHistoryTab = ({ PatientId }) => {
     const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
     const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
 
-    const PrescriptionVisitData = _.orderBy(patientPrescriptionData, [item => item.lastModified], ['desc']);
-    console.log("PrescriptionVisitData", PrescriptionVisitData);
+    const PrescriptionVisitData = _.orderBy(patientPrescriptionData, [item => item.createdAt], ['desc']);
+    // console.log("PrescriptionVisitData", PrescriptionVisitData);
 
     const filterbill = PrescriptionVisitData?.filter(visit => visit.prescriptionUser === PatientId);
     // console.log("visitcalender", filterbill)
