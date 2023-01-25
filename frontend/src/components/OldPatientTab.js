@@ -59,7 +59,7 @@ const OldPatientTab = ({ choosePatient }) => {
   return (
     <div>
       {/* table Starts */}
-      <table className="table table-borderless" bordercolor="black" id="myTable">
+      <table className="table table-borderless" bordercolor="#6caaa8" id="myTable">
         <tr>
           <td>
             <Form.Control

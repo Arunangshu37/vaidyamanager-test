@@ -18,7 +18,7 @@ const ViewDetailTab = ({ PatientIds }) => {
   // filter visits based on patientId
 
   const filteredView = PrescriptionVisitData?.filter(visit => visit.prescriptionUser === PatientIds);
-  console.log("filteredView", filteredView)
+  // console.log("filteredView", filteredView)
 
   return (
     <div style={{ marginTop: "3rem" }}>
@@ -44,7 +44,7 @@ const ViewDetailTab = ({ PatientIds }) => {
               {/* {index + 1} */}
               <h2>{dayjs(v.createdAt).format('DD/MM/YYYY')}</h2>
             </Col>
-            <table className="table table-borderless" bordercolor="black" style={{ backgroundColor: "aliceblue" }}>
+            <table className="table table-borderless" bordercolor="#6caaa8" style={{ backgroundColor: "aliceblue" }}>
               <tr>
                 <td>
                   <Card style={{ width: '18rem' }}>

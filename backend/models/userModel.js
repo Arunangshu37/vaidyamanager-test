@@ -48,7 +48,7 @@ const userSchema = mongoose.Schema(
         weight: {
             type: String,
         },
-        presentIllness: {
+        illness: {
             type: String,
         },
         duration: {

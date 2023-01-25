@@ -37,7 +37,7 @@ const VisitingCalender = ({ patientId }) => {
           <h6>Weight:{filteredVisits[0]?.Patient[0].weight} </h6>
         </Card.Body>
       </Card>
-      <table className="striped bordered visiting" bordercolor="black">
+      <table className="striped bordered visiting" bordercolor="#6caaa8">
         <thead>
           <tr>
             <th>

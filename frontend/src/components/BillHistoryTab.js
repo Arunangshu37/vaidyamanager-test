@@ -16,7 +16,15 @@ const BillHistoryTab = ({ PatientId }) => {
     // console.log("PrescriptionVisitData", PrescriptionVisitData);
 
     const filterbill = PrescriptionVisitData?.filter(visit => visit.prescriptionUser === PatientId);
-    // console.log("visitcalender", filterbill)
+
+    
+    let Total = 0;
+    let Paid =0;
+    filterbill.map((bill) =>  {
+        bill.payment?.Debit_Credit? Total += bill.payment?.Debit_Credit: Total += 0
+        bill.payment?.paid? Paid += bill.payment?.paid: Paid += 0
+    })
+
 
     return (
         <div>
@@ -45,19 +53,20 @@ const BillHistoryTab = ({ PatientId }) => {
                                 <td>{v.payment?.medicine}</td>
                                 <td>{v.payment?.Debit_Credit}</td>
                                 <td>{v.payment?.paid}</td>
+                               
                             </tr>
                         );
                     })}
-                    {/* <tr>
+                    <tr>
                         <td>Total</td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>Paid</td>
-                        <td>Paid</td>
+                        <td>{Total}</td>
+                        <td>{Paid}</td>
 
 
-                    </tr> */}
+                    </tr>
 
                 </tbody>
             </table>

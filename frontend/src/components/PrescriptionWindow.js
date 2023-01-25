@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Modal, ListGroup, InputGroup, Card } from 'react-bootstrap'
-import { Checkbox, IconButton } from '@mui/material'
-import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../prescription.css'
 import { getUserInfoDetails } from '../actions/userActions'
 import { addPrescriptionUser, addDietChart } from '../actions/prescriptionActions'
 import { useDispatch, useSelector } from 'react-redux'
-import AddIcon from '@mui/icons-material/Add';
 import { DiechartList } from './DiechartList';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import jsPDF from 'jspdf'
-import dayjs from 'dayjs'
 import { getMedicines } from '../actions/prescriptionActions'
 import '../prescriptionWindow.css'
 let googleTransliterate = require("google-input-tool");

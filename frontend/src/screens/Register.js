@@ -22,14 +22,14 @@ const Register = ({ location, history }) => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState(null)
-    const [age, setAge] = useState();
-    const [gender, setGender] = useState();
-    const [address, setAddress] = useState();
-    const [weight, setWeight] = useState();
-    const [illness, setIllness] = useState();
-    const [treatment, setTreatment] = useState();
-    const [duration, setDuration] = useState();
-    const [reference, setReference] = useState();
+    const [age, setAge] = useState('');
+    const [gender, setGender] = useState('');
+    const [address, setAddress] = useState('');
+    const [weight, setWeight] = useState('');
+    const [illness, setIllness] = useState('');
+    const [treatment, setTreatment] = useState('');
+    const [duration, setDuration] = useState('');
+    const [reference, setReference] = useState('');
     // const [dob, setDob] = useState();
     const [date, setDate] = useState(new Date());
 
@@ -75,6 +75,19 @@ const Register = ({ location, history }) => {
             // Dispatch Register
             dispatch(register(name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, false))
             localStorage.setItem('isLogin', true)
+            setName('');
+            setEmail('');
+            setPhone('');
+            setAge('');
+            setGender('');
+            setAddress('');
+            setWeight('');
+            setIllness('');
+            setTreatment('');
+            setDuration('');
+
+
+
         }
     }
 
@@ -233,7 +246,7 @@ const Register = ({ location, history }) => {
                                     <label> Present Illness</label>
                                 </td>
                                 <td colSpan={5}>
-                                    <Form.Group controlId='Illness' className='registerform-group'>
+                                    <Form.Group controlId='illness' className='registerform-group'>
                                         <Form.Control
                                             type='text'
                                             placeholder='About Illness'

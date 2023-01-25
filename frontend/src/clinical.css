@@ -1,0 +1,21 @@
+.clinical table{ 
+    margin: auto;
+    border: none;
+    width: 100%;
+    
+}
+.clinical table{ 
+    width: 100%; 
+}
+
+.clinical td, .clinical th {
+    border: 0px solid #ddd;
+    padding: 8px;
+}
+.clinical th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #589a98;
+    color: white;
+}

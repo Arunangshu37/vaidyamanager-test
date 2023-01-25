@@ -51,9 +51,7 @@ import About from './screens/Abouts'
 import MedicineCards from './components/MedicineCards'
 import SearchSymptom from './screens/SearchSymptom'
 import OldMasterTab from './components/OldMasterTab'
-import OldPatientTab from './components/OldPatientTab'
-import ViewDetailTab from './components/ViewDetailTab'
-import VisitingCalender from './components/VisitingCalender'
+import Inventory from './components/Inventory'
 import OldPrescriptions from './components/OldPrescriptions'
 import Dashboard from './screens/Dashboard'
 
@@ -79,7 +77,7 @@ const App = () => {
                     <Route path='/tab' component={TabComponent} />
                     <Route path='/mastertab' component={MasterTab} />
                     <Route path='/old-mastertab' component={OldMasterTab} />
-                    {/* <Route path='/viewpatient' component={ViewDetailTab} /> */}
+                    <Route path='/inventory' component={Inventory} />
                     {/* <Route path='/visitlist' component={VisitingCalender} /> */}
                     {/* <Route path='/oldprescription' component={OldPrescriptions} />
                 <Route path='/oldpatient' component={OldPatientTab} /> */}

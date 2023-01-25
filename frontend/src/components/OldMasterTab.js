@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLocation } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import OldPatientTab from './OldPatientTab';
@@ -6,7 +6,6 @@ import ViewDetailTab from './ViewDetailTab';
 import VisitingCalender from './VisitingCalender';
 import BillHistoryTab from './BillHistoryTab';
 import OldPrescriptions from './OldPrescriptions';
-import { withRouter } from 'react-router-dom';
 
 const OldMasterTab = () => {
   const [key, setKey] = useState('oldPatient')

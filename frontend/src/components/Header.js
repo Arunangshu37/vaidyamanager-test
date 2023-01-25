@@ -76,6 +76,11 @@ const Header = () => {
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
+                                <LinkContainer to={`/inventory`}>
+                                    <Navbar.Brand>Inventory
+                                        &nbsp;  |&nbsp;
+                                    </Navbar.Brand>
+                                </LinkContainer>
                                
                                 {/* <NavDropdown title="Know More" id="basic-nav-dropdown" renderMenuOnMount={true}>
                                     <NavDropdown.Item href="/about-us" >

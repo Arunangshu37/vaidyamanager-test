@@ -108,10 +108,10 @@ export const register = (name, email, phone, password, address, age, gender, wei
         })
         alert('Register Successfully!');
         // Login in the user as well after registering
-        dispatch({
-            type: USER_LOGIN_SUCCESS,
-            payload: data,
-        })
+        // dispatch({
+        //     type: USER_LOGIN_SUCCESS,
+        //     payload: data,
+        // })
 
         // Set user data to local storage
         localStorage.setItem('userInfo', JSON.stringify(data))
