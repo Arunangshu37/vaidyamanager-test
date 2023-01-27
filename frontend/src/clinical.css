@@ -4,7 +4,7 @@
     width: 100%;
     
 }
-.clinical table{ 
+.clinical{ 
     width: 100%; 
 }
 
@@ -18,4 +18,14 @@
     text-align: left;
     background-color: #589a98;
     color: white;
+}
+
+.clinic-input{
+    width: 17%;
+    height: 34px;
+    padding: 1px 6px;
+    border: 1px solid #6caaa8;
+    outline: none;
+    border-radius: 6px;
+
 }

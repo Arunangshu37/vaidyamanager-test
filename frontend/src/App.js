@@ -54,6 +54,9 @@ import OldMasterTab from './components/OldMasterTab'
 import Inventory from './components/Inventory'
 import OldPrescriptions from './components/OldPrescriptions'
 import Dashboard from './screens/Dashboard'
+import Analytics from './screens/Analytics'
+import Setting from './screens/Setting'
+import VisitingCards from './screens/VisitingCards'
 
 
 const App = () => {
@@ -78,7 +81,7 @@ const App = () => {
                     <Route path='/mastertab' component={MasterTab} />
                     <Route path='/old-mastertab' component={OldMasterTab} />
                     <Route path='/inventory' component={Inventory} />
-                    {/* <Route path='/visitlist' component={VisitingCalender} /> */}
+                    <Route path='/analytics' component={Analytics} />
                     {/* <Route path='/oldprescription' component={OldPrescriptions} />
                 <Route path='/oldpatient' component={OldPatientTab} /> */}
                     <Route path='/oldprescription' component={OldPrescriptions} />
@@ -110,6 +113,8 @@ const App = () => {
                     <Route path='/carosel' component={CarouselBanner} />
                     <Route path='/medicinecards' component={MedicineCards} />
                     <Route path='/seach' component={SearchSymptom} />
+                    <Route path='/settings' component={Setting} />
+                    <Route path='/visitingcard' component={VisitingCards} />
                     {/* <Route path='/dashboard' component={Dashboard} /> */}
                 </Container>
             </main>

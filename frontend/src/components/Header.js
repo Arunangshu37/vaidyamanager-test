@@ -67,12 +67,12 @@ const Header = () => {
                                     </Navbar.Brand>
                                 </LinkContainer>
                                 <LinkContainer to={`/mastertab`}>
-                                    <Navbar.Brand>New
+                                    <Navbar.Brand>Patient Registeration
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
                                 <LinkContainer to={`/old-mastertab`}>
-                                    <Navbar.Brand>Old
+                                    <Navbar.Brand>OPD Visits
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
@@ -81,7 +81,12 @@ const Header = () => {
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
-                               
+                                <LinkContainer to={`/analytics`}>
+                                    <Navbar.Brand>Analytics
+                                        &nbsp;  |&nbsp;
+                                    </Navbar.Brand>
+                                </LinkContainer>
+
                                 {/* <NavDropdown title="Know More" id="basic-nav-dropdown" renderMenuOnMount={true}>
                                     <NavDropdown.Item href="/about-us" >
                                         About Us
@@ -114,14 +119,16 @@ const Header = () => {
                                                 Profile
                                             </NavDropdown.Item>
                                         </LinkContainer>
-                                        {isSuperAdmin ?
-                                            <LinkContainer to='/review-order'>
-                                                <NavDropdown.Item>
-                                                    Review Order
-                                                </NavDropdown.Item>
-                                            </LinkContainer> : ""
-                                        }
-
+                                        <LinkContainer to='/visitingcard'>
+                                            <NavDropdown.Item>
+                                                Visiting Card
+                                            </NavDropdown.Item>
+                                        </LinkContainer>
+                                        <LinkContainer to='/settings'>
+                                            <NavDropdown.Item>
+                                                Setting
+                                            </NavDropdown.Item>
+                                        </LinkContainer>
                                         <NavDropdown.Item
                                             onClick={logoutHandler}
                                         >
