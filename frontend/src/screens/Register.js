@@ -30,6 +30,7 @@ const Register = ({ location, history }) => {
     const [treatment, setTreatment] = useState('');
     const [duration, setDuration] = useState('');
     const [reference, setReference] = useState('');
+    const [profilePictureURL, setprofilePictureURL] = useState('')
     // const [dob, setDob] = useState();
     const [date, setDate] = useState(new Date());
 
@@ -73,7 +74,7 @@ const Register = ({ location, history }) => {
         } else {
 
             // Dispatch Register
-            dispatch(register(name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, false))
+            dispatch(register(name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date,profilePictureURL, false))
             localStorage.setItem('isLogin', true)
             setName('');
             setEmail('');
@@ -187,6 +188,17 @@ const Register = ({ location, history }) => {
                                             onChange={(e) => setWeight(e.target.value)}
 
                                         ></Form.Control>
+                                    </Form.Group>
+                                </td>
+                                <td>
+                                    <Form.Group controlId='Image' className='userImage'>
+                                        {/* <Form.Control
+                                            type='text'
+                                            placeholder='Image'
+                                            value={userImage}
+                                            onChange={(e) => setUserImage(e.target.value)}
+
+                                        ></Form.Control> */}
                                     </Form.Group>
                                 </td>
                             </tr>

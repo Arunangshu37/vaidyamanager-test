@@ -51,7 +51,7 @@ const authUser = asyncHandler(async (req, res) => {
 // @route POST /api/users
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, phone, password,address,Date,weight,illness,duration,treatment,reference, age, gender,isAdmin} = req.body
+    const { name, email, phone, password,address,Date,weight,illness,duration,treatment,reference, age, gender,isAdmin,profilePictureURL} = req.body
 
     const userExists = await User.findOne({ email })
 // console.log("admin",isAdmin)
@@ -76,7 +76,8 @@ const registerUser = asyncHandler(async (req, res) => {
         treatment,
         duration,
         reference,
-        isAdmin
+        isAdmin,
+        profilePictureURL
         // resetToken,
         // expireToken
     })
@@ -84,12 +85,12 @@ const registerUser = asyncHandler(async (req, res) => {
     // If the user is successfully created then send back user details in response
     if (user) {
         // console.log("success");
-        transporter.sendMail({
-            to: user.email,
-            from: "info@mindvein.com",
-            subject: "Registeration success",
-            html: "<h1>welcome to Mindvein</h1>"
-        })
+        // transporter.sendMail({
+        //     to: user.email,
+        //     from: "info@mindvein.com",
+        //     subject: "Registeration success",
+        //     html: "<h1>welcome to Mindvein</h1>"
+        // })
         res.status(201).json({
             _id: user._id,
             name: user.name,

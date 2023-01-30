@@ -5,6 +5,9 @@ import '../prescription.css'
 import { getUserInfoDetails } from '../actions/userActions'
 import { addPrescriptionUser, addDietChart } from '../actions/prescriptionActions'
 import { useDispatch, useSelector } from 'react-redux'
+
+import Box from '@mui/material/Box';
+import Icon from '@mui/material/Icon';
 import { DiechartList } from './DiechartList';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -144,8 +147,8 @@ const PrescriptionWindow = () => {
   const [inputFields, setInputFields] = useState([]);
   const addFields = (event) => {
     let medicineName = event.target.textContent.trim();
-    let isMedicineAdded = inputFields.find((_)=>{ return _.med.medicineName == medicineName })?.med._id !== undefined
-    if(!isMedicineAdded){
+    let isMedicineAdded = inputFields.find((_) => { return _.med.medicineName == medicineName })?.med._id !== undefined
+    if (!isMedicineAdded) {
       let med = allMedicines.medicinesList?.find((med) => { return med.medicineName === medicineName })
       let newfield = { Dose: '', med: med }
       setInputFields([...inputFields, newfield])
@@ -576,6 +579,12 @@ const PrescriptionWindow = () => {
                 </div>
               ))}
               <input id="translatedvalue" className='p-input' value={translatedValue} type="hidden" />
+
+              <div style={{margin:"800px 1px 2px 0px"}}>
+                <Icon baseClassName="fas" className="fa-plus-circle" fontSize="small" />
+              </div>
+
+
             </td>
             <td>
               {inputFields.map((input, index) => {

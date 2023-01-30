@@ -57,6 +57,7 @@ import Dashboard from './screens/Dashboard'
 import Analytics from './screens/Analytics'
 import Setting from './screens/Setting'
 import VisitingCards from './screens/VisitingCards'
+import MainPage from './screens/MainPage'
 
 
 const App = () => {
@@ -75,7 +76,7 @@ const App = () => {
                 <Route path='/about' component={About} />
                 <Route path='/contact-us' component={ContactUs} />
                 <Route path='/dashboard' component={Dashboard} />
-
+                <Route path='/mainpage'  component={MainPage} />
                 <Container>
                     <Route path='/tab' component={TabComponent} />
                     <Route path='/mastertab' component={MasterTab} />
@@ -85,7 +86,7 @@ const App = () => {
                     {/* <Route path='/oldprescription' component={OldPrescriptions} />
                 <Route path='/oldpatient' component={OldPatientTab} /> */}
                     <Route path='/oldprescription' component={OldPrescriptions} />
-                    {/* <Route path='/oldprescription' render={(props) => <OldPrescriptions patientId={props.location.state?.patientId} />} /> */}
+                 
                     <Route path='/terms-condition' component={TermsAndConditions} />
                     <Route path='/privacy-policy' component={PrivacyPolicy} />
                     <Route path='/refund-policy' component={RefundPolicy} />

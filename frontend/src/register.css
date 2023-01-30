@@ -65,4 +65,10 @@
             transform: translateY(85px);
   }
  
-  
+.userImage{
+  background-color: lightgrey;
+  width: 160px;
+  border: 15px solid #88ccc6;
+  padding: 50px;
+  margin: 20px;
+  }

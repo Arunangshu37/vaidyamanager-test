@@ -61,32 +61,54 @@ const Header = () => {
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
-                                <LinkContainer to={`/dashboard`}>
-                                    <Navbar.Brand>Dashboard
-                                        &nbsp;  |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer>
-                                <LinkContainer to={`/mastertab`}>
-                                    <Navbar.Brand>Patient Registeration
-                                        &nbsp;  |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer>
-                                <LinkContainer to={`/old-mastertab`}>
-                                    <Navbar.Brand>OPD Visits
-                                        &nbsp;  |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer>
-                                <LinkContainer to={`/inventory`}>
-                                    <Navbar.Brand>Inventory
-                                        &nbsp;  |&nbsp;
-                                    </Navbar.Brand>
-                                </LinkContainer>
+                                {
+                                    isLogin ? <LinkContainer to={`/dashboard`}>
+                                        <Navbar.Brand>Dashboard
+                                            &nbsp;  |&nbsp;
+                                        </Navbar.Brand>
+                                    </LinkContainer>
+                                        :
+                                       ""
+                                }
+                                {
+                                    isLogin ? <LinkContainer to={`/mastertab`}>
+                                        <Navbar.Brand>Patient Registeration
+                                            &nbsp;  |&nbsp;
+                                        </Navbar.Brand>
+                                    </LinkContainer>
+                                        :
+                                      ""
+                                }
+                                 {
+                                    isLogin ? <LinkContainer to={`/old-mastertab`}>
+                                        <Navbar.Brand>OPD Visits
+                                            &nbsp;  |&nbsp;
+                                        </Navbar.Brand>
+                                    </LinkContainer>
+                                        :
+                                        ""
+                                }
+                               {
+                                    isLogin ? <LinkContainer to={`/inventory`}>
+                                        <Navbar.Brand>Inventory
+                                            &nbsp;  |&nbsp;
+                                        </Navbar.Brand>
+                                    </LinkContainer>
+                                        :
+                              ""
+                                }
+                         
                                 <LinkContainer to={`/analytics`}>
                                     <Navbar.Brand>Analytics
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
 
+                                <LinkContainer to={`/mainpage`}>
+                                    <Navbar.Brand>Login
+                                        &nbsp;  |&nbsp;
+                                    </Navbar.Brand>
+                                </LinkContainer>
                                 {/* <NavDropdown title="Know More" id="basic-nav-dropdown" renderMenuOnMount={true}>
                                     <NavDropdown.Item href="/about-us" >
                                         About Us
@@ -114,11 +136,11 @@ const Header = () => {
                                         title={userInfo.name}
                                         id='username'
                                     >
-                                        <LinkContainer to='/profile'>
+                                        {/* <LinkContainer to='/profile'>
                                             <NavDropdown.Item>
                                                 Profile
                                             </NavDropdown.Item>
-                                        </LinkContainer>
+                                        </LinkContainer> */}
                                         <LinkContainer to='/visitingcard'>
                                             <NavDropdown.Item>
                                                 Visiting Card
