@@ -42,7 +42,7 @@ const ViewDetailTab = ({ PatientIds }) => {
           <Row key={index}>
             <Col>
               {/* {index + 1} */}
-              <h2>{dayjs(v.createdAt).format('DD/MM/YYYY')}</h2>
+              <h2 style={{fontWeight:"bold", color:"#357e7c"}}>{dayjs(v.createdAt).format('DD/MM/YYYY')}</h2>
             </Col>
             <table className="table table-borderless" bordercolor="#6caaa8" style={{ backgroundColor: "aliceblue" }}>
               <tr>

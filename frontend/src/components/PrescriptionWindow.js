@@ -35,10 +35,11 @@ const PrescriptionWindow = () => {
     video: "",
     report: "",
     payment: {},
+    Remark: ""
   }
 
   const [prescription, setPrescription] = useState(defaultData);
-
+  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
 
   //Prescription API Data
@@ -75,7 +76,8 @@ const PrescriptionWindow = () => {
           Video: videofile,
           report: reportfile,
           payment: inputVal,
-          prescriptiondays: prescription.prescriptiondays
+          prescriptiondays: prescription.prescriptiondays,
+          Remark: prescription.Remark
 
         }
         dispatch(addPrescriptionUser(mainPrescription))
@@ -438,6 +440,10 @@ const PrescriptionWindow = () => {
     // if (dietArray.length != 0) document.getElementById("markDietChartAttached").innerHTML = "✓";
   }, [imagefile, videofile, reportfile])
 
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
+
 
   return (
     <>
@@ -580,8 +586,18 @@ const PrescriptionWindow = () => {
               ))}
               <input id="translatedvalue" className='p-input' value={translatedValue} type="hidden" />
 
-              <div style={{margin:"800px 1px 2px 0px"}}>
-                <Icon baseClassName="fas" className="fa-plus-circle" fontSize="small" />
+              <div style={{ margin: "800px 1px 2px 0px" }}>
+                <Icon baseClassName="fas" className="fa-plus-circle" fontSize="small" onClick={togglePopup} />
+                {isOpen && <input className='popup-box'
+                  content={<>
+                    <b>Remark</b>
+
+
+                  </>}
+                  value={prescription.Remark}
+                  onChange={(e) => setPrescription({ ...prescription, Remark: e.target.value })}
+                  handleClose={togglePopup}
+                />}
               </div>
 
 

@@ -80,6 +80,9 @@ const prescriptionSchema = mongoose.Schema(
             },
             // Mode: String
         },
+        Remark: {
+            type: String
+        },
 
     },
     {

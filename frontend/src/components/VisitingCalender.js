@@ -49,7 +49,7 @@ const VisitingCalender = ({ patientId }) => {
             {/* <th>Next Visit</th> */}
             <th> Prescription Days</th>
             {/* <th> Lapse Days</th> */}
-            {/* <th>Remark</th> */}
+            <th>Remark</th>
           </tr>
         </thead>
 
@@ -61,7 +61,7 @@ const VisitingCalender = ({ patientId }) => {
                 <td>{dayjs(v.createdAt).format('DD/MM/YYYY')}</td>
                 {/* <td></td> */}
                  <td>{v.prescriptiondays}</td>
-                {/* <td>{v.}</td>  */}
+                <td>{v.Remark}</td> 
               </tr>
             );
           })}

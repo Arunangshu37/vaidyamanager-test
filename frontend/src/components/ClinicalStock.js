@@ -55,7 +55,9 @@ const ClinicalStock = () => {
 
                                     {index === selectedRow &&
                                         <div>
-                                            <input className='clinic-input' />
+                                            <input className='clinic-input' placeholder='Unit'/>
+                                            <input className='clinic-input' placeholder='Gram' />
+                                            <Button>Done</Button>
                                             <Button onClick={() => handleRemove(index)}>Remove</Button>
                                         </div>
                                     }

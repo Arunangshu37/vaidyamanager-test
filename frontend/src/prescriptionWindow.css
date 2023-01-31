@@ -79,3 +79,18 @@ flex-direction: row;
 padding: 0px 1px 0px 1px;
 margin: 2px 2px 2px 0 5px;
 justify-content: space-between; */
+.popup-box {
+
+  position: relative;
+  width: 50%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 7vh;
+  /* margin-top: calc(97vh - 81vh - 18px); */
+  background: #fff;
+  border-radius: 4px;
+  padding: 29px;
+  border: 1px solid #999;
+  overflow: auto;
+
+}
