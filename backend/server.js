@@ -11,6 +11,7 @@ import easebuzzRoutes from './routes/easebuzzRoutes.js'
 import therapyRoutes from './routes/therapyRoutes.js'
 import inquiryRoutes from './routes/inquiryRoutes.js'
 import prescriptionRoutes from './routes/prescriptionRoutes.js'
+import dashboardRoutes from './routes/dashboardRoutes.js'
 
 // consultant  & doctor route
 import consultantsRoutes from './routes/consultantsRoutes.js'
@@ -58,11 +59,15 @@ app.get('/api/video', (req, res) => {
 });
 app.use("/api/videos", videoRoutes);
 
+//Patient Therapy
 app.use('/api/therapy', therapyRoutes);
+//Patient Inquiry
 app.use('/api/inquiry', inquiryRoutes);
-
+//Prescription Routes
 app.use('/api/prescription',prescriptionRoutes)
+//dashboard Routes
 
+app.use('/api/dashboard', dashboardRoutes)
 
 var upload = multer();
 app.use(upload.array()); 
