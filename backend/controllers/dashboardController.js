@@ -23,6 +23,8 @@ const addAppointmentDetails = asyncHandler(async (req, res) => {
         patientContact
     })
     const createAppointment = await AppointmentData.save();
+    console.log("date",appointmentDate)
+    console.log("date",appointmentTime)
     res.status(201).json(createAppointment)
 
 })

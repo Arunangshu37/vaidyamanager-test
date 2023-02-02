@@ -6,13 +6,18 @@ import Row from 'react-bootstrap/Row';
 import '../dashboard.css';
 import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from 'react-redux'
-import {createDashboardAppointment} from '../actions/dashboardActions'
+import { createDashboardAppointment, getPatientppointments } from '../actions/dashboardActions'
+import dayjs from 'dayjs';
 
 const Dashboard = () => {
+
+  const [todayAppointments, setTodayAppointments] = useState([]);
+  const [tomorrowAppointments, setTomorrowAppointments] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
+
   const appointmentdefaultData = {
-    appointmentDate: "Select Date",
-    appointmentTime: "Select Time",
+    appointmentDate: "",
+    appointmentTime: "",
     patientName: "",
     patientContact: ""
   }
@@ -22,20 +27,43 @@ const Dashboard = () => {
   const addAppointmentData = useSelector((state) => state.patientAppointment)
   const { loading, error, success, appointmentData } = addAppointmentData
 
+  const getAppointments = useSelector((state) => state.getAppointmentPatients)
+  const { loadingapp, appointmentsData, errorapp } = getAppointments
+  console.log("Appointments Data", appointmentsData)
+
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log("Date is",appointment)
+    console.log("Date is", appointment)
+    console.log("Date is", dayjs(appointment.appointmentTime).format('HH:mm'),)
     dispatch(createDashboardAppointment(
-      appointment.appointmentDate,
-      appointment.appointmentTime,
+      dayjs(appointment.appointmentDate).format('YYYY-MM-DD'),
+      dayjs(appointment.appointmentTime).format('HH:mm'),
       appointment.patientName,
       appointment.patientContact,
     ))
-
     setAppointment(appointmentdefaultData)
-
   }
 
+  useEffect(() => {
+    dispatch(getPatientppointments());
+  }, [dispatch])
+
+  useEffect(() => {
+    const today = dayjs().format('YYYY-MM-DD');
+    const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
+
+    const todayAppointments = appointmentsData?.filter(appointments => {
+      console.log("today", appointments.appointmentDate, today)
+      return dayjs(appointments.appointmentDate).format('YYYY-MM-DD') === today;
+    });
+
+    const tomorrowAppointments = appointmentsData?.filter(appointments => {
+      return dayjs(appointments.appointmentDate).format('YYYY-MM-DD') === tomorrow;
+    });
+
+    setTodayAppointments(todayAppointments);
+    setTomorrowAppointments(tomorrowAppointments);
+  }, [appointmentsData]);
 
   return (
     <>
@@ -49,8 +77,12 @@ const Dashboard = () => {
               <Card.Body>
 
                 <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
+                  {todayAppointments?.map(appointment => (
+                    <div key={appointment.id}>
+                      <p>Patient Name: {appointment.patientName}</p>
+                      <p>Phone Number: {appointment.patientContact}</p>
+                    </div>
+                  ))}
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -62,8 +94,13 @@ const Dashboard = () => {
               <Card.Body>
 
                 <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
+                  {tomorrowAppointments?.map(appointment => (
+                    <div key={appointment.id}>
+                      <p>Patient Name: {appointment.patientName}</p>
+                      <p>Phone Number: {appointment.patientContact}</p>
+                    </div>
+                  ))}
+
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -107,9 +144,9 @@ const Dashboard = () => {
                       timeCaption="Time"
                       dateFormat="h:mm aa"
                       // value={}
-                      onChange={(date) => setAppointment({ ...appointment, appointmentTime:date})}
+                      onChange={(time) => setAppointment({ ...appointment, appointmentTime: time })}
                     />
-                    
+
                   </div>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <input type="text" id="pName" className='p-input' placeholder='Patient Name' style={{ margin: "0 14px 9px 0" }}

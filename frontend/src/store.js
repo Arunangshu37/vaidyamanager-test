@@ -50,7 +50,7 @@ import {medicinesListReducer,dietChartDetailReducer,prescriptionDetailReducer,
 import {createInquiryReducer} from './reducers/inquiryReducers'
 
 
-import {createDashboardAppointmentReducer} from './reducers/dashboardReducers'
+import {createDashboardAppointmentReducer,getPatientAppointmentDetailsReducer} from './reducers/dashboardReducers'
 
 const reducer = combineReducers({
     productList: productListReducer,
@@ -91,7 +91,8 @@ const reducer = combineReducers({
     getDietData:getDietChartDataReducer,
     getPrescripionList:getPrescriptionDetailsReducer,
     getPatientPrescriptionList:getPatientPrescriptionDetailReducer,
-    patientAppointment:createDashboardAppointmentReducer
+    patientAppointment:createDashboardAppointmentReducer,
+    getAppointmentPatients:getPatientAppointmentDetailsReducer,
 
 })
 

@@ -25,12 +25,6 @@ export const createDashboardAppointment = (
             type: DASHBOARD_APPOINTMNET_REQUEST,
         })
 
-        // Header to send with the request
-        // const config = {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        // }
 
         // Make request to server and get the response data
         const { data } = await axios.post(
@@ -59,6 +53,32 @@ export const createDashboardAppointment = (
     } catch (error) {
         dispatch({
             type: DASHBOARD_APPOINTMNET_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
+
+//getting appointment list
+export const getPatientppointments = () => async (dispatch) => {
+
+    try {
+        dispatch({
+            type: DASHBOARD_GETAPPOINTMNET_SUCCESS,
+        })
+        const { data } = await axios.get('/api/dashboard/getappointment')
+
+        dispatch({
+            type: DASHBOARD_GETAPPOINTMNET_SUCCESS,
+            payload: data,
+        })
+        console.log("Appointments")
+    } catch (error) {
+        dispatch({
+            type: DASHBOARD_GETAPPOINTMNET_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

@@ -20,12 +20,10 @@ const OldPrescriptions = ({ patientIds }) => {
     patientInfo: {}
   });
 
-
   const patientData = patientIds;
   const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
   const PrescriptionDates = _.orderBy(patientPrescriptionData, [item => item.createdAt], ['desc']);
-  console.log("Prescription Date",PrescriptionDates)
 
   useEffect(() => {
     dispatch(getPatientDetail());
