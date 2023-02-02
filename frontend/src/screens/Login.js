@@ -111,23 +111,23 @@ const Login = ({ location, history }) => {
                                 >
                                     Sign In
                                 </Button>
-                                <div className="divider d-flex align-items-center my-4">
+                                {/* <div className="divider d-flex align-items-center my-4">
                                     <p className="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-                                </div>
+                                </div> */}
                                 {/* <Button type="submit" className="btn btn-primary btn-lg btn-block" style={{ color:"white",backgroundColor: "#3b5998" }}
                                 >
                                     <Link style={{ color:"white"}} to={'/otpscreen'}>
                                     Sign In With Phone No
                                     </Link>
                                 </Button> */}
-                                <Row className='py-3'>
+                                {/* <Row className='py-3'>
                                     <Col>
                                         New Customer{' '}
                                         <Link to={"/mastertab"}>
                                             Register
                                         </Link>
                                     </Col>
-                                </Row>
+                                </Row> */}
                             </Form>
                         </div>
                     </div>

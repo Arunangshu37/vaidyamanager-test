@@ -56,7 +56,7 @@ const Header = () => {
 
                         <Navbar.Collapse id='basic-navbar-nav'>
                             <Nav className='me-auto'>
-                                <LinkContainer to={`/`}>
+                                <LinkContainer to={`/home`}>
                                     <Navbar.Brand>Home
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
@@ -88,7 +88,7 @@ const Header = () => {
                                         :
                                         ""
                                 }
-                               {
+                               {/* {
                                     isLogin ? <LinkContainer to={`/inventory`}>
                                         <Navbar.Brand>Inventory
                                             &nbsp;  |&nbsp;
@@ -96,15 +96,15 @@ const Header = () => {
                                     </LinkContainer>
                                         :
                               ""
-                                }
+                                } */}
                          
-                                <LinkContainer to={`/analytics`}>
+                                {/* <LinkContainer to={`/analytics`}>
                                     <Navbar.Brand>Analytics
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
-                                </LinkContainer>
+                                </LinkContainer> */}
 
-                                <LinkContainer to={`/mainpage`}>
+                                <LinkContainer to={`/login`}>
                                     <Navbar.Brand>Login
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
@@ -141,7 +141,7 @@ const Header = () => {
                                                 Profile
                                             </NavDropdown.Item>
                                         </LinkContainer> */}
-                                        <LinkContainer to='/visitingcard'>
+                                        {/* <LinkContainer to='/visitingcard'>
                                             <NavDropdown.Item>
                                                 Visiting Card
                                             </NavDropdown.Item>
@@ -150,7 +150,7 @@ const Header = () => {
                                             <NavDropdown.Item>
                                                 Setting
                                             </NavDropdown.Item>
-                                        </LinkContainer>
+                                        </LinkContainer> */}
                                         <NavDropdown.Item
                                             onClick={logoutHandler}
                                         >

@@ -29,12 +29,9 @@ const Dashboard = () => {
 
   const getAppointments = useSelector((state) => state.getAppointmentPatients)
   const { loadingapp, appointmentsData, errorapp } = getAppointments
-  console.log("Appointments Data", appointmentsData)
 
   const submitHandler = (e) => {
     e.preventDefault()
-    console.log("Date is", appointment)
-    console.log("Date is", dayjs(appointment.appointmentTime).format('HH:mm'),)
     dispatch(createDashboardAppointment(
       dayjs(appointment.appointmentDate).format('YYYY-MM-DD'),
       dayjs(appointment.appointmentTime).format('HH:mm'),
@@ -53,7 +50,6 @@ const Dashboard = () => {
     const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD');
 
     const todayAppointments = appointmentsData?.filter(appointments => {
-      console.log("today", appointments.appointmentDate, today)
       return dayjs(appointments.appointmentDate).format('YYYY-MM-DD') === today;
     });
 
@@ -130,15 +126,16 @@ const Dashboard = () => {
             <Card border="info" style={{ width: '22rem' }}>
               <Card.Header>Appointment</Card.Header>
               <Card.Body>
-                {/* <Card.Title>Info Card Title</Card.Title> */}
                 <Card.Text>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <DatePicker
+                     placeholderText="Select Date"
                       selected={appointment.appointmentDate}
                       onChange={(date) => setAppointment({ ...appointment, appointmentDate: date })} />
                     <DatePicker
                       selected={appointment.appointmentTime}
                       showTimeSelect
+                      placeholderText="Time"
                       showTimeSelectOnly
                       timeIntervals={15}
                       timeCaption="Time"
@@ -166,23 +163,25 @@ const Dashboard = () => {
             </Card>
             <br />
           </Col>
-          <Col >
+          {/* Notification */}
+          {/* <Col >
             <Card border="info" style={{ width: '18rem' }}>
               <Card.Header>Notification</Card.Header>
               <Card.Body>
-                {/* <Card.Title>Info Card Title</Card.Title> */}
+             
                 <Card.Text>
                   fgfgf
                 </Card.Text>
               </Card.Body>
             </Card>
             <br />
-          </Col>
-          <Col >
+          </Col> */}
+          {/* Reminder */}
+          {/* <Col>
             <Card border="info" style={{ width: '18rem' }}>
               <Card.Header>Reminder</Card.Header>
               <Card.Body>
-                {/* <Card.Title>Info Card Title</Card.Title> */}
+             
                 <Card.Text>
                   <input type="text" id="subject" className='p-input' placeholder='Subject' style={{ margin: "0 14px 9px 0" }} />
                   <div style={{ display: "flex", justifyContent: "center" }}>
@@ -212,7 +211,7 @@ const Dashboard = () => {
               </Card.Body>
             </Card>
             <br />
-          </Col>
+          </Col> */}
         </Row>
       </Container>
 
