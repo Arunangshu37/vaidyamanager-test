@@ -58,6 +58,7 @@ import Analytics from './screens/Analytics'
 import Setting from './screens/Setting'
 import VisitingCards from './screens/VisitingCards'
 import MainPage from './screens/MainPage'
+import PrescriptionData from './screens/PrescriptionData'
 
 
 const App = () => {
@@ -117,7 +118,7 @@ const App = () => {
                     <Route path='/seach' component={SearchSymptom} />
                     <Route path='/settings' component={Setting} />
                     <Route path='/visitingcard' component={VisitingCards} />
-                    {/* <Route path='/dashboard' component={Dashboard} /> */}
+                    <Route path='/receptionist' component={PrescriptionData} />
                 </Container>
             </main>
             <Footer />

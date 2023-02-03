@@ -77,6 +77,7 @@ const registerUser = asyncHandler(async (req, res) => {
         duration,
         reference,
         isAdmin,
+        isRole,
         profilePictureURL
         // resetToken,
         // expireToken
@@ -101,6 +102,7 @@ const registerUser = asyncHandler(async (req, res) => {
             age: user.age,
             gender: user.gender,
             isAdmin: user.isAdmin,
+            isRole: user.isRole,
             isSubscriber: user.isSubscriber,
             isSuperAdmin:user.isSuperAdmin,
             token: generateToken(user._id),
@@ -124,6 +126,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
             email: user.email,
             phone: user.phone,
             isAdmin: user.isAdmin,
+            isRole: user.isRole,
             isSubscriber: user.isSubscriber,
             isSuperAdmin:user.isSuperAdmin,
         })
@@ -236,7 +239,6 @@ const newPassword= asyncHandler(async(req,res)=>{
 //get users in descending order
 const  getUserDesc = asyncHandler(async (req, res) => {
     const userDesc = await User.find({}).sort({_id:-1}).limit(1);
-    // console.log(userDesc)
     res.json(userDesc)
 })
 

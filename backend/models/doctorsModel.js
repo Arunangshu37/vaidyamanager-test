@@ -2,7 +2,6 @@ import mongoose from 'mongoose'
 
 const doctorSchema = mongoose.Schema(
     {
-        // _id: mongoose.Schema.ObjectId,
         name: {
             type: String,
             required: true,
@@ -15,12 +14,7 @@ const doctorSchema = mongoose.Schema(
             type: String,
 
         },
-        // consultant_date1: [{
-        //     from: String,
-        //     to: String,
-        // }],
         consultant_date: [{
-            // _id: mongoose.Schema.ObjectId,
             from: String,
             to: String,
         }],

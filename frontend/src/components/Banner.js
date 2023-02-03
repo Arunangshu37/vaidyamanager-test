@@ -10,7 +10,7 @@ function Banner() {
                     <div className='row'>
                         <div className="col-lg-6 offset-lg-6">
                             <div className="pa-banner-text">
-                                <h4 className="pa-banner-category">Aloe vera</h4>
+                                <h4 className="pa-banner-category">विशेष </h4>
                                 <h2>Lorem ipsum dolor sit amet consectetur adipiscing elit</h2>
                                 <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
                                     nisi ut aliquip ex ea commodo consequat. Duis aute irure 

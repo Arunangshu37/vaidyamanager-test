@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 // Bootstrap UI Components
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
@@ -11,9 +11,11 @@ import { useHistory } from 'react-router-dom';
 const Header = () => {
     const dispatch = useDispatch()
     // const history = useHistory()
+
     const isLogin = localStorage.getItem('isLogin');
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
+    console.log(userInfo)
 
     const baseUrl = process.env.REACT_APP_API__BASE_URL;
     const isAdmin = userInfo?.isAdmin;
@@ -21,6 +23,7 @@ const Header = () => {
 
     const isAdminUser = isAdmin ? isAdmin : false;
 
+    const [role, setRole] = useState('');
 
     const logoutHandler = () => {
         dispatch(logout())
@@ -56,13 +59,14 @@ const Header = () => {
 
                         <Navbar.Collapse id='basic-navbar-nav'>
                             <Nav className='me-auto'>
-                                <LinkContainer to={`/home`}>
+                               { isLogin ?<LinkContainer to={`/home`}>
                                     <Navbar.Brand>Home
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
-                                </LinkContainer>
+                                </LinkContainer>: ""
+                                }
                                 {
-                                    isLogin ? <LinkContainer to={`/dashboard`}>
+                                    isAdmin ? <LinkContainer to={`/dashboard`}>
                                         <Navbar.Brand>Dashboard
                                             &nbsp;  |&nbsp;
                                         </Navbar.Brand>
@@ -71,7 +75,7 @@ const Header = () => {
                                        ""
                                 }
                                 {
-                                    isLogin ? <LinkContainer to={`/mastertab`}>
+                                    isAdmin ? <LinkContainer to={`/mastertab`}>
                                         <Navbar.Brand>Patient Registeration
                                             &nbsp;  |&nbsp;
                                         </Navbar.Brand>
@@ -80,7 +84,7 @@ const Header = () => {
                                       ""
                                 }
                                  {
-                                    isLogin ? <LinkContainer to={`/old-mastertab`}>
+                                    isAdmin ? <LinkContainer to={`/old-mastertab`}>
                                         <Navbar.Brand>OPD Visits
                                             &nbsp;  |&nbsp;
                                         </Navbar.Brand>
@@ -88,15 +92,15 @@ const Header = () => {
                                         :
                                         ""
                                 }
-                               {/* {
-                                    isLogin ? <LinkContainer to={`/inventory`}>
-                                        <Navbar.Brand>Inventory
+                               {
+                                    isAdmin ? <LinkContainer to={`/receptionist`}>
+                                        <Navbar.Brand>Patient Data
                                             &nbsp;  |&nbsp;
                                         </Navbar.Brand>
                                     </LinkContainer>
                                         :
-                              ""
-                                } */}
+                                        ""
+                                }
                          
                                 {/* <LinkContainer to={`/analytics`}>
                                     <Navbar.Brand>Analytics
@@ -104,11 +108,19 @@ const Header = () => {
                                     </Navbar.Brand>
                                 </LinkContainer> */}
 
-                                <LinkContainer to={`/login`}>
-                                    <Navbar.Brand>Login
+                                {isLogin ? <LinkContainer to={`/about`}>
+                                    <Navbar.Brand>About
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
-                                </LinkContainer>
+                                </LinkContainer>:""}
+
+                                {isLogin ? <LinkContainer to={`/contact-us`}>
+                                    <Navbar.Brand>Contact
+                                        &nbsp;  |&nbsp;
+                                    </Navbar.Brand>
+                                </LinkContainer>:""}
+
+                                
                                 {/* <NavDropdown title="Know More" id="basic-nav-dropdown" renderMenuOnMount={true}>
                                     <NavDropdown.Item href="/about-us" >
                                         About Us
@@ -158,7 +170,7 @@ const Header = () => {
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                 ) : (
-                                    <LinkContainer to='/login'>
+                                    <LinkContainer to='/'>
                                         <Nav.Link>
                                             <i className='fa fa-user mr-2'></i>
                                             Sign In

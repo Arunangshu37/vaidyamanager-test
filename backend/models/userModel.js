@@ -76,6 +76,9 @@ const userSchema = mongoose.Schema(
         },
         profilePictureURL: {
             type: String
+        },
+        isRole:{
+            type:String
         }
     },
     {

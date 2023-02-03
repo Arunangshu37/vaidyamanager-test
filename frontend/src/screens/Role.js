@@ -33,8 +33,8 @@ const Role = ({ location, history }) => {
     const [dob, setDob] = useState();
     const [qualification, setQualification] = useState('');
     const [experience, setExperience] = useState('');
-    const [fee, setFee] = useState();
-    const [file, setFile] = useState()
+    // const [fee, setFee] = useState();
+    // const [file, setFile] = useState()
     // const [isAdmin, setIsAdmin] = useState();
     const dispatch = useDispatch()
 
@@ -47,15 +47,13 @@ const Role = ({ location, history }) => {
 
     var isAdmin = false
 
-    console.log("profilePictureURL", file)
+    // console.log("profilePictureURL", file)
 
     //calculate the age
     const getAge = (dob) => {
-        // console.log("do", dob)
         var today = dayjs();
         var birthdate = dayjs(dob)
         var patitentAge = today.diff(birthdate, 'year')
-        // console.log("patient age is",patitentAge)
         setAge(patitentAge)
     }
     useEffect(() => {
@@ -109,15 +107,15 @@ const Role = ({ location, history }) => {
                             experience: experience,
                             email_id: response.data.email,
                             phone_no: response.data.phone,
-                            consultation_fee: fee,
-                            profilePictureURL: file
+                            // consultation_fee: fee,
+                            // profilePictureURL: file
                         }))
-                        setFee('')
+                        // setFee('')
                         setQualification('')
                         setExperience('')
                         setEmail('')
                         setPhone('')
-                        setFile('')
+                        // setFile('')
                     })
                     .catch((err) => console.error(err));
             }
@@ -131,20 +129,14 @@ const Role = ({ location, history }) => {
 
     }
 
-    const handleImageUpload = (file) => {
-        // const base64 = imageConvertor(file)
-        // setFile(base64)
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(file)
-        fileReader.onload = () => {
-
-            console.log(fileReader.result)
-            setFile(fileReader.result)
-        }
-    }
-
-  
- 
+    // const handleImageUpload = (file) => {
+    //     const fileReader = new FileReader();
+    //     fileReader.readAsDataURL(file)
+    //     fileReader.onload = () => {
+    //         console.log(fileReader.result)
+    //         setFile(fileReader.result)
+    //     }
+    // }
 
     return (
         <>
@@ -201,7 +193,7 @@ const Role = ({ location, history }) => {
                                         ></Form.Control>
                                     </Form.Group>
 
-                                    <Form.Group controlId='fee'>
+                                    {/* <Form.Group controlId='fee'>
                                         <Form.Label>Consulation fee</Form.Label>
                                         <Form.Control
                                             type='text'
@@ -209,18 +201,16 @@ const Role = ({ location, history }) => {
                                             value={fee}
                                             onChange={(e) => setFee(e.target.value)}
                                         ></Form.Control>
-                                    </Form.Group>
-                                    <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>Default file input example</Form.Label>
+                                    </Form.Group> */}
+                                    {/* <Form.Group controlId="formFile" className="mb-3">
+                                        <Form.Label style={{color:"black"}}> Profile Image</Form.Label>
                                         <Form.Control
                                             style={{ color: "black" }}
                                             type="file"
-                                            // value={file}
-                                            // onChange={(e) => setFile(e.target.value)}
                                             onChange={(e) => handleImageUpload(e.target.files[0])}
                                         />
 
-                                    </Form.Group>
+                                    </Form.Group> */}
                                 </> :
                                 <>
                                     {role === "Patient" ?
@@ -306,7 +296,7 @@ const Role = ({ location, history }) => {
                             </Button>
                         </Form >
 
-                    </FormContainer >
+                    </FormContainer>
 
                 </div>
             </div>

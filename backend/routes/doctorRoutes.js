@@ -1,6 +1,6 @@
 import express from 'express'
 
-import {getDoc,addDoctors,updateDoctor,updateAppointmentDate,cancelAppointmentDoctor} from '../controllers/getdoctorController.js'
+import {getDoc,addDoctors,updateDoctor,updateAppointmentDate,cancelAppointmentDoctor} from '../controllers/doctorController.js'
 import { protect } from '../middleware/authMiddleware.js'
 
 
