@@ -18,7 +18,7 @@ const MainPage = ({ location, history }) => {
     e.preventDefault()
     dispatch(login(email, password))
     localStorage.setItem('isLogin', true)
-    history.push('/home');
+    // history.push('/home');
 
   }
   return (

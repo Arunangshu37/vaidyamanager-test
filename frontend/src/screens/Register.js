@@ -74,7 +74,7 @@ const Register = ({ location, history }) => {
         } else {
 
             // Dispatch Register
-            dispatch(register(name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, profilePictureURL, false))
+            dispatch(register(name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, false,profilePictureURL))
             localStorage.setItem('isLogin', true)
             setName('');
             setEmail('');

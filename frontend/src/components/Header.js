@@ -23,13 +23,10 @@ const Header = () => {
 
     const isAdminUser = isAdmin ? isAdmin : false;
 
-    const [role, setRole] = useState('');
-
     const logoutHandler = () => {
         dispatch(logout())
         localStorage.removeItem('isLogin')
         window.location.reload();
-        // history.push('/')
     }
 
     return (
@@ -59,68 +56,58 @@ const Header = () => {
 
                         <Navbar.Collapse id='basic-navbar-nav'>
                             <Nav className='me-auto'>
-                               { isLogin ?<LinkContainer to={`/home`}>
+                                <LinkContainer to={`/home`}>
                                     <Navbar.Brand>Home
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
-                                </LinkContainer>: ""
-                                }
+                                </LinkContainer>
                                 {
-                                    isAdmin ? <LinkContainer to={`/dashboard`}>
+                                    isSuperAdmin ? <LinkContainer to={`/dashboard`}>
                                         <Navbar.Brand>Dashboard
                                             &nbsp;  |&nbsp;
                                         </Navbar.Brand>
-                                    </LinkContainer>
-                                        :
-                                       ""
+                                    </LinkContainer> : ""
                                 }
                                 {
-                                    isAdmin ? <LinkContainer to={`/mastertab`}>
+                                    isSuperAdmin ? <LinkContainer to={`/mastertab`}>
                                         <Navbar.Brand>Patient Registeration
                                             &nbsp;  |&nbsp;
                                         </Navbar.Brand>
-                                    </LinkContainer>
-                                        :
-                                      ""
+                                    </LinkContainer> : ""
                                 }
-                                 {
-                                    isAdmin ? <LinkContainer to={`/old-mastertab`}>
+
+                                {
+                                    isSuperAdmin ? <LinkContainer to={`/old-mastertab`}>
                                         <Navbar.Brand>OPD Visits
                                             &nbsp;  |&nbsp;
                                         </Navbar.Brand>
-                                    </LinkContainer>
-                                        :
-                                        ""
+                                    </LinkContainer> : ""
                                 }
-                               {
-                                    isAdmin ? <LinkContainer to={`/receptionist`}>
-                                        <Navbar.Brand>Patient Data
-                                            &nbsp;  |&nbsp;
-                                        </Navbar.Brand>
-                                    </LinkContainer>
-                                        :
-                                        ""
-                                }
-                         
-                                {/* <LinkContainer to={`/analytics`}>
-                                    <Navbar.Brand>Analytics
+
+                                {isAdmin ? <LinkContainer to={`/receptionist`}>
+                                    <Navbar.Brand>Patient Data
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
-                                </LinkContainer> */}
+                                </LinkContainer> : ""}
 
-                                {isLogin ? <LinkContainer to={`/about`}>
+
+
+
+
+
+                                <LinkContainer to={`/about`}>
                                     <Navbar.Brand>About
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
-                                </LinkContainer>:""}
+                                </LinkContainer>
 
-                                {isLogin ? <LinkContainer to={`/contact-us`}>
+                                <LinkContainer to={`/contact-us`}>
                                     <Navbar.Brand>Contact
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
-                                </LinkContainer>:""}
+                                </LinkContainer>
 
-                                
+
                                 {/* <NavDropdown title="Know More" id="basic-nav-dropdown" renderMenuOnMount={true}>
                                     <NavDropdown.Item href="/about-us" >
                                         About Us
