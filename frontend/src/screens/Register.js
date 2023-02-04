@@ -86,15 +86,11 @@ const Register = ({ location, history }) => {
             setIllness('');
             setTreatment('');
             setDuration('');
-
-
-
         }
     }
 
     return (
         <>
-
             {/* <FormContainer>  */}
             <h1 style={{ marginLeft: " 127px", fontSize: "22px" }}>Sign Up</h1>
             {/* {error && <Message variant='danger'>{error}</Message>}
@@ -190,9 +186,6 @@ const Register = ({ location, history }) => {
                                 ></Form.Control>
                             </Form.Group>
                         </td>
-
-
-
                     </tr>
                     <tr>
                         <td>

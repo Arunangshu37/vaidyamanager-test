@@ -90,11 +90,6 @@ const Header = () => {
                                     </Navbar.Brand>
                                 </LinkContainer> : ""}
 
-
-
-
-
-
                                 <LinkContainer to={`/about`}>
                                     <Navbar.Brand>About
                                         &nbsp;  |&nbsp;
@@ -144,12 +139,12 @@ const Header = () => {
                                             <NavDropdown.Item>
                                                 Visiting Card
                                             </NavDropdown.Item>
-                                        </LinkContainer>
-                                        <LinkContainer to='/settings'>
+                                        </LinkContainer>*/}
+                                      { isSuperAdmin ? <LinkContainer to='/settings'>
                                             <NavDropdown.Item>
                                                 Setting
                                             </NavDropdown.Item>
-                                        </LinkContainer> */}
+                                        </LinkContainer> : ""}
                                         <NavDropdown.Item
                                             onClick={logoutHandler}
                                         >

@@ -3,8 +3,11 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
+import ChangePassword from './ChangePassword';
+import StaffAccount from './StaffAccount';
 
-function Setting() {
+const Setting = () => {
+
   return (
     <div style={{ marginTop: "4rem" }}>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -24,10 +27,10 @@ function Setting() {
                 <Nav.Link eventKey="fourth">Change Password</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="fifth">Staff Acoount</Nav.Link>
+                <Nav.Link eventKey="fifth">Staff Account</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="sixth"> Acoount</Nav.Link>
+                <Nav.Link eventKey="sixth"> Account</Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>
@@ -37,7 +40,20 @@ function Setting() {
                 fdf
               </Tab.Pane>
               <Tab.Pane eventKey="second">
-                fgdg
+                second
+              </Tab.Pane>
+              <Tab.Pane eventKey="third">
+                third
+              </Tab.Pane>
+              <Tab.Pane eventKey="fourth">
+             <ChangePassword/>
+              </Tab.Pane>
+              <Tab.Pane eventKey="fifth">
+
+                <StaffAccount />
+              </Tab.Pane>
+              <Tab.Pane eventKey="sixth">
+                sixth
               </Tab.Pane>
             </Tab.Content>
           </Col>
