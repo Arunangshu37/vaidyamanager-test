@@ -22,8 +22,6 @@ const OldPatientTab = ({ choosePatient }) => {
     return patientPrescriptionData?.filter(dataItem => dataItem.Patient[0]._id === id)[0];
   });
 
-  // console.log("uniqueData", uniqueData);
-
   useEffect(() => {
     dispatch(getPrescriptionDetail());
     dispatch(getPatientDetail());
@@ -96,17 +94,10 @@ const OldPatientTab = ({ choosePatient }) => {
               <td>Active</td>
               <td>
                 <div>
-                  {/* <Link to={{ pathname: '/oldprescription', state: { data: data.Patient[0]._id } }}>
-                    <Button >View</Button>
-                  </Link> */}
                   <Button onClick={setPatientDetail} id={data.Patient[0]._id } >View</Button>
                 </div>
-                {/* <Button onClick={() => props.handleViewClick(data.Patient[0]._id)}>View</Button> */}
                 <div style={{ display: "none" }}>
-                  {/* <OldPrescriptions patientId={data.Patient[0]._id} /> */}
-
                 </div>
-
               </td>
             </>
           </tr>

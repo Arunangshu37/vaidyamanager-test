@@ -11,19 +11,26 @@ const PrescriptionData = () => {
   const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
 
+  const today = dayjs().format('YYYY-MM-DD');
+  const filteredTodayData = patientPrescriptionData?.filter(item => dayjs(item.createdAt).isSame(today, 'day'));
+
+  const uniquePatientData = Array.from(new Set(filteredTodayData?.map(items => items.Patient[0]._id))).map(id => {
+    return filteredTodayData?.filter(dataItem => dataItem.Patient[0]._id === id)[0];
+  });
+
   useEffect(() => {
     dispatch(getPatientDetail());
   }, [dispatch])
 
-  console.log("Data is", patientPrescriptionData)
   return (
     <div style={{ marginTop: "4rem" }}>
       <Card>
         <Card.Body>
-          <h6> </h6>
+          <h6> Today's Prescribed Data</h6>
           <h6> </h6>
         </Card.Body>
       </Card>
+      <div style={{overflowX:"auto"}}>
       <table className="striped bordered visiting" bordercolor="#6caaa8">
         <thead>
           <tr>
@@ -34,7 +41,7 @@ const PrescriptionData = () => {
               Patient Name
             </th>
             <th>
-              Visit Date
+              Date
             </th>
             <th>
               Symptoms
@@ -42,8 +49,6 @@ const PrescriptionData = () => {
             <th>
               Medicines
             </th>
-
-            {/* <th>Remark</th> */}
             <th>
               Panchakrma
             </th>
@@ -51,20 +56,43 @@ const PrescriptionData = () => {
         </thead>
 
         <tbody>
-          {patientPrescriptionData?.map((v, index) => {
+          {filteredTodayData?.map((v, index) => {
             return (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{patientPrescriptionData[0]?.Patient[0].name}</td>
+                <td>{
+                  v.Patient?.map((patient, p) => {
+                    return (
+                      <li key={p}>
+                        <p>
+                          {patient.name}
+                        </p>
+                      </li>
+                    )
+                  })
+                }</td>
                 <td>{dayjs(v.createdAt).format('DD/MM/YYYY')}</td>
-                {/* <td></td> */}
-
-
+                <td>{v.Symptoms.join(',')}</td>
+                <td> {v.medicineData.map((medicine, i) => {
+                  return (
+                    <li key={i}>
+                      <p>Name: {v.PatientMedicines.find((el) => el._id === medicine.medicineDetails)?.medicineName}</p>
+                      <p>Dose: {medicine.dose}</p>
+                    </li>
+                  );
+                })}</td>
+                <td>
+                  {v.panchkarma?.map(item => (
+                    <li key={item.id}>name:{item.panchkarma_name},days:{item.panchkarma_days}</li>
+                  ))}
+                </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      </div>
+    
 
     </div>
   )

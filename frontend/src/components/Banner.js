@@ -11,10 +11,12 @@ function Banner() {
                         <div className="col-lg-6 offset-lg-6">
                             <div className="pa-banner-text">
                                 <h3 className="pa-banner-category">विशेष चिकित्सालय </h3>
-                                <h2>Lorem ipsum dolor sit amet consectetur adipiscing elit</h2>
-                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                                    nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-                                    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                <h2>
+                                    સુખાયુ આયુર્વેદ ચિકિત્સાલય</h2>
+                                <p style={{
+                                    fontFamily: "sans-serif",
+                                    fontSize: "40px"
+                                }}>વિદ્ધકર્મ, અગ્નિકર્મ અને પંચકર્મનું કેન્દ્ર</p>
                             </div>
 
                         </div>

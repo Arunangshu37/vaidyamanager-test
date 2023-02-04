@@ -7,7 +7,7 @@ const CompanyStock = () => {
   const dispatch = useDispatch();
   const allMedicines = useSelector((state) => state.getallMedicineList)
   const { loadingMedicine, errorMedicine, medicinesList } = allMedicines;
-  console.log("Medicine List", medicinesList)
+  // console.log("Medicine List", medicinesList)
 
   useEffect(() => {
     dispatch(getMedicines());

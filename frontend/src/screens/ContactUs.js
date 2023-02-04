@@ -20,8 +20,9 @@ const ContactUs = ({ history }) => {
                     </div>
                     <div className="contact-info-text">
                       <h2> Clinic Address</h2>
-                      <span> Sector 8, Sheltor Complex, Near KGN Xpress Hotel, Kharghar, Navi Mumbai 410210,</span>
-                      <span>Maharashtra, India.</span>
+                      <span> સરનામું : ૨૨૮, અવધ પ્રાઈડ, બીજો માળ, મેટ્રો પીલ્લર નં. ૧૩૯ ની સામે,
+                        નિરાંત ચોકડી, વસ્ત્રાલ, અમદાવાદ-૧૮</span>
+                      <span></span>
                     </div>
                   </div>
                 </div>
@@ -34,9 +35,9 @@ const ContactUs = ({ history }) => {
                     </div>
                     <div className="contact-info-text  flex-fill" >
                       <h2>E-mail</h2>
-                      <span>care.mindvein@gmail.com</span>
+                      <span>sukhayu7@gmail.com</span>
                       <span></span>
-                      <span>Contact No:(+91) 8567029029</span>
+                      <span>મો. ૯૧૬૫૦૩૧૬૫</span>
                     </div>
                   </div>
                 </div>
@@ -75,7 +76,7 @@ const ContactUs = ({ history }) => {
             </div>
           </div>
         </section>
-       
+
       </Container>
     </>
   )
