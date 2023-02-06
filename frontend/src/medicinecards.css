@@ -42,7 +42,7 @@ svg:not(:root) {
     display: inline-block;
 }
 .pa-medicine-box h2 {
-    font-size: 22px;
+    font-size: 30px;
     margin: 20px 0 10px;
     text-transform: capitalize;
 }
@@ -53,4 +53,6 @@ a {
 .pa-medicine-box p {
     margin: 0px;
     padding-top: 10px;
+    font-size: 16px;
+
 }

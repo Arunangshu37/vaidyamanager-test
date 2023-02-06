@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMedicines } from '../actions/prescriptionActions'
 import '../clinical.css'
-import { Row, Col, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 const ClinicalStock = () => {
     const dispatch = useDispatch();

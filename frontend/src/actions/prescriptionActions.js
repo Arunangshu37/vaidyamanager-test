@@ -143,7 +143,6 @@ export const getPrescription = () => async (dispatch) => {
             type: GET_PRESCRIPTION_SUCCESS,
             payload: data,
         })
-        console.log("Get Prescription")
     } catch (error) {
         dispatch({
             type: GET_PRESCRIPTION_FAIL,

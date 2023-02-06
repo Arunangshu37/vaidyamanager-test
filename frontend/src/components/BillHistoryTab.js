@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import * as _ from 'lodash'
 import dayjs from 'dayjs'
 import { getPatientDetail } from '../actions/prescriptionActions';

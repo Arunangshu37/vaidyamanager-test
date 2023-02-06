@@ -30,9 +30,11 @@ function MedicineCards() {
                                 l-59.998-103.917l49.638-28.656c28.716-16.578,65.373-6.761,81.955,21.957C484.913,360.844,474.785,397.49,446.3,413.939z"></path>
                                     </svg>
                                 </div>
-                                <h2><a href="#">Herbal medicine</a></h2>
-                                <a href="#">Pure Ayurveda</a>
-                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris aliquip </p>
+                                <h2><a href="#">अग्निकर्म </a></h2>
+                                {/* <a href="#">Pure Ayurveda</a> */}
+                                <p>इस चिकित्सा पद्धती में सोने कि काडी से त्वचा पर सेक दिया जाता है|</p>
+                                <p>यह 5००० वर्ष पुराणी शास्त्रीय आयुर्वेद चिकित्सा पद्धती है |</p>
+                                <p>यह नस का दब जाना, करोडरज्जू के विकार, वात के विकार, सभी प्रकार का दर्द, संधिवात जैसे व्याधी मी लाभदायी उपचार पद्धती है|</p>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6">
@@ -104,9 +106,18 @@ function MedicineCards() {
                                         </g>
                                     </svg>
                                 </div>
-                                <h2><a href="#">chemical less</a></h2>
-                                <a href="#">Herbal Medicine</a>
-                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris aliquip </p>
+                                <h2><a href="#">विद्धकर्म</a></h2>
+                                {/* <a href="#">Herbal Medicine</a> */}
+                                <p>यह उपचार पद्धती से रक्तप्रवाह सरल किया जाता है | </p>
+                                <p>
+                                यह संपूर्ण से आयुर्वेद उपचार पध्दती है | शरीरपर विशिष्ट स्थानोंपर विद्ध्कर्म करने से विकार मिटते है |
+                                </p>
+                                <p>विद्धकर्म याने अक्यूपंक्चर नही |</p>
+                                <p>
+                                संपूर्ण शरीर में १०८ विशिष्ट जगह है, जहां पे हर एक अवयव का नियंत्रण होता है | उसे मर्म कहा जाता है | 
+                                </p>
+                                <p>इस चिकित्सा पध्दती में उन जागाह का प्रयोग होता है |</p>
+                                <p>यह मानसिक विकारोंमे अत्यंत लाभदायी चिकित्सा पध्दती है |  </p>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6">

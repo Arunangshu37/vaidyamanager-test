@@ -6,33 +6,39 @@ function StaffAccount() {
   return (
     <div>
       StaffAccount
-      <CardGroup>
-      <Card>
-        <Card.Body>
-          <table>
-            <tr>
-              <td>
-              <Card.Header>Staff Name</Card.Header>
-              </td>
-              <td>
-              <Card.Header>Staff Name</Card.Header>
-              </td>
-              <td>
-              <Card.Header>Staff Name</Card.Header>
-              </td>
-            </tr>
+      <article class="card">
+        <header>
+          <h2>Staff details</h2>
+        </header>
+        {/* <img src="balloons2.jpg" alt="Hot air balloons"/> */}
+        <div class="content">
+          <Card>
+            <Card.Body>
+             
+            </Card.Body>
+          </Card>
+          <table className="striped bordered visiting" bordercolor="#6caaa8">
+            <thead>
+              <tr>
+                <th>
+                 Staff Name
+                </th>
+                <th>Access</th>
+              </tr>
+            </thead>
+            <tbody>            
+                  <tr>
+                    <td></td>
+                    <td></td>
+
+       
+                  </tr>
+            </tbody>
           </table>
-          
- 
-          
-          
-          </Card.Body>
+        </div>
+      </article>
 
-          
-      </Card>
-     
 
-      </CardGroup>
     </div>
   )
 }

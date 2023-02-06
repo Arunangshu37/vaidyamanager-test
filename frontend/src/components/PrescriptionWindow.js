@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, Modal, ListGroup, InputGroup, Card } from 'react-bootstrap'
+import { Form, Button, Modal,InputGroup, Card } from 'react-bootstrap'
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../prescription.css'
 import { getUserInfoDetails } from '../actions/userActions'
 import { addPrescriptionUser, addDietChart } from '../actions/prescriptionActions'
 import { useDispatch, useSelector } from 'react-redux'
-
-import Box from '@mui/material/Box';
 import Icon from '@mui/material/Icon';
 import { DiechartList } from './DiechartList';
 import TextField from '@mui/material/TextField';
@@ -14,6 +12,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import jsPDF from 'jspdf'
+import Alert from 'react-bootstrap/Alert';
 import { getMedicines } from '../actions/prescriptionActions'
 import '../prescriptionWindow.css'
 let googleTransliterate = require("google-input-tool");
@@ -385,19 +384,27 @@ const PrescriptionWindow = () => {
   }
 
   //image upload 
+  
+
   const [imagefile, setImageFile] = useState();
   const handleImageUpload = (file) => {
+    if (file.size <= 7 * 1024) {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file)
     fileReader.onload = () => {
       console.log(fileReader.result)
       setImageFile(fileReader.result)
       setPrescription({ ...prescription, image: imagefile })
-    }
+    };
+  } else {
+   alert("File size exceeded the limit of 7KB");
+   
+  }
   }
 
   const [videofile, setVideoFile] = useState();
   const handleVideoUpload = (video) => {
+    if (video.size <= 20 * 1024) {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(video)
     fileReader.onload = () => {
@@ -406,18 +413,24 @@ const PrescriptionWindow = () => {
       setPrescription({ ...prescription, video: videofile })
 
     }
+  } else {
+    alert("File size exceeded the limit of 20KB");
+   }
   }
 
   const [reportfile, setReportFile] = useState();
   const handleReportUpload = (report) => {
+    if (report.size <= 12 * 1024) {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(report)
     fileReader.onload = () => {
       console.log(fileReader.result)
       setReportFile(fileReader.result)
       setPrescription({ ...prescription, report: reportfile })
-
     }
+  } else {
+    alert("File size exceeded the limit of 12KB");
+   }
   }
 
   //patient list
