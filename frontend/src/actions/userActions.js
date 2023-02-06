@@ -106,7 +106,7 @@ export const register = (name, email, phone, password, address, age, gender, wei
             type: USER_REGISTER_SUCCESS,
             payload: data,
         })
-        alert('Register Successfully!');
+        // alert('Register Successfully!');
         // Login in the user as well after registering
         // dispatch({
         //     type: USER_LOGIN_SUCCESS,

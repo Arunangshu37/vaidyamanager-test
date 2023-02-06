@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import '../mainpage.css'
-import Card from 'react-bootstrap/Card';
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 // Redux Actions
 import { login } from '../actions/userActions'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MainPage = ({ location, history }) => {
   const dispatch = useDispatch()
@@ -13,11 +14,15 @@ const MainPage = ({ location, history }) => {
   // Get user login info from Redux state
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, error, userInfo } = userLogin
-
+  // const notify = () => toast("Wow so easy!");
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(login(email, password))
+    toast.success('Login Successfully!', {
+      position: toast.POSITION.TOP_CENTER
+  });
     localStorage.setItem('isLogin', true)
+
     // history.push('/home');
 
   }
@@ -76,6 +81,7 @@ const MainPage = ({ location, history }) => {
 
                         <div className="pt-1 mb-4">
                           <button className="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                          <ToastContainer />
                         </div>
 
                         {/* <a className="small text-muted" href="#">Forgot password?</a>

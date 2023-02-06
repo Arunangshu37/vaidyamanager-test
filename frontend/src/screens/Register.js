@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from 'react-redux'
 import '../demoreg.css'
 import '../register.css'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
 import { register } from '../actions/userActions'
-
-import { Container, Row, Card, Col, ListGroup, Button, Image, Form } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Button, Image, Form } from 'react-bootstrap';
 
 
 
@@ -75,6 +73,9 @@ const Register = ({ location, history }) => {
 
             // Dispatch Register
             dispatch(register(name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, false,profilePictureURL))
+            toast.success('Registration Successfully!', {
+                position: toast.POSITION.TOP_CENTER
+            });
             localStorage.setItem('isLogin', true)
             setName('');
             setEmail('');
@@ -370,7 +371,9 @@ const Register = ({ location, history }) => {
                         <td></td>
                         <td>  <Button type='submit' variant='primary'>
                             Register
-                        </Button></td>
+                        </Button>
+                        <ToastContainer />
+                        </td>
                         <td>
                             <Button t variant='primary'>
                                 Reset
