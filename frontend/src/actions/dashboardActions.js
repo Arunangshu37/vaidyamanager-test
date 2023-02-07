@@ -75,7 +75,7 @@ export const getPatientppointments = () => async (dispatch) => {
             type: DASHBOARD_GETAPPOINTMNET_SUCCESS,
             payload: data,
         })
-        console.log("Appointments")
+       
     } catch (error) {
         dispatch({
             type: DASHBOARD_GETAPPOINTMNET_FAIL,

@@ -282,7 +282,7 @@ export const updateUserStaff = (id,user) => async (dispatch, getState) => {
             type: USER_STATUS_SUCCESS,
             payload: data,
         })
-        console.log("user is")
+        // console.log("user is")
     } catch (error) {
         dispatch({
             type: USER_STATUS_FAIL,
