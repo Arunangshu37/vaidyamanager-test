@@ -239,5 +239,27 @@ const  getUserDesc = asyncHandler(async (req, res) => {
     res.json(userDesc)
 })
 
+//update the status of the user
+const  updateStatus = asyncHandler(async (req, res) => {
+    const userStaff = await User.findById(req.params.id)
+    if(userStaff){
+        userStaff.name = req.body.name,
+        userStaff.email = req.body.email,
+        userStaff.phone = req.body.phone,
+        userStaff.password = req.body.password,
+        userStaff.isAdmin = req.body.isAdmin,
+        userStaff.isSuperAdmin = req.body.isSuperAdmin
 
-export { authUser, getUserProfile, registerUser, updateUserProfile, getUserInfoDetails, resetPassword,newPassword,getUserDesc }
+        const updatedStaffStatus = await userStaff.save()
+        res.json(updatedStaffStatus)
+    }
+   
+    else {
+        res.status(404)
+        throw new Error('Could not update status')
+    }
+})
+
+
+
+export { authUser, getUserProfile, registerUser, updateUserProfile, getUserInfoDetails, resetPassword,newPassword,getUserDesc,updateStatus}

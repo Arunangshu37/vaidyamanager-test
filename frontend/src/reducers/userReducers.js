@@ -22,7 +22,11 @@ import {
     USER_LATEST_REQUEST,
     USER_LATEST_SUCCESS,
     USER_LATEST_FAIL,
-    USER_LATEST_RESET
+    USER_LATEST_RESET,
+    USER_STATUS_REQUEST,
+    USER_STATUS_SUCCESS,
+    USER_STATUS_FAIL,
+    USER_STATUS_RESET
 
 } from '../constants/userConstants'
 
@@ -214,6 +218,28 @@ export const userInfoDescReducer = (state = { users: [] }, action) => {
             return {
                 loadingUsers: false,
                 errorUsers: action.payload,
+            }
+        default:
+            return state
+    }
+}
+
+export const userUpdateStatusReducer = (state = {}, action) => {
+    switch (action.type) {
+        case USER_STATUS_REQUEST:
+            return {
+                loading: true,
+            }
+        case USER_STATUS_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                userInfo: action.payload,
+            }
+        case USER_STATUS_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
             }
         default:
             return state

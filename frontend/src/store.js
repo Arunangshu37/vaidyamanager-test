@@ -29,7 +29,8 @@ import {
     userUpdateProfileReducer,
     userInfoDetailsReducer,
     userResetPasswordReducer,
-    userInfoDescReducer
+    userInfoDescReducer,
+    userUpdateStatusReducer
 } from './reducers/userReducers'
 import {
     createOrderReducer,
@@ -93,6 +94,7 @@ const reducer = combineReducers({
     getPatientPrescriptionList:getPatientPrescriptionDetailReducer,
     patientAppointment:createDashboardAppointmentReducer,
     getAppointmentPatients:getPatientAppointmentDetailsReducer,
+    updateUserStatus:userUpdateStatusReducer,
 
 })
 

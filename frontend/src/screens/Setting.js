@@ -29,9 +29,9 @@ const Setting = () => {
               <Nav.Item>
                 <Nav.Link eventKey="fifth">Staff Account</Nav.Link>
               </Nav.Item>
-              <Nav.Item>
+              {/* <Nav.Item>
                 <Nav.Link eventKey="sixth"> Account</Nav.Link>
-              </Nav.Item>
+              </Nav.Item> */}
             </Nav>
           </Col>
           <Col sm={9}>
@@ -52,9 +52,9 @@ const Setting = () => {
 
                 <StaffAccount />
               </Tab.Pane>
-              <Tab.Pane eventKey="sixth">
+              {/* <Tab.Pane eventKey="sixth">
                 sixth
-              </Tab.Pane>
+              </Tab.Pane> */}
             </Tab.Content>
           </Col>
         </Row>

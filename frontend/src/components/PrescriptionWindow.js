@@ -1014,7 +1014,7 @@ const PrescriptionWindow = () => {
         <Modal.Body>
           <div id="instructions" style={{ padding: '15px 10px' }}>
             <div>
-              <Button>Send Email</Button>
+              {/* <Button>Send Email</Button> */}
             </div>
             <dl>
               <dt>What to take ? </dt>

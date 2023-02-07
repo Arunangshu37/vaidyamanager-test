@@ -19,6 +19,10 @@ import {
     USER_LATEST_REQUEST,
     USER_LATEST_SUCCESS,
     USER_LATEST_FAIL,
+    USER_STATUS_REQUEST,
+    USER_STATUS_SUCCESS,
+    USER_STATUS_FAIL,
+
 
 } from '../constants/userConstants'
 import { ORDER_LIST_USER_RESET } from '../constants/orderConstants'
@@ -81,7 +85,7 @@ export const logout = () => (dispatch) => {
     })
 }
 
-export const register = (name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, isAdmin,profilePictureURL) => async (dispatch) => {
+export const register = (name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, isAdmin, profilePictureURL) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST,
@@ -97,7 +101,7 @@ export const register = (name, email, phone, password, address, age, gender, wei
         // Make request to server and get the response data
         const { data } = await axios.post(
             '/api/users',
-            { name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, isAdmin,profilePictureURL },
+            { name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, isAdmin, profilePictureURL },
             config
         )
 
@@ -249,4 +253,43 @@ export const getUserDesc = () => async (dispatch) => {
         // console.log("get latest user Failed")
     }
 
+}
+
+export const updateUserStaff = (id,user) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_STATUS_REQUEST,
+        })
+
+        // Get user login and user info
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        // Header to send with the request
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        }
+
+        // Make request to server and get the response data
+        const { data } = await axios.put(`/api/users/${id}/updateStatus`, user, config)
+
+        // Dispatch user register success after making the request
+        dispatch({
+            type: USER_STATUS_SUCCESS,
+            payload: data,
+        })
+        console.log("user is")
+    } catch (error) {
+        dispatch({
+            type: USER_STATUS_FAIL,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
 }
