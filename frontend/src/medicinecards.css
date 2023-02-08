@@ -45,6 +45,7 @@ svg:not(:root) {
     font-size: 30px;
     margin: 20px 0 10px;
     text-transform: capitalize;
+    font-family: 'Tiro Devanagari Hindi', serif;
 }
 a {
     color: #242424;
@@ -54,5 +55,5 @@ a {
     margin: 0px;
     padding-top: 10px;
     font-size: 16px;
-
+    font-family: 'Tiro Devanagari Hindi', serif;
 }

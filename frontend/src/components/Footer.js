@@ -53,17 +53,17 @@ const Footer = () => {
                   <li>
                     <a href="/about">About Us</a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href="">Privacy Policy</a>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <a href="">Terms &amp; Conditions</a>
-                  </li>
+                  </li> */}
                   <li>
                     <a href="/contact-us">Contact us</a>
                   </li>
                   <li>
-                    <a href="">Return Policy</a>
+                    <a href="/refund-policy">Return Policy</a>
                   </li>
                 </ul>
               </div>
@@ -100,18 +100,18 @@ const Footer = () => {
                       src={"http://localhost:2000/images/instagram.svg"}
                     />
                   </a>
-                  <a href="" target="_blank">
+                  {/* <a href="" target="_blank">
                     <img style={{ marginRight: "15px" }}
                       // src="images/linkedin.svg" 
                       src={"http://localhost:2000/images/linkedin.svg"}
                     />
-                  </a>
-                  <a href="" target="_blank">
+                  </a> */}
+                  {/* <a href="" target="_blank">
                     <img style={{ marginRight: "15px" }}
                       // src="images/twitter.svg" 
                       src={"http://localhost:2000/images/twitter.svg"}
                     />
-                  </a>
+                  </a> */}
                 </div>
               </div>
             </div>

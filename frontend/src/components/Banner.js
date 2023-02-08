@@ -13,10 +13,7 @@ function Banner() {
                                 <h3 className="pa-banner-category">विशेष चिकित्सा  </h3>
                                 <h2>
                                 सुखायु आयुर्वेद क्लिनिक</h2>
-                                <p style={{
-                                    fontFamily: "sans-serif",
-                                    fontSize: "40px"
-                                }}>विधाकर्म, अग्निकर्म और पंचकर्म केंद्र</p>
+                                <p>विद्धकर्म, अग्निकर्म और पंचकर्म केंद्र</p>
                             </div>
 
                         </div>

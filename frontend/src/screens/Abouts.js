@@ -32,48 +32,50 @@ const Abouts = () => {
                 </div>
             </div>
 
+            <div class="pa-team">
+                <div class="container">
+                    <div class="pa-heading">
+                    </div>
+                    <div>
+                        <img src={"images/margadarshan.jpg"} style={{
+                            width: "100%",
+                            height: "550px",
+                            margin: " 0 0 0 15px"
+                        }} />
+                    </div>
+                </div>
+            </div>
             <div class="pa-counter spacer-top spacer-bottom">
                 <div class="container">
                     <div class="pa-heading">
                         <img src={"images/herbal.svg"} alt="image" class="img-fluid" />
                         <h1>Benefit from choosing the best</h1>
                     </div>
-                    <Container>
-                        <Row>
-                            <Col  sm={8}>
-                            <img src={"images/about-us.jpg"}  style={{width:"500px" ,height:"345px"}}/>
-                            </Col>
-                            <Col  md={{ span: 4, offset: 4 }}>
-                            <img src={"images/panchkarma.jpg"} style={{width:"533px" ,height:"521px"}}/></Col>
-                            <Row>
-                            <Col md={{ span: 6, offset: 3 }}>
-                            <img src={"images/panchkarma.jpg"} style={{width:"533px" ,height:"521px"}}/></Col>
-                            </Row>
-                         
-                        </Row>
-                        {/* <Row>
-                            <Col> <img src={"images/panchkarma.jpg"} style={{width:"500px" ,height:"345px"}}/></Col>
-                            <Col> <img src={"images/panchkarma.jpg"} style={{width:"500px" ,height:"345px"}}/></Col>
-                            <Col> <img src={"images/panchkarma.jpg"} style={{width:"500px" ,height:"345px"}}/></Col>
-                        </Row> */}
-                    </Container>
-                    <div class="pa-team">
-                        <div class="container">
-                            <div class="pa-heading">
-                                {/* <img src={"images/herbal.svg"} alt="image" class="img-fluid"/> */}
-                                <h1></h1>
+                    <div className='Grids'>
+                        <div class="imageGrid">
+                            <a href="" data-lightbox="homePortfolio">
+                                <img src="images/aboutcard.jpg" />
+                            </a>
 
-                            </div>
+                            <a href="" data-lightbox="homePortfolio" class="vertical">
+                                <img src="images/panchkarmafront.png" />
+                            </a>
+
+
+
+                            <a href="" data-lightbox="homePortfolio">
+                                <img src="images/ayurveda.jpg" />
+                            </a>
+
                             <div>
-                                <img src={"images/margadarshan.jpg"} style={{
-                                    width: "100%",
-                                    height: "550px",
-                                    margin: " 0 0 0 15px"
-                                }} />
+                                <a href="" data-lightbox="homePortfolio" class="horizontal">
+                                    <img src="images/panchkarmaback.jpg" />
+                                </a>
                             </div>
+
                         </div>
                     </div>
-                    {/* team end */}
+
                 </div>
             </div>
         </>
