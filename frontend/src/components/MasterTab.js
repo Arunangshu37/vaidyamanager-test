@@ -24,9 +24,9 @@ const MasterTab = () => {
         <Tab eventKey="prescription" title="Prescription">
           <PrescriptionWindow />
         </Tab>
-        <Tab eventKey="document" title="Documents">
+        {/* <Tab eventKey="document" title="Documents">
          <DocumentTab/>
-          </Tab>
+          </Tab> */}
       </Tabs>
     </div>
   )

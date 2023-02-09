@@ -29,7 +29,9 @@ const BillHistoryTab = ({ PatientId }) => {
     return (
         <div>
             <Card>
-                <Card.Body>Patient Name:{filterbill[0]?.Patient[0].name}</Card.Body>
+                <Card.Body>
+                  <h6>Patient Name:{filterbill[0]?.Patient[0].name}</h6>  
+                    </Card.Body>
             </Card>
             <table className="striped bordered visiting" bordercolor="#1d4e4a">
                 <thead>

@@ -24,9 +24,6 @@ const Register = ({ location, history }) => {
     const [gender, setGender] = useState('');
     const [address, setAddress] = useState('');
     const [weight, setWeight] = useState('');
-    const [illness, setIllness] = useState('');
-    const [treatment, setTreatment] = useState('');
-    const [duration, setDuration] = useState('');
     const [reference, setReference] = useState('');
     const [profilePictureURL, setprofilePictureURL] = useState('')
     // const [dob, setDob] = useState();
@@ -72,7 +69,7 @@ const Register = ({ location, history }) => {
         } else {
 
             // Dispatch Register
-            dispatch(register(name, email, phone, password, address, age, gender, weight, illness, treatment, duration, reference, date, false,profilePictureURL))
+            dispatch(register(name, email, phone, password, address, age, gender, weight, reference, date, false, profilePictureURL))
             toast.success('Registration Successfully!', {
                 position: toast.POSITION.TOP_CENTER
             });
@@ -84,9 +81,7 @@ const Register = ({ location, history }) => {
             setGender('');
             setAddress('');
             setWeight('');
-            setIllness('');
-            setTreatment('');
-            setDuration('');
+          
         }
     }
 
@@ -239,75 +234,6 @@ const Register = ({ location, history }) => {
                             </Form.Group>
                         </td>
                     </tr>
-                    {/* <tr>
-                        <td>
-                            <label>Profile Photo</label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId='picture' className='registerform-group'>
-                                <Form.Control
-                                    type='file'
-                                    placeholder=''
-                                    value={profilePictureURL}
-                                    onChange={(e) => setprofilePictureURL(e.target.value)}
-
-                                ></Form.Control>
-                            </Form.Group>
-                        </td>
-                    </tr> */}
-                    <tr>
-                        <td>
-                            <label> Present Illness</label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId='illness' className='registerform-group'>
-                                <Form.Control
-                                    type='text'
-                                    placeholder='About Illness'
-                                    value={illness}
-                                    onChange={(e) => setIllness(e.target.value)}
-
-                                ></Form.Control>
-                            </Form.Group>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Previous Taken treatment</label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId='Treatment' className='registerform-group'>
-                                <Form.Control as="select"
-                                    type='text'
-                                    placeholder='Gender'
-                                    value={treatment}
-                                    onChange={(e) => setTreatment(e.target.value)}
-                                >
-                                    <option value="">Select</option>
-                                    <option value="Allopathy">Allopathy</option>
-                                    <option value="Ayurved">Ayurved</option>
-                                    <option value="Homeopathy">Homeopathy</option>
-                                    <option value="Other">Other</option>
-                                </Form.Control>
-                            </Form.Group>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Duration</label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId='Duration' className='registerform-group'>
-                                <Form.Control
-                                    type='text'
-                                    placeholder='Duration in Month'
-                                    value={duration}
-                                    onChange={(e) => setDuration(e.target.value)}
-
-                                ></Form.Control>
-                            </Form.Group>
-                        </td>
-                    </tr>
 
                     <tr>
                         <td>
@@ -372,15 +298,15 @@ const Register = ({ location, history }) => {
                         <td>  <Button type='submit' variant='primary'>
                             Register
                         </Button>
-                        <ToastContainer />
+                            <ToastContainer />
                         </td>
                         <td>
                             <Button t variant='primary'>
                                 Reset
                             </Button></td>
                     </tr>
-                   
-                       {/* <div className="userimage-upload">
+
+                    {/* <div className="userimage-upload">
                             <label for="file-input">
                                 <img src={"/images/user(1).png"} alt="image" />
                             </label>

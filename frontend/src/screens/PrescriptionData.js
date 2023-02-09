@@ -49,9 +49,9 @@ const PrescriptionData = () => {
             <th>
               Medicines
             </th>
-            <th>
+            {/* <th>
               Panchakrma
-            </th>
+            </th> */}
           </tr>
         </thead>
 
@@ -81,11 +81,11 @@ const PrescriptionData = () => {
                     </li>
                   );
                 })}</td>
-                <td>
+                {/* <td>
                   {v.panchkarma?.map(item => (
                     <li key={item.id}>name:{item.panchkarma_name},days:{item.panchkarma_days}</li>
                   ))}
-                </td>
+                </td> */}
               </tr>
             );
           })}

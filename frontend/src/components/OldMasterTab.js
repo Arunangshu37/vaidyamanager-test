@@ -64,9 +64,9 @@ const OldMasterTab = () => {
         <Tab eventKey="Bill" title="Bill history">
           <BillHistoryTab PatientId={selectedPatientId} />
         </Tab>
-        <Tab eventKey="view" title="View">
+        {/* <Tab eventKey="view" title="View">
           <ViewDetailTab PatientIds={selectedPatientId} />
-        </Tab>
+        </Tab> */}
       </Tabs>
     </div>
   )

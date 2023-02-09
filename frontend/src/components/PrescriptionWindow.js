@@ -23,13 +23,13 @@ const PrescriptionWindow = () => {
   const defaultData = {
     diet: "",
     prescriptiondays: "",
-    ayurveda: "",
-    ayurvedaDiagnosis: "",
-    mDiagnosis: "",
-    modernSystem: "",
-    treatement: "",
-    treatmentdays: "",
-    panchkarma: [],
+    // ayurveda: "",
+    // ayurvedaDiagnosis: "",
+    // mDiagnosis: "",
+    // modernSystem: "",
+    // treatement: "",
+    // treatmentdays: "",
+    // panchkarma: [],
     image: "",
     video: "",
     report: "",
@@ -64,13 +64,13 @@ const PrescriptionWindow = () => {
           Symptoms: symptomList,
           diet_chart: response._id,
           medicineData: medicineAndDoseArray,
-          ayurveda_diagnosis: prescription.ayurvedaDiagnosis,
-          mDiagnosis: prescription.mDiagnosis,
-          modernSystem: prescription.modernSystem,
-          prescriptionTreatment: prescription.treatement,
-          treatmentdays: prescription.treatmentdays,
-          panchkarma: prescription.panchkarma,
-          ayurveda: prescription.ayurveda,
+          // ayurveda_diagnosis: prescription.ayurvedaDiagnosis,
+          // mDiagnosis: prescription.mDiagnosis,
+          // modernSystem: prescription.modernSystem,
+          // prescriptionTreatment: prescription.treatement,
+          // treatmentdays: prescription.treatmentdays,
+          // panchkarma: prescription.panchkarma,
+          // ayurveda: prescription.ayurveda,
           Image: imagefile,
           Video: videofile,
           report: reportfile,
@@ -81,7 +81,6 @@ const PrescriptionWindow = () => {
         }
         dispatch(addPrescriptionUser(mainPrescription))
 
-        // console.log("Prescription", mainPrescription);
       })
       .catch(e => console.log(e))
 
@@ -93,12 +92,12 @@ const PrescriptionWindow = () => {
 
   const allMedicines = useSelector((state) => state.getallMedicineList)
   const { loadingMedicine, errorMedicine, medicinesList } = allMedicines;
-  // console.log("Medicine List", allMedicines)
+
 
   // User(Patient)
   const Patient = useSelector((state) => state.userInfoDetails)
   const { loadingUsers, errorUsers, users } = Patient;
-  // console.log("All users", users)
+ 
 
   useEffect(() => {
     dispatch(getUserInfoDetails());
@@ -334,39 +333,39 @@ const PrescriptionWindow = () => {
     })
   }
 
-  const [isPanchkarmaChecked, setIsPanchkarmaChecked] = useState(true);
-  //panchkarma toggle
-  const toggleSelect = () => {
-    setIsPanchkarmaChecked(!isPanchkarmaChecked)
-  }
+  // const [isPanchkarmaChecked, setIsPanchkarmaChecked] = useState(true);
+  // //panchkarma toggle
+  // const toggleSelect = () => {
+  //   setIsPanchkarmaChecked(!isPanchkarmaChecked)
+  // }
 
 
-  //add input box on selection
-  const selectPanchkarma = (e) => {
-    if (prescription.panchkarma.every((el) => el.panchkarma_name !== e.target.value)) {
-      const tempData = { panchkarma_name: e.target.value, panchkarma_days: '0' }
-      setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempData] })
-    }
-  }
+  // //add input box on selection
+  // const selectPanchkarma = (e) => {
+  //   if (prescription.panchkarma.every((el) => el.panchkarma_name !== e.target.value)) {
+  //     const tempData = { panchkarma_name: e.target.value, panchkarma_days: '0' }
+  //     setPrescription({ ...prescription, panchkarma: [...prescription.panchkarma, tempData] })
+  //   }
+  // }
 
 
-  const removeDays = (pname) => {
-    const a = prescription.panchkarma.filter((v) => v.panchkarma_name !== pname)
-    setPrescription({ ...prescription, panchkarma: a })
+  // const removeDays = (pname) => {
+  //   const a = prescription.panchkarma.filter((v) => v.panchkarma_name !== pname)
+  //   setPrescription({ ...prescription, panchkarma: a })
 
-  }
+  // }
 
-  const handlePanchkarmaDay = (e) => {
-    const tempDay = prescription.panchkarma.map((el) => {
-      if (el.panchkarma_name === e.target.name) {
-        return { panchkarma_name: e.target.name, panchkarma_days: e.target.value }
-      }
-      else {
-        return { ...el }
-      }
-    })
-    setPrescription({ ...prescription, panchkarma: tempDay })
-  }
+  // const handlePanchkarmaDay = (e) => {
+  //   const tempDay = prescription.panchkarma.map((el) => {
+  //     if (el.panchkarma_name === e.target.name) {
+  //       return { panchkarma_name: e.target.name, panchkarma_days: e.target.value }
+  //     }
+  //     else {
+  //       return { ...el }
+  //     }
+  //   })
+  //   setPrescription({ ...prescription, panchkarma: tempDay })
+  // }
 
 
   const [medicineAndDoseArray, setMedicineAndDoseArray] = React.useState([]);
@@ -637,20 +636,18 @@ const PrescriptionWindow = () => {
               {/* {console.log("inputfields", inputFields)} */}
             </td>
             <td>
-              {/* Qty
-              <input type="text" placeholder='00' /> */}
             </td>
             <td style={{ width: "40%" }}>
               <table border="1px" bordercolor="black" cellspacing="5px" cellpadding="5%" align="center" >
-                <tr>
+                {/* <tr>
                   <td colspan="2">
                     <input type="text" id="ayurvedaDiagnosis" className='p-input' placeholder='Ayurveda Diagnosis'
                       value={prescription.ayurvedaDiagnosis}
                       onChange={(e) => setPrescription({ ...prescription, ayurvedaDiagnosis: e.target.value })}
                     />
                   </td>
-                </tr>
-                <tr>
+                </tr> */}
+                {/* <tr>
                   <td>
                     <input type="text" id="mDiagnosis" className='p-input' placeholder='M Diagnosis'
                       value={prescription.mDiagnosis}
@@ -663,8 +660,8 @@ const PrescriptionWindow = () => {
                       onChange={(e) => setPrescription({ ...prescription, modernSystem: e.target.value })}
                     />
                   </td>
-                </tr>
-                <tr>
+                </tr> */}
+                {/* <tr>
                   <td>
                     <input type="text" id="treatement" placeholder='Treatment' className='p-input'
                       value={prescription.treatement}
@@ -683,8 +680,8 @@ const PrescriptionWindow = () => {
                       <option value="Days">Days</option>
                     </select>
                   </td>
-                </tr>
-                <tr>
+                </tr> */}
+                {/* <tr>
                   <td>
                     <input type="text" className='p-input' placeholder='Ayurveda'
                       value={prescription.ayurveda}
@@ -724,8 +721,8 @@ const PrescriptionWindow = () => {
                       </select>
                     </div>
                   </td>
-                </tr>
-                <tr>
+                </tr> */}
+                {/* <tr>
                   <Card>
                     {
                       prescription.panchkarma.map((item) => (
@@ -739,7 +736,7 @@ const PrescriptionWindow = () => {
                       ))
                     }
                   </Card>
-                </tr>
+                </tr> */}
                 <tr>
                   <td colSpan={'2'}>
                     <table className="table table-bordered border-primary" border={"1px"} style={{ width: "100%" }}>

@@ -46,7 +46,7 @@ const ViewDetailTab = ({ PatientIds }) => {
             </Col>
             <table className="table table-borderless" bordercolor="#6caaa8" style={{ backgroundColor: "aliceblue" }}>
               <tr>
-                <td>
+                {/* <td>
                   <Card style={{ width: '18rem' }}>
                     <Card.Body>
                       <Card.Title>Ayurveda</Card.Title>
@@ -63,7 +63,7 @@ const ViewDetailTab = ({ PatientIds }) => {
 
                     </Card.Body>
                   </Card>
-                </td>
+                </td> */}
                 <td>
                   <Card style={{ width: '18rem' }}>
                     <Card.Body>

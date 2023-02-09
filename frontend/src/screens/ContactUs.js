@@ -20,9 +20,8 @@ const ContactUs = ({ history }) => {
                     </div>
                     <div className="contact-info-text">
                       <h2> Clinic Address</h2>
-                      <span> સરનામું : ૨૨૮, અવધ પ્રાઈડ, બીજો માળ, મેટ્રો પીલ્લર નં. ૧૩૯ ની સામે,
-                        નિરાંત ચોકડી, વસ્ત્રાલ, અમદાવાદ-૧૮</span>
-                      <span></span>
+                      <span style={{padding:"5px"}}> Awadh Pride, 2nd Floor, Metro Pillar no. Opposite 139, Nirant Chowk, Vastral, Ahmedabad-18</span>
+           
                     </div>
                   </div>
                 </div>
@@ -35,9 +34,12 @@ const ContactUs = ({ history }) => {
                     </div>
                     <div className="contact-info-text  flex-fill" >
                       <h2>E-mail</h2>
+                  
                       <span>sukhayu7@gmail.com</span>
+                  
+                      <span> Mobile NO: 9165731657</span>
                       <span></span>
-                      <span>મો. ૯૧૬૫૦૩૧૬૫</span>
+                      <span></span>
                     </div>
                   </div>
                 </div>
@@ -49,10 +51,12 @@ const ContactUs = ({ history }) => {
                       <i className="fas fa-clock"></i>
                     </div>
                     <div className="contact-info-text" >
-                      <h2>Available time</h2>
-                      <span>Mon - Sat 9:00 am - 9.00 pm</span>
+                      <h2>Clinic time</h2>
+                 
+                      <span>Morning - 10:30 am - 2.00 pm</span>
+                      <span>Evening  5:00 pm - 8:00 pm</span>
                       <span></span>
-                      <span>Sunday Closed</span>
+                      <span></span>
                     </div>
                   </div>
                 </div>

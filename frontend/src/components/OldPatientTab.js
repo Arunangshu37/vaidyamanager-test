@@ -68,12 +68,12 @@ const OldPatientTab = ({ choosePatient }) => {
               onChange={searchPatient}
             />
           </td>
-          <td>
+          {/* <td>
             Ayurveda Diagnosis
           </td>
           <td >
             Modern Diagnosis
-          </td>
+          </td> */}
           <td >
             Contact
           </td>
@@ -88,8 +88,8 @@ const OldPatientTab = ({ choosePatient }) => {
           <tr key={index}>
             <>
               <td> {data.Patient[0].name}</td>
-              <td>{data.ayurveda_diagnosis}</td>
-              <td>{data.mDiagnosis}</td>
+              {/* <td>{data.ayurveda_diagnosis}</td>
+              <td>{data.mDiagnosis}</td> */}
               <td>{data.Patient[0].phone}</td>
               <td>Active</td>
               <td>
