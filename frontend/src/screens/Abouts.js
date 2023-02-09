@@ -51,31 +51,25 @@ const Abouts = () => {
                         <img src={"images/herbal.svg"} alt="image" class="img-fluid" />
                         <h1>Benefit from choosing the best</h1>
                     </div>
-                    <div className='Grids'>
-                        <div class="imageGrid">
-                            <a href="" data-lightbox="homePortfolio">
-                                <img src="images/aboutcard.jpg" />
-                            </a>
-
-                            <a href="" data-lightbox="homePortfolio" class="vertical">
-                                <img src="images/panchkarmafront.png" />
-                            </a>
-
-
-
-                            <a href="" data-lightbox="homePortfolio">
-                                <img src="images/ayurveda.jpg" />
-                            </a>
-
-                            <div>
-                                <a href="" data-lightbox="homePortfolio" class="horizontal">
-                                    <img src="images/panchkarmaback.jpg" />
-                                </a>
-                            </div>
-
-                        </div>
+                    
+                    <div>
+                        <Row>
+                            <Col>
+                                <Row>
+                                    <img className='imgSmall' src="images/ayurveda.jpg" />
+                                </Row>
+                                <Row>
+                                    <img className='imgSmall' src="images/aboutcard.jpg" />
+                                </Row>
+                            </Col>
+                            <Col>
+                                <img className='imgSmall' style={{ height: '810px' }} src="images/panchkarmafront.png" />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <img className='imgPanchkarmaback' src="images/panchkarmaback.jpg" />
+                        </Row>
                     </div>
-
                 </div>
             </div>
         </>
