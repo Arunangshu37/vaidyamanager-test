@@ -23,7 +23,7 @@ const MainPage = ({ location, history }) => {
   });
     localStorage.setItem('isLogin', true)
 
-    // history.push('/home');
+    history.push('/home');
 
   }
   return (

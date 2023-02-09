@@ -24,7 +24,7 @@ const Footer = () => {
       <div className="pa-footer-three">
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 col-md-6">
+            {/* <div className="col-lg-3 col-md-6">
               <div className="pa-foot-box">
                 <h2 className="pa-foot-title">Top Products</h2>
                 <ul>
@@ -45,7 +45,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> */}
             <div className="col-lg-3 col-md-6">
               <div className="pa-foot-box">
                 <h2 className="pa-foot-title">Legal Information</h2>

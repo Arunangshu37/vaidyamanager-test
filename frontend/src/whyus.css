@@ -68,9 +68,11 @@ li {
     border: 1px dashed #6caaa8;
     border-radius: 100%;
     text-align: center;
+    background-color: #b1ecea;
 }
 .pa-why-img img {
-    width: 150px;
+    margin-top: -165px;
+    width: 322px;
 }
 
 /* right li */
@@ -84,9 +86,9 @@ li {
 .pa-why-right ul li:nth-child(2) {
     padding-left: 140px;
 }
-.pa-why-right ul li:nth-child(4) {
+/* .pa-why-right ul li:nth-child(4) {
     padding-left: 145px;
-}
+} */
 .pa-why-ul ul li:last-child {
     margin-bottom: 0;
 }
@@ -112,32 +114,47 @@ li {
     transform: rotate(8deg) translate(13px, 10px);
 }
 .pa-why-left ul li:nth-child(4):after {
-    transform: rotate(-8deg) translate(10px, -10px);
+    width: 151px;
+    transform: rotate(350deg) translate(14px, -10px);
+
+}
+.pa-why-left ul li:nth-child(5):after {
+    width: 199px;
+    transform: rotate(341deg) translate(55px, -10px);
 }
 .pa-why-left ul li:last-child:after {
-    transform: rotate(-14deg) translate(55px, -10px);
+    transform: rotate(334deg) translate(114px, -10px);
+    width: 242px;
 }
 .pa-why-right ul li:first-child:after {
-    /* transform: rotate(-11deg) translate(-62px, 10px); */
-    transform: rotate(-9deg) translate(-56px, 10px);
+    width: 146px;
+    transform: rotate(348deg) translate(-56px, 10px);
 }
 .pa-why-right ul li:after {
     left: 0;
 }
 .pa-why-right ul li:nth-child(2):after {
+    width: 136px;
     /* transform: rotate(-8deg) translate(-15px, 10px); */
-    transform: rotate(-10deg) translate(-4px, 12px);
+    transform: rotate(354deg) translate(-1px, 17px);
 }
 .pa-why-right ul li:nth-child(3):after {
-    transform: rotate(4deg) translate(6px, 1px);
+    width: 139px;
+    transform: rotate(1deg) translate(6px, 1px);
 }
 
 .pa-why-right ul li:nth-child(4):after {
-    transform: rotate(8deg) translate(-11px, -10px);
+    transform: rotate(8deg) translate(6px, -9px);
 }
+
+.pa-why-right ul li:nth-child(5):after {
+    width: 178px;
+    transform: rotate(23deg) translate(-42px, -21px);
+}
+
 .pa-why-right ul li:last-child:after {
-    width: 191px;
-    transform: rotate(13deg) translate(-54px, -15px);
+    width: 242px;
+    transform: rotate(31deg) translate(-105px, -10px);
     /* transform: rotate(16deg) translate(-50px, -10px); */
 }
 @media screen and (max-width: 575px){
@@ -260,4 +277,13 @@ li {
     background: rgba(108, 170, 168, 0.1);
 }
 
+.whyImage h5{
+    margin: -223px -1px 6px 78px;
+    font-size: 41px;
+    color: #25a9b2;
+}
 
+.whyImage p{
+    margin: 14px -1px 6px 85px;
+    font-size: 18px;
+}
