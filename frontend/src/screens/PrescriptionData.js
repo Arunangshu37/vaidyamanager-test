@@ -43,9 +43,7 @@ const PrescriptionData = () => {
             <th>
               Date
             </th>
-            <th>
-              Symptoms
-            </th>
+         
             <th>
               Medicines
             </th>
@@ -72,7 +70,7 @@ const PrescriptionData = () => {
                   })
                 }</td>
                 <td>{dayjs(v.createdAt).format('DD/MM/YYYY')}</td>
-                <td>{v.Symptoms.join(',')}</td>
+         
                 <td> {v.medicineData.map((medicine, i) => {
                   return (
                     <li key={i}>

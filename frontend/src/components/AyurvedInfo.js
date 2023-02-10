@@ -43,8 +43,8 @@ const AyurvedInfo = () => {
                         <h5>best for you</h5>
                     </div>
                     <div className="row">
-                        {/* <img src={"images/whyus.png"} alt="image" className="img-fluid"/> */}
-                        <div className="col-md-4 col-sm-6 pr-0">
+                        <img src={"images/whysukhayu.png"} alt="image" className="img-fluid"/>
+                        {/* <div className="col-md-4 col-sm-6 pr-0">
                             <div className="pa-why-ul pa-why-left">
                                 <ul>
                                     <li>Joint Problems</li>
@@ -58,12 +58,14 @@ const AyurvedInfo = () => {
                         </div>
                         <div className="col-md-4 p-0">
                             <div className="pa-why-img">
-                                
-                                {/* <img src="images/vaidya-logo-preview.png" alt="image" className="img-fluid" /> */}
+
+                                <img src="images/sukhayuenglish.png" alt="image" className="img-fluid" />
                             </div>
-                            <div className='whyImage'>   <h5>AYURVEDA</h5>
-                                <p>The Mother of all Healing</p></div>
-                         
+                            <div className='whyImage'>
+                            
+                                <p>The Mother of all Healing</p>
+                            </div>
+
                         </div>
                         <div className="col-md-4 col-sm-6 pl-0">
                             <div className="pa-why-ul pa-why-right">
@@ -74,10 +76,10 @@ const AyurvedInfo = () => {
                                     <li>Stree Vikar</li>
                                     <li>Infertility</li>
                                     <li>Panchkarma</li>
-                                   
+
                                 </ul>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

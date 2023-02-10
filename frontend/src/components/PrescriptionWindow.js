@@ -442,7 +442,7 @@ const PrescriptionWindow = () => {
 
     setPatient(user);
     // console.log(selectedUserId)
-    console.log("this is ", patient, user);
+    // console.log("this is ", patient, user);
   }
 
   useEffect(() => {
@@ -535,7 +535,7 @@ const PrescriptionWindow = () => {
                 freeSolo
                 options={allMedicines?.medicinesList}
                 style={{
-                  width: 130,
+                  width: 200,
                   margin: "-24px 15px 0px 54px",
                   fontWeight: "bold"
                 }}

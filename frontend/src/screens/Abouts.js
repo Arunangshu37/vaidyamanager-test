@@ -14,7 +14,7 @@ const Abouts = () => {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="pa-about-img">
-                                <img src={"/images/ayurvedbaneer2.jpg"} alt="image" className="img-fluid" />
+                                <img src={"images/sukhayumarathi.png"} alt="image" className="img-fluid" />
                             </div>
                         </div>
                         <div className="col-lg-6">

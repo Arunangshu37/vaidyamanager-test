@@ -7,6 +7,7 @@ import '../dashboard.css';
 import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from 'react-redux'
 import { createDashboardAppointment, getPatientppointments } from '../actions/dashboardActions'
+import { getUserInfoDetails } from '../actions/userActions'
 import dayjs from 'dayjs';
 
 const Dashboard = () => {
@@ -30,6 +31,18 @@ const Dashboard = () => {
   const getAppointments = useSelector((state) => state.getAppointmentPatients)
   const { loadingapp, appointmentsData, errorapp } = getAppointments
 
+  // User(Patient)
+  const Patient = useSelector((state) => state.userInfoDetails)
+  const { loadingUsers, errorUsers, users } = Patient;
+
+
+  const adminFilter = users?.filter(e => e.isAdmin === false && dayjs(e.createdAt).isSame(dayjs(), 'day'));
+  console.log("Dashoabrd filter admin", adminFilter)
+
+  // const showRegisterPatients = adminFilter?.filter((e) => e.createdAt === dayjs())
+  // console.log("showRegisterPatients",showRegisterPatients)
+
+
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(createDashboardAppointment(
@@ -43,6 +56,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getPatientppointments());
+    dispatch(getUserInfoDetails());
   }, [dispatch])
 
   useEffect(() => {
@@ -77,6 +91,14 @@ const Dashboard = () => {
                     <div key={appointment.id}>
                       <p>Patient Name: {appointment.patientName}</p>
                       <p>Phone Number: {appointment.patientContact}</p>
+                    </div>
+                  ))}
+                  <hr />
+                  {/* <h3>Today's  Patients</h3> */}
+                  {adminFilter?.map(user => (
+                    <div key={user.id}>
+                      <p>Patient Name: {user.name}</p>
+                 
                     </div>
                   ))}
                 </Card.Text>
@@ -129,7 +151,7 @@ const Dashboard = () => {
                 <Card.Text>
                   <div style={{ display: "flex", justifyContent: "center" }}>
                     <DatePicker
-                     placeholderText="Select Date"
+                      placeholderText="Select Date"
                       selected={appointment.appointmentDate}
                       onChange={(date) => setAppointment({ ...appointment, appointmentDate: date })} />
                     <DatePicker
