@@ -67,7 +67,7 @@ const addPrescriptionDetails = asyncHandler(async (req, res) => {
 
     })
     const createdPrescription = await PrescripionData.save();
-    console.log("suceess")
+    // console.log("suceess")
     res.status(201).json(createdPrescription)
 
 })

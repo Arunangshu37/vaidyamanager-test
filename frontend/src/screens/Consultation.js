@@ -346,9 +346,9 @@ const Consultation = ({ match, history }) => {
       const consultantDate = doctors?.find((doctor) => doctor.name == name)?.consultant_date
       filterTime = consultantDate?.find((dates) => dayjs(dates.from).format("ddd, MMM DD, YYYY") == dayjs(date).format("ddd, MMM DD, YYYY"))
     }
-    console.log("filter time", filterTime)
-    console.log("from", typeof filterTime?.from)
-    console.log("To", typeof filterTime?.to)
+    // console.log("filter time", filterTime)
+    // console.log("from", typeof filterTime?.from)
+    // console.log("To", typeof filterTime?.to)
     if (filterTime) {
 
       setFromTime(filterTime.from)

@@ -37,7 +37,7 @@ const Dashboard = () => {
 
 
   const adminFilter = users?.filter(e => e.isAdmin === false && dayjs(e.createdAt).isSame(dayjs(), 'day'));
-  console.log("Dashoabrd filter admin", adminFilter)
+  // console.log("Dashoabrd filter admin", adminFilter)
 
   // const showRegisterPatients = adminFilter?.filter((e) => e.createdAt === dayjs())
   // console.log("showRegisterPatients",showRegisterPatients)
