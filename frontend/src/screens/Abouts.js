@@ -32,23 +32,23 @@ const Abouts = () => {
                 </div>
             </div>
 
-            <div class="pa-team">
-                <div class="container">
-                    <div class="pa-heading">
+            <div className="pa-team">
+                <div className="container">
+                    <div className="pa-heading">
                     </div>
                     <div>
                         <img src={"images/margadarshan.jpg"} style={{
                             width: "100%",
                             height: "550px",
                             margin: " 0 0 0 15px"
-                        }} />
+                        }} className="img-fluid"/>
                     </div>
                 </div>
             </div>
-            <div class="pa-counter spacer-top spacer-bottom">
-                <div class="container">
-                    <div class="pa-heading">
-                        <img src={"images/herbal.svg"} alt="image" class="img-fluid" />
+            <div className="pa-counter spacer-top spacer-bottom">
+                <div className="container">
+                    <div className="pa-heading">
+                        <img src={"images/herbal.svg"} alt="image" className="img-fluid" />
                         <h1>Benefit from choosing the best</h1>
                     </div>
                     
@@ -56,18 +56,18 @@ const Abouts = () => {
                         <Row>
                             <Col>
                                 <Row>
-                                    <img className='imgSmall' src="images/ayurveda.jpg" />
+                                    <img className='imgSmall img-fluid' src="images/ayurveda.jpg" />
                                 </Row>
                                 <Row>
-                                    <img className='imgSmall' src="images/aboutcard.jpg" />
+                                    <img className='imgSmall img-fluid' src="images/aboutcard.jpg" />
                                 </Row>
                             </Col>
                             <Col>
-                                <img className='imgSmall' style={{ height: '810px' }} src="images/panchkarmafront.png" />
+                                <img className='imgSmall img-fluid' style={{ height: '810px' }} src="images/panchkarmafront.png" />
                             </Col>
                         </Row>
                         <Row>
-                            <img className='imgPanchkarmaback' src="images/panchkarmaback.jpg" />
+                            <img className='imgPanchkarmaback img-fluid' src="images/panchkarmaback.jpg" />
                         </Row>
                     </div>
                 </div>

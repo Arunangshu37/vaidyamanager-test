@@ -37,7 +37,7 @@ const ContactUs = ({ history }) => {
                   
                       <span>sukhayu7@gmail.com</span>
                   
-                      <span> Mobile NO: 9165731657</span>
+                      <span> Mobile No: 9165731657</span>
                       <span></span>
                       <span></span>
                     </div>
@@ -54,7 +54,7 @@ const ContactUs = ({ history }) => {
                       <h2>Clinic time</h2>
                  
                       <span>Morning - 10:30 am - 2.00 pm</span>
-                      <span>Evening  5:00 pm - 8:00 pm</span>
+                      <span>Evening - 5:00 pm - 8:00 pm</span>
                       <span></span>
                       <span></span>
                     </div>
@@ -64,7 +64,7 @@ const ContactUs = ({ history }) => {
             </div>
 
           </div>
-          <div className="row justify-content-center">
+          {/* <div className="row justify-content-center">
             <div className="col-md-5">
               <div className="pa-contact-form">
                 <h5 className='contact-heading'>Please Fill the Form</h5>
@@ -78,7 +78,7 @@ const ContactUs = ({ history }) => {
                 </form>
               </div>
             </div>
-          </div>
+          </div> */}
         </section>
 
       </Container>

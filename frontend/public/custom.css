@@ -18,9 +18,18 @@
   background-color: #479591 !important;
 }
 
-
+.navbar-brand{
+  background: transparent !important;
+}
 .navbar-dark .navbar-nav .nav-link {
   color: #1d4e4a !important;
+}
+
+.navbar-collapse {
+  background-color:  #88ccc6   !important;
+  flex-basis: 100%;
+  flex-grow: 1;
+  align-items: center;
 }
 /* .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
   color: orangered;

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
+    /* width: 100vw; */
     height: 100vh;
   }
   
@@ -28,7 +28,7 @@
     font-weight: 800;
   }
   
-  label {
+  .authlabel {
     font-size: 14px;
     font-weight: 600;
     color: rgb(34, 34, 34);

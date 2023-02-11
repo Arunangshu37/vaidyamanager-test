@@ -14,7 +14,7 @@ const MainPage = ({ location, history }) => {
   // Get user login info from Redux state
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, error, userInfo } = userLogin
-  // const notify = () => toast("Wow so easy!");
+  
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(login(email, password))
@@ -28,113 +28,49 @@ const MainPage = ({ location, history }) => {
   }
   return (
     <div>
-      {/* <Container>
-        <Row>
-          <Col sm={8}>
-            <div class="row">
-              <div class="col s12 m8 l4 offset-m2 offset-l4">
-
-                <div class="card">
-
-                  <div class="card-action teal lighten-1 white-text">
-                    <h3>Login Form</h3>
-                  </div>
-
-                  <div class="card-content">
-                    <div class="form-field">
-                      <label for="username">Username</label>
-                      <input type="text" id="username" />
-                    </div><br />
-
-                    <div class="form-field">
-                      <label for="password">Password</label>
-                      <input type="password" id="password" />
-                    </div><br />
-
-
-
-                    <div class="form-field">
-                      <button class="btn-large waves-effect waves-dark" style={{ width: "100px" }}>Login</button>
-                    </div><br />
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </Col>
-
-        </Row>
-
-      </Container> */}
-      {/* <div class="row">
-        <div class="col s12 m8 l4 offset-m2 offset-l4">
-
-          <div class="card">
-
-            <div class="card-action teal lighten-1 white-text">
-              <h3>Login Form</h3>
-            </div>
-
-            <div class="card-content">
-              <div class="form-field">
-                <label for="username">Username</label>
-                <input type="text" id="username" />
-              </div><br />
-
-              <div class="form-field">
-                <label for="password">Password</label>
-                <input type="password" id="password" />
-              </div><br />
-
-
-
-              <div class="form-field">
-                <button class="btn-large waves-effect waves-dark" style={{ width: "100px" }}>Login</button>
-              </div><br />
-            </div>
-
-          </div>
-        </div>
-      </div> */}
-
-
 
       <div className="Auth-form-container">
-        <form className="Auth-form">
+        <Form className="Auth-form" onSubmit={submitHandler}>
           <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Sign In</h3>
+            {/* <h3 className="Auth-form-title">Sign In</h3> */}
             <div className="text-center">
     
               <span className="link-primary" >
-                Sign Up
+                <h4>Sign in</h4>
               </span>
             </div>
             <div className="form-group mt-3">
-              <label>Email address</label>
+              <label className='authlabel'>Email address</label>
               <input
                 type="email"
                 className="form-control mt-1"
                 placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="form-group mt-3">
-              <label>Password</label>
+              <label className='authlabel'>Password</label>
               <input
                 type="password"
                 className="form-control mt-1"
                 placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="d-grid gap-2 mt-3">
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>
+          
             </div>
-            <p className="text-center mt-2">
+            <ToastContainer />
+            {/* <p className="text-center mt-2">
               Forgot <a href="#">password?</a>
-            </p>
+            </p> */}
           </div>
-        </form>
+        </Form>
       </div>
 
       {/* <section className="vh-100" >

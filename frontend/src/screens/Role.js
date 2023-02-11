@@ -47,8 +47,6 @@ const Role = ({ location, history }) => {
 
     var isAdmin = false
 
-    console.log("profilePictureURL", file)
-
     //calculate the age
     const getAge = (dob) => {
         // console.log("do", dob)
