@@ -1,0 +1,6 @@
+{
+  "appId": "com.example.app",
+  "appName": " vaidya_manager",
+  "webDir": "build",
+  "bundledWebRuntime": false
+}
