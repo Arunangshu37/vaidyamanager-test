@@ -7,7 +7,7 @@ import '../register.css'
 import { register } from '../actions/userActions'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Button, Image, Form } from 'react-bootstrap';
+import { Button, Image, Form,InputGroup} from 'react-bootstrap';
 
 
 
@@ -28,7 +28,7 @@ const Register = ({ location, history }) => {
     const [profilePictureURL, setprofilePictureURL] = useState('')
     // const [dob, setDob] = useState();
     const [date, setDate] = useState(new Date());
-
+    const [validated, setValidated] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -81,7 +81,7 @@ const Register = ({ location, history }) => {
             setGender('');
             setAddress('');
             setWeight('');
-          
+            setValidated(true);
         }
     }
 
@@ -93,7 +93,7 @@ const Register = ({ location, history }) => {
                     {message && <Message variant='danger'>{message}</Message>}
                     {loading && <Loader />} */}
 
-            <Form onSubmit={submitHandler} className='registerform'>
+            <Form onSubmit={submitHandler} className='registerform' validated={validated}>
                 <table>
                     <tr>
                         <td>
@@ -205,14 +205,20 @@ const Register = ({ location, history }) => {
                             <label>Email Id</label>
                         </td>
                         <td colSpan={5}>
-                            <Form.Group controlId='email' className='registerform-group'>
-                                <Form.Control
-                                    type='email'
-                                    placeholder='email@example.com'
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                ></Form.Control>
-                            </Form.Group>
+                            <InputGroup hasValidation>
+                                <Form.Group controlId='email' className='registerform-group'>
+                                    <Form.Control
+                                        type='email'
+                                        placeholder='email@example.com'
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                    ></Form.Control>
+                                </Form.Group>
+                                <Form.Control.Feedback type="invalid">
+                                    Please enter valid email-id.
+                                </Form.Control.Feedback>
+                            </InputGroup>
                         </td>
                     </tr>
 
@@ -223,6 +229,7 @@ const Register = ({ location, history }) => {
                             </label>
                         </td>
                         <td colSpan={5}>
+                        <InputGroup hasValidation>
                             <Form.Group controlId='phone' className='registerform-group'>
                                 <Form.Control
                                     type="phone"
@@ -232,6 +239,10 @@ const Register = ({ location, history }) => {
                                     onChange={(e) => setPhone(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
+                            <Form.Control.Feedback type="invalid">
+                                    Please enter valid phone no.
+                                </Form.Control.Feedback>
+                            </InputGroup>
                         </td>
                     </tr>
 

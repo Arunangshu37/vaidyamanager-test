@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, Card } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPrescriptionDetail, getPatientDetail } from '../actions/prescriptionActions'
-import { Link } from 'react-router-dom'
-import OldPrescriptions from './OldPrescriptions'
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import PrescriptionWindow from './PrescriptionWindow';
 
 const OldPatientTab = ({ choosePatient }) => {
   const dispatch = useDispatch();
@@ -18,8 +23,8 @@ const OldPatientTab = ({ choosePatient }) => {
 
   // console.log("prescriptionDetail", prescriptionDetail)
 
-  const uniqueData = Array.from(new Set(patientPrescriptionData?.map(item => item.Patient[0]._id))).map(id => {
-    return patientPrescriptionData?.filter(dataItem => dataItem.Patient[0]._id === id)[0];
+  const uniqueData = Array.from(new Set(patientPrescriptionData?.map(item => item.Patient[0]?._id))).map(id => {
+    return patientPrescriptionData?.filter(dataItem => dataItem.Patient[0]?._id === id)[0];
   });
 
   useEffect(() => {
@@ -32,6 +37,7 @@ const OldPatientTab = ({ choosePatient }) => {
     // console.log("setpatient id",e.target.id);
     // console.log("holg")
   };
+
 
 
   const searchPatient = (e) => {
@@ -54,6 +60,19 @@ const OldPatientTab = ({ choosePatient }) => {
     }
   }
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('lg'));
+
+
   return (
     <div>
       {/* table Starts */}
@@ -68,17 +87,11 @@ const OldPatientTab = ({ choosePatient }) => {
               onChange={searchPatient}
             />
           </td>
-          {/* <td>
-            Ayurveda Diagnosis
-          </td>
-          <td >
-            Modern Diagnosis
-          </td> */}
           <td >
             Contact
           </td>
-          <td >
-            Status
+          <td>
+            Add Prescription
           </td>
           <td >
             Full Detail
@@ -87,14 +100,49 @@ const OldPatientTab = ({ choosePatient }) => {
         {uniqueData.map((data, index) => (
           <tr key={index}>
             <>
-              <td> {data.Patient[0].name}</td>
-              {/* <td>{data.ayurveda_diagnosis}</td>
-              <td>{data.mDiagnosis}</td> */}
-              <td>{data.Patient[0].phone}</td>
-              <td>Active</td>
+              <td> {data.Patient[0]?.name}</td>
+              <td>{data.Patient[0]?.phone}</td>
               <td>
                 <div>
-                  <Button onClick={setPatientDetail} id={data.Patient[0]._id } >View</Button>
+                  <Button variant="outlined" onClick={handleClickOpen}>
+                    Add
+                  </Button>
+                  <Dialog
+                    fullScreen={fullScreen}
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="responsive-dialog-title"
+                    sx={{
+                      "& .MuiDialog-container": {
+                        "& .MuiPaper-root": {
+                          width: "100%",
+                          maxWidth: "902px",  // Set your width here
+                        },
+                      },
+                    }}
+                  >
+                    <DialogTitle id="responsive-dialog-title">Prescription</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText>
+
+                        <br />
+                     
+                      </DialogContentText>
+                      <PrescriptionWindow />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose}>Cancel</Button>
+                      <Button onClick={handleClose}>Submit</Button>
+                    </DialogActions>
+                  </Dialog>
+                </div>
+
+
+
+              </td>
+              <td>
+                <div>
+                  <Button onClick={setPatientDetail} id={data.Patient[0]?._id} >View</Button>
                 </div>
                 <div style={{ display: "none" }}>
                 </div>

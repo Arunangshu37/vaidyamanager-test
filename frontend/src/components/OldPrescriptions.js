@@ -31,25 +31,25 @@ const OldPrescriptions = ({ patientIds }) => {
 
   useEffect(() => {
     const patientId = patientData;
-    const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]._id === patientId);
+    const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]?._id === patientId);
     setPatientDataPrescription({
       createdAtDates: patientPrescriptions?.map(prescription => prescription.createdAt),
       patientInfo: {
-        name: patientPrescriptions[0]?.Patient[0].name,
-        weight: patientPrescriptions[0]?.Patient[0].weight,
-        age: patientPrescriptions[0]?.Patient[0].age,
-        gender: patientPrescriptions[0]?.Patient[0].gender,
+        name: patientPrescriptions[0]?.Patient[0]?.name,
+        weight: patientPrescriptions[0]?.Patient[0]?.weight,
+        age: patientPrescriptions[0]?.Patient[0]?.age,
+        gender: patientPrescriptions[0]?.Patient[0]?.gender,
       }
     });
 
   }, [patientData]);
 
   const patientId = patientData;
-  const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]._id === patientId);
+  const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]?._id === patientId);
   const visits = patientDataPrescription.createdAtDates?.map((date) => {
     const prescriptionD = patientPrescriptions?.filter(p => p.createdAt === date);
     const newMedicineData = prescriptionD[0]?.medicineData.map((v) => {
-      const p = prescriptionD[0]?.PatientMedicines.find(e => e._id === v.medicineDetails)
+      const p = prescriptionD[0]?.PatientMedicines.find(e => e?._id === v.medicineDetails)
       return { ...v, medicineData: p }
     })
     return {
@@ -72,8 +72,8 @@ const OldPrescriptions = ({ patientIds }) => {
         <div className="card-body">
           <div className="col">
             <h5>Patient Details</h5>
-            <h6> Patient Name: {patientDataPrescription.patientInfo.name}</h6>
-            <h6>Weight: {patientDataPrescription.patientInfo.weight}</h6>
+            <h6> Patient Name: {patientDataPrescription.patientInfo?.name}</h6>
+            <h6>Weight: {patientDataPrescription.patientInfo?.weight}</h6>
             {/* <h6>Sex: {patientDataPrescription.patientInfo.gender}</h6> */}
           </div>
         </div>
