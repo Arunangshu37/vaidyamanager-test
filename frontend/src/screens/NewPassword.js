@@ -45,7 +45,7 @@ const NewPassword = ({ location, history }) => {
         }
          else {
             // Dispatch Register
-            fetch("http://localhost:8000/api/users/new-password",{
+            fetch("https://vaidyabackend.vercel.app/api/users/new-password",{
                 method:"post",
                 headers:{
                     "Content-Type":"application/json"

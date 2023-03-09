@@ -97,7 +97,7 @@ const Role = ({ location, history }) => {
                     isAdmin: isAdmin
                 }
                 axios
-                    .post(`http://localhost:8000/api/users`, data)
+                    .post(`https://vaidyabackend.vercel.app/api/users`, data)
                     .then((response) => {
                         console.log(response.data)
 

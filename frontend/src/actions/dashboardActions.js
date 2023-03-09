@@ -28,7 +28,7 @@ export const createDashboardAppointment = (
 
         // Make request to server and get the response data
         const { data } = await axios.post(
-            '/api/dashboard/appointment',
+            'http://192.168.1.20:8000/api/dashboard/appointment',
             {
                 appointmentDate,
                 appointmentTime,
@@ -69,7 +69,7 @@ export const getPatientppointments = () => async (dispatch) => {
         dispatch({
             type: DASHBOARD_GETAPPOINTMNET_SUCCESS,
         })
-        const { data } = await axios.get('/api/dashboard/getappointment')
+        const { data } = await axios.get('http://192.168.1.20:8000/api/dashboard/getappointment')
 
         dispatch({
             type: DASHBOARD_GETAPPOINTMNET_SUCCESS,

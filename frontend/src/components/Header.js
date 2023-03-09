@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../actions/userActions'
 import { useHistory } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({location, history}) => {
     const dispatch = useDispatch()
     // const history = useHistory()
 
@@ -26,7 +26,11 @@ const Header = () => {
     const logoutHandler = () => {
         dispatch(logout())
         localStorage.removeItem('isLogin')
+        // history.push('/');
+        // window.location.reload();
         window.location.reload();
+        window.location.href = '/';
+       
     }
 
     return (
@@ -56,18 +60,18 @@ const Header = () => {
 
                         <Navbar.Collapse id='basic-navbar-nav'>
                             <Nav className='me-auto'>
-                                <LinkContainer to={`/home`}>
+                                <LinkContainer to={`/`}>
                                     <Navbar.Brand>Home
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>
-                                {
+                                {/* {
                                     isSuperAdmin ? <LinkContainer to={`/dashboard`}>
                                         <Navbar.Brand>Dashboard
                                             &nbsp;  |&nbsp;
                                         </Navbar.Brand>
                                     </LinkContainer> : ""
-                                }
+                                } */}
                                 {
                                     isSuperAdmin ? <LinkContainer to={`/mastertab`}>
                                         <Navbar.Brand>Patient Registeration
@@ -102,24 +106,13 @@ const Header = () => {
                                     </Navbar.Brand>
                                 </LinkContainer>
 
+                                {isLogin && !isAdmin ?<LinkContainer to={`/patientPrescription`}>
+                                    <Navbar.Brand>Prescription
+                                        &nbsp;  |&nbsp;
+                                    </Navbar.Brand>
+                                </LinkContainer>: ""}
 
-                                {/* <NavDropdown title="Know More" id="basic-nav-dropdown" renderMenuOnMount={true}>
-                                    <NavDropdown.Item href="/about-us" >
-                                        About Us
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item href="/contact-us">
-                                        Contact Us
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item href="/terms-condition">
-                                        Terms & Conditions
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item href="/privacy-policy" >
-                                        Privacy & Policy
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item href="/refund-policy" >
-                                        Refund Policy
-                                    </NavDropdown.Item>
-                                </NavDropdown> */}
+                              
                             </Nav>
                         </Navbar.Collapse>
 
@@ -152,7 +145,7 @@ const Header = () => {
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                 ) : (
-                                    <LinkContainer to='/'>
+                                    <LinkContainer to='/mainpage'>
                                         <Nav.Link>
                                             <i className='fa fa-user mr-2'></i>
                                             Sign In

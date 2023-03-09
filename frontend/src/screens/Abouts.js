@@ -24,7 +24,7 @@ const Abouts = () => {
                                     {/* <h1>We are here with 25 years of experience</h1> */}
                                     <h5>about us</h5>
                                 </div>
-                                <p>Welcome to Sukhayu Ayurvedic Chikitsalaya, Agnikarma Viddhakarma Research Center. We specialize in providing a holistic approach to healthcare using traditional Ayurvedic practices. We at Sukhayu offer a range of services, including agnikarma viddhakarma, Panchkarma, and a complete Ayurvedic practice.
+                                <p align="justify">Welcome to Sukhayu Ayurvedic Chikitsalaya, Agnikarma Viddhakarma Research Center. We specialize in providing a holistic approach to healthcare using traditional Ayurvedic practices. We at Sukhayu offer a range of services, including agnikarma viddhakarma, Panchkarma, and a complete Ayurvedic practice.
 
                                     Agnikarma viddhakarma is a specialized Ayurvedic treatment that involves using heat to promote healing and relieve pain with different shalaka (stick with specific measurements) made up of metals like Suvarna,Tamra, Rajat, Loh, Panchdhatu, etc. In "Viddha-karma" we use insulin needle on a specific point for management of different diseases like musculoskeletal conditions such as arthritis and back pain, knee joint pain, cervical spondylitis, lumbar spondylitis, sciatica, AVN, allergic rhinitis, infertility, headache, insomnia any many more.
 
@@ -47,7 +47,6 @@ const Abouts = () => {
                     <div>
                         <img src={"images/margadarshan.jpg"} style={{
                             width: "100%",
-                            height: "550px",
                             margin: " 0 0 0 15px"
                         }} className="img-fluid" />
                     </div>
@@ -61,12 +60,12 @@ const Abouts = () => {
                     </div>
 
                     <div>
-                        <Row>
+                        <Row className='sukhayu-about'>
                             <Col>
-                                <Row>
+                                <Row className='sukhayu-about'>
                                     <img className='imgSmall img-fluid' src="images/ayurveda.jpg" />
                                 </Row>
-                                <Row>
+                                <Row className='sukhayu-about'>
                                     <img className='imgSmall img-fluid' src="images/aboutcard.jpg" />
                                 </Row>
                             </Col>
@@ -74,7 +73,7 @@ const Abouts = () => {
                                 <img className='imgSmall img-fluid' style={{ height: '810px' }} src="images/panchkarmafront.png" />
                             </Col>
                         </Row>
-                        <Row>
+                        <Row className='sukhayu-about'> 
                             <Col>
                             <img className='imgSmall img-fluid' style={{ height: '400px' }} src="images/10.jpg" />
                             </Col>
@@ -82,7 +81,7 @@ const Abouts = () => {
                             <img className='imgSmall img-fluid' style={{ height: '400px' }} src="images/8.jpg" />
                             </Col>
                         </Row>
-                        <Row>
+                        <Row className='sukhayu-about'>
                             <Col>
                             <img className='imgSmall img-fluid' style={{ height: '400px' }} src="images/7.jpg" />
                             </Col>
@@ -90,7 +89,7 @@ const Abouts = () => {
                             <img className='imgSmall img-fluid' style={{ height: '400px' }} src="images/9.jpg" />
                             </Col>
                         </Row>
-                        <Row>
+                        <Row className='sukhayu-about'>
                             <img className='imgPanchkarmaback img-fluid' src="images/panchkarmaback.jpg" />
                         </Row>
                   

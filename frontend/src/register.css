@@ -43,6 +43,14 @@
 
 }
 
+.register-input {
+  width: 60%;
+  /* height: 36px; 
+    padding: 1px 6px; */
+  border: 1px solid #6caaa8;
+  outline: none;
+
+}
 
 
 .formContent {
@@ -85,4 +93,17 @@
   top: 212px;
   left: 330px;
   color: var(--white);
+}
+
+.date-input{
+  width: 81%;
+  height: 35px;
+  padding: 0px 20px;
+  border: 1px solid #6caaa8;
+  outline: none;
+  border-radius: 5px;
+}
+
+.react-datepicker-wrapper,.react-datepicker__input-container{
+  border: none;
 }

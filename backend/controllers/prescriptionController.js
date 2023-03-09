@@ -43,6 +43,7 @@ const addPrescriptionDetails = asyncHandler(async (req, res) => {
         report,
         payment,
         Remark,
+     
 
     } = req.body
 
@@ -63,9 +64,12 @@ const addPrescriptionDetails = asyncHandler(async (req, res) => {
         Video,
         report,
         payment,
-        Remark
+        Remark,
 
-    })
+
+    }
+    )
+    
     const createdPrescription = await PrescripionData.save();
     // console.log("suceess")
     res.status(201).json(createdPrescription)

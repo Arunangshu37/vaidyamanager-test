@@ -16,10 +16,10 @@
     position: sticky;
   }
   
-  #divOuter{
+  /* #divOuter{
     width: 190px; 
     overflow: hidden;
-  }
+  } */
 
   .symptomcard{
     color: black;
@@ -61,9 +61,7 @@ button, .p-input {
     outline: none;
     overflow: visible;
 }
-.react-datepicker-wrapper,.react-datepicker__input-container{
-  border: none;
-}
+
 .form-check-inline .form-check-input {
   position: static;
   margin-top: 0px;

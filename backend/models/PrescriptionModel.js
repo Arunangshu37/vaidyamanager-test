@@ -12,11 +12,11 @@ const prescriptionSchema = mongoose.Schema(
             ref: 'DietChart'
         },
         Symptoms: [{
-            type:String
+            type: String
         }],
         medicineData: [{
             dose: {
-             type: String
+                type: String
             },
             medicineDetails: {
                 type: mongoose.Schema.Types.ObjectId,
@@ -38,19 +38,19 @@ const prescriptionSchema = mongoose.Schema(
         prescriptionTreatment: {
             type: String
         },
-        treatmentdays:{
+        treatmentdays: {
             type: String
         },
         ayurveda: {
             type: String
         },
         panchkarma: [{
-            panchkarma_name:  {
+            panchkarma_name: {
                 type: String
-               },
-            panchkarma_days:  {
+            },
+            panchkarma_days: {
                 type: String
-               }
+            }
 
         }],
         Image: {
@@ -66,7 +66,7 @@ const prescriptionSchema = mongoose.Schema(
             Consulting: {
                 type: String
             },
-            medicine:{
+            medicine: {
                 type: String
             },
             paid: {
@@ -78,12 +78,18 @@ const prescriptionSchema = mongoose.Schema(
             discount: {
                 type: String
             },
-            // Mode: String
+            paymentmode:
+            {
+                type: String
+            },
+            paymentRemark: {
+                type: String
+            },
+           
         },
         Remark: {
             type: String
         },
-
     },
     {
         timestamps: true,
