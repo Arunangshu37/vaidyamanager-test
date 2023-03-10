@@ -47,17 +47,21 @@ const PrescriptionLists = () => {
     doc.setTextColor('#444');
     doc.text('Doctor Name:', 400, 25);
     doc.setFont('bold');
-    doc.text('DR.Meghhaa', 470, 25);
+    doc.text('DR Meghhaa Akshay Pendkar', 470, 25);
     doc.setFont('normal');
-    doc.text('Phone Number:', 400, 40);
+    doc.text('Email:',400,40)
     doc.setFont('bold');
-    doc.text('9175569131', 470, 40);
+    doc.text('sukhayu7@gmail.com',470,40)
     doc.setFont('normal');
-    doc.text('Clinic Address:', 400, 50);
+    doc.text('Phone Number:', 400, 50);
     doc.setFont('bold');
-    doc.text('Awadh Pride, 2nd Floor,', 470, 50);
-    doc.text(' Metro Pillar no. Opposite 139,', 400, 60)
-    doc.text('Nirant Chowk, Vastral, Ahmedabad-18', 400, 70);
+    doc.text('9175569131', 470, 50);
+    doc.setFont('normal');
+    doc.text('Clinic Address:', 400, 60);
+    doc.setFont('bold');
+    doc.text('Awadh Pride, 2nd Floor,', 470, 60);
+    doc.text(' Metro Pillar no. Opposite 139,', 400, 70)
+    doc.text('Nirant Chowk, Vastral, Ahmedabad-18', 400, 80);
 
     // Add patient details and prescription information
     doc.setFontSize(18);

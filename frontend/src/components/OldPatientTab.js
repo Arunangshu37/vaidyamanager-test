@@ -10,7 +10,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import PrescriptionWindow from './PrescriptionWindow';
+import PrescriptionWindow2 from './PrescriptionWindow2';
 
 const OldPatientTab = ({ choosePatient }) => {
   const dispatch = useDispatch();
@@ -131,7 +131,7 @@ const OldPatientTab = ({ choosePatient }) => {
                           <br />
 
                         </DialogContentText>
-                        <PrescriptionWindow />
+                        <PrescriptionWindow2 />
                       </DialogContent>
                       <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
