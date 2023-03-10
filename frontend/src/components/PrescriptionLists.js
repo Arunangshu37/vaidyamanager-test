@@ -98,7 +98,7 @@ const PrescriptionLists = () => {
 
   return (
     <div style={{ marginTop: "50px" }}>
-      PrescriptionLists
+      <h1>PrescriptionLists</h1>
       <table className="striped bordered visiting" bordercolor="#6caaa8">
         <thead>
           <tr>

@@ -63,7 +63,6 @@ function PrescriptionWindow2() {
           Remark: prescription.Remark
 
         }
-        console.log(mainPrescription)
         dispatch(addPrescriptionUser(mainPrescription))
         // .then(() => {
         //   // Call the generatePrecription function after saving the data
@@ -264,8 +263,8 @@ function PrescriptionWindow2() {
     document.getElementById('dos').checked = true;
     setAllowanceState("1");
     setPreDiet(preDiet => ({ ...preDiet, wtodo: document.getElementById('what_todo').value, wto_dont: document.getElementById('what_todont').value }));
-  
-    
+
+
   };
 
   useEffect(() => {
@@ -610,9 +609,9 @@ function PrescriptionWindow2() {
       </div>
 
 
-      <Form onSubmit={submitHandler}>
+      <Form onSubmit={submitHandler} style={{marginTop:" 1em"}}>
         {/* table Starts */}
-        <table id="pdf-content" className="table table-borderless" bordercolor="black">
+        <table id="pdf-content" className="table table-borderless" bordercolor="#6caaa8">
           <tbody>
             <tr>
               <td style={{ borderRight: "1px solid " }}>
@@ -672,7 +671,7 @@ function PrescriptionWindow2() {
           <tbody>
             <tr>
               <td colSpan={'2'}>
-                <h1 style={{margin: "8px 0 8px -71px"}}>Payment Section</h1>
+                <h1 style={{ margin: "8px 0 8px -71px" }}>Payment Section</h1>
                 <table className="table table-bordered border-primary" border={"1px"} style={{ width: "100%" }}>
                   <tbody>
                     <tr>
@@ -712,7 +711,7 @@ function PrescriptionWindow2() {
                           name="paid"
                           className='p-input'
                           value={inputVal.paid}
-
+                          style={{ backgroundColor: "#e8fffa" }}
                           onChange={onValueChange} /></td>
 
                     </tr>
@@ -724,6 +723,7 @@ function PrescriptionWindow2() {
                           type="text"
                           name="Debit_Credit"
                           value={inputVal.Debit_Credit}
+                          style={{ backgroundColor: "#e8fffa" }}
                           onChange={onValueChange} readOnly />
                       </td>
 

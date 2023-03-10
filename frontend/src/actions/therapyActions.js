@@ -29,7 +29,7 @@ export const createTherapy = (patientName,
             }
             // Make request to server and get the response data
             const { data } = await axios.post(
-                `http://192.168.1.20:8000/api/therapy/`,
+                `/api/therapy/`,
                 {
                     patientName,
                     therapycontact,

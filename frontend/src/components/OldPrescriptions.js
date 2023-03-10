@@ -8,7 +8,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import { Col, Button, Row, Card, ListGroup } from 'react-bootstrap'
 import '../oldPrescription.css'
 import VisitingCalender from './VisitingCalender';
-
+import Alert from 'react-bootstrap/Alert';
 
 
 const OldPrescriptions = ({ patientIds }) => {
@@ -74,7 +74,10 @@ const OldPrescriptions = ({ patientIds }) => {
             <h5>Patient Details</h5>
             <h6> Patient Name: {patientDataPrescription.patientInfo?.name}</h6>
             <h6>Weight: {patientDataPrescription.patientInfo?.weight}</h6>
-            {/* <h6>Sex: {patientDataPrescription.patientInfo.gender}</h6> */}
+            <Alert variant='success' style={{width: "359px",margin:"-4px"}}>
+            Note: Click on the dates to see symptoms & medicines
+            </Alert>
+            {/* <h5 style={{backgroundColor:"#badbcc",color:"#0f5132"}}>Note: Click on the dates to see symptoms & medicines</h5> */}
           </div>
         </div>
       </div>

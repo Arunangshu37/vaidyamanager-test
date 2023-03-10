@@ -76,7 +76,7 @@ const Footer = () => {
                 {/* social */}
                 {/* style={{ marginTop: "51px", display: "flex", justifyContent: "center" }} */}
                 <div >
-                  <a href="" target="_blank">
+                  <a href="https://www.facebook.com/story.php?story_fbid=pfbid0Gvgv1EvvLCVjJYUCpvuSSYbqgKt7yJgfAzSJ92u4zUZFv2YG7B3B6Jz1GUC4tCDkl&id=100076816459208&mibextid=Nif5oz&_rdr" target="_blank">
                     <img style={{ marginRight: "15px" }}
                       // src="images/facebook.svg"
                       src={"http://localhost:2000/images/facebook.svg"}
@@ -108,7 +108,7 @@ const Footer = () => {
         </div>
         <div className="pa-copyright pa-copyright-two">
           <div className="container">
-            <p>Copyright © 2022. All right reserved. <a href=""></a></p>
+            <p>Copyright © 2023. All right reserved. <a href=""></a></p>
           </div>
         </div>
       </>
