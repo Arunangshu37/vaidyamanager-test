@@ -13,3 +13,7 @@
     width: 45%;
   }
   
+.selected-date {
+    background-color: rgb(75 177 161 / 80%);
+    color: #fff;
+  }

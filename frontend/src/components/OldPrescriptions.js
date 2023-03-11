@@ -14,6 +14,7 @@ import Alert from 'react-bootstrap/Alert';
 const OldPrescriptions = ({ patientIds }) => {
   const dispatch = useDispatch();
   const [selectedVisit, setSelectedVisit] = useState(null);
+  const [selectedVisitDate, setSelectedVisitDate] = useState(null);
   const [createdAtDates, setCreatedAtDates] = useState([]);
   const [patientDataPrescription, setPatientDataPrescription] = useState({
     createdAtDates: [],
@@ -60,9 +61,9 @@ const OldPrescriptions = ({ patientIds }) => {
   });
 
 
-  const handleDateClick = (visit) => {
+  const handleDateClick = (visit, visitDate) => {
     setSelectedVisit(visit);
-
+    setSelectedVisitDate(visitDate);
   };
 
   return (
@@ -74,8 +75,8 @@ const OldPrescriptions = ({ patientIds }) => {
             <h5>Patient Details</h5>
             <h6> Patient Name: {patientDataPrescription.patientInfo?.name}</h6>
             <h6>Weight: {patientDataPrescription.patientInfo?.weight}</h6>
-            <Alert variant='success' style={{width: "359px",margin:"-4px"}}>
-            Note: Click on the dates to see symptoms & medicines
+            <Alert variant='success' style={{ width: "359px", margin: "-4px" }}>
+              Note: Click on the dates to see symptoms & medicines
             </Alert>
             {/* <h5 style={{backgroundColor:"#badbcc",color:"#0f5132"}}>Note: Click on the dates to see symptoms & medicines</h5> */}
           </div>
@@ -88,7 +89,10 @@ const OldPrescriptions = ({ patientIds }) => {
             <Card.Header>Visit Dates</Card.Header>
             <ListGroup variant="flush">
               {visits.map((visit, index) => (
-                <ListGroup.Item key={index} onClick={() => handleDateClick(visit)}>
+                <ListGroup.Item key={index}
+                  onClick={() => handleDateClick(visit, visit.visitDate)}
+                  className={visit.visitDate === selectedVisitDate ? 'selected-date' : ''}
+                >
                   {visit.visitDate}
                 </ListGroup.Item>
               ))}

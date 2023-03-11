@@ -11,21 +11,27 @@ import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import PrescriptionWindow2 from './PrescriptionWindow2';
+import dayjs from 'dayjs'
 
 const OldPatientTab = ({ choosePatient }) => {
   const dispatch = useDispatch();
+
+
+  const [previousPrescriptions, setPreviousPrescriptions] = useState([]);
+
   const prescription = useSelector((state) => state.getPrescripionList)
   const { loading, error, prescriptionData } = prescription;
   // console.log("Prescription is", prescriptionData);
 
   const prescriptionDetail = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = prescriptionDetail;
-
-  // console.log("prescriptionDetail", prescriptionDetail)
+  console.log("Prescription is", patientPrescriptionData);
 
   const uniqueData = Array.from(new Set(patientPrescriptionData?.map(item => item.Patient[0]?._id))).map(id => {
     return patientPrescriptionData?.filter(dataItem => dataItem.Patient[0]?._id === id)[0];
   });
+  console.log("uniq", uniqueData)
+
 
   useEffect(() => {
     dispatch(getPrescriptionDetail());
@@ -37,6 +43,7 @@ const OldPatientTab = ({ choosePatient }) => {
     // console.log("setpatient id",e.target.id);
     // console.log("holg")
   };
+
 
 
 
@@ -61,13 +68,18 @@ const OldPatientTab = ({ choosePatient }) => {
   }
 
   const [open, setOpen] = React.useState(false);
+  const [previousPrescription, setPreviousPrescription] = useState([]);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (id) => {
     setOpen(true);
+    const oldPrescription = patientPrescriptionData?.filter(p => p.Patient[0]?._id === id)
+    const sortedPrescriptions = oldPrescription.sort((a, b) => b.createdAt - a.createdAt);
+    setPreviousPrescription(sortedPrescriptions.slice(0, 2))
   };
 
   const handleClose = () => {
     setOpen(false);
+    setPreviousPrescription([])
   };
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('lg'));
@@ -78,8 +90,6 @@ const OldPatientTab = ({ choosePatient }) => {
       {/* table Starts */}
       <table className="table table-borderless" bordercolor="#6caaa8" id="myTable">
         <tbody>
-
-
           <tr>
             <td>
               <Form.Control
@@ -107,7 +117,7 @@ const OldPatientTab = ({ choosePatient }) => {
                 <td>{data.Patient[0]?.phone}</td>
                 <td>
                   <div>
-                    <Button variant="outlined" onClick={handleClickOpen}>
+                    <Button variant="outlined" onClick={() => handleClickOpen(data.Patient[0]?._id)}>
                       Add
                     </Button>
                     <Dialog
@@ -131,7 +141,46 @@ const OldPatientTab = ({ choosePatient }) => {
                           <br />
 
                         </DialogContentText>
-                        <PrescriptionWindow2 />
+                        <table className="striped bordered visiting" bordercolor="#6caaa8">
+                          <thead>
+                            <tr>
+                              <th>
+                                No
+                              </th>
+                              <th>
+                                Visit Date
+                              </th>
+                              {/* <th>Next Visit</th> */}
+                              <th> Symptoms </th>
+                              {/* <th> Lapse Days</th> */}
+                              <th>Medicines</th>
+
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            {previousPrescription?.map((v, index) => {
+                              return (
+                                <tr key={index}>
+                                  <td>{index + 1}</td>
+                                  <td>{dayjs(v.createdAt).format('DD/MM/YYYY')}</td>
+                                  <td>{v.Symptoms?.join(', ')}</td>
+                                 <td>
+                                 <ul>
+                                    {v.medicineData?.map((medicine) => (
+                                      <li key={medicine._id}>
+                                        <p>Name: {v.PatientMedicines?.find((el)=> el._id === medicine.medicineDetails)?.medicineName}</p>
+                                        <p>Dose: {medicine.dose}</p>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                  </td> 
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                        <PrescriptionWindow2 previousPrescription={previousPrescription} />
                       </DialogContent>
                       <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>

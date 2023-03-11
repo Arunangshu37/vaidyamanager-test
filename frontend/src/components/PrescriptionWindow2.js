@@ -19,7 +19,7 @@ import '../prescriptionWindow.css'
 let googleTransliterate = require("google-input-tool");
 
 
-function PrescriptionWindow2() {
+const PrescriptionWindow2 = (previousPrescription) => {
   const defaultData = {
     diet: "",
     prescriptiondays: "",
@@ -29,7 +29,7 @@ function PrescriptionWindow2() {
     payment: {},
     Remark: "",
   }
-
+  console.log("previous", previousPrescription)
   const [prescription, setPrescription] = useState(defaultData);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -602,14 +602,14 @@ function PrescriptionWindow2() {
                 value={prescription.prescriptiondays}
                 onChange={(e) => setPrescription({ ...prescription, prescriptiondays: e.target.value })}
               />
-              <h5 align="center" style={{ fontWeiight: "300", margin: "-25px 62px 0 0" }}> Prescription Days</h5>
+              <h5 align="center" style={{ fontWeiight: "300", margin: "-25px 6px 0 0" }}> Prescription Days</h5>
             </div>
           </div>
         </div>
       </div>
 
 
-      <Form onSubmit={submitHandler} style={{marginTop:" 1em"}}>
+      <Form onSubmit={submitHandler} style={{ marginTop: " 1em" }}>
         {/* table Starts */}
         <table id="pdf-content" className="table table-borderless" bordercolor="#6caaa8">
           <tbody>
