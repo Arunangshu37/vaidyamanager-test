@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import '../visitingcalender.css'
 import * as _ from 'lodash'
@@ -41,11 +41,11 @@ const VisitingCalender = ({ patientId }) => {
         <thead>
           <tr>
             <th>
-             No
+              No
             </th>
             <th>
               Visit Date
-              </th>
+            </th>
             {/* <th>Next Visit</th> */}
             <th> Prescription Days</th>
             {/* <th> Lapse Days</th> */}
@@ -61,8 +61,8 @@ const VisitingCalender = ({ patientId }) => {
                 <td>{index + 1}</td>
                 <td>{dayjs(v.createdAt).format('DD/MM/YYYY')}</td>
                 {/* <td></td> */}
-                 <td>{v.prescriptiondays}</td>
-                <td>{v.Remark}</td> 
+                <td>{v.prescriptiondays|| '-'}</td>
+                <td>{v.Remark || '-'}</td>
               </tr>
             );
           })}

@@ -25,12 +25,12 @@ const OldPatientTab = ({ choosePatient }) => {
 
   const prescriptionDetail = useSelector((state) => state.getPatientPrescriptionList)
   const { loadingp, errorp, patientPrescriptionData } = prescriptionDetail;
-  console.log("Prescription is", patientPrescriptionData);
+
 
   const uniqueData = Array.from(new Set(patientPrescriptionData?.map(item => item.Patient[0]?._id))).map(id => {
     return patientPrescriptionData?.filter(dataItem => dataItem.Patient[0]?._id === id)[0];
   });
-  console.log("uniq", uniqueData)
+
 
 
   useEffect(() => {
@@ -110,7 +110,7 @@ const OldPatientTab = ({ choosePatient }) => {
               Full Detail
             </td>
           </tr>
-          {uniqueData.map((data, index) => (
+          {uniqueData?.map((data, index) => (
             <tr key={index}>
               <>
                 <td> {data.Patient[0]?.name}</td>

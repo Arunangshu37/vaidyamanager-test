@@ -51,10 +51,10 @@ const BillHistoryTab = ({ PatientId }) => {
                             <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>{dayjs(v.createdAt).format('DD/MM/YYYY')}</td>
-                                <td>{v.payment?.Consulting}</td>
-                                <td>{v.payment?.medicine}</td>
-                                <td>{v.payment?.Debit_Credit}</td>
-                                <td>{v.payment?.paid}</td>
+                                <td>{v.payment?.Consulting || '-'}</td>
+                                <td>{v.payment?.medicine || '-'}</td>
+                                <td>{v.payment?.Debit_Credit || '-'}</td>
+                                <td>{v.payment?.paid || '-'}</td>
                                
                             </tr>
                         );

@@ -98,28 +98,31 @@ const OldPrescriptions = ({ patientIds }) => {
               ))}
             </ListGroup>
           </Card>
-          {selectedVisit && (
-            <div className="symptoms-medicines-container">
-              <Card className="symptoms-medicines-card">
-                <Card.Header>Symptoms</Card.Header>
-                <ListGroup variant="flush">
-                  {selectedVisit.symptomObserved?.map((symptom, index) => (
-                    <ListGroup.Item key={index}>{symptom}</ListGroup.Item>
-                  ))}
-                </ListGroup>
-              </Card>
-              <Card className="symptoms-medicines-card">
-                <Card.Header>Medicines</Card.Header>
-                <ListGroup variant="flush">
-                  {selectedVisit.medicinePrescribed?.map((medicine, index) => (
-                    <ListGroup.Item key={index}>
-                      {medicine.medicineData?.medicineName} ({medicine?.dose})
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-              </Card>
-            </div>
-          )}
+          <Card>
+            {selectedVisit && (
+              <div className="symptoms-medicines-container">
+                <Card className="symptoms-medicines-card">
+                  <Card.Header>Symptoms</Card.Header>
+                  <ListGroup variant="flush">
+                    {selectedVisit.symptomObserved?.map((symptom, index) => (
+                      <ListGroup.Item key={index}>{symptom}</ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                </Card>
+                <Card className="symptoms-medicines-card">
+                  <Card.Header>Medicines</Card.Header>
+                  <ListGroup variant="flush">
+                    {selectedVisit.medicinePrescribed?.map((medicine, index) => (
+                      <ListGroup.Item key={index}>
+                        {medicine.medicineData?.medicineName} ({medicine?.dose})
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                </Card>
+              </div>
+            )}
+          </Card>
+
         </div>
       </CardGroup>
       <div style={{ display: "none" }}>

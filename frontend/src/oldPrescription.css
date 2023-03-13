@@ -4,7 +4,7 @@
   }
   .symptoms-medicines-container {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     /* margin-top: 10px; */
     width: 300px;
     margin: 2px 3px 14px 51px;
