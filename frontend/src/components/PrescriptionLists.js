@@ -124,8 +124,8 @@ const PrescriptionLists = () => {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{dayjs(v.createdAt).format('DD/MM/YYYY')}</td>
-                <td>{v.prescriptiondays}</td>
-                <td>{v.Remark}</td>
+                <td>{v.prescriptiondays || '-'}</td>
+                <td>{v.Remark || '-'}</td>
                 <td>
                   <Button onClick={() => generatePDF(v)}>
                     Print
