@@ -47,7 +47,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
 
         }
         inputFields.map((obj) => {
-          medicineAndDoseArray.push({ dose: obj.dose, medicineDetails: obj.med._id })
+          medicineAndDoseArray.push({ dose: obj.dose, medicineDetails: obj.med?._id })
         });
 
         let mainPrescription = {
@@ -64,12 +64,6 @@ const PrescriptionWindow2 = (previousPrescription) => {
 
         }
         dispatch(addPrescriptionUser(mainPrescription))
-        // .then(() => {
-        //   // Call the generatePrecription function after saving the data
-
-        //   generatePrecription();
-        // });
-
       })
       .catch(e => console.log(e))
   }
@@ -136,9 +130,9 @@ const PrescriptionWindow2 = (previousPrescription) => {
   const [inputFields, setInputFields] = useState([]);
   const addFields = (event) => {
     let medicineName = event.target.textContent.trim();
-    let isMedicineAdded = inputFields.find((_) => { return _.med.medicineName == medicineName })?.med?._id !== undefined
+    let isMedicineAdded = inputFields.find((_) => { return _.med?.medicineName == medicineName })?.med?._id !== undefined
     if (!isMedicineAdded) {
-      let med = allMedicines?.medicinesList?.find((med) => { return med.medicineName === medicineName })
+      let med = allMedicines?.medicinesList?.find((med) => { return med?.medicineName === medicineName })
       let newfield = { Dose: '', med: med }
       setInputFields([...inputFields, newfield])
       return
@@ -332,79 +326,14 @@ const PrescriptionWindow2 = (previousPrescription) => {
     })
   }
 
-  //pdf of precription
-  const generatePrecription = () => {
-    // Create a new PDF document
-    const doc = new jsPDF('p', 'pt', 'a4');
-
-    // Set background color for header section
-    doc.setFillColor('#ccf9f5');
-    doc.rect(0, 0, doc.internal.pageSize.width, 80, 'F');
-
-    // Add logo
-    const image = new Image();
-    image.src = 'images/vaidya-logo-preview.png';
-    doc.addImage(image, 'PNG', doc.internal.pageSize.width - 600, 10, 190, 100);
-
-    // Add doctor name, phone number, and clinic address
-    doc.setFontSize(10);
-    doc.setTextColor('#444');
-    doc.text('Doctor Name:', 400, 25);
-    doc.setFont('bold');
-    doc.text('DR.Meghhaa', 470, 25);
-    doc.setFont('normal');
-    doc.text('Phone Number:', 400, 40);
-    doc.setFont('bold');
-    doc.text('9175569131', 470, 40);
-    doc.setFont('normal');
-    doc.text('Clinic Address:', 400, 50);
-    doc.setFont('bold');
-    doc.text('Awadh Pride, 2nd Floor,', 470, 50);
-    doc.text(' Metro Pillar no. Opposite 139,', 400, 60)
-    doc.text('Nirant Chowk, Vastral, Ahmedabad-18', 400, 70);
-
-    // Add patient details
-    doc.setFontSize(18);
-    doc.setFont('bold');
-    doc.text('Prescription', 210, 120);
-    doc.setFontSize(12);
-    doc.text(`Patient Name: ${patient?.name}`, 50, 180);
-    doc.text(`Prescription Days: ${prescription.prescriptiondays}`, 50, 200);
-    doc.text(`Remark: ${prescription.Remark}`, 50, 220);
-
-    // Add table for medicine details
-    const rows = [];
-    inputFields.forEach((input, index) => {
-      const medicineName = input.med.medicineName;
-      const dose = input.dose;
-      const symptoms = prescription.symptomList;
-      rows.push([`Medicine ${index + 1}`, medicineName, dose]);
-    });
-
-    doc.autoTable({
-      startY: 250,
-      head: [['', 'Medicine Name', 'Dose']],
-      body: rows,
-      theme: 'striped',
-      headStyles: { fillColor: '#ccf9f5', textColor: '#444' },
-      styles: { textColor: '#444' },
-      columnStyles: {
-        0: { fontStyle: 'bold' },
-        1: { cellWidth: 'wrap' },
-        2: { cellWidth: 'wrap' },
-        3: { cellWidth: 'auto' }
-      }
-    });
-    doc.save('prescription.pdf');
-  }
-
+ 
   const [medicineAndDoseArray, setMedicineAndDoseArray] = React.useState([]);
   const updateDose = (e) => {
     // getmedicine name using the id
     let medicineName = document.getElementById('me' + e.target.id).textContent.trim();
     // first find the index where of the medicine whose dose is to be set
     const newState = inputFields.map((obj) => {
-      if (obj.med.medicineName === medicineName) {
+      if (obj.med?.medicineName === medicineName) {
         return { ...obj, dose: e.target.value };
       }
       return obj;
@@ -557,6 +486,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
               <Button style={{ margin: "-4px 0 0 11px" }} onClick={addSymptomArray}>Add</Button>
             </div>
             <div className="col">
+            {allMedicines && (
               <Autocomplete
                 id="highlights-demo"
                 sx={{
@@ -569,7 +499,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
                   margin: "-24px 15px 0px 54px",
                   fontWeight: "bold"
                 }}
-                getOptionLabel={(option) => option?.medicineName}
+                getOptionLabel={(option) => option.medicineName}
                 renderInput={(params) => (
                   <TextField {...params} label="Add Medicines"
                     margin="normal" />
@@ -596,6 +526,8 @@ const PrescriptionWindow2 = (previousPrescription) => {
                   );
                 }}
               />
+              )}
+
             </div>
             <div className="col">
               <input type="text" className='d-input' placeholder="00"
@@ -644,8 +576,8 @@ const PrescriptionWindow2 = (previousPrescription) => {
                       <div id="divOuter">
                         <div id="divInner">
 
-                          <h6 id={'med' + index} >{input.med.medicineName}</h6>
-                          <input type="hidden" className='p-input' value={input.med.id} name="medId[]" />
+                          <h6 id={'med' + index} >{input.med?.medicineName}</h6>
+                          <input type="hidden" className='p-input' value={input.med?.id} name="medId[]" />
                           <input id={'d' + index} className='partitioned' type="text" placeholder='Dose' name='dose' maxLength="4" onChange={updateDose} />
                           <Button variant="contained"
                             onClick={() => removeFields(index)}
@@ -1006,8 +938,8 @@ const PrescriptionWindow2 = (previousPrescription) => {
               <dd>
                 <ul>
                   {
-                    dietCategories.map((category) => {
-                      return <li>
+                    dietCategories.map((category,index) => {
+                      return <li key={index}>
                         {
                           dietArray?.filter((_) => { return _.diet.category == category && _.allowance == '1' })
                             .map((element) => element.diet.name).join(", ")
@@ -1021,8 +953,8 @@ const PrescriptionWindow2 = (previousPrescription) => {
               <dd>
                 <ul>
                   {
-                    dietCategories.map((category) => {
-                      return <li>
+                    dietCategories.map((category,index) => {
+                      return <li key={index}>
                         {
                           dietArray?.filter((_) => { return _.diet.category == category && _.allowance == '2' })
                             .map((element) => element.diet.name).join(", ")
@@ -1037,8 +969,8 @@ const PrescriptionWindow2 = (previousPrescription) => {
               <dd>
                 <ul>
                   {
-                    dietCategories.map((category) => {
-                      return <li>
+                    dietCategories.map((category,index) => {
+                      return <li key={index}>
                         {
                           dietArray?.filter((_) => { return _.diet.category == category && _.allowance == '3' })
                             .map((element) => element.diet.name).join(", ")
