@@ -40,8 +40,8 @@ const PrescriptionLists = () => {
     doc.rect(0, 0, doc.internal.pageSize.width, 80, 'F');
     // Add logo
     const image = new Image();
-    image.src = 'images/vaidya-logo-preview.png';
-    doc.addImage(image, 'PNG', doc.internal.pageSize.width - 600, 10, 190, 100);
+    image.src = 'images/sukhayuenglish.png';
+    doc.addImage(image, 'PNG', doc.internal.pageSize.width - 620, 5, 200, 120);
     // Add doctor name, phone number, and clinic address
     doc.setFontSize(10);
     doc.setTextColor('#444');

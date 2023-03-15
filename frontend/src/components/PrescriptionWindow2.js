@@ -29,7 +29,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
     payment: {},
     Remark: "",
   }
-  console.log("previous", previousPrescription)
+
   const [prescription, setPrescription] = useState(defaultData);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -66,6 +66,8 @@ const PrescriptionWindow2 = (previousPrescription) => {
         dispatch(addPrescriptionUser(mainPrescription))
       })
       .catch(e => console.log(e))
+      //reload
+      window.location.reload();
   }
 
   //dietchart API
@@ -112,14 +114,21 @@ const PrescriptionWindow2 = (previousPrescription) => {
 
   //add symptoms
   const addSymptomArray = () => {
-    setTranslateInputValue('');
     if (selectValue === "") {
 
       setSymptomList(prevItems => prevItems.concat(document.getElementById("lan").value));
+      setTranslateInputValue('')
       return
+
     }
     setSymptomList(prevItems => prevItems.concat(document.getElementById("translatedvalue").value));
   }
+
+const onSymptomKeydown = (event) => {
+  if (event.key === "Enter") {
+    addSymptomArray();
+  }
+}
   //remove symptoms
   const removeSymptomArray = item => {
     // Remove an item from the array using `filter`
@@ -129,7 +138,10 @@ const PrescriptionWindow2 = (previousPrescription) => {
   //use state for dynamic input fields for medicines
   const [inputFields, setInputFields] = useState([]);
   const addFields = (event) => {
-    let medicineName = event.target.textContent.trim();
+   
+    let medicineName = event.target.textContent;
+    // console.log(medicineName)
+    // console.log(event.target.innerHTML)
     let isMedicineAdded = inputFields.find((_) => { return _.med?.medicineName == medicineName })?.med?._id !== undefined
     if (!isMedicineAdded) {
       let med = allMedicines?.medicinesList?.find((med) => { return med?.medicineName === medicineName })
@@ -479,11 +491,12 @@ const PrescriptionWindow2 = (previousPrescription) => {
                 name="symptoms"
                 className='sym-input'
                 onChange={onSymptomChange}
-                value={prescription.translateinputValue}
+                value={translateinputValue }
+                onKeyDown={onSymptomKeydown}
                 placeholder="Add symptoms"
                 required
               />
-              <Button style={{ margin: "-4px 0 0 11px" }} onClick={addSymptomArray}>Add</Button>
+              <Button style={{margin: "-4px 0 0 11px" }} onClick={addSymptomArray}>Add</Button>
             </div>
             <div className="col">
             {allMedicines && (
@@ -509,17 +522,13 @@ const PrescriptionWindow2 = (previousPrescription) => {
                   const parts = parse(option.medicineName, matches);
 
                   return (
-                    <li {...props} onClick={addFields} >
+                    <li {...props}  onClick={addFields} >
                       <div>
                         {parts.map((part, index) => (
-                          <span
-                            key={index}
-
-                            style={{
-                              fontWeight: part.highlight ? 400 : 200,
-                            }}>
-                            {part.text}
-                          </span>
+                            // style={{
+                            //   fontWeight: part.highlight ? 400 : 200,
+                            // }}
+                            part.text
                         ))}
                       </div>
                     </li>
@@ -553,7 +562,11 @@ const PrescriptionWindow2 = (previousPrescription) => {
                     <button onClick={() => removeSymptomArray(item)}>Remove</button>
                   </div>
                 ))}
-                <input id="translatedvalue" className='p-input' value={translatedValue} type="hidden" />
+                <input 
+                id="translatedvalue" 
+                className='p-input' 
+                value={translatedValue} 
+                type="hidden" />
 
                 {/* remark tag */}
                 <div>
