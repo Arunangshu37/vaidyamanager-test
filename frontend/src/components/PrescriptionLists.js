@@ -7,6 +7,7 @@ import * as _ from 'lodash'
 import dayjs from 'dayjs'
 import jsPDF from 'jspdf'
 
+
 const PrescriptionLists = () => {
   const dispatch = useDispatch();
   const isLogin = localStorage.getItem('isLogin');
@@ -37,21 +38,31 @@ const PrescriptionLists = () => {
     const doc = new jsPDF('p', 'pt', 'a4');
     // Set background color for header section
     doc.setFillColor('#ccf9f5');
-    doc.rect(0, 0, doc.internal.pageSize.width, 80, 'F');
+  
+    doc.rect(0, 0, doc.internal.pageSize.width, 120, 'F');
     // Add logo
     const image = new Image();
     image.src = 'images/sukhayuenglish.png';
-    doc.addImage(image, 'PNG', doc.internal.pageSize.width - 620, 5, 200, 120);
+    doc.addImage(image, 'PNG', doc.internal.pageSize.width - 620, 4, 220, 170);
+
+    doc.setFontSize(10);
+    doc.setTextColor('#444');
+    doc.setFontSize(15);
+    doc.setFont('Noto Sans Devanagari');
+    doc.text('Sukhayu Ayurved Clinic', 20, 25);
+    // doc.text('सुखायु आयुर्वेद क्लिनिकविद्धकर्म, अग्निकर्म और पंचकर्म केंद्र', 400, 27);
+   
     // Add doctor name, phone number, and clinic address
+
     doc.setFontSize(10);
     doc.setTextColor('#444');
     doc.text('Doctor Name:', 400, 25);
     doc.setFont('bold');
     doc.text('DR Meghhaa Akshay Pendkar', 470, 25);
     doc.setFont('normal');
-    doc.text('Email:',400,40)
+    doc.text('Email:', 400, 40)
     doc.setFont('bold');
-    doc.text('sukhayu7@gmail.com',470,40)
+    doc.text('sukhayu7@gmail.com', 470, 40)
     doc.setFont('normal');
     doc.text('Phone Number:', 400, 50);
     doc.setFont('bold');
@@ -66,7 +77,7 @@ const PrescriptionLists = () => {
     // Add patient details and prescription information
     doc.setFontSize(18);
     doc.setFont('bold');
-    doc.text('Prescription', 210, 120);
+    doc.text('Prescription', 220, 20);
     doc.setFontSize(12);
     doc.text(`Patient Name: ${userInfo?.name}`, 50, 180);
 
