@@ -62,6 +62,7 @@ import PrescriptionData from './screens/PrescriptionData'
 import Signup from './screens/Signup'
 import PrescriptionWindow2 from './components/PrescriptionWindow2'
 import PrescriptionLists from './components/PrescriptionLists'
+import Medicine from './screens/Medicine'
 
 const App = () => {
 

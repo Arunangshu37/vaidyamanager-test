@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import ChangePassword from './ChangePassword';
 import StaffAccount from './StaffAccount';
+import Medicine from './Medicine';
 
 const Setting = () => {
 
@@ -29,9 +30,9 @@ const Setting = () => {
               <Nav.Item>
                 <Nav.Link eventKey="fifth">Staff Account</Nav.Link>
               </Nav.Item>
-              {/* <Nav.Item>
-                <Nav.Link eventKey="sixth"> Account</Nav.Link>
-              </Nav.Item> */}
+              <Nav.Item>
+                <Nav.Link eventKey="sixth"> Medicines</Nav.Link>
+              </Nav.Item>
             </Nav>
           </Col>
           <Col sm={9}>
@@ -52,9 +53,9 @@ const Setting = () => {
 
                 <StaffAccount />
               </Tab.Pane>
-              {/* <Tab.Pane eventKey="sixth">
-                sixth
-              </Tab.Pane> */}
+              <Tab.Pane eventKey="sixth">
+          <Medicine/>
+              </Tab.Pane>
             </Tab.Content>
           </Col>
         </Row>

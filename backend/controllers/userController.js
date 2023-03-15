@@ -40,7 +40,7 @@ const authUser = asyncHandler(async (req, res) => {
             isSuperAdmin:user.isSuperAdmin,
             token: generateToken(user._id),
         })
-        console.log("Successfully Done!")
+        // console.log("Successfully Done!")
     } else {
         res.status(401)
         throw new Error('Invalid email or password')
