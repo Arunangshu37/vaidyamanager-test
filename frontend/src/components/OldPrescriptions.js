@@ -49,7 +49,7 @@ const OldPrescriptions = ({ patientIds }) => {
   const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]?._id === patientId);
   const visits = patientDataPrescription.createdAtDates?.map((date) => {
     const prescriptionD = patientPrescriptions?.filter(p => p.createdAt === date);
-    const newMedicineData = prescriptionD[0]?.medicineData.map((v) => {
+    const newMedicineData = prescriptionD[0]?.medicineData?.map((v) => {
       const p = prescriptionD[0]?.PatientMedicines.find(e => e?._id === v.medicineDetails)
       return { ...v, medicineData: p }
     })

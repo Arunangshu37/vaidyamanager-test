@@ -23,6 +23,10 @@ import {
     PATIENT_PRESCRIPTION_SUCCESS,
     PATIENT_PRESCRIPTION_FAIL,
     PATIENT_PRESCRIPTION_RESET,
+    ADD_MEDICINE_REQUEST,
+    ADD_MEDICINE_SUCCESS,
+    ADD_MEDICINE_FAIL,
+    ADD_MEDICINE_RESET
 }
     from '../constants/prescriptionConstants'
 
@@ -58,6 +62,35 @@ export const medicinesListReducer = (state = { medicinesList: [] }, action) => {
             return state
     }
 }
+
+//add medicines
+export const medicinesDetailsDetailReducer = (state = {}, action) => {
+    switch (action.type) {
+
+        case ADD_MEDICINE_REQUEST:
+            return {
+                loadingmed: true,
+            }
+        case ADD_MEDICINE_SUCCESS:
+            return {
+                loadingmed: false,
+                success: true,
+                medicineMaster: action.payload,
+
+            }
+        case ADD_MEDICINE_FAIL:
+            return {
+                loadingmed: false,
+                errormed: action.payload,
+
+            }
+        case ADD_MEDICINE_RESET:
+            return {}
+        default:
+            return state
+    }
+}
+
 
 //dietchart add
 export const dietChartDetailReducer = (state = {}, action) => {

@@ -135,7 +135,7 @@ const DocumentTab = () => {
                                     dietCategories.map((category) => {
                                       return <li>
                                         {
-                                          DietList[0].pateientDietChart.filter((_) => { return _.diet.category == category && _.allowance == '1' })
+                                          DietList[0].pateientDietChart?.filter((_) => { return _.diet.category == category && _.allowance == '1' })
                                             .map((element) => element.diet.name).join(", ")
                                         }
                                       </li>
@@ -150,7 +150,7 @@ const DocumentTab = () => {
                                     dietCategories?.map((category) => {
                                       return <li>
                                         {
-                                          DietList[0].pateientDietChart.filter((_) => { return _.diet.category == category && _.allowance == '2' })
+                                          DietList[0].pateientDietChart?.filter((_) => { return _.diet.category == category && _.allowance == '2' })
                                             .map((element) => element.diet.name).join(", ")
                                         }
                                       </li>
@@ -165,7 +165,7 @@ const DocumentTab = () => {
                                     dietCategories.map((category) => {
                                       return <li>
                                         {
-                                          DietList[0].pateientDietChart.filter((_) => { return _.diet.category == category && _.allowance == '3' })
+                                          DietList[0].pateientDietChart?.filter((_) => { return _.diet.category == category && _.allowance == '3' })
                                             .map((element) => element.diet.name).join(", ")
                                         }
                                       </li>

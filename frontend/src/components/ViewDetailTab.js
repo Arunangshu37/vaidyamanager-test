@@ -72,18 +72,18 @@ const ViewDetailTab = ({ PatientIds }) => {
                       <Card.Text>
                         <h6>What to take ? </h6>
 
-                          <span>   {v.Diet_Chart[0].pateientDietChart.filter((e) => e.allowance === '1')?.map((ele) => {
+                          <span>   {v.Diet_Chart[0].pateientDietChart?.filter((e) => e.allowance === '1')?.map((ele) => {
                             return ele.diet.name
                           })}</span>
 
                        
                         <h6>What to avoid ?  </h6>
-                          {v.Diet_Chart[0].pateientDietChart.filter((e) => e.allowance === '2')?.map((ele) => {
+                          {v.Diet_Chart[0].pateientDietChart?.filter((e) => e.allowance === '2')?.map((ele) => {
                             return ele.diet.name
                           })}
                       
                         <h6>take Ocassionaly </h6>
-                          {v.Diet_Chart[0].pateientDietChart.filter((e) => e.allowance === '3')?.map((ele) => {
+                          {v.Diet_Chart[0].pateientDietChart?.filter((e) => e.allowance === '3')?.map((ele) => {
                             return ele.diet.name
                           })}
                        
