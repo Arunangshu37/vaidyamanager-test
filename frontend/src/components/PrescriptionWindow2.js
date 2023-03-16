@@ -524,7 +524,7 @@ const onSymptomKeydown = (event) => {
                   return (
                     <li {...props}  onClick={addFields} >
                       <div>
-                        {parts.map((part, index) => (
+                        {parts?.map((part, index) => (
                             // style={{
                             //   fontWeight: part.highlight ? 400 : 200,
                             // }}
@@ -536,7 +536,7 @@ const onSymptomKeydown = (event) => {
                 }}
               />
               )}
-
+{/* {console.log(allMedicines?.medicinesList)} */}
             </div>
             <div className="col">
               <input type="text" className='d-input' placeholder="00"

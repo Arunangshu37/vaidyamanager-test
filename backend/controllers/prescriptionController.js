@@ -107,6 +107,7 @@ const addMedicineDetails = asyncHandler(async (req, res) => {
           })
           const createdMedicine = await MedicineData.save();
           res.status(201).json(createdMedicine)
+       
       }
 
 })

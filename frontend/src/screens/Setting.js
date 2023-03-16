@@ -27,9 +27,9 @@ const Setting = () => {
               <Nav.Item>
                 <Nav.Link eventKey="fourth">Change Password</Nav.Link>
               </Nav.Item> */}
-              <Nav.Item>
+              {/* <Nav.Item>
                 <Nav.Link eventKey="fifth">Staff Account</Nav.Link>
-              </Nav.Item>
+              </Nav.Item> */}
               <Nav.Item>
                 <Nav.Link eventKey="sixth"> Medicines</Nav.Link>
               </Nav.Item>
@@ -49,12 +49,12 @@ const Setting = () => {
               <Tab.Pane eventKey="fourth">
              <ChangePassword/>
               </Tab.Pane> */}
-              <Tab.Pane eventKey="fifth">
+              {/* <Tab.Pane eventKey="fifth">
 
-                <StaffAccount />
-              </Tab.Pane>
+                {/* <StaffAccount />
+              </Tab.Pane> */}
               <Tab.Pane eventKey="sixth">
-          <Medicine/>
+             <Medicine/>
               </Tab.Pane>
             </Tab.Content>
           </Col>
