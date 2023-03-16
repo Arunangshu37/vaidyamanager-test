@@ -139,7 +139,7 @@ const OldPatientTab = ({ choosePatient }) => {
                         <DialogContentText>
 
                           <br />
-
+                        
                         </DialogContentText>
                         <table className="striped bordered visiting" bordercolor="#6caaa8">
                           <thead>
@@ -178,6 +178,7 @@ const OldPatientTab = ({ choosePatient }) => {
                                 </tr>
                               );
                             })}
+                            
                           </tbody>
                         </table>
                         <PrescriptionWindow2 previousPrescription={previousPrescription} />

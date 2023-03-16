@@ -67,7 +67,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
       })
       .catch(e => console.log(e))
       //reload
-      window.location.reload();
+      // window.location.reload();
   }
 
   //dietchart API
@@ -449,18 +449,15 @@ const onSymptomKeydown = (event) => {
 
               return (
                 <li {...props} onClick={setUser} >
-                  <div>
-                    {parts.map((part, index) => (
-                      <span
-                        key={index}
-
-                        style={{
-                          fontWeight: part.highlight ? 400 : 200,
-                        }}>
-                        {part.text}
-                      </span>
-                    ))}
-                  </div>
+               
+                 <div>
+                        {parts?.map((part, index) => (
+                            // style={{
+                            //   fontWeight: part.highlight ? 400 : 200,
+                            // }}
+                            part.text
+                        ))}
+                      </div>
                 </li>
               );
             }}
@@ -496,7 +493,7 @@ const onSymptomKeydown = (event) => {
                 placeholder="Add symptoms"
                 required
               />
-              <Button style={{margin: "-4px 0 0 11px" }} onClick={addSymptomArray}>Add</Button>
+              <Button style={{margin: "-4px 0 0 11px" }} onClick={()=>addSymptomArray()}>Add</Button>
             </div>
             <div className="col">
             {allMedicines && (
@@ -556,7 +553,7 @@ const onSymptomKeydown = (event) => {
           <tbody>
             <tr>
               <td style={{ borderRight: "1px solid " }}>
-                {symptomList.map(item => (
+                {symptomList?.map(item => (
                   <div key={item}>
                     {item}
                     <button onClick={() => removeSymptomArray(item)}>Remove</button>
