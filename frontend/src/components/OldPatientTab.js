@@ -16,9 +16,6 @@ import dayjs from 'dayjs'
 const OldPatientTab = ({ choosePatient }) => {
   const dispatch = useDispatch();
 
-
-  const [previousPrescriptions, setPreviousPrescriptions] = useState([]);
-
   const prescription = useSelector((state) => state.getPrescripionList)
   const { loading, error, prescriptionData } = prescription;
   // console.log("Prescription is", prescriptionData);
@@ -129,7 +126,7 @@ const OldPatientTab = ({ choosePatient }) => {
                         "& .MuiDialog-container": {
                           "& .MuiPaper-root": {
                             width: "100%",
-                            maxWidth: "902px",  // Set your width here
+                            maxWidth: "950px",  // Set your width here
                           },
                         },
                       }}
@@ -150,9 +147,7 @@ const OldPatientTab = ({ choosePatient }) => {
                               <th>
                                 Visit Date
                               </th>
-                              {/* <th>Next Visit</th> */}
                               <th> Symptoms </th>
-                              {/* <th> Lapse Days</th> */}
                               <th>Medicines</th>
 
                             </tr>
@@ -181,7 +176,12 @@ const OldPatientTab = ({ choosePatient }) => {
                             
                           </tbody>
                         </table>
-                        <PrescriptionWindow2 previousPrescription={previousPrescription} />
+                 <div>
+               
+                 <PrescriptionWindow2  previousPrescription={previousPrescription} />
+      
+                 </div>
+                       
                       </DialogContent>
                       <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>

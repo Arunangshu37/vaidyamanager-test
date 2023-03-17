@@ -66,8 +66,8 @@ const PrescriptionWindow2 = (previousPrescription) => {
         dispatch(addPrescriptionUser(mainPrescription))
       })
       .catch(e => console.log(e))
-      //reload
-      // window.location.reload();
+    //reload
+    // window.location.reload();
   }
 
   //dietchart API
@@ -113,22 +113,29 @@ const PrescriptionWindow2 = (previousPrescription) => {
   }, [translateinputValue]);
 
   //add symptoms
-  const addSymptomArray = () => {
+  const addSymptomArray = (e) => {
     if (selectValue === "") {
 
-      setSymptomList(prevItems => prevItems.concat(document.getElementById("lan").value));
+      // setSymptomList(prevItems => prevItems.concat(document.getElementById("lan").value));
+      setSymptomList(prevItems => [...prevItems, translateinputValue]);
+      setTranslateInputValue('');
+      // console.log("Settoms", symptomList)
       setTranslateInputValue('')
+
       return
-
     }
-    setSymptomList(prevItems => prevItems.concat(document.getElementById("translatedvalue").value));
+    setSymptomList(prevItems => [...prevItems, translatedValue]);
+    setTranslateInputValue('');
+    setTranslatedValue('');
+    // setSymptomList(prevItems => prevItems.concat(document.getElementById("translatedvalue").value));
+    // setSymptomList([...symptomList, document.getElementById('translatedvalue').value])
   }
 
-const onSymptomKeydown = (event) => {
-  if (event.key === "Enter") {
-    addSymptomArray();
+  const onSymptomKeydown = (event) => {
+    if (event.key === "Enter") {
+      addSymptomArray();
+    }
   }
-}
   //remove symptoms
   const removeSymptomArray = item => {
     // Remove an item from the array using `filter`
@@ -138,7 +145,7 @@ const onSymptomKeydown = (event) => {
   //use state for dynamic input fields for medicines
   const [inputFields, setInputFields] = useState([]);
   const addFields = (event) => {
-   
+
     let medicineName = event.target.textContent;
     // console.log(medicineName)
     // console.log(event.target.innerHTML)
@@ -338,7 +345,7 @@ const onSymptomKeydown = (event) => {
     })
   }
 
- 
+
   const [medicineAndDoseArray, setMedicineAndDoseArray] = React.useState([]);
   const updateDose = (e) => {
     // getmedicine name using the id
@@ -449,15 +456,15 @@ const onSymptomKeydown = (event) => {
 
               return (
                 <li {...props} onClick={setUser} >
-               
-                 <div>
-                        {parts?.map((part, index) => (
-                            // style={{
-                            //   fontWeight: part.highlight ? 400 : 200,
-                            // }}
-                            part.text
-                        ))}
-                      </div>
+
+                  <div>
+                    {parts?.map((part, index) => (
+                      // style={{
+                      //   fontWeight: part.highlight ? 400 : 200,
+                      // }}
+                      part.text
+                    ))}
+                  </div>
                 </li>
               );
             }}
@@ -488,52 +495,52 @@ const onSymptomKeydown = (event) => {
                 name="symptoms"
                 className='sym-input'
                 onChange={onSymptomChange}
-                value={translateinputValue }
+                value={translateinputValue}
                 onKeyDown={onSymptomKeydown}
                 placeholder="Add symptoms"
                 required
               />
-              <Button style={{margin: "-4px 0 0 11px" }} onClick={()=>addSymptomArray()}>Add</Button>
+              <Button style={{ margin: "-4px 0 0 11px" }} onClick={(e) => addSymptomArray(e)}>Add</Button>
             </div>
             <div className="col">
-            {allMedicines && (
-              <Autocomplete
-                id="highlights-demo"
-                sx={{
-                  "& fieldset": { border: 'none' },
-                }}
-                freeSolo
-                options={allMedicines?.medicinesList}
-                style={{
-                  width: 200,
-                  margin: "-24px 15px 0px 54px",
-                  fontWeight: "bold"
-                }}
-                getOptionLabel={(option) => option.medicineName}
-                renderInput={(params) => (
-                  <TextField {...params} label="Add Medicines"
-                    margin="normal" />
-                )}
-                renderOption={(props, option, { inputValue }) => {
-                  const matches = match(option.medicineName, inputValue, { insideWords: true });
-                  const parts = parse(option.medicineName, matches);
+              {allMedicines && (
+                <Autocomplete
+                  id="highlights-demo"
+                  sx={{
+                    "& fieldset": { border: 'none' },
+                  }}
+                  freeSolo
+                  options={allMedicines?.medicinesList}
+                  style={{
+                    width: 200,
+                    margin: "-24px 15px 0px 54px",
+                    fontWeight: "bold"
+                  }}
+                  getOptionLabel={(option) => option.medicineName}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Add Medicines"
+                      margin="normal" />
+                  )}
+                  renderOption={(props, option, { inputValue }) => {
+                    const matches = match(option.medicineName, inputValue, { insideWords: true });
+                    const parts = parse(option.medicineName, matches);
 
-                  return (
-                    <li {...props}  onClick={addFields} >
-                      <div>
-                        {parts?.map((part, index) => (
+                    return (
+                      <li {...props} onClick={addFields} >
+                        <div>
+                          {parts?.map((part, index) => (
                             // style={{
                             //   fontWeight: part.highlight ? 400 : 200,
                             // }}
                             part.text
-                        ))}
-                      </div>
-                    </li>
-                  );
-                }}
-              />
+                          ))}
+                        </div>
+                      </li>
+                    );
+                  }}
+                />
               )}
-{/* {console.log(allMedicines?.medicinesList)} */}
+              {/* {console.log(allMedicines?.medicinesList)} */}
             </div>
             <div className="col">
               <input type="text" className='d-input' placeholder="00"
@@ -553,17 +560,19 @@ const onSymptomKeydown = (event) => {
           <tbody>
             <tr>
               <td style={{ borderRight: "1px solid " }}>
-                {symptomList?.map(item => (
-                  <div key={item}>
-                    {item}
-                    <button onClick={() => removeSymptomArray(item)}>Remove</button>
-                  </div>
-                ))}
-                <input 
-                id="translatedvalue" 
-                className='p-input' 
-                value={translatedValue} 
-                type="hidden" />
+                {symptomList ?
+                  symptomList.map(item => (
+                    <div key={item}>
+                      {item}
+                      <button onClick={() => removeSymptomArray(item)}>Remove</button>
+                    </div>
+                  ))
+                  : "Symptom list is not available"}
+                <input
+                  id="translatedvalue"
+                  className='p-input'
+                  value={translatedValue}
+                  type="hidden" />
 
                 {/* remark tag */}
                 <div>
@@ -948,8 +957,8 @@ const onSymptomKeydown = (event) => {
               <dd>
                 <ul>
                   {
-                    dietCategories.map((category,index) => {
-                      return <li key={index}>
+                    dietCategories.map((category, id) => {
+                      return <li key={id}>
                         {
                           dietArray?.filter((_) => { return _.diet.category == category && _.allowance == '1' })
                             .map((element) => element.diet.name).join(", ")
@@ -963,7 +972,7 @@ const onSymptomKeydown = (event) => {
               <dd>
                 <ul>
                   {
-                    dietCategories.map((category,index) => {
+                    dietCategories.map((category, index) => {
                       return <li key={index}>
                         {
                           dietArray?.filter((_) => { return _.diet.category == category && _.allowance == '2' })
@@ -979,7 +988,7 @@ const onSymptomKeydown = (event) => {
               <dd>
                 <ul>
                   {
-                    dietCategories.map((category,index) => {
+                    dietCategories.map((category, index) => {
                       return <li key={index}>
                         {
                           dietArray?.filter((_) => { return _.diet.category == category && _.allowance == '3' })
