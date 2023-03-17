@@ -55,9 +55,19 @@ export const addMedicineDetails = (medicineData) => async (dispatch, getState) =
         dispatch({
             type: ADD_MEDICINE_REQUEST,
         })
+        // Check if the medicine already exists
+        const existingMedicine = getState().medicines.medicineList.find(medicine => medicine.medicineName === medicineData.medicineName)
 
+        if (existingMedicine) {
+            dispatch({
+                type: ADD_MEDICINE_FAIL,
+                payload: 'Medicine name already exists'
+            })
+            alert("Medicine name already exists");
+            return
+        }
         // Make request to server and get the response data
-        const { data } = await axios.post(`/api/prescription/add_medicines`,medicineData )
+        const { data } = await axios.post(`/api/prescription/add_medicines`, medicineData)
 
         // Dispatch  success after making the request
         dispatch({
