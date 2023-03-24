@@ -3,7 +3,10 @@ import bcrypt from 'bcryptjs'
 
 const userSchema = mongoose.Schema(
     {
-
+        patientRegistrationNo:{
+            type: Number,
+            required: true,
+        },
         name: {
             type: String,
             required: true,
@@ -11,13 +14,13 @@ const userSchema = mongoose.Schema(
         // We use the unique attribute to avoid having duplicate emails in the database
         email: {
             type: String,
-            required: true,
-            unique: true,
+            // required: true,
+            // unique: true,
         },
         phone: {
             type: Number,
-            required: true,
-            unique: true,
+            // required: true,
+            // unique: true,
         },
         password: {
             type: String,
@@ -73,6 +76,14 @@ const userSchema = mongoose.Schema(
         },
         address: {
             type: String,
+        },
+        registrationFor:{
+            isTherapy:{
+                type:Boolean
+            },
+            isInquiry:{
+                type:Boolean
+            }
         }
     },
     {

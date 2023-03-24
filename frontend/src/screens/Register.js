@@ -26,12 +26,14 @@ const Register = ({ location, history }) => {
   // const [dob, setDob] = useState();
   const [date, setDate] = useState(new Date());
   const [validated, setValidated] = useState(false);
+  const [isChild, setIsChild] = useState(false);
   const dispatch = useDispatch();
   // Get user login info from Redux state
   const userRegister = useSelector((state) => state.userRegister)
   const { loading, error, userInfo } = userRegister
 
   // // Handler that logs in the user
+  const  registrationNo = useSelector(s=> s.userRegisterReducer)
   const submitHandler = (e) => {
     e.preventDefault()
     // Check if passwords are the same
@@ -41,6 +43,8 @@ const Register = ({ location, history }) => {
 
       // Dispatch Register
       dispatch(register(name, email, phone, password, address, age, gender, weight, reference, date, false, profilePictureURL))
+   
+      console.log("registr",registrationNo)
       toast.success('Registration Successfully!', {
         position: toast.POSITION.TOP_CENTER
       });
@@ -55,7 +59,9 @@ const Register = ({ location, history }) => {
       setValidated(true);
       setPassword('');
       setConfirmPassword('');
+      setIsChild('')
     }
+ 
   }
 
   return (
@@ -115,7 +121,7 @@ const Register = ({ location, history }) => {
                 maxLength="10"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                required
+                // required
               />
             </Form.Group>
           </Col>
@@ -223,6 +229,27 @@ const Register = ({ location, history }) => {
                 <option value="Other">Other</option>
               </Form.Control>
             </Form.Group>
+            <Col md={6}>
+            <Form.Group controlId='checkbox'>
+              <Form.Label>CheckBox</Form.Label>
+              {/* <Form.Control
+                type='checkbox'
+                value={parentChild}
+                onChange={(e) => setParentChild(e.target.value)}
+      
+              
+              /> */}
+                <Form.Check
+          
+          checked={isChild} 
+
+          onChange={(e) => setIsChild(e.target.checked)}
+
+            type='checkbox'
+            
+          />
+            </Form.Group>
+          </Col>
           </Col>
         </Row>
         <Button type='submit' variant='primary'>
