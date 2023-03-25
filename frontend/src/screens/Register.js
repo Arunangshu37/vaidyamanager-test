@@ -11,40 +11,58 @@ import { Button, Image, Form, InputGroup, Row, Col } from 'react-bootstrap';
 
 
 const Register = ({ location, history }) => {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [message, setMessage] = useState(null)
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
-  const [address, setAddress] = useState('');
-  const [weight, setWeight] = useState('');
-  const [reference, setReference] = useState('');
-  const [profilePictureURL, setprofilePictureURL] = useState('')
-  // const [dob, setDob] = useState();
-  const [date, setDate] = useState(new Date());
-  const [validated, setValidated] = useState(false);
-  const [isChild, setIsChild] = useState(false);
+
+  const RegisterData = {
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    address: "",
+    date: new Date(),
+    age: "",
+    weight: "",
+    gender: "",
+    illness: "",
+    treatment: "",
+    duration: "",
+    reference: "",
+    profilePictureURL: "",
+    isAdmin: false,
+    validated: false
+  }
+  const [registrationForm, setRegistrationForm] = useState(RegisterData)
+
   const dispatch = useDispatch();
   // Get user login info from Redux state
   const userRegister = useSelector((state) => state.userRegister)
   const { loading, error, userInfo } = userRegister
 
-  // // Handler that logs in the user
-  const  registrationNo = useSelector(s=> s.userRegisterReducer)
   const submitHandler = (e) => {
     e.preventDefault()
+
     // Check if passwords are the same
     if (password !== confirmPassword) {
       setMessage('Passwords do not match')
     } else {
 
       // Dispatch Register
-      dispatch(register(name, email, phone, password, address, age, gender, weight, reference, date, false, profilePictureURL))
-   
-      console.log("registr",registrationNo)
+      dispatch(register
+        (registrationForm.name,
+          registrationForm.email,
+          registrationForm.phone,
+          registrationForm.password,
+          registrationForm.address,
+          registrationForm.age,
+          registrationForm.gender,
+          registrationForm.weight,
+          registrationForm.reference,
+          registrationForm.date,
+          // registrationForm.false,
+          registrationForm.profilePictureURL
+        ))
+
+      // console.log("registr", registrationNo)
       toast.success('Registration Successfully!', {
         position: toast.POSITION.TOP_CENTER
       });
@@ -61,7 +79,7 @@ const Register = ({ location, history }) => {
       setConfirmPassword('');
       setIsChild('')
     }
- 
+
   }
 
   return (
@@ -121,13 +139,13 @@ const Register = ({ location, history }) => {
                 maxLength="10"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                // required
+              // required
               />
             </Form.Group>
           </Col>
         </Row>
 
-      
+
         <Row>
           <Col md={6}>
             <Form.Group controlId='Age'>
@@ -181,7 +199,7 @@ const Register = ({ location, history }) => {
             </Form.Group>
           </Col>
         </Row>
-        
+
         <Row>
           <Col md={6}>
             <Form.Group controlId='password'>
@@ -207,12 +225,11 @@ const Register = ({ location, history }) => {
               />
             </Form.Group>
           </Col>
-          
         </Row>
         <Row>
-          <Col className='col-md-7 offset-md-3'>
+          <Col md={6}>
             <Form.Group controlId='reference' >
-            <Form.Label>Reference for vaidya manager?</Form.Label>
+              <Form.Label>Reference for vaidya manager?</Form.Label>
               <Form.Control
                 as="select"
                 type='text'
@@ -229,28 +246,34 @@ const Register = ({ location, history }) => {
                 <option value="Other">Other</option>
               </Form.Control>
             </Form.Group>
-            <Col md={6}>
-            <Form.Group controlId='checkbox'>
-              <Form.Label>CheckBox</Form.Label>
-              {/* <Form.Control
-                type='checkbox'
-                value={parentChild}
-                onChange={(e) => setParentChild(e.target.value)}
-      
-              
-              /> */}
-                <Form.Check
-          
-          checked={isChild} 
-
-          onChange={(e) => setIsChild(e.target.checked)}
-
-            type='checkbox'
-            
-          />
+          </Col>
+          <Col md={3}>
+            <Form.Group controlId="radios">
+              <Form.Check
+                value="design"
+                type="radio"
+                aria-label="radio 1"
+                label="Design"
+                name="InTh"
+              // onChange={handleChange}
+              // checked
+              />
             </Form.Group>
           </Col>
+          <Col md={3}>
+            <Form.Group controlId="radios">
+              <Form.Check
+                value="food"
+                type="radio"
+                aria-label="radio 2"
+                label="Food"
+                name="InTh"
+                // onChange={handleChange}
+                checked
+              />
+            </Form.Group>
           </Col>
+
         </Row>
         <Button type='submit' variant='primary'>
           Sign Up

@@ -55,7 +55,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const { name, email, phone,
         password, address, Date, weight,
         illness, duration, treatment, reference,
-        age, gender, isAdmin } = req.body;
+        age, gender, isAdmin,registrationFor} = req.body;
 
     let lastPatientRegistrationNo = 0;
 
@@ -63,8 +63,6 @@ const registerUser = asyncHandler(async (req, res) => {
     if (lastPatient && lastPatient.patientRegistrationNo) {
         lastPatientRegistrationNo = lastPatient.patientRegistrationNo+1;
     }
-
-    console.log("first",lastPatientRegistrationNo)
     // Create a new user
     const user = await User.create({
         name,
@@ -81,10 +79,10 @@ const registerUser = asyncHandler(async (req, res) => {
         duration,
         reference,
         isAdmin,
-        patientRegistrationNo:lastPatientRegistrationNo
+        patientRegistrationNo:lastPatientRegistrationNo,
+        registrationFor
     })
 
-    console.log("user",user)
     // If the user is successfully created then send back user details in response
     if (user) {
         res.status(201).json({
@@ -100,6 +98,7 @@ const registerUser = asyncHandler(async (req, res) => {
             isSubscriber: user.isSubscriber,
             isSuperAdmin:user.isSuperAdmin,
             token: generateToken(user._id),
+            registrationFor
         })
     } else {
         res.status(400)
