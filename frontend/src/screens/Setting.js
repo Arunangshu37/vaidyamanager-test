@@ -6,6 +6,7 @@ import Tab from 'react-bootstrap/Tab';
 import ChangePassword from './ChangePassword';
 import StaffAccount from './StaffAccount';
 import Medicine from './Medicine';
+import Doctors from './screens/Doctors';
 
 const Setting = () => {
 
@@ -27,9 +28,9 @@ const Setting = () => {
               <Nav.Item>
                 <Nav.Link eventKey="fourth">Change Password</Nav.Link>
               </Nav.Item> */}
-              {/* <Nav.Item>
-                <Nav.Link eventKey="fifth">Staff Account</Nav.Link>
-              </Nav.Item> */}
+              <Nav.Item>
+                <Nav.Link eventKey="fifth">Doctors</Nav.Link>
+              </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="sixth"> Medicines</Nav.Link>
               </Nav.Item>
@@ -49,10 +50,9 @@ const Setting = () => {
               <Tab.Pane eventKey="fourth">
              <ChangePassword/>
               </Tab.Pane> */}
-              {/* <Tab.Pane eventKey="fifth">
-
-                {/* <StaffAccount />
-              </Tab.Pane> */}
+              <Tab.Pane eventKey="fifth">
+                <Doctors />
+              </Tab.Pane>
               <Tab.Pane eventKey="sixth">
              <Medicine/>
               </Tab.Pane>

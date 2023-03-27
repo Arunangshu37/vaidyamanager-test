@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 const addDoctors = asyncHandler(async (req, res) => {
     const {
         name,
-        specialty,
+        speciality,
         licenseNumber,
         experience,
         email_id,
@@ -16,7 +16,7 @@ const addDoctors = asyncHandler(async (req, res) => {
 
     const doctor = new Doctor({
         name,
-        specialty,
+        speciality,
         licenseNumber,
         experience,
         email_id,
@@ -44,7 +44,7 @@ const updateDoctor = asyncHandler(async (req, res) => {
     // const date = doctor.consultant_date.find((a) => a._id === req.params.dateid)
     if (doctor) {
         doctor.name = req.body.name
-        doctor.specialty = req.body.specialty,
+        doctor.speciality = req.body.speciality,
         doctor.licenseNumber = req.body.licenseNumber,
         doctor.experience = req.body.experience
         doctor.email_id = req.body.email_id

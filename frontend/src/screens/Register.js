@@ -243,7 +243,7 @@ const Register = ({ location, history }) => {
           </Col>
           <Col md={6}>
             <Form.Group controlId='registrationFor'>
-              <Form.Label>registration For</Form.Label>
+              <Form.Label>Registration For?</Form.Label>
               <div>
                 <Form.Check
                   inline

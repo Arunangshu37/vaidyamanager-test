@@ -49,6 +49,7 @@ import Signup from './screens/Signup'
 import PrescriptionWindow2 from './components/PrescriptionWindow2'
 import PrescriptionLists from './components/PrescriptionLists'
 import Medicine from './screens/Medicine'
+import Doctors from './screens/Doctors';
 
 const App = () => {
 
@@ -61,6 +62,7 @@ const App = () => {
                 <Route path='/demoReg' component={DemoRegistration} />
                 <Route path='/register' component={RegisterScreen} />
                 <Route path='/therapy' component={Therapy} />
+                <Route path='/doctor' component={Doctors}/>
                 <Route path='/inquiry' component={Inquiry} />
                 <Route path='/breadcrumb' component={Breadcrumb} />
                 <Route path='/about' component={About} />
