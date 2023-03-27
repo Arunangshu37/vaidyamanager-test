@@ -1,10 +1,4 @@
-import {
-    PRODUCT_LIST_REQUEST,
-    PRODUCT_LIST_SUCCESS,
-    PRODUCT_LIST_FAIL,
-    PRODUCT_DETAILS_REQUEST,
-    PRODUCT_DETAILS_SUCCESS,
-    PRODUCT_DETAILS_FAIL,
+import{
     DOCTORS_LIST_FAIL,
     DOCTORS_LIST_SUCCESS,
     DOCTORS_LIST_REQUEST,
@@ -26,32 +20,8 @@ import {
     DOCTORS_DATA_REQUEST,
     DOCTORS_DATA_RESET,
     DOCTORS_DELETE_SUCCESS,
- 
 
-} from '../constants/productConstants'
-
-// Getting products from server
-export const productListReducer = (state = { products: [] }, action) => {
-    switch (action.type) {
-        case PRODUCT_LIST_REQUEST:
-            return {
-                loading: true,
-                products: [],
-            }
-        case PRODUCT_LIST_SUCCESS:
-            return {
-                loading: false,
-                products: action.payload,
-            }
-        case PRODUCT_LIST_FAIL:
-            return {
-                loading: false,
-                error: action.payload,
-            }
-        default:
-            return state
-    }
-}
+} from '../constants/doctorConstants';
 
 export const doctorListReducer = (state = { doctors: [] }, action) => {
     switch (action.type) {
@@ -80,57 +50,6 @@ export const doctorListReducer = (state = { doctors: [] }, action) => {
                 loading: false,
                 error: action.payload,
             }
-        default:
-            return state
-    }
-}
-
-// Get products details
-export const productDetailsReducer = (
-    state = { product: { reviews: [] } },
-    action
-) => {
-    switch (action.type) {
-        case PRODUCT_DETAILS_REQUEST:
-            return {
-                loading: true,
-                ...state,
-            }
-        case PRODUCT_DETAILS_SUCCESS:
-            return {
-                loading: false,
-                product: action.payload,
-            }
-        case PRODUCT_DETAILS_FAIL:
-            return {
-                loading: false,
-                error: action.payload,
-            }
-        default:
-            return state
-    }
-}
-
-//create doctor appointments
-export const createDoctorReducer = (state = {}, action) => {
-    switch (action.type) {
-        case DOCTORS_CREATE_REQUEST:
-            return {
-                loading: true,
-            }
-        case DOCTORS_CREATE_SUCCESS:
-            return {
-                loading: false,
-                success: true,
-                order: action.payload,
-            }
-        case DOCTORS_CREATE_FAIL:
-            return {
-                loading: false,
-                error: action.payload,
-            }
-        case DOCTORS_CREATE_RESET:
-            return {}
         default:
             return state
     }

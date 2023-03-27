@@ -15,7 +15,7 @@ import { register } from '../actions/userActions'
 import dayjs from 'dayjs'
 //css
 // import '../register.css'
-import { createDoctorData } from '../actions/productActions'
+import { createDoctorData } from '../actions/doctorActions'
 import axios from 'axios'
 
 

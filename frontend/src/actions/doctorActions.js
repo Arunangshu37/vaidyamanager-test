@@ -1,10 +1,4 @@
-import {
-    PRODUCT_LIST_REQUEST,
-    PRODUCT_LIST_SUCCESS,
-    PRODUCT_LIST_FAIL,
-    PRODUCT_DETAILS_FAIL,
-    PRODUCT_DETAILS_REQUEST,
-    PRODUCT_DETAILS_SUCCESS,
+import{
     DOCTORS_LIST_SUCCESS,
     DOCTORS_LIST_FAIL,
     DOCTORS_CREATE_SUCCESS,
@@ -22,32 +16,49 @@ import {
     DOCTORS_DATA_FAIL,
     DOCTORS_DATA_REQUEST,
     DOCTORS_DATA_SUCCESS
+} from '../constants/doctorConstants';
+import axios from 'axios';
 
-
-} from '../constants/productConstants'
-import axios from 'axios'
-
-
-
-export const listProducts = () => async (dispatch) => {
+//doctor api
+export const createDoctorData = (doctor) => async (dispatch, getState) => {
     try {
         dispatch({
-            type: PRODUCT_LIST_REQUEST,
+            type: DOCTORS_DATA_REQUEST,
         })
-        const { data } = await axios.get('/api/products')
 
+        // Get user login and user info
+        const {
+            userLogin: { userInfo },
+        } = getState()
+
+        // console.log("${userInfo.token}", userInfo);
+
+        // Header to send with the request
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        }
+
+        // Make request to server and get the response data
+        const { data } = await axios.post(`/api/doctors/add_doc`,doctor ,config)
+
+        // Dispatch doctor success after making the request
         dispatch({
-            type: PRODUCT_LIST_SUCCESS,
+            type: DOCTORS_DATA_SUCCESS,
             payload: data,
         })
+        alert('Doctor Added Successfully..')
     } catch (error) {
         dispatch({
-            type: PRODUCT_LIST_FAIL,
+            type: DOCTORS_DATA_FAIL,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
                     : error.message,
         })
+
     }
 }
 
@@ -72,75 +83,6 @@ export const listDoctors = () => async (dispatch) => {
         })
     }
 }
-
-export const listProductDetails = (id) => async (dispatch) => {
-    try {
-        dispatch({
-            type: PRODUCT_DETAILS_REQUEST,
-        })
-        const { data } = await axios.get(`/api/products/${id}`)
-
-        dispatch({
-            type: PRODUCT_DETAILS_SUCCESS,
-            payload: data,
-        })
-    } catch (error) {
-        dispatch({
-            type: PRODUCT_DETAILS_FAIL,
-            payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
-        })
-    }
-}
-
-//doctor api
-export const createDoctor = (id, docDate) => async (dispatch, getState) => {
-    try {
-        dispatch({
-            type: DOCTORS_CREATE_REQUEST,
-        })
-
-        // Get user login and user info
-        const {
-            userLogin: { userInfo },
-        } = getState()
-
-        // console.log("${userInfo.token}", userInfo);
-
-        // Header to send with the request
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`,
-            },
-        }
-
-        // Make request to server and get the response data
-        const { data } = await axios.put(`/api/doctors/${id}/doc`,
-            docDate,
-            config
-        )
-
-        // Dispatch doctor success after making the request
-        dispatch({
-            type: DOCTORS_CREATE_SUCCESS,
-            payload: data,
-        })
-        alert('Date Added Successfully..')
-    } catch (error) {
-        dispatch({
-            type: DOCTORS_CREATE_FAIL,
-            payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
-        })
-
-    }
-}
-
 
 export const updateDoctor = (id) => async (dispatch, getState) => {
     try {
@@ -185,8 +127,6 @@ export const updateDoctor = (id) => async (dispatch, getState) => {
 
     }
 }
-
-
 
 export const updateAppointments = (id, dateid, details) => async (dispatch, getState) => {
     try {
@@ -282,44 +222,3 @@ export const cancelAppointmentDates = (id, deleteid) => async (
 }
 
 
-export const createDoctorData = (doctor) => async (dispatch, getState) => {
-    try {
-        dispatch({
-            type: DOCTORS_DATA_REQUEST,
-        })
-
-        // Get user login and user info
-        const {
-            userLogin: { userInfo },
-        } = getState()
-
-        // console.log("${userInfo.token}", userInfo);
-
-        // Header to send with the request
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${userInfo.token}`,
-            },
-        }
-
-        // Make request to server and get the response data
-        const { data } = await axios.post(`/api/doctors/`,doctor ,config)
-
-        // Dispatch doctor success after making the request
-        dispatch({
-            type: DOCTORS_DATA_SUCCESS,
-            payload: data,
-        })
-        alert('Doctor Added Successfully..')
-    } catch (error) {
-        dispatch({
-            type: DOCTORS_DATA_FAIL,
-            payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
-        })
-
-    }
-}

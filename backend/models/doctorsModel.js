@@ -6,18 +6,18 @@ const doctorSchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        qualification: {
-            type: String,
-            required: true,
+        specialty: { 
+            type: String, 
+            required: true
         },
+        licenseNumber: { 
+            type: String, 
+            required: true, 
+            unique: true },
         experience: {
             type: String,
 
         },
-        consultant_date: [{
-            from: String,
-            to: String,
-        }],
         email_id: {
             type: String,
             required: true,

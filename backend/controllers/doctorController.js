@@ -1,26 +1,23 @@
-
 import asyncHandler from 'express-async-handler'
 import Doctor from '../models/doctorsModel.js'
 import mongoose from 'mongoose'
 
-
 const addDoctors = asyncHandler(async (req, res) => {
-
     const {
         name,
-        qualification,
+        specialty,
+        licenseNumber,
         experience,
         email_id,
         phone_no,
         consultation_fee,
         profilePictureURL
-
     } = req.body
-
 
     const doctor = new Doctor({
         name,
-        qualification,
+        specialty,
+        licenseNumber,
         experience,
         email_id,
         phone_no,
@@ -28,39 +25,33 @@ const addDoctors = asyncHandler(async (req, res) => {
         profilePictureURL
 
     })
-
-    const createdDoctor = await doctor.save()
-
-    res.status(201).json(createdDoctor)
-
+    const createdDoctor = await doctor.save();
+    res.status(201).json(createdDoctor);
 })
 
 
 // get doctors
 const getDoc = asyncHandler(async (req, res) => {
     //  Get all the doctors from MongoDB
-
-    // res.json("worked")
     const doctors = await Doctor.find({});
-    res.json(doctors)
+    res.json(doctors);
 })
 
 // add the consultant dates into db
 const updateDoctor = asyncHandler(async (req, res) => {
     // Get data from DB
-    const doctor = await Doctor.findById(req.params.id)
+    const doctor = await Doctor.findById(req.params.id);
     // const date = doctor.consultant_date.find((a) => a._id === req.params.dateid)
     if (doctor) {
         doctor.name = req.body.name
-        doctor.qualification = req.body.qualification
+        doctor.specialty = req.body.specialty,
+        doctor.licenseNumber = req.body.licenseNumber,
         doctor.experience = req.body.experience
-        doctor.consultant_date = req.body.consultant_date
-        // doctor.consultant_date1 = req.body.consultant_date1
         doctor.email_id = req.body.email_id
         doctor.phone_no = req.body.phone_no
+        doctor.consultation_fee = req.body.consultation_fee
 
-        const updateDoctors = await doctor.save()
-
+        const updateDoctors = await doctor.save();
         // Send back updated doctors
         res.json(updateDoctors)
     } else {
