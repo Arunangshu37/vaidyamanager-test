@@ -27,7 +27,6 @@ const authUser = asyncHandler(async (req, res) => {
     // Find a user by email
     const user = await User.findOne({ email })
     // console.log("Users",user)
-
     // If the user exists and the password matches the one store return the details with JSON web token signature
     if (user && (await user.matchPassword(password))) {
         res.json({
@@ -98,7 +97,8 @@ const registerUser = asyncHandler(async (req, res) => {
             isSubscriber: user.isSubscriber,
             isSuperAdmin:user.isSuperAdmin,
             token: generateToken(user._id),
-            registrationFor
+            registrationFor,
+            success:true
         })
     } else {
         res.status(400)

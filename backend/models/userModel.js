@@ -78,12 +78,7 @@ const userSchema = mongoose.Schema(
             type: String,
         },
         registrationFor:{
-            isTherapy:{
-                type:Boolean
-            },
-            isInquiry:{
-                type:Boolean
-            }
+           type:String
         }
     },
     {

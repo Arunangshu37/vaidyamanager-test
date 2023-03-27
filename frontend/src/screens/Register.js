@@ -11,7 +11,6 @@ import { Button, Image, Form, InputGroup, Row, Col } from 'react-bootstrap';
 
 
 const Register = ({ location, history }) => {
-
   const RegisterData = {
     name: "",
     email: "",
@@ -23,64 +22,62 @@ const Register = ({ location, history }) => {
     age: "",
     weight: "",
     gender: "",
-    illness: "",
-    treatment: "",
-    duration: "",
     reference: "",
     profilePictureURL: "",
     isAdmin: false,
-    validated: false
   }
   const [registrationForm, setRegistrationForm] = useState(RegisterData)
-
+  const [message, setMessage] = useState(null)
   const dispatch = useDispatch();
   // Get user login info from Redux state
   const userRegister = useSelector((state) => state.userRegister)
   const { loading, error, userInfo } = userRegister
 
-  const submitHandler = (e) => {
-    e.preventDefault()
+  const  registrationResponse = useSelector(s=> s.userRegisterReducer)
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
     // Check if passwords are the same
-    if (password !== confirmPassword) {
-      setMessage('Passwords do not match')
+    if (registrationForm.password !== registrationForm.confirmPassword) {
+      setMessage("Passwords do not match");
     } else {
-
-      // Dispatch Register
-      dispatch(register
-        (registrationForm.name,
-          registrationForm.email,
-          registrationForm.phone,
-          registrationForm.password,
-          registrationForm.address,
-          registrationForm.age,
-          registrationForm.gender,
-          registrationForm.weight,
-          registrationForm.reference,
-          registrationForm.date,
-          // registrationForm.false,
-          registrationForm.profilePictureURL
-        ))
-
-      // console.log("registr", registrationNo)
-      toast.success('Registration Successfully!', {
-        position: toast.POSITION.TOP_CENTER
-      });
-      localStorage.setItem('isLogin', true)
-      setName('');
-      setEmail('');
-      setPhone('');
-      setAge('');
-      setGender('');
-      setAddress('');
-      setWeight('');
-      setValidated(true);
-      setPassword('');
-      setConfirmPassword('');
-      setIsChild('')
+      try {
+         dispatch(
+          register(
+            registrationForm.name,
+            registrationForm.email,
+            registrationForm.phone,
+            registrationForm.password,
+            registrationForm.address,
+            registrationForm.age,
+            registrationForm.gender,
+            registrationForm.weight,
+            registrationForm.reference,
+            registrationForm.date,
+            registrationForm.isAdmin,
+            registrationForm.profilePictureURL,
+            registrationForm.registrationFor
+          )
+        ).then((e)=> {
+          if (e.payload.success) {
+            toast.success(
+              `Registration Successfully!\nPatient RegistrationNo: ${e.payload.patientRegistrationNo}`,
+              {
+                position: toast.POSITION.TOP_CENTER,
+                className: 'toast-message'
+              }
+            );
+            
+          }
+        }) 
+        localStorage.setItem("isLogin", true);
+        setRegistrationForm(RegisterData);
+      } catch (error) {
+        console.error(error);
+      }
     }
+  };
 
-  }
 
   return (
     <>
@@ -93,8 +90,8 @@ const Register = ({ location, history }) => {
               <Form.Control
                 type='text'
                 placeholder='Full Name'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={registrationForm.name}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, name: e.target.value })}
                 required
               />
             </Form.Group>
@@ -104,8 +101,8 @@ const Register = ({ location, history }) => {
               <Form.Label>Date</Form.Label>
               <div className='date-input'>
                 <DatePicker
-                  selected={date}
-                  onChange={(date) => setDate(date)}
+                  selected={registrationForm.date}
+                  onChange={(date) => setRegistrationForm({ ...registrationForm, date: date })}
                   peekNextMonth
                   showMonthDropdown
                   dropdownMode="select"
@@ -124,8 +121,8 @@ const Register = ({ location, history }) => {
               <Form.Control
                 type='email'
                 placeholder='Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={registrationForm.email}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, email: e.target.value })}
                 required
               />
             </Form.Group>
@@ -137,15 +134,13 @@ const Register = ({ location, history }) => {
                 type='tel'
                 placeholder='Phone Number'
                 maxLength="10"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                value={registrationForm.phone}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, phone: e.target.value })}
               // required
               />
             </Form.Group>
           </Col>
         </Row>
-
-
         <Row>
           <Col md={6}>
             <Form.Group controlId='Age'>
@@ -153,8 +148,8 @@ const Register = ({ location, history }) => {
               <Form.Control
                 type='text'
                 placeholder='Age'
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
+                value={registrationForm.age}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, age: e.target.value })}
               />
             </Form.Group>
           </Col>
@@ -163,8 +158,8 @@ const Register = ({ location, history }) => {
               <Form.Label>Gender</Form.Label>
               <Form.Control
                 as='select'
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
+                value={registrationForm.gender}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, gender: e.target.value })}
                 required
               >
                 <option value=''>Choose...</option>
@@ -180,8 +175,8 @@ const Register = ({ location, history }) => {
               <Form.Control
                 type='text'
                 placeholder='Weight in Kg'
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
+                value={registrationForm.weight}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, weight: e.target.value })}
               />
             </Form.Group>
           </Col>
@@ -193,8 +188,8 @@ const Register = ({ location, history }) => {
                 rows={1}
                 type='text'
                 placeholder='Address'
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={registrationForm.address}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, address: e.target.value })}
               />
             </Form.Group>
           </Col>
@@ -207,8 +202,8 @@ const Register = ({ location, history }) => {
               <Form.Control
                 type='password'
                 placeholder='Password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={registrationForm.password}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, password: e.target.value })}
                 required
               />
             </Form.Group>
@@ -219,8 +214,8 @@ const Register = ({ location, history }) => {
               <Form.Control
                 type='password'
                 placeholder='Confirm Password'
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={registrationForm.confirmPassword}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, confirmPassword: e.target.value })}
                 required
               />
             </Form.Group>
@@ -234,9 +229,8 @@ const Register = ({ location, history }) => {
                 as="select"
                 type='text'
                 placeholder='Reference for vaidya manager?'
-                value={reference}
-                onChange={(e) => setReference(e.target.value)}
-
+                value={registrationForm.reference}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, reference: e.target.value })}
               >
                 <option value="">Reference</option>
                 <option value="Newspaper">Newspaper</option>
@@ -247,38 +241,40 @@ const Register = ({ location, history }) => {
               </Form.Control>
             </Form.Group>
           </Col>
-          <Col md={3}>
-            <Form.Group controlId="radios">
-              <Form.Check
-                value="design"
-                type="radio"
-                aria-label="radio 1"
-                label="Design"
-                name="InTh"
-              // onChange={handleChange}
-              // checked
-              />
+          <Col md={6}>
+            <Form.Group controlId='registrationFor'>
+              <Form.Label>registration For</Form.Label>
+              <div>
+                <Form.Check
+                  inline
+                  type='radio'
+                  label='Therapy'
+                  name='registrationFor'
+                  id='therapy'
+                  value='Therapy'
+                  // checked={registrationForm.registrationFor === 'therapy'}
+                  onChange={(e) => setRegistrationForm({ ...registrationForm, registrationFor: e.target.value })}
+                  required
+                />
+                <Form.Check
+                  inline
+                  type='radio'
+                  label='Inquiry'
+                  name='registrationFor'
+                  id='inquiry'
+                  value='Inquiry'
+                  // checked={registrationForm.gender === 'female'}
+                  onChange={(e) => setRegistrationForm({ ...registrationForm, registrationFor: e.target.value })}
+                  required
+                />
+              </div>
             </Form.Group>
           </Col>
-          <Col md={3}>
-            <Form.Group controlId="radios">
-              <Form.Check
-                value="food"
-                type="radio"
-                aria-label="radio 2"
-                label="Food"
-                name="InTh"
-                // onChange={handleChange}
-                checked
-              />
-            </Form.Group>
-          </Col>
-
         </Row>
         <Button type='submit' variant='primary'>
           Sign Up
         </Button>
-        <ToastContainer />
+        <ToastContainer autoClose={10000} />
       </Form>
     </>
   )

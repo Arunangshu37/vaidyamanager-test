@@ -22,8 +22,6 @@ import {
     USER_STATUS_REQUEST,
     USER_STATUS_SUCCESS,
     USER_STATUS_FAIL,
-
-
 } from '../constants/userConstants'
 import { ORDER_LIST_USER_RESET } from '../constants/orderConstants'
 import axios from 'axios'
@@ -84,12 +82,23 @@ export const logout = () => (dispatch) => {
     })
 }
 
-export const register = (name, email, phone, password, address, age, gender, weight, reference, date, isAdmin, profilePictureURL,isChild) => async (dispatch) => {
+export const register = (name, 
+    email, 
+    phone, 
+    password, 
+    address, 
+    age, 
+    gender,
+    weight, 
+    reference, 
+    date, 
+    isAdmin, 
+    profilePictureURL,
+    registrationFor) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST,
         })
-        // console.log(isAdmin)
         // Header to send with the request
         const config = {
             headers: {
@@ -100,26 +109,30 @@ export const register = (name, email, phone, password, address, age, gender, wei
         // Make request to server and get the response data
         const { data } = await axios.post(
             '/api/users',
-            { name, email, phone, password, address, age, gender, weight, reference, date, isAdmin, profilePictureURL,isChild },
+            { name, 
+            email, 
+            phone, 
+            password, 
+            address, 
+            age, 
+            gender, 
+            weight, 
+            reference, 
+            date,
+            isAdmin,
+            profilePictureURL,
+            registrationFor },
             config
         )
-
-        // Dispatch user register success after making the request
-        dispatch({
+        return dispatch({
             type: USER_REGISTER_SUCCESS,
             payload: data,
         })
         // alert('Register Successfully!');
-        // Login in the user as well after registering
-        // dispatch({
-        //     type: USER_LOGIN_SUCCESS,
-        //     payload: data,
-        // })
-
         // Set user data to local storage
         // localStorage.setItem('userInfo', JSON.stringify(data))
     } catch (error) {
-        dispatch({
+         return dispatch({
             type: USER_REGISTER_FAIL,
             payload:
                 error.response && error.response.data.message

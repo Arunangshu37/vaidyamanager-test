@@ -7,7 +7,8 @@ import {
     from '../constants/therapyConstants'
 import axios from 'axios'
 
-export const createTherapy = (patientName,
+export const createTherapy = (
+    patientName,
     therapycontact,
     therapyemail,
     therapyName,
