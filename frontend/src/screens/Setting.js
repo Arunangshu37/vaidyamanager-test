@@ -3,10 +3,10 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
-import ChangePassword from './ChangePassword';
-import StaffAccount from './StaffAccount';
+import Doctors from './Doctors';
 import Medicine from './Medicine';
-import Doctors from './screens/Doctors';
+
+
 
 const Setting = () => {
 
@@ -51,7 +51,7 @@ const Setting = () => {
              <ChangePassword/>
               </Tab.Pane> */}
               <Tab.Pane eventKey="fifth">
-                <Doctors />
+                <Doctors/>
               </Tab.Pane>
               <Tab.Pane eventKey="sixth">
              <Medicine/>

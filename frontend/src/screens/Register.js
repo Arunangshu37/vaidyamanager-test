@@ -28,21 +28,31 @@ const Register = ({ location, history }) => {
   }
   const [registrationForm, setRegistrationForm] = useState(RegisterData)
   const [message, setMessage] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
   // Get user login info from Redux state
   const userRegister = useSelector((state) => state.userRegister)
   const { loading, error, userInfo } = userRegister
 
-  const  registrationResponse = useSelector(s=> s.userRegisterReducer)
+  const registrationResponse = useSelector(s => s.userRegisterReducer)
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    // setIsSubmitting(true);
+    // try {
+    //   const response = await axios.get('/api/users');
+    //   setPatientId(response.data);
+    // } catch (error) {
+    //   // Handle error
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
     // Check if passwords are the same
     if (registrationForm.password !== registrationForm.confirmPassword) {
       setMessage("Passwords do not match");
     } else {
       try {
-         dispatch(
+        dispatch(
           register(
             registrationForm.name,
             registrationForm.email,
@@ -58,7 +68,8 @@ const Register = ({ location, history }) => {
             registrationForm.profilePictureURL,
             registrationForm.registrationFor
           )
-        ).then((e)=> {
+        ).then((e) => {
+          // console.log("Register DAta",registrationForm);
           if (e.payload.success) {
             toast.success(
               `Registration Successfully!\nPatient RegistrationNo: ${e.payload.patientRegistrationNo}`,
@@ -67,9 +78,9 @@ const Register = ({ location, history }) => {
                 className: 'toast-message'
               }
             );
-            
+
           }
-        }) 
+        })
         localStorage.setItem("isLogin", true);
         setRegistrationForm(RegisterData);
       } catch (error) {
@@ -78,6 +89,36 @@ const Register = ({ location, history }) => {
     }
   };
 
+  //   import React, { useState } from 'react';
+  // import axios from 'axios';
+
+  // function RegisterForm() {
+  //   const [patientId, setPatientId] = useState(null);
+  //   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  //   const handleRegister = async () => {
+  //     setIsSubmitting(true);
+  //     try {
+  //       const response = await axios.get('/api/patientId');
+  //       setPatientId(response.data);
+  //     } catch (error) {
+  //       // Handle error
+  //     } finally {
+  //       setIsSubmitting(false);
+  //     }
+  //   };
+
+  //   return (
+  //     <div>
+  //       <label>Patient ID:</label>
+  //       <input type="text" value={patientId} disabled />
+
+  //       <button onClick={handleRegister} disabled={isSubmitting}>
+  //         {isSubmitting ? 'Registering...' : 'Register'}
+  //       </button>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>

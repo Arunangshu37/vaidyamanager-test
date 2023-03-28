@@ -81,7 +81,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
   // User(Patient)List
   const Patient = useSelector((state) => state.userInfoDetails)
   const { loadingUsers, errorUsers, users } = Patient;
-  //  console.log("Patient List",users)
+  console.log("Patient List", users)
 
   useEffect(() => {
     dispatch(getUserInfoDetails());
@@ -201,8 +201,6 @@ const PrescriptionWindow2 = (previousPrescription) => {
       updateInputVal({ paymentRemark: value });
     }
     updateInputVal({ [name]: value });
-
-
   };
 
   // Modal
@@ -211,7 +209,6 @@ const PrescriptionWindow2 = (previousPrescription) => {
   const handleShow = () => {
     setAllowanceState("1");
     setShow(true);
-
   };
 
   //checkboxes
@@ -271,13 +268,10 @@ const PrescriptionWindow2 = (previousPrescription) => {
       if (unicode !== "▢") {
         setDietArray(dietArray => [...dietArray, { diet: element, allowance: getIdFromUnicode(unicode) }]);
       }
-
     });
     document.getElementById('dos').checked = true;
     setAllowanceState("1");
     setPreDiet(preDiet => ({ ...preDiet, wtodo: document.getElementById('what_todo').value, wto_dont: document.getElementById('what_todont').value }));
-
-
   };
 
   useEffect(() => {
@@ -410,12 +404,12 @@ const PrescriptionWindow2 = (previousPrescription) => {
 
   //patient list
   const [patient, setPatient] = useState();
-
-  const setUser = (e) => {
+  const setUser = (selectedOption) => {
     // console.log(e)
-    const selectedUserPhone = e.target.innerText.split("-")?.[1].trim()
-    const user = users?.find((user) => user?.phone.toString() === selectedUserPhone)
-    setPatient(user);
+    // const selectedUserPhone = e.target.innerText.split("-")?.[1].trim()
+    const user = users?.find((user) => user?.patientRegistrationNo)
+    // const user = users?.find((user) => user?.phone.toString() === selectedUserPhone)
+    setPatient(selectedOption);
   }
 
   useEffect(() => {
@@ -445,23 +439,21 @@ const PrescriptionWindow2 = (previousPrescription) => {
               width: 150,
               fontWeight: "bold"
             }}
-            getOptionLabel={(option) => `${option?.name} - ${option?.phone}`}
+            getOptionLabel={(option) => `${option?.name} - ${option?.patientRegistrationNo}`}
             renderInput={(params) => (
-              <TextField {...params} label=" Select Patient"
-                margin="normal" />
+              <TextField {...params} label="Select Patient"
+                // onChange={() => setPatient(null)}
+                margin="normal"
+              />
             )}
             renderOption={(props, option, { inputValue }) => {
-              const matches = match(`${option?.name} - ${option?.phone}`, inputValue, { insideWords: true });
-              const parts = parse(`${option?.name} - ${option?.phone}`, matches);
+              const matches = match(`${option?.name} - ${option?.patientRegistrationNo}`, inputValue, { insideWords: true });
+              const parts = parse(`${option?.name} - ${option?.patientRegistrationNo}`, matches);
 
               return (
-                <li {...props} onClick={setUser} >
-
+                <li {...props} onClick={setUser(option)}>
                   <div>
                     {parts?.map((part, index) => (
-                      // style={{
-                      //   fontWeight: part.highlight ? 400 : 200,
-                      // }}
                       part.text
                     ))}
                   </div>
@@ -470,8 +462,9 @@ const PrescriptionWindow2 = (previousPrescription) => {
             }}
           />
           <div className="col">
-
-            <h5>{patient?.name}</h5>
+            {patient && (
+              <h5>{`${patient?.name} - ${patient?.patientRegistrationNo}`}</h5>
+            )}
           </div>
         </div>
       </div>
@@ -540,7 +533,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
                   }}
                 />
               )}
-              {/* {console.log(allMedicines?.medicinesList)} */}
+
             </div>
             <div className="col">
               <input type="text" className='d-input' placeholder="00"
@@ -600,10 +593,10 @@ const PrescriptionWindow2 = (previousPrescription) => {
                           <input id={'d' + index} className='partitioned' type="text" placeholder='Dose' name='dose' maxLength="4" onChange={updateDose} />
                           <Button variant="contained"
                             onClick={() => removeFields(index)}
-                          >  <DeleteIcon fontSize='medium' />  </Button>
+                          >  <DeleteIcon fontSize='medium' />
+                          </Button>
                         </div>
                       </div>
-
                     </div>
                   )
                 })}
@@ -614,7 +607,6 @@ const PrescriptionWindow2 = (previousPrescription) => {
               </td>
             </tr>
           </tbody>
-
         </table>
         {/* table End */}
         {/* payment table Starts */}
@@ -639,8 +631,8 @@ const PrescriptionWindow2 = (previousPrescription) => {
                           className='p-input'
                           value={inputVal.Consulting}
                           onChange={onValueChange}
-                        /></td>
-
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td> Medicines</td>
@@ -651,8 +643,8 @@ const PrescriptionWindow2 = (previousPrescription) => {
                           className='p-input'
                           value={inputVal.medicine}
                           onChange={onValueChange}
-                        /> </td>
-
+                        />
+                      </td>
                     </tr>
                     <tr>
                       <td> Paid</td>
@@ -664,7 +656,6 @@ const PrescriptionWindow2 = (previousPrescription) => {
                           value={inputVal.paid}
                           style={{ backgroundColor: "#e8fffa" }}
                           onChange={onValueChange} /></td>
-
                     </tr>
                     <tr>
                       <td> Debit</td>
@@ -677,7 +668,6 @@ const PrescriptionWindow2 = (previousPrescription) => {
                           style={{ backgroundColor: "#e8fffa" }}
                           onChange={onValueChange} readOnly />
                       </td>
-
                     </tr>
                     <tr>
                       <td>Discount</td>
@@ -690,7 +680,6 @@ const PrescriptionWindow2 = (previousPrescription) => {
                           onChange={onValueChange} />
                       </td>
                     </tr>
-
                     <tr>
                       <td>Mode of Payment</td>
                       <td>
@@ -738,10 +727,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
                         <table className="table table-bordered border-primary" border={"1px"} style={{ width: "100%" }}>
                           <tbody>
                             <tr>
-
-
                               <td style={{ width: "30%" }}>Document</td>
-
                               <td>
                                 Image
                                 <div className="image-upload">

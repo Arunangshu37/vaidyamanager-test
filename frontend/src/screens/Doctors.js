@@ -6,31 +6,45 @@ import { Button, Form } from 'react-bootstrap';
 import { createDoctorData } from '../actions/doctorActions'
 
 const Doctors = () => {
+    const [imageFile, setImageFile] = useState();
     const DoctorData = {
-        doctorname,
-        speciality,
-        licenseNumber,
-        experience,
-        email_id,
-        phone_no,
-        consultation_fee,
-        profilePictureURL:imageFile
+        doctorname: "",
+        speciality: "",
+        licenseNumber: "",
+        experience: "",
+        email_id: "",
+        phone_no: "",
+        consultation_fee: "",
+        profilePictureURL:""
     }
     const [doctorForm, setDoctorForm] = useState(DoctorData);
-    const [imageFile, setImageFile] = useState(null);
-
     const dispatch = useDispatch();
 
-    // const addTherapy = useSelector((state) => state.createTherapy)
-    // const { loading, error, success, therapyData } = addTherapy
+    const addDoctors = useSelector((state) => state.createDoctorData)
+    const { loadingdoctordata, doctordata, success, errordoctordata } = addDoctors
 
     const resetHandler = (e) => {
-        setTherapyform(defaultData)
+        setDoctorForm(DoctorData)
     }
 
+    const handleImageUpload = (file) => {
+        if (file.size <= 15* 1024) {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file)
+            fileReader.onload = () => {
+                console.log(fileReader.result)
+                setImageFile(fileReader.result)
+                setDoctorForm({ ...doctorForm, profilePictureURL: imageFile})
+            };
+            alert("Image is selected");
+        } else {
+            alert("File size exceeded the limit of 7KB");
+
+        }
+    }
     const submitHandler = (e) => {
-        e.preventDefault()
-        // console.log("thrapy", therapyform);
+        e.preventDefault();
+        console.log("doctors", doctorForm);
         dispatch(createDoctorData(
             doctorForm.doctorname,
             doctorForm.speciality,
@@ -103,7 +117,7 @@ const Doctors = () => {
                                 <td>
                                     <label> Experience</label>
                                 </td>
-                                <td >
+                                <td>
                                     <Form.Group controlId='experience'>
                                         <Form.Control
                                             type='text'
@@ -133,7 +147,7 @@ const Doctors = () => {
                                 <td>
                                     <label>Phone No</label>
                                 </td>
-                                <td >
+                                <td>
                                     <Form.Group controlId='phone_no'>
                                         <Form.Control
                                             type='text'
@@ -163,25 +177,30 @@ const Doctors = () => {
                                 </td>
                             </tr>
                             <tr>
-                                <label>
-                                    Profile Picture
-                                </label>
                                 <td>
-                                    <Form.Group controlId='profilePicture'>
-                                        <Form.Control
-                                            type='file'
-                                            accept='image/*'
-                                            onChange={(e) => setImageFile(e.target.files[0])}
-                                        />
-                                    </Form.Group>
+                                    <label>
+                                        Profile Picture
+                                    </label>
                                 </td>
+                                <td>
+                                <div className="image-upload">
+                                  <img src='images/upload.png' />
+                                  <input id="file-input" type="file" className='p-input'
+                                    value={doctorForm.profilePictureURL}
+                                    onChange={(e) => handleImageUpload(e.target.files[0])} />
+                                </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
                                 <td>
                                     <Button type='submit' variant='primary'>
                                         Save
                                     </Button>
                                     <Button style={{ marginLeft: "5px" }} onClick={resetHandler} variant='primary'>
                                         Reset
-                                    </Button></td>
+                                    </Button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

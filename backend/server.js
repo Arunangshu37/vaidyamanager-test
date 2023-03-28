@@ -15,6 +15,7 @@ import fs from 'fs';
 import cors from 'cors';
 import path from 'path';
 import multer from 'multer'
+import mutexify from 'mutexify';
 // Initialize config file
 dotenv.config()
 // Establish connection with MongoDB database.
@@ -46,6 +47,8 @@ app.use('/api/prescription',prescriptionRoutes)
 app.use('/api/dashboard', dashboardRoutes)
 //Otp routes
 // app.use("/api/auth", authRoutes);
+
+const mutex = mutexify();
 
 var upload = multer();
 app.use(upload.array()); 
