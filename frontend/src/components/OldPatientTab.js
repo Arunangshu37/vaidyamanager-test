@@ -12,6 +12,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import PrescriptionWindow2 from './PrescriptionWindow2';
 import dayjs from 'dayjs'
+import * as _ from 'lodash'
 
 const OldPatientTab = ({ choosePatient }) => {
   const dispatch = useDispatch();
@@ -42,8 +43,6 @@ const OldPatientTab = ({ choosePatient }) => {
   };
 
 
-
-
   const searchPatient = (e) => {
     var input, filter, table, tr, td, i, txtValue;
     input = e.target.value;
@@ -66,11 +65,16 @@ const OldPatientTab = ({ choosePatient }) => {
 
   const [open, setOpen] = React.useState(false);
   const [previousPrescription, setPreviousPrescription] = useState([]);
+  console.log(previousPrescription);
 
   const handleClickOpen = (id) => {
     setOpen(true);
+    // console.log("patientPrescriptionData",patientPrescriptionData);
     const oldPrescription = patientPrescriptionData?.filter(p => p.Patient[0]?._id === id)
-    const sortedPrescriptions = oldPrescription.sort((a, b) => b.createdAt - a.createdAt);
+    // console.log("oldPrescription",oldPrescription)
+    const sortedPrescriptions = _.orderBy(oldPrescription, [item => item.createdAt], ['desc']);
+    // const sortedPrescriptions = oldPrescription.sort((a, b) => a.createdAt - b.createdAt);
+    // console.log("sortedPrescriptions",sortedPrescriptions)
     setPreviousPrescription(sortedPrescriptions.slice(0, 2))
   };
 
@@ -134,9 +138,7 @@ const OldPatientTab = ({ choosePatient }) => {
                       <DialogTitle id="responsive-dialog-title">Prescription</DialogTitle>
                       <DialogContent>
                         <DialogContentText>
-
                           <br />
-                        
                         </DialogContentText>
                         <table className="striped bordered visiting" bordercolor="#6caaa8">
                           <thead>
@@ -149,10 +151,8 @@ const OldPatientTab = ({ choosePatient }) => {
                               </th>
                               <th> Symptoms </th>
                               <th>Medicines</th>
-
                             </tr>
                           </thead>
-
                           <tbody>
                             {previousPrescription?.map((v, index) => {
                               return (
@@ -160,28 +160,24 @@ const OldPatientTab = ({ choosePatient }) => {
                                   <td>{index + 1}</td>
                                   <td>{dayjs(v.createdAt).format('DD/MM/YYYY')}</td>
                                   <td>{v.Symptoms?.join(', ')}</td>
-                                 <td>
-                                 <ul>
-                                    {v.medicineData?.map((medicine) => (
-                                      <li key={medicine._id}>
-                                        <p>Name: {v.PatientMedicines?.find((el)=> el._id === medicine.medicineDetails)?.medicineName}</p>
-                                        <p>Dose: {medicine.dose}</p>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                  </td> 
+                                  <td>
+                                    <ul>
+                                      {v.medicineData?.map((medicine) => (
+                                        <li key={medicine._id}>
+                                          <p>Name: {v.PatientMedicines?.find((el) => el._id === medicine.medicineDetails)?.medicineName}</p>
+                                          <p>Dose: {medicine.dose}</p>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </td>
                                 </tr>
                               );
                             })}
-                            
                           </tbody>
                         </table>
-                 <div>
-               
-                 <PrescriptionWindow2  previousPrescription={previousPrescription} />
-      
-                 </div>
-                       
+                        <div>
+                          <PrescriptionWindow2 previousPrescription={previousPrescription} />
+                        </div>
                       </DialogContent>
                       <DialogActions>
                         <Button onClick={handleClose}>Cancel</Button>
@@ -189,9 +185,6 @@ const OldPatientTab = ({ choosePatient }) => {
                       </DialogActions>
                     </Dialog>
                   </div>
-
-
-
                 </td>
                 <td>
                   <div>
@@ -206,8 +199,6 @@ const OldPatientTab = ({ choosePatient }) => {
         </tbody>
       </table>
       {/* table End */}
-
-
     </div>
   )
 }

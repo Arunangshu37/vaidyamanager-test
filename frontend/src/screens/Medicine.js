@@ -19,36 +19,36 @@ const Medicine = () => {
     }
 
     const [medicineform, setMedicineform] = useState(defaultData);
-    const [errorMessage, setErrorMessage] = useState(null); 
+    const [errorMessage, setErrorMessage] = useState(null);
     const dispatch = useDispatch();
 
     //redux state for the medicines
     const submitHandler = (e) => {
         e.preventDefault();
-        const addNewMedicine = () => {
-            const newMedicine = {
-                medicineName: medicineform.medicineName,
-                Qty: medicineform.Qty,
-                Unit: medicineform.Unit,
-                Gram: medicineform.Gram,
-                supplierName: medicineform.supplierName,
-                contactNo: medicineform.contactNo,
-                amount: medicineform.amount,
-                medicine_reciver_name: medicineform.medicine_reciver_name,
-            };
-   
-            dispatch(addMedicineDetails(newMedicine))
-                .then(() => {
-                    setMedicineform(defaultData);
-                    setErrorMessage(null); // clear error message if the submission was successful
-                })
-                .catch((error) => {
-                    console.log(error);
-                        setErrorMessage('Medicine name already exists'); // set error message if there was an error
-             
-                });
-        };
-        addNewMedicine();
+        // const addNewMedicine = () => {
+        // const newMedicine = {
+        //     medicineName: medicineform.medicineName,
+        //     Qty: medicineform.Qty,
+        //     Unit: medicineform.Unit,
+        //     Gram: medicineform.Gram,
+        //     supplierName: medicineform.supplierName,
+        //     contactNo: medicineform.contactNo,
+        //     amount: medicineform.amount,
+        //     medicine_reciver_name: medicineform.medicine_reciver_name,
+        // };
+        console.log(medicineform)
+        dispatch(addMedicineDetails(medicineform))
+            .then(() => {
+                setMedicineform(defaultData);
+                setErrorMessage(null); // clear error message if the submission was successful
+            })
+            .catch((error) => {
+                console.log(error);
+                setErrorMessage('Medicine name already exists'); // set error message if there was an error
+
+            });
+        // };
+        // addNewMedicine();
     };
 
     const resetHandler = (e) => {

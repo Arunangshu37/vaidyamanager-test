@@ -1,6 +1,30 @@
 import asyncHandler from 'express-async-handler'
 import Doctor from '../models/doctorsModel.js'
 import mongoose from 'mongoose'
+// const multer = require('multer')
+import multer from 'multer';
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true)
+    } else {
+        cb(new Error('Invalid file type. Only JPEG and PNG image files are allowed.'), false)
+    }
+}
+
+const upload = multer({
+    storage: storage,
+    fileFilter: fileFilter
+})
 
 const addDoctors = asyncHandler(async (req, res) => {
     const {
@@ -23,10 +47,16 @@ const addDoctors = asyncHandler(async (req, res) => {
         phone_no,
         consultation_fee,
         profilePictureURL
-
     })
-    const createdDoctor = await doctor.save();
-    res.status(201).json(createdDoctor);
+    const createdDoctor = await doctor.save()
+    res.status(201).json(createdDoctor)
+    // try {
+    //     const createdDoctor = await doctor.save();
+    //     res.status(201).json(createdDoctor);
+    //   } catch (error) {
+    //     console.log(error);
+    //     res.status(500).json({ message: 'Server Error' });
+    //   }
 })
 
 

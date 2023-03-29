@@ -81,7 +81,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
   // User(Patient)List
   const Patient = useSelector((state) => state.userInfoDetails)
   const { loadingUsers, errorUsers, users } = Patient;
-  console.log("Patient List", users)
+  // console.log("Patient List", users)
 
   useEffect(() => {
     dispatch(getUserInfoDetails());
@@ -405,7 +405,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
   //patient list
   const [patient, setPatient] = useState();
   const setUser = (selectedOption) => {
-    // console.log(e)
+    console.log(selectedOption);
     // const selectedUserPhone = e.target.innerText.split("-")?.[1].trim()
     const user = users?.find((user) => user?.patientRegistrationNo)
     // const user = users?.find((user) => user?.phone.toString() === selectedUserPhone)
@@ -451,7 +451,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
               const parts = parse(`${option?.name} - ${option?.patientRegistrationNo}`, matches);
 
               return (
-                <li {...props} onClick={setUser(option)}>
+                <li {...props} onClick={() => setUser(option)}>
                   <div>
                     {parts?.map((part, index) => (
                       part.text

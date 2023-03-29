@@ -8,14 +8,14 @@ import { createDoctorData } from '../actions/doctorActions'
 const Doctors = () => {
     const [imageFile, setImageFile] = useState();
     const DoctorData = {
-        doctorname: "",
+        name: "",
         speciality: "",
         licenseNumber: "",
         experience: "",
         email_id: "",
         phone_no: "",
         consultation_fee: "",
-        profilePictureURL:""
+        profilePictureURL: ""
     }
     const [doctorForm, setDoctorForm] = useState(DoctorData);
     const dispatch = useDispatch();
@@ -28,34 +28,24 @@ const Doctors = () => {
     }
 
     const handleImageUpload = (file) => {
-        if (file.size <= 15* 1024) {
+        if (file.size <= 15 * 1024) {
             const fileReader = new FileReader();
             fileReader.readAsDataURL(file)
             fileReader.onload = () => {
-                console.log(fileReader.result)
-                setImageFile(fileReader.result)
-                setDoctorForm({ ...doctorForm, profilePictureURL: imageFile})
+                console.log(file)
+                setImageFile(file.name)
+                setDoctorForm({ ...doctorForm, profilePictureURL: fileReader.result })
             };
             alert("Image is selected");
         } else {
-            alert("File size exceeded the limit of 7KB");
+            alert("File size exceeded the limit of 15KB");
 
         }
     }
     const submitHandler = (e) => {
         e.preventDefault();
         console.log("doctors", doctorForm);
-        dispatch(createDoctorData(
-            doctorForm.doctorname,
-            doctorForm.speciality,
-            doctorForm.licenseNumber,
-            doctorForm.experience,
-            doctorForm.email_id,
-            doctorForm.phone_no,
-            doctorForm.consultation_fee,
-            doctorForm.profilePictureURL,
-            imageFile
-        ))
+        dispatch(createDoctorData(doctorForm))
         setDoctorForm(DoctorData)
     }
 
@@ -75,8 +65,8 @@ const Doctors = () => {
                                         <Form.Control
                                             type='text'
                                             placeholder='Doctor Name'
-                                            value={doctorForm.doctorname}
-                                            onChange={(e) => setDoctorForm({ ...doctorForm, doctorname: e.target.value })}
+                                            value={doctorForm.name}
+                                            onChange={(e) => setDoctorForm({ ...doctorForm, name: e.target.value })}
                                         ></Form.Control>
                                     </Form.Group>
                                 </td>
@@ -183,12 +173,12 @@ const Doctors = () => {
                                     </label>
                                 </td>
                                 <td>
-                                <div className="image-upload">
-                                  <img src='images/upload.png' />
-                                  <input id="file-input" type="file" className='p-input'
-                                    value={doctorForm.profilePictureURL}
-                                    onChange={(e) => handleImageUpload(e.target.files[0])} />
-                                </div>
+                                    <div className="image-upload">
+                                        <img src='images/upload.png' />
+                                        <input id="file-input" type="file" className='p-input'
+                                            onChange={(e) => handleImageUpload(e.target.files[0])} />
+                                            <h3>{imageFile}</h3>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>

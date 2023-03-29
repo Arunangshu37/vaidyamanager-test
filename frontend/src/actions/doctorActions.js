@@ -18,6 +18,7 @@ import axios from 'axios';
 
 //doctor api
 export const createDoctorData = (doctor) => async (dispatch, getState) => {
+    console.log("Doctor",doctor)
     try {
         dispatch({
             type: DOCTORS_DATA_REQUEST,
