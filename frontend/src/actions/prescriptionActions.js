@@ -54,9 +54,7 @@ export const addMedicineDetails = (medicineData) => async (dispatch, getState) =
     try {
         dispatch({
             type: ADD_MEDICINE_REQUEST,
-        })
-        console.log("medicine etails",medicineData)
-       
+        }) 
         // Make request to server and get the response data
         const { data } = await axios.post(`/api/prescription/add_medicines`, medicineData)
 
@@ -65,9 +63,10 @@ export const addMedicineDetails = (medicineData) => async (dispatch, getState) =
             type: ADD_MEDICINE_SUCCESS,
             payload: data,
         })
-        console.log("medicine added")
-        alert("MEDICINES added Successfully");
+        alert("MEDICINEs added Successfully");
+
         return data
+        
     } catch (error) {
         dispatch({
             type: ADD_MEDICINE_FAIL,
@@ -76,6 +75,7 @@ export const addMedicineDetails = (medicineData) => async (dispatch, getState) =
                     ? error.response.data.message
                     : error.message,
         })
+        alert("MEDICINE cannot be Added")
     }
 }
 

@@ -405,7 +405,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
   //patient list
   const [patient, setPatient] = useState();
   const setUser = (selectedOption) => {
-    console.log(selectedOption);
+    // console.log(selectedOption);
     // const selectedUserPhone = e.target.innerText.split("-")?.[1].trim()
     const user = users?.find((user) => user?.patientRegistrationNo)
     // const user = users?.find((user) => user?.phone.toString() === selectedUserPhone)
