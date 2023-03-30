@@ -48,15 +48,80 @@ const authUser = asyncHandler(async (req, res) => {
 // @route POST /api/users
 // @access Public
 // Create a mutex
-// const mutex = mutexify();
+const mutex = mutexify();
+const registerUser = asyncHandler(async (req, res) => {
+    const { name, email, phone,
+        password, address, Date, weight,
+        illness, duration, treatment, reference,
+        age, gender, isAdmin, registrationFor } = req.body;
+    try {
+        // Acquire the mutex to ensure only one request can access the patient ID counter at a time
+        await mutex.lock();
+
+        let lastPatientRegistrationNo = 0;
+
+        // Get the last patient registration number from the database
+        const lastPatient = await User.findOne().sort({ patientRegistrationNo: -1 });
+        if (lastPatient && lastPatient.patientRegistrationNo) {
+            lastPatientRegistrationNo = lastPatient.patientRegistrationNo + 1;
+        }
+        console.log("done")
+        // Create a new user with the next available patient registration number
+        const user = await User.create({
+            name,
+            email,
+            phone,
+            password,
+            address,
+            Date,
+            age,
+            weight,
+            gender,
+            illness,
+            treatment,
+            duration,
+            reference,
+            isAdmin,
+            patientRegistrationNo: lastPatientRegistrationNo,
+            registrationFor
+        });
+
+        // If the user is successfully created then send back user details in response
+        if (user) {
+            res.status(201).json({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                address: user.address,
+                age: user.age,
+                gender: user.gender,
+                isAdmin: user.isAdmin,
+                patientRegistrationNo: user.patientRegistrationNo,
+                isSubscriber: user.isSubscriber,
+                isSuperAdmin: user.isSuperAdmin,
+                token: generateToken(user._id),
+                registrationFor,
+                success: true
+            })
+        } else {
+            res.status(400)
+            throw new Error('Invalid user data')
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to create user' });
+    } finally {
+        // Release the mutex
+        mutex.unlock();
+    }
+})
+
+
 // const registerUser = asyncHandler(async (req, res) => {
 //     const { name, email, phone,
 //         password, address, Date, weight,
 //         illness, duration, treatment, reference,
 //         age, gender, isAdmin, registrationFor } = req.body;
-//     try {
-//         // Acquire the mutex to ensure only one request can access the patient ID counter at a time
-//         await mutex.lock();
 
 //         let lastPatientRegistrationNo = 0;
 
@@ -108,72 +173,7 @@ const authUser = asyncHandler(async (req, res) => {
 //             res.status(400)
 //             throw new Error('Invalid user data')
 //         }
-//     } catch (error) {
-//         res.status(500).json({ message: 'Failed to create user' });
-//     } finally {
-//         // Release the mutex
-//         mutex.unlock();
-//     }
 // })
-
-const mutex = mutexify();
-const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, phone,
-        password, address, Date, weight,
-        illness, duration, treatment, reference,
-        age, gender, isAdmin, registrationFor } = req.body;
-
-        let lastPatientRegistrationNo = 0;
-        
-        // Get the last patient registration number from the database
-        const lastPatient = await User.findOne().sort({ patientRegistrationNo: -1 });
-        if (lastPatient && lastPatient.patientRegistrationNo) {
-            lastPatientRegistrationNo = lastPatient.patientRegistrationNo + 1;
-        }
-
-        // Create a new user with the next available patient registration number
-        const user = await User.create({
-            name,
-            email,
-            phone,
-            password,
-            address,
-            Date,
-            age,
-            weight,
-            gender,
-            illness,
-            treatment,
-            duration,
-            reference,
-            isAdmin,
-            patientRegistrationNo: lastPatientRegistrationNo,
-            registrationFor
-        });
-
-        // If the user is successfully created then send back user details in response
-        if (user) {
-            res.status(201).json({
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                phone: user.phone,
-                address:user.address,
-                age: user.age,
-                gender: user.gender,
-                isAdmin: user.isAdmin,
-                patientRegistrationNo:user.patientRegistrationNo,
-                isSubscriber: user.isSubscriber,
-                isSuperAdmin:user.isSuperAdmin,
-                token: generateToken(user._id),
-                registrationFor,
-                success:true
-            })
-        } else {
-            res.status(400)
-            throw new Error('Invalid user data')
-        }
-})
 
 
 const getUserProfile = asyncHandler(async (req, res) => {
