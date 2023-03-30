@@ -5,22 +5,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-// import Paper from '@mui/material/Paper';
-// import Draggable from 'react-draggable';
 
 
-// function PaperComponent(props) {
-//     return (
-//       <Draggable
-//         handle="#draggable-dialog-title"
-//         cancel={'[class*="MuiDialogContent-root"]'}
-//       >
-//         <Paper {...props} />
-//       </Draggable>
-//     );
-//   }
-
- function ComfirmationDialog() {
+function ComfirmationDialog() {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -32,16 +19,9 @@ import DialogTitle from '@mui/material/DialogTitle';
     };
     return (
         <div>
-          
-            {/* <Button variant="outlined" onClick={handleClickOpen}>
-             Cancel
-            </Button> */}
             <Dialog
                 open={open}
-                onClose={handleClose}
-                // PaperComponent={PaperComponent}
-                // aria-labelledby="draggable-dialog-title"
-            >
+                onClose={handleClose}>
                 <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
                     Yes
                 </DialogTitle>
@@ -52,7 +32,7 @@ import DialogTitle from '@mui/material/DialogTitle';
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleClose}>
-               NO
+                        NO
                     </Button>
                     <Button onClick={handleClose}>Subscribe</Button>
                 </DialogActions>

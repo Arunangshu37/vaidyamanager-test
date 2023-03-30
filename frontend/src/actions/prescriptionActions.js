@@ -63,7 +63,7 @@ export const addMedicineDetails = (medicineData) => async (dispatch, getState) =
             type: ADD_MEDICINE_SUCCESS,
             payload: data,
         })
-        alert("MEDICINEs added Successfully");
+        alert("Medicine added Successfully");
 
         return data
         
@@ -75,7 +75,7 @@ export const addMedicineDetails = (medicineData) => async (dispatch, getState) =
                     ? error.response.data.message
                     : error.message,
         })
-        alert("MEDICINE cannot be Added")
+        alert("Medicine cannot be Added")
     }
 }
 
@@ -94,7 +94,7 @@ export const addPrescriptionUser = (prescriptionData) => async (dispatch, getSta
             type: PRESCRIPTION_SUCCESS,
             payload: data,
         })
-        console.log("prescription added")
+        // console.log("prescription added")
         alert("Prescription added Successfully");
         return data
     } catch (error) {

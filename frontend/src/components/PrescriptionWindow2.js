@@ -361,7 +361,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file)
       fileReader.onload = () => {
-        console.log(fileReader.result)
+        // console.log(fileReader.result)
         setImageFile(fileReader.result)
         setPrescription({ ...prescription, image: imagefile })
       };

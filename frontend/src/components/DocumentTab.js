@@ -84,11 +84,8 @@ const DocumentTab = () => {
                     <div>
                     <h1>Video</h1>
                     <video src={p.Video} controls width="50%" height="50%">
-
                     </video>
                     </div>
-                   
-                    {/* <video width="300px" controls height="500px" src={p.Video}/> */}
                   </Tab.Pane>
                   <br />
                   <Tab.Pane eventKey="Report">
@@ -99,10 +96,9 @@ const DocumentTab = () => {
                       <img height={"80px"} src={"images/pdf-file.png"} />
                     </a>
                   </Tab.Pane>
-
                 </>
-
               ))}
+
               {DietList?.map((d) => (
                 <>
                   <Tab.Pane eventKey="Diet Chart" key={d.id}>
@@ -115,18 +111,14 @@ const DocumentTab = () => {
                         size='lg'
                         aria-labelledby="contained-modal-title-vcenter"
                         centered
-                        onHide={handelInstructionclose}
-                      >
+                        onHide={handelInstructionclose}>
                         <Modal.Header closeButton>
                           <Modal.Title>Diet chart instructions</Modal.Title>
-
                           <Button>Send Email</Button>
-
                         </Modal.Header>
                         <Modal.Body>
 
                           <div id="dietinstructions" style={{ padding: '15px 10px' }}>
-
                             <dl>
                               <dt>What to take ? </dt>
                               <dd>

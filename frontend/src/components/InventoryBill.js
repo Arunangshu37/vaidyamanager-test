@@ -1,14 +1,12 @@
 import React from 'react'
 
-const InventoryBill = () =>{
-  return (
-    <div>InventoryBill
-
-
-<table className="clinical">
+const InventoryBill = () => {
+    return (
+        <div>InventoryBill
+            <table className="clinical">
                 <thead>
                     <tr>
-                    <th>
+                        <th>
                             <h4>Date</h4>
                         </th>
                         <th>
@@ -22,36 +20,30 @@ const InventoryBill = () =>{
                         </th>
                         <th> <h4>Invoice</h4></th>
                         <th>
-                        <h4>Payment</h4>
+                            <h4>Payment</h4>
                         </th>
                         <th>
-                        <h4>Total</h4>
+                            <h4>Total</h4>
                         </th>
                         <th>
-                        <h4>Mode</h4>
+                            <h4>Mode</h4>
                         </th>
                         <th>
-                        <h4>Unpaid</h4>
+                            <h4>Unpaid</h4>
                         </th>
                     </tr>
                 </thead>
-
                 <tbody>
-                  
-                            <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                     
-
-
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
-
-    </div>
-  )
+        </div>
+    )
 }
 
 export default InventoryBill

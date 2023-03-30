@@ -8,15 +8,11 @@ import { useDispatch, useSelector } from 'react-redux'
 const BillHistoryTab = ({ PatientId }) => {
     const dispatch = useDispatch();
 
-
     const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)
     const { loadingp, errorp, patientPrescriptionData } = OldPrescriptions;
-
     const PrescriptionVisitData = _.orderBy(patientPrescriptionData, [item => item.createdAt], ['desc']);
     // console.log("PrescriptionVisitData", PrescriptionVisitData);
-
     const filterbill = PrescriptionVisitData?.filter(visit => visit.prescriptionUser === PatientId);
-
     
     let Total = 0;
     let Paid =0;
@@ -66,10 +62,7 @@ const BillHistoryTab = ({ PatientId }) => {
                         <td></td>
                         <td>{Total}</td>
                         <td>{Paid}</td>
-
-
                     </tr>
-
                 </tbody>
             </table>
         </div>

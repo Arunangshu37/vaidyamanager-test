@@ -25,11 +25,9 @@ const Inventory = () => {
         <Tab eventKey="newMedicine" title="New Medicine">
           <NewMedicine />
         </Tab>
-
         <Tab eventKey="inventorybill" title="Bill History">
           <InventoryBill />
         </Tab>
-
       </Tabs>
     </div>
   )

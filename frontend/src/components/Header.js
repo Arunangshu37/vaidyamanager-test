@@ -111,8 +111,6 @@ const Header = ({location, history}) => {
                                         &nbsp;  |&nbsp;
                                     </Navbar.Brand>
                                 </LinkContainer>: ""}
-
-                              
                             </Nav>
                         </Navbar.Collapse>
 

@@ -28,7 +28,6 @@ const CompanyStock = () => {
             <th></th>
           </tr>
         </thead>
-
         <tbody>
           {medicinesList?.map((m) => {
             return (
@@ -39,10 +38,7 @@ const CompanyStock = () => {
                 <td>Add Stock</td>
               </tr>
             )
-
           })}
-
-
         </tbody>
       </table>
     </div>

@@ -15,8 +15,6 @@ const style = {
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  // const shareUrl = "www.mindvein.com";
-  // const baseUrl = process.env.REACT_APP_API__BASE_URL;
 
   const title = "Title"
   return (
@@ -24,28 +22,6 @@ const Footer = () => {
       <div className="pa-footer-three">
         <div className="container">
           <div className="row">
-            {/* <div className="col-lg-3 col-md-6">
-              <div className="pa-foot-box">
-                <h2 className="pa-foot-title">Top Products</h2>
-                <ul>
-                  <li>
-                    <a href="">Black Organic Tea</a>
-                  </li>
-                  <li>
-                    <a href="">Loose Leaf Tea</a>
-                  </li>
-                  <li>
-                    <a href="">Oolong Tea</a>
-                  </li>
-                  <li>
-                    <a href="">Green Tea</a>
-                  </li>
-                  <li>
-                    <a href="">Sencha Tea</a>
-                  </li>
-                </ul>
-              </div>
-            </div> */}
             <div className="col-lg-3 col-md-6">
               <div className="pa-foot-box">
                 <h2 className="pa-foot-title">Legal Information</h2>
@@ -53,12 +29,6 @@ const Footer = () => {
                   <li>
                     <a href="/about">About Us</a>
                   </li>
-                  {/* <li>
-                    <a href="">Privacy Policy</a>
-                  </li> */}
-                  {/* <li>
-                    <a href="">Terms &amp; Conditions</a>
-                  </li> */}
                   <li>
                     <a href="/contact-us">Contact us</a>
                   </li>
@@ -69,12 +39,9 @@ const Footer = () => {
               </div>
             </div>
           </div>
-        
 
             <div className='row'>
               <div className="col-md-6 offset-md-5">
-                {/* social */}
-                {/* style={{ marginTop: "51px", display: "flex", justifyContent: "center" }} */}
                 <div >
                   <a href="https://www.facebook.com/story.php?story_fbid=pfbid0Gvgv1EvvLCVjJYUCpvuSSYbqgKt7yJgfAzSJ92u4zUZFv2YG7B3B6Jz1GUC4tCDkl&id=100076816459208&mibextid=Nif5oz&_rdr" target="_blank">
                     <img style={{ marginRight: "15px" }}
@@ -88,22 +55,9 @@ const Footer = () => {
                       src={"http://localhost:2000/images/instagram.svg"}
                     />
                   </a>
-                  {/* <a href="" target="_blank">
-                    <img style={{ marginRight: "15px" }}
-                      // src="images/linkedin.svg" 
-                      src={"http://localhost:2000/images/linkedin.svg"}
-                    />
-                  </a> */}
-                  {/* <a href="" target="_blank">
-                    <img style={{ marginRight: "15px" }}
-                      // src="images/twitter.svg" 
-                      src={"http://localhost:2000/images/twitter.svg"}
-                    />
-                  </a> */}
                 </div>
               </div>
             </div>
-
           </div>
         </div>
         <div className="pa-copyright pa-copyright-two">
