@@ -48,15 +48,17 @@ const authUser = asyncHandler(async (req, res) => {
 // @route POST /api/users
 // @access Public
 // Create a mutex
-const mutex = mutexify();
-const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, phone,
-        password, address, Date, weight,
-        illness, duration, treatment, reference,
-        age, gender, isAdmin, registrationFor } = req.body;
+// const mutexify = require('mutexify');
+const registerUserMutex = new mutexify();
+const registerUser = (async (req, res) => {
+    await registerUserMutex.lock();
+   
     try {
         // Acquire the mutex to ensure only one request can access the patient ID counter at a time
-        await mutex.lock();
+        const { name, email, phone,
+            password, address, Date, weight,
+            illness, duration, treatment, reference,
+            age, gender, isAdmin, registrationFor } = req.body;
 
         let lastPatientRegistrationNo = 0;
 
@@ -112,7 +114,7 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(500).json({ message: 'Failed to create user' });
     } finally {
         // Release the mutex
-        mutex.unlock();
+        registerUserMutex.unlock();
     }
 })
 
