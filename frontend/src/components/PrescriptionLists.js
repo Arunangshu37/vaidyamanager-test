@@ -39,7 +39,7 @@ const PrescriptionLists = () => {
     // Set background color for header section
     doc.setFillColor('#ccf9f5');
   
-    doc.rect(0, 0, doc.internal.pageSize.width, 120, 'F');
+    doc.rect(0, 0, doc.internal.pageSize.width, 140, 'F');
     // Add logo
     const image = new Image();
     image.src = 'images/sukhayuenglish.png';
