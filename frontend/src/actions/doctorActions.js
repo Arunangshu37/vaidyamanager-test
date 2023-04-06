@@ -39,7 +39,7 @@ export const createDoctorData = (doctor) => async (dispatch, getState) => {
         }
 
         // Make request to server and get the response data
-        const { data } = await axios.post(`http://localhost:8000/api/doctors/add_doc`,doctor ,config)
+        const { data } = await axios.post(`http://localhost:2000/api/doctors/add_doc`,doctor ,config)
 
         // Dispatch doctor success after making the request
         dispatch({
@@ -64,7 +64,7 @@ export const listDoctors = () => async (dispatch) => {
         dispatch({
             type: DOCTORS_LIST_SUCCESS,
         })
-        const { data } = await axios.get('http://localhost:8000/api/doctors/doc')
+        const { data } = await axios.get('http://localhost:2000/api/doctors/doc')
 
         dispatch({
             type: DOCTORS_LIST_SUCCESS,

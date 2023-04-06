@@ -31,7 +31,7 @@ export const getMedicines = () => async (dispatch) => {
         dispatch({
             type: MEDICINE_SUCCESS,
         })
-        const { data } = await axios.get('http://localhost:8000/api/prescription/get_medicines')
+        const { data } = await axios.get('http://localhost:2000/api/prescription/get_medicines')
 
         dispatch({
             type: MEDICINE_SUCCESS,
@@ -56,7 +56,7 @@ export const addMedicineDetails = (medicineData) => async (dispatch, getState) =
             type: ADD_MEDICINE_REQUEST,
         }) 
         // Make request to server and get the response data
-        const { data } = await axios.post(`http://localhost:8000/api/prescription/add_medicines`, medicineData)
+        const { data } = await axios.post(`http://localhost:2000/api/prescription/add_medicines`, medicineData)
 
         // Dispatch  success after making the request
         dispatch({
@@ -87,7 +87,7 @@ export const addPrescriptionUser = (prescriptionData) => async (dispatch, getSta
         })
 
         // Make request to server and get the response data
-        const { data } = await axios.post(`http://localhost:8000/api/prescription/add_prescription`, prescriptionData)
+        const { data } = await axios.post(`http://localhost:2000/api/prescription/add_prescription`, prescriptionData)
 
         // Dispatch  success after making the request
         dispatch({
@@ -116,7 +116,7 @@ export const addDietChart = (diet) => async (dispatch, getState) => {
         })
 
         // Make request to server and get the response data
-        const { data } = await axios.post(`http://localhost:8000/api/prescription/add_dietchart`, diet)
+        const { data } = await axios.post(`http://localhost:2000/api/prescription/add_dietchart`, diet)
 
         // Dispatch  success after making the request
         dispatch({
@@ -144,7 +144,7 @@ export const getPrescription = () => async (dispatch) => {
         dispatch({
             type: GET_PRESCRIPTION_SUCCESS,
         })
-        const { data } = await axios.get('http://localhost:8000/api/prescription/get_prescription')
+        const { data } = await axios.get('http://localhost:2000/api/prescription/get_prescription')
 
         dispatch({
             type: GET_PRESCRIPTION_SUCCESS,
@@ -168,7 +168,7 @@ export const getDietChartList = () => async (dispatch) => {
         dispatch({
             type: GET_DIETCHART_SUCCESS,
         })
-        const { data } = await axios.get('http://localhost:8000/api/prescription/get_dietchart')
+        const { data } = await axios.get('http://localhost:2000/api/prescription/get_dietchart')
 
         dispatch({
             type: GET_DIETCHART_SUCCESS,
@@ -192,7 +192,7 @@ export const getPrescriptionDetail = () => async (dispatch) => {
         dispatch({
             type: DATA_PRESCRIPTION_SUCCESS,
         })
-        const { data } = await axios.get('http://localhost:8000/api/prescription/getallPrescription')
+        const { data } = await axios.get('http://localhost:2000/api/prescription/getallPrescription')
 
         dispatch({
             type: DATA_PRESCRIPTION_SUCCESS,
@@ -217,7 +217,7 @@ export const getPatientDetail = () => async (dispatch) => {
         dispatch({
             type: PATIENT_PRESCRIPTION_SUCCESS,
         })
-        const { data } = await axios.get('http://localhost:8000/api/prescription/getpatientPrescription')
+        const { data } = await axios.get('http://localhost:2000/api/prescription/getpatientPrescription')
 
         dispatch({
             type: PATIENT_PRESCRIPTION_SUCCESS,
