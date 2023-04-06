@@ -40,7 +40,7 @@ export const login = (email, password) => async (dispatch) => {
 
         // Make request to server and get the response data
         const { data } = await axios.post(
-            '/api/users/login',
+            'http://localhost:8000/api/users/login',
             { email, password }, config)
 
         // Dispatch user login success after making the request
@@ -157,7 +157,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         }
 
         // Make request to server and get the response data
-        const { data } = await axios.get(`/api/users/${id}`, config)
+        const { data } = await axios.get(`http://localhost:8000/api/users/${id}`, config)
 
         // Dispatch user register success after making the request
         dispatch({
@@ -195,7 +195,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         }
 
         // Make request to server and get the response data
-        const { data } = await axios.put(`/api/users/profile`, user, config)
+        const { data } = await axios.put(`http://locahhost:8000/api/users/profile`, user, config)
 
         // Dispatch user register success after making the request
         dispatch({
@@ -221,7 +221,7 @@ export const getUserInfoDetails = () => async (dispatch) => {
         dispatch({
             type: USER_INFO_DETAILS_REQUEST,
         })
-        const { data } = await axios.get('/api/users/userInfo')
+        const { data } = await axios.get('http://localhost:8000/api/users/userInfo')
 
         dispatch({
             type: USER_INFO_DETAILS_SUCCESS,
@@ -244,7 +244,7 @@ export const getUserDesc = () => async (dispatch) => {
         dispatch({
             type: USER_LATEST_REQUEST,
         })
-        const { data } = await axios.get('/api/users/latest-patient')
+        const { data } = await axios.get('http://localhost:8000/api/users/latest-patient')
 
         dispatch({
             type: USER_LATEST_SUCCESS,
@@ -284,7 +284,7 @@ export const updateUserStaff = (id, user) => async (dispatch, getState) => {
         }
 
         // Make request to server and get the response data
-        const { data } = await axios.put(`/api/users/${id}/updateStatus`, user, config)
+        const { data } = await axios.put(`http://localhost:8000/api/users/${id}/updateStatus`, user, config)
 
         // Dispatch user register success after making the request
         dispatch({

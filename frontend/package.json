@@ -6,7 +6,7 @@
   "dependencies": {
     "@babel/core": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
-    "@capacitor/android": "^4.7.0",
+    "@capacitor/android": "^4.7.3",
     "@capacitor/core": "^4.7.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
