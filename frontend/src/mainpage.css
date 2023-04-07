@@ -59,8 +59,8 @@
   }
 }
 
-
-@media only screen and (max-width: 600px) {
+/* 
+@media only screen and (max-width: 400px){
   .Auth-form {
     width: 320px;
     box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
@@ -69,9 +69,25 @@
     border-radius: 8px;
     background-color: white;
   }
+.Auth-form-container {
+    height: 123vh;
+    padding: 8px 3px 0 31px;
+}
+} */
+
+@media only screen and (max-width: 600px) {
+  .Auth-form {
+    width: 320px;
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    background-color: #88ccc6d6;
+  }
 
   .Auth-form-container {
     height: 148vh;
+    padding: 8px 3px 0 31px;
   }
 
   .Auth-form-wrapper {
@@ -80,3 +96,4 @@
     padding-bottom: 116px;
   }
 }
+
