@@ -11,7 +11,7 @@ const MainPage = ({ location, history }) => {
   const dispatch = useDispatch()
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
-  
+
   // Get user login info from Redux state
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, error, userInfo } = userLogin
@@ -29,53 +29,50 @@ const MainPage = ({ location, history }) => {
   }
   return (
     <div>
-      
-        <div className="Auth-form-container">
+      <div className="Auth-form-container">
         <div className="Auth-form-wrapper">
           <Form className="Auth-form" onSubmit={submitHandler}>
             <div className="Auth-form-content">
               {/* <h3 className="Auth-form-title">Sign In</h3> */}
-              <div className="text-center">
-
+              <div className="text-center" style={{ padding: "0px 22px 0 0"} } >
                 <span className="link-primary" >
                   <h4>Sign in</h4>
                 </span>
               </div>
-              <div className="form-group mt-3">
-                <label className='authlabel'>Email address</label>
-                <input
-                  type="email"
-                  className="form-control mt-1"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="form-group mt-3">
-                <label className='authlabel'>Password</label>
-                <input
-                  type="password"
-                  className="form-control mt-1"
-                  placeholder="Enter password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="d-grid gap-2 mt-3">
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
-
-              </div>
-              <ToastContainer />
-              {/* <p className="text-center mt-2">
+            <div className="form-group mt-3">
+              <label className='authlabel'>Email address</label>
+              <input
+                type="email"
+                className="form-control mt-1"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group mt-3">
+              <label className='authlabel'>Password</label>
+              <input
+                type="password"
+                className="form-control mt-1"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="d-grid gap-2 mt-3">
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </div>
+            <ToastContainer />
+            {/* <p className="text-center mt-2">
               Forgot <a href="#">password?</a>
             </p> */}
-            </div>
-          </Form>
         </div>
-      </div>
+      </Form>
     </div>
+      </div >
+    </div >
   )
 }
 
