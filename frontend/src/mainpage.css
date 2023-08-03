@@ -3,24 +3,25 @@
   justify-content: center;
   align-items: center;
   /* width: 100vw; */
-  height: 100vh;
+  height: 97vh;
   /* background: linear-gradient(-45deg, #74ebd5, #9face6, #fcd3a5);
     background-size: 400% 400%;
     animation: wave 5s ease-in-out infinite; */
 }
 
 .Auth-form-wrapper {
-  width: 420px;
-  padding-top: 30px;
-  padding-bottom: 20px;
+  width: 576px;
+  padding-top: 71px;
+  padding-bottom: 70px;
 }
 
 .Auth-form {
-  width: 420px;
+  height: 354px;
+  width: 578px;
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
   padding-top: 30px;
   padding-bottom: 20px;
-  border-radius: 8px;
+  border-radius: 46px;
   background-color: white;
 }
 

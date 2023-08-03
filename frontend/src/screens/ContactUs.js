@@ -7,7 +7,6 @@ const ContactUs = ({ history }) => {
   const currentYear = new Date().getFullYear();
   return (
     <>
-    
       <Breadcrumb />
       <Container>
         <section className="contact-page-sec">
@@ -21,7 +20,7 @@ const ContactUs = ({ history }) => {
                     </div>
                     <div className="contact-info-text">
                       <h2> Clinic Address</h2>
-                      <span style={{padding:"5px"}}> Awadh Pride, 2nd Floor, Metro Pillar no. Opposite 139, Nirant Chowk, Vastral, Ahmedabad-18</span>
+                      <span style={{padding:"5px"}}> Awadh Pride, 2nd Floor, Metro Pillar no. Opposite 139, Nirant Chowk</span>
            
                     </div>
                   </div>
@@ -38,7 +37,7 @@ const ContactUs = ({ history }) => {
                   
                       <span>sukhayu7@gmail.com</span>
                   
-                      <span> Mobile No: 9165731657</span>
+                      <span> Mobile No: 78265489245</span>
                       <span></span>
                       <span></span>
                     </div>
@@ -65,8 +64,8 @@ const ContactUs = ({ history }) => {
             </div>
 
           </div>
-          {/* <div className="row justify-content-center">
-            <div className="col-md-5">
+          <div className="row justify-content-center">
+            <div className="col-sm-6">
               <div className="pa-contact-form">
                 <h5 className='contact-heading'>Please Fill the Form</h5>
                 <form>
@@ -79,7 +78,7 @@ const ContactUs = ({ history }) => {
                 </form>
               </div>
             </div>
-          </div> */}
+          </div>
         </section>
 
       </Container>
