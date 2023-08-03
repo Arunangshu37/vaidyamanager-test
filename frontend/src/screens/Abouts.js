@@ -92,8 +92,6 @@ const Abouts = () => {
                         <Row className='sukhayu-about'>
                             <img className='imgPanchkarmaback img-fluid' src="images/panchkarmaback.jpg" />
                         </Row>
-                  
-
                     </div>
                 </div>
             </div>

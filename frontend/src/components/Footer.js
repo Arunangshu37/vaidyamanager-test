@@ -1,22 +1,9 @@
 import React from 'react'
-import { Container, Row, Card, Button, Col, Image, } from 'react-bootstrap'
 import '../footer2.css'
-
-const style = {
-  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-  borderRadius: 3,
-  border: 0,
-  color: 'white',
-  padding: '0 30px',
-  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-};
-
-
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const title = "Title"
   return (
     <>
       <div className="pa-footer-three">
@@ -32,9 +19,9 @@ const Footer = () => {
                   <li>
                     <a href="/contact-us">Contact us</a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href="/refund-policy">Return Policy</a>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>

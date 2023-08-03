@@ -36,7 +36,6 @@ const MainPage = ({ location, history }) => {
             <div className="Auth-form-content">
               {/* <h3 className="Auth-form-title">Sign In</h3> */}
               <div className="text-center">
-
                 <span className="link-primary" >
                   <h4>Sign in</h4>
                 </span>

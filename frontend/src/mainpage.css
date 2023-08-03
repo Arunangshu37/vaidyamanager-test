@@ -4,9 +4,9 @@
   align-items: center;
   /* width: 100vw; */
   height: 97vh;
-  /* background: linear-gradient(-45deg, #74ebd5, #9face6, #fcd3a5);
-    background-size: 400% 400%;
-    animation: wave 5s ease-in-out infinite; */
+  background: linear-gradient(-45deg, #70afae, #a2f9ff4a, #a0b9b6);
+  background-size: 400% 400%;
+  animation: wave 5s ease-in-out infinite;
 }
 
 .Auth-form-wrapper {

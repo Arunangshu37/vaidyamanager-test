@@ -6,8 +6,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 // Components
 import Header from './components/Header'
 import Footer from './components/Footer'
-// import Loader from './components/Loader'
-// import LoadingSpinner from './components/LoadingSpinner'
 
 // Screens
 import HomeScreen from './screens/Home'
@@ -57,7 +55,7 @@ const App = () => {
         <Router history={history}>
             <Header />
 
-            <main className='py-3'>
+            <main className='py-0'>
             <Route path='/'component={HomeScreen} exact />
                 <Route path='/demoReg' component={DemoRegistration} />
                 <Route path='/register' component={RegisterScreen} />

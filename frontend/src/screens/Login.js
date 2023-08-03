@@ -100,7 +100,6 @@ const Login = ({ location, history }) => {
                                 >
                                     Sign In
                                 </Button>
-                              
                             </Form>
                         </div>
                     </div>
