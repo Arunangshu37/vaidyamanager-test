@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
 // Bootstrap UI Components
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 // Redux User Actions
 import { logout } from '../actions/userActions'
-import { useHistory } from 'react-router-dom';
+
 
 const Header = ({location, history}) => {
     const dispatch = useDispatch()

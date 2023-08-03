@@ -1,7 +1,6 @@
-import React from 'react'
-import '../about.css'
-import Breadcrumb from '../components/Breadcrumb'
-import Container from 'react-bootstrap/Container';
+import React from 'react';
+import '../about.css';
+import Breadcrumb from '../components/Breadcrumb';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "../trial.css"
 import jsPDF from "jspdf";
 import "jspdf-autotable";

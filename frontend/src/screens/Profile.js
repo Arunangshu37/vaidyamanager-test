@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // Bootstrap Components
-import { Form, Button, Row, Col, Table } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Form, Button, Row, Col} from 'react-bootstrap'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 // UI Components

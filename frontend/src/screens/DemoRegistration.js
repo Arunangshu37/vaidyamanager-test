@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import DatePicker from "react-datepicker";
+import React, { useState, useEffect } from 'react';
+
 import "react-datepicker/dist/react-datepicker.css";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 // import '../demoreg.css'
 // import '../register.css'
 import Message from '../components/Message'

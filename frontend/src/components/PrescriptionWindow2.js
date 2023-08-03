@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-import { Form, Button, Modal, InputGroup, Card } from 'react-bootstrap'
+import { Form, Button, Modal, InputGroup } from 'react-bootstrap'
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../prescription.css'
 import { getUserInfoDetails } from '../actions/userActions'
@@ -13,13 +13,12 @@ import Autocomplete from '@mui/material/Autocomplete';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import jsPDF from 'jspdf'
-import Alert from 'react-bootstrap/Alert';
 import { getMedicines } from '../actions/prescriptionActions'
 import '../prescriptionWindow.css'
 let googleTransliterate = require("google-input-tool");
 
 
-const PrescriptionWindow2 = (previousPrescription) => {
+const PrescriptionWindow2 = () => {
   const defaultData = {
     diet: "",
     prescriptiondays: "",
@@ -540,7 +539,7 @@ const PrescriptionWindow2 = (previousPrescription) => {
                 value={prescription.prescriptiondays}
                 onChange={(e) => setPrescription({ ...prescription, prescriptiondays: e.target.value })}
               />
-              <h5 align="center" style={{ fontWeiight: "300", margin: "-25px 6px 0 0" }}> Prescription Days</h5>
+              <h5 align="center" style={{ fontWeight: "300", margin: "-25px 6px 0 0" }}> Prescription Days</h5>
             </div>
           </div>
         </div>
@@ -911,15 +910,9 @@ const PrescriptionWindow2 = (previousPrescription) => {
 
         {/* table End */}
         <div className='prebutton'>
-          <Button type='submit' variant='primary'>
+          <Button type='submit' variant='primary' className='mb-1'>
             Save
           </Button>
-          {/* <Button
-            variant='primary'
-            onClick={() => generatePrecription()}
-          >
-            Print
-          </Button> */}
         </div>
 
       </Form>
@@ -1000,17 +993,6 @@ const PrescriptionWindow2 = (previousPrescription) => {
             </dl>
           </div>
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handelInstructionclose}>
-            Close
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => generatePdf()}
-          >
-            Get pdf
-          </Button>
-        </Modal.Footer> */}
       </Modal>
     </>
 

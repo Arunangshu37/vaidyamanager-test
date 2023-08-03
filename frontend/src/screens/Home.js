@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Container, Card } from 'react-bootstrap'
+import React from 'react';
+import { Container } from 'react-bootstrap';
 // Redux
 import AyurvedInfo from '../components/AyurvedInfo'
 import Banner from '../components/Banner'
-import CarouselBanner from '../components/CarouselBanner'
 import SuccessStories from '../components/SuccessStories'
 import MedicineCards from '../components/MedicineCards'
 

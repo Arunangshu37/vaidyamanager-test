@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Container, Row, Card, Button, } from 'react-bootstrap'
-import "../contact.css"
-import Breadcrumb from '../components/Breadcrumb'
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import "../contact.css";
+import Breadcrumb from '../components/Breadcrumb';
 
 const ContactUs = ({ history }) => {
   const currentYear = new Date().getFullYear();

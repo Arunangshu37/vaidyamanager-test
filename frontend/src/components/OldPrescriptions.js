@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 import * as _ from 'lodash'
 import CardGroup from 'react-bootstrap/CardGroup';
-import { Col, Button, Row, Card, ListGroup } from 'react-bootstrap'
+import { Card, ListGroup } from 'react-bootstrap'
 import '../oldPrescription.css'
 import VisitingCalender from './VisitingCalender';
 import Alert from 'react-bootstrap/Alert';

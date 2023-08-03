@@ -19,9 +19,12 @@ const Footer = () => {
                   <li>
                     <a href="/contact-us">Contact us</a>
                   </li>
-                  {/* <li>
+                  <li>
                     <a href="/refund-policy">Return Policy</a>
-                  </li> */}
+                  </li>
+                  <li>
+                    <a href="/terms-condition">Terms & Conditions</a>
+                  </li>
                 </ul>
               </div>
             </div>

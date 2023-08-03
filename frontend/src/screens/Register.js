@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Button, Image, Form, InputGroup, Row, Col } from 'react-bootstrap';
 
 
-const Register = ({ location, history }) => {
+const Register = () => {
   const RegisterData = {
     name: "",
     email: "",
@@ -38,16 +38,6 @@ const Register = ({ location, history }) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    // setIsSubmitting(true);
-    // try {
-    //   const response = await axios.get('/api/users');
-    //   setPatientId(response.data);
-    // } catch (error) {
-    //   // Handle error
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
-    // Check if passwords are the same
     if (registrationForm.password !== registrationForm.confirmPassword) {
       setMessage("Passwords do not match");
     } else {
@@ -88,37 +78,6 @@ const Register = ({ location, history }) => {
       }
     }
   };
-
-  //   import React, { useState } from 'react';
-  // import axios from 'axios';
-
-  // function RegisterForm() {
-  //   const [patientId, setPatientId] = useState(null);
-  //   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  //   const handleRegister = async () => {
-  //     setIsSubmitting(true);
-  //     try {
-  //       const response = await axios.get('/api/patientId');
-  //       setPatientId(response.data);
-  //     } catch (error) {
-  //       // Handle error
-  //     } finally {
-  //       setIsSubmitting(false);
-  //     }
-  //   };
-
-  //   return (
-  //     <div>
-  //       <label>Patient ID:</label>
-  //       <input type="text" value={patientId} disabled />
-
-  //       <button onClick={handleRegister} disabled={isSubmitting}>
-  //         {isSubmitting ? 'Registering...' : 'Register'}
-  //       </button>
-  //     </div>
-  //   );
-  // }
 
   return (
     <>
@@ -312,7 +271,7 @@ const Register = ({ location, history }) => {
             </Form.Group>
           </Col>
         </Row>
-        <Button type='submit' variant='primary'>
+        <Button type='submit' variant='primary' className='mb-1'>
           Sign Up
         </Button>
         <ToastContainer autoClose={10000} />

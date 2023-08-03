@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Card, Row, Col } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import { getPatientDetail } from '../actions/prescriptionActions';
-import * as _ from 'lodash'
-import dayjs from 'dayjs'
+import React from 'react';
+import { Card, Row, Col } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import * as _ from 'lodash';
+import dayjs from 'dayjs';
 
 const ViewDetailTab = ({ PatientIds }) => {
   const dispatch = useDispatch();
@@ -21,7 +20,7 @@ const ViewDetailTab = ({ PatientIds }) => {
   // console.log("filteredView", filteredView)
 
   return (
-    <div style={{ marginTop: "3rem" }}>
+    <div style={{ marginTop: "6rem" }}>
 
       <div className="card">
         <div className="card-body">

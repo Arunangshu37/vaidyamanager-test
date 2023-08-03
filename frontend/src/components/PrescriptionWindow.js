@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, Modal,InputGroup, Card } from 'react-bootstrap'
+import { Form, Button, Modal,InputGroup } from 'react-bootstrap'
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../prescription.css'
 import { getUserInfoDetails } from '../actions/userActions'
@@ -12,7 +12,6 @@ import Autocomplete from '@mui/material/Autocomplete';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import jsPDF from 'jspdf'
-import Alert from 'react-bootstrap/Alert';
 import { getMedicines } from '../actions/prescriptionActions'
 import '../prescriptionWindow.css'
 let googleTransliterate = require("google-input-tool");

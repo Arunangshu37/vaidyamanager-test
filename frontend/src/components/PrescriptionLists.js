@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import { getPatientDetail } from '../actions/prescriptionActions';
@@ -112,7 +112,7 @@ const PrescriptionLists = () => {
 
 
   return (
-    <div style={{ marginTop: "50px" }}>
+    <div style={{ marginTop: "55px" }}>
       <h1>PrescriptionLists</h1>
       <table className="striped bordered visiting" bordercolor="#6caaa8">
         <thead>

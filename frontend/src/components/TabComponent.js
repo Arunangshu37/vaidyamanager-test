@@ -18,14 +18,14 @@ const TabComponent = () => {
                                 <Nav.Link eventKey="Patient">Patient
                                 </Nav.Link>
                             </Nav.Item>
-                            {/* <Nav.Item>
+                            <Nav.Item>
                                 <Nav.Link eventKey="Therapy">Therapy
                              </Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link eventKey="Inquiry">Inquiry
                              </Nav.Link>
-                            </Nav.Item> */}
+                            </Nav.Item>
                         </Nav>
                     </Col>
                     <Col sm={8}>
@@ -33,13 +33,13 @@ const TabComponent = () => {
                             <Tab.Pane eventKey="Patient">
                             <Register/>   
                             </Tab.Pane>
-                            {/* <Tab.Pane eventKey="Therapy">
+                            <Tab.Pane eventKey="Therapy">
                             <Therapy/>
                         
                             </Tab.Pane>
                             <Tab.Pane eventKey="Inquiry">
                            <Inquiry/>
-                            </Tab.Pane> */}
+                            </Tab.Pane>
                         </Tab.Content>
                     </Col>
                 </Row>

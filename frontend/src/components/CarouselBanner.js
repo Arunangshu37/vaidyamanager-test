@@ -39,20 +39,15 @@ const CarouselBanner = () => {
 
     return (
         <>
-
             <OwlCarousel className="slider-items owl-carousel" {...options}>
                 <div className="owlitem">
                     <img src={"/images/ayurvedbaneer2.jpg"} width="800px" height="400px" />
                 </div>
                 <div className="owlitem">
-
                     <img src={"/images/ayurvedbanner1.jpg"} width="800px" height="400px"/>
                     </div>
-
-
             </OwlCarousel>
         </>
-
     )
 }
 

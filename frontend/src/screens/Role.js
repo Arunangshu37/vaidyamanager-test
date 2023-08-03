@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // Bootstrap Components
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // Redux
