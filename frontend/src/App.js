@@ -44,17 +44,15 @@ import VisitingCards from './screens/VisitingCards'
 import MainPage from './screens/MainPage'
 import PrescriptionData from './screens/PrescriptionData'
 import Signup from './screens/Signup'
-import PrescriptionWindow2 from './components/PrescriptionWindow2'
 import PrescriptionLists from './components/PrescriptionLists'
-import Medicine from './screens/Medicine'
 import Doctors from './screens/Doctors';
+import SuccessStories from './components/SuccessStories';
 
 const App = () => {
 
     return (
         <Router history={history}>
             <Header />
-
             <main className='py-0'>
             <Route path='/'component={HomeScreen} exact />
                 <Route path='/demoReg' component={DemoRegistration} />
