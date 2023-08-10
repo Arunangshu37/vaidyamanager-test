@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap';
 // Redux
 import AyurvedInfo from '../components/AyurvedInfo'
 import Banner from '../components/Banner'
-import SuccessStories from '../components/SuccessStories'
 import MedicineCards from '../components/MedicineCards'
 
 const Home = () => {
@@ -20,12 +19,7 @@ const Home = () => {
           <MedicineCards />
           </div>
           <Container>
-          <div>
-          <AyurvedInfo />
-          </div>
-          <div>
-            <SuccessStories />
-          </div>
+          <AyurvedInfo/>
           </Container>
     </>
   )

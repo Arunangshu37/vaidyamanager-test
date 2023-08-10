@@ -1,8 +1,8 @@
-import React from 'react'
-import { Card } from 'react-bootstrap'
-import * as _ from 'lodash'
-import dayjs from 'dayjs'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { Card } from 'react-bootstrap';
+import * as _ from 'lodash';
+import dayjs from 'dayjs';
+import { useSelector } from 'react-redux';
 
 const BillHistoryTab = ({ PatientId }) => {
     const OldPrescriptions = useSelector((state) => state.getPatientPrescriptionList)

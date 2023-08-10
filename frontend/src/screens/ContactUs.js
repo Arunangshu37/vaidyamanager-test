@@ -20,7 +20,7 @@ const ContactUs = ({ history }) => {
                     </div>
                     <div className="contact-info-text">
                       <h2> Clinic Address</h2>
-                      <span style={{padding:"5px"}}> Awadh Pride, 2nd Floor, Metro Pillar no. Opposite 139, Nirant Chowk</span>
+                      <span style={{padding:"5px"}}>  Apartment Sidhharat Nagar, near Aundh, Pune Parihar Chowk, Maharashtra</span>
            
                     </div>
                   </div>
@@ -35,9 +35,9 @@ const ContactUs = ({ history }) => {
                     <div className="contact-info-text  flex-fill" >
                       <h2>E-mail</h2>
                   
-                      <span>sukhayu7@gmail.com</span>
+                      <span>Clinic@gmail.com</span>
                   
-                      <span> Mobile No: 78265489245</span>
+                      <span> Mobile No: 7854123695</span>
                       <span></span>
                       <span></span>
                     </div>

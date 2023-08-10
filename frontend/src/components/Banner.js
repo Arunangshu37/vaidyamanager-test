@@ -1,6 +1,6 @@
-import React from 'react'
-import { Container } from 'react-bootstrap'
-import '../banner.css'
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import '../banner.css';
 
 function Banner() {
     return (
@@ -14,7 +14,6 @@ function Banner() {
                                 <h2> The Heart Clinic</h2>
                                 {/* <p>Panchkarma, Vidhakarma</p> */}
                             </div>
-
                         </div>
                     </div>
                 </Container>
