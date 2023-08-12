@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // Bootstrap Components
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // Redux
@@ -15,7 +15,7 @@ import { register } from '../actions/userActions'
 import dayjs from 'dayjs'
 //css
 // import '../register.css'
-import { createDoctorData } from '../actions/productActions'
+import { createDoctorData } from '../actions/doctorActions'
 import axios from 'axios'
 
 
@@ -46,8 +46,6 @@ const Role = ({ location, history }) => {
     const redirect = location.search ? location.search.split('=')[1] : '/'
 
     var isAdmin = false
-
-    console.log("profilePictureURL", file)
 
     //calculate the age
     const getAge = (dob) => {
@@ -99,7 +97,7 @@ const Role = ({ location, history }) => {
                     isAdmin: isAdmin
                 }
                 axios
-                    .post(`http://localhost:8000/api/users`, data)
+                    .post(`https://vaidyabackend.vercel.app/api/users`, data)
                     .then((response) => {
                         console.log(response.data)
 

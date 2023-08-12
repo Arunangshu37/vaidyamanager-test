@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 
@@ -18,7 +18,7 @@ const Analytics = () => {
 
 
   return (
-    <div style={{ marginTop: "4rem" }}>
+    <div style={{ marginTop: "6rem" }}>
       <Autocomplete
         freeSolo
         id="free-solo-2-demo"

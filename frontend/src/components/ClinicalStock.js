@@ -7,11 +7,9 @@ import { Button } from 'react-bootstrap'
 const ClinicalStock = () => {
     const dispatch = useDispatch();
     const [selectedRow, setSelectedRow] = useState(null);
-
     const allMedicines = useSelector((state) => state.getallMedicineList)
     const { loadingMedicine, errorMedicine, medicinesList } = allMedicines;
     // console.log("Medicine List", medicinesList)
-
 
     const handleAdd = (index) => {
         setSelectedRow(index);
@@ -21,7 +19,6 @@ const ClinicalStock = () => {
         setSelectedRow(null);
     }
 
-
     useEffect(() => {
 
         dispatch(getMedicines());
@@ -29,7 +26,6 @@ const ClinicalStock = () => {
 
     return (
         <div>
-
             <table className="clinical">
                 <thead>
                     <tr>
@@ -43,7 +39,6 @@ const ClinicalStock = () => {
                         <th></th>
                     </tr>
                 </thead>
-
                 <tbody>
                     {medicinesList?.map((m,index) => {
                         return (
@@ -52,7 +47,6 @@ const ClinicalStock = () => {
                                 <td>{m.supplierName}</td>
                                 <td colspan={2}>{m.Qty}</td>
                                 <td>
-
                                     {index === selectedRow &&
                                         <div>
                                             <input className='clinic-input' placeholder='Unit'/>
@@ -62,14 +56,10 @@ const ClinicalStock = () => {
                                         </div>
                                     }
                                     <Button onClick={() => handleAdd(index)}>Add Stock</Button>
-
                                 </td>
                             </tr>
                         )
-
                     })}
-
-
                 </tbody>
             </table>
         </div>

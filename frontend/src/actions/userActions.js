@@ -22,10 +22,7 @@ import {
     USER_STATUS_REQUEST,
     USER_STATUS_SUCCESS,
     USER_STATUS_FAIL,
-
-
 } from '../constants/userConstants'
-import { ORDER_LIST_USER_RESET } from '../constants/orderConstants'
 import axios from 'axios'
 
 export const login = (email, password) => async (dispatch) => {
@@ -44,18 +41,16 @@ export const login = (email, password) => async (dispatch) => {
         // Make request to server and get the response data
         const { data } = await axios.post(
             '/api/users/login',
-            { email, password },
-            config
-        )
+            { email, password }, config)
 
         // Dispatch user login success after making the request
         dispatch({
             type: USER_LOGIN_SUCCESS,
             payload: data,
         })
-
         // Set user data to local storage
         localStorage.setItem('userInfo', JSON.stringify(data))
+        alert("Login Successfully")
     } catch (error) {
         dispatch({
             type: USER_LOGIN_FAIL,
@@ -65,6 +60,7 @@ export const login = (email, password) => async (dispatch) => {
                     : error.message,
         })
     }
+
 }
 
 export const logout = () => (dispatch) => {
@@ -79,18 +75,25 @@ export const logout = () => (dispatch) => {
     dispatch({
         type: USER_DETAILS_RESET,
     })
-
-    dispatch({
-        type: ORDER_LIST_USER_RESET,
-    })
 }
 
-export const register = (name, email, phone, password, address, age, gender, weight, reference, date, isAdmin, profilePictureURL) => async (dispatch) => {
+export const register = (name, 
+    email, 
+    phone, 
+    password, 
+    address, 
+    age, 
+    gender,
+    weight, 
+    reference, 
+    date, 
+    isAdmin, 
+    profilePictureURL,
+    registrationFor) => async (dispatch) => {
     try {
         dispatch({
             type: USER_REGISTER_REQUEST,
         })
-        // console.log(isAdmin)
         // Header to send with the request
         const config = {
             headers: {
@@ -101,26 +104,30 @@ export const register = (name, email, phone, password, address, age, gender, wei
         // Make request to server and get the response data
         const { data } = await axios.post(
             '/api/users',
-            { name, email, phone, password, address, age, gender, weight, reference, date, isAdmin, profilePictureURL },
+            { name, 
+            email, 
+            phone, 
+            password, 
+            address, 
+            age, 
+            gender, 
+            weight, 
+            reference, 
+            date,
+            isAdmin,
+            profilePictureURL,
+            registrationFor },
             config
         )
-
-        // Dispatch user register success after making the request
-        dispatch({
+        return dispatch({
             type: USER_REGISTER_SUCCESS,
             payload: data,
         })
         // alert('Register Successfully!');
-        // Login in the user as well after registering
-        // dispatch({
-        //     type: USER_LOGIN_SUCCESS,
-        //     payload: data,
-        // })
-
         // Set user data to local storage
-        localStorage.setItem('userInfo', JSON.stringify(data))
+        // localStorage.setItem('userInfo', JSON.stringify(data))
     } catch (error) {
-        dispatch({
+         return dispatch({
             type: USER_REGISTER_FAIL,
             payload:
                 error.response && error.response.data.message
@@ -195,6 +202,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
             type: USER_UPDATE_PROFILE_SUCCESS,
             payload: data,
         })
+        // console.log("get users",data)
     } catch (error) {
         dispatch({
             type: USER_UPDATE_PROFILE_FAIL,
@@ -207,6 +215,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 }
 
 //userinfo action api
+
 export const getUserInfoDetails = () => async (dispatch) => {
     try {
         dispatch({
@@ -255,7 +264,7 @@ export const getUserDesc = () => async (dispatch) => {
 
 }
 
-export const updateUserStaff = (id,user) => async (dispatch, getState) => {
+export const updateUserStaff = (id, user) => async (dispatch, getState) => {
     try {
         dispatch({
             type: USER_STATUS_REQUEST,

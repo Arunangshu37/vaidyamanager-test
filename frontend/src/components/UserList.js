@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, {useEffect } from 'react'
 import { getUserInfoDetails } from '../actions/userActions'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -8,7 +8,6 @@ function UserList(props) {
     // UserList
     const userLists = useSelector((state) => state.userInfoDetails)
     const { users } = userLists;
-
 
     useEffect(() => {
 
@@ -30,7 +29,6 @@ function UserList(props) {
 
     return (
         <div>
-
             <ul>
                 {users.map((item) => (
                     <li key={item.id}>{item.name}</li>

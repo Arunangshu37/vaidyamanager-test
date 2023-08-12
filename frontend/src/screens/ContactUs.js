@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Container, Row, Card, Button, } from 'react-bootstrap'
-import "../contact.css"
-import Breadcrumb from '../components/Breadcrumb'
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import "../contact.css";
+import Breadcrumb from '../components/Breadcrumb';
 
 const ContactUs = ({ history }) => {
   const currentYear = new Date().getFullYear();
@@ -20,7 +20,7 @@ const ContactUs = ({ history }) => {
                     </div>
                     <div className="contact-info-text">
                       <h2> Clinic Address</h2>
-                      <span style={{padding:"5px"}}> Awadh Pride, 2nd Floor, Metro Pillar no. Opposite 139, Nirant Chowk, Vastral, Ahmedabad-18</span>
+                      <span style={{padding:"5px"}}>  Apartment Sidhharat Nagar, near Aundh, Pune Parihar Chowk, Maharashtra</span>
            
                     </div>
                   </div>
@@ -35,9 +35,9 @@ const ContactUs = ({ history }) => {
                     <div className="contact-info-text  flex-fill" >
                       <h2>E-mail</h2>
                   
-                      <span>sukhayu7@gmail.com</span>
+                      <span>Clinic@gmail.com</span>
                   
-                      <span> Mobile NO: 9165731657</span>
+                      <span> Mobile No: 7854123695</span>
                       <span></span>
                       <span></span>
                     </div>
@@ -54,7 +54,7 @@ const ContactUs = ({ history }) => {
                       <h2>Clinic time</h2>
                  
                       <span>Morning - 10:30 am - 2.00 pm</span>
-                      <span>Evening  5:00 pm - 8:00 pm</span>
+                      <span>Evening - 5:00 pm - 8:00 pm</span>
                       <span></span>
                       <span></span>
                     </div>
@@ -65,7 +65,7 @@ const ContactUs = ({ history }) => {
 
           </div>
           <div className="row justify-content-center">
-            <div className="col-md-5">
+            <div className="col-sm-6">
               <div className="pa-contact-form">
                 <h5 className='contact-heading'>Please Fill the Form</h5>
                 <form>

@@ -16,23 +16,14 @@ const TabComponent = () => {
                         <Nav variant="pills" className="flex-column">
                             <Nav.Item>
                                 <Nav.Link eventKey="Patient">Patient
-                                {/* <Link to={'/register'}>
-                              Patient
-                              </Link> */}
                                 </Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link eventKey="Therapy">Therapy
-                                {/* <Link to={'/therapy'}>
-                                Therapy
-                             </Link> */}
                              </Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link eventKey="Inquiry">Inquiry
-                                {/* <Link to={'/inquiry'}>
-                                Inquiry
-                             </Link> */}
                              </Nav.Link>
                             </Nav.Item>
                         </Nav>
@@ -41,7 +32,6 @@ const TabComponent = () => {
                         <Tab.Content>
                             <Tab.Pane eventKey="Patient">
                             <Register/>   
-                           
                             </Tab.Pane>
                             <Tab.Pane eventKey="Therapy">
                             <Therapy/>

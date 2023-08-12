@@ -32,12 +32,10 @@ function Breadcrumb() {
                                 </ul>
                             </>
                         )}
-
                     </div>
                 </div>
             </div>
         </>
-
     )
 }
 

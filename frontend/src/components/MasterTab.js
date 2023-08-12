@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import DocumentTab from './DocumentTab';
-import PrescriptionWindow from './PrescriptionWindow';
+import PrescriptionWindow2 from './PrescriptionWindow2';
 import TabComponent from './TabComponent';
-
-
 
 const MasterTab = () => {
   const [key, setKey] = useState('basic detail');
 
   return (
-    <div style={{ marginTop: "4rem" }}>
+    <div style={{ marginTop: "6rem" }}>
       <Tabs
         id="controlled-tab-example"
         activeKey={key}
@@ -22,11 +19,8 @@ const MasterTab = () => {
           <TabComponent />
         </Tab>
         <Tab eventKey="prescription" title="Prescription">
-          <PrescriptionWindow />
+          <PrescriptionWindow2 />
         </Tab>
-        {/* <Tab eventKey="document" title="Documents">
-         <DocumentTab/>
-          </Tab> */}
       </Tabs>
     </div>
   )

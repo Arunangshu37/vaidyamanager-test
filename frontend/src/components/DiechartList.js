@@ -1,12 +1,4 @@
-// import React from 'react'
 
-// function DiechartList() {
-//   return (
-//     <div>DiechartList</div>
-//   )
-// }
-
-// export default DiechartList
 export const DiechartList = [
     {
       id: 1,

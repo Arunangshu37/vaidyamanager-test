@@ -9,11 +9,30 @@
 .pa-about-img {
     position: relative;
     width: fit-content;
+    height: 600px;
 }
 
 .pa-about-img img {
     border-radius: 10px;
+    /* margin-top: 40px; */
 }
+
+@media only screen and (min-width: 992px) {
+    .pa-team img {
+        height: "550px",
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .sukhayu-about {
+        display: flex;
+        flex-direction: column;
+        /* flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px; */
+    }
+}
+
 
 .pa-about-content .pa-heading,
 .pa-services-content .pa-heading,
@@ -45,6 +64,7 @@
 
 .pa-about-content p:last-child {
     margin: 0;
+    font-size: 15px;
 }
 
 /* p {
@@ -282,4 +302,18 @@ a:-webkit-any-link {
     height: 400px;
     width: 1125px;
     margin-top: 10px;
+}
+
+/* .aboutImages{
+    width: 100%;
+    height: 550px;
+    margin: 0 0 0 15px;
+} */
+
+@media screen and (max-width: 600px) {
+    .imgSmall {
+        width: 494px;
+        height: 161px;
+        margin-bottom: 10px;
+    }
 }

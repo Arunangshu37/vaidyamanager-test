@@ -5,15 +5,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 import * as _ from 'lodash'
 import CardGroup from 'react-bootstrap/CardGroup';
-import { Col, Button, Row, Card, ListGroup } from 'react-bootstrap'
+import { Card, ListGroup } from 'react-bootstrap'
 import '../oldPrescription.css'
 import VisitingCalender from './VisitingCalender';
-
+import Alert from 'react-bootstrap/Alert';
 
 
 const OldPrescriptions = ({ patientIds }) => {
   const dispatch = useDispatch();
   const [selectedVisit, setSelectedVisit] = useState(null);
+  const [selectedVisitDate, setSelectedVisitDate] = useState(null);
   const [createdAtDates, setCreatedAtDates] = useState([]);
   const [patientDataPrescription, setPatientDataPrescription] = useState({
     createdAtDates: [],
@@ -31,25 +32,25 @@ const OldPrescriptions = ({ patientIds }) => {
 
   useEffect(() => {
     const patientId = patientData;
-    const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]._id === patientId);
+    const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]?._id === patientId);
     setPatientDataPrescription({
       createdAtDates: patientPrescriptions?.map(prescription => prescription.createdAt),
       patientInfo: {
-        name: patientPrescriptions[0]?.Patient[0].name,
-        weight: patientPrescriptions[0]?.Patient[0].weight,
-        age: patientPrescriptions[0]?.Patient[0].age,
-        gender: patientPrescriptions[0]?.Patient[0].gender,
+        name: patientPrescriptions[0]?.Patient[0]?.name,
+        weight: patientPrescriptions[0]?.Patient[0]?.weight,
+        age: patientPrescriptions[0]?.Patient[0]?.age,
+        gender: patientPrescriptions[0]?.Patient[0]?.gender,
       }
     });
 
   }, [patientData]);
 
   const patientId = patientData;
-  const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]._id === patientId);
+  const patientPrescriptions = PrescriptionDates?.filter(prescription => prescription.Patient[0]?._id === patientId);
   const visits = patientDataPrescription.createdAtDates?.map((date) => {
     const prescriptionD = patientPrescriptions?.filter(p => p.createdAt === date);
-    const newMedicineData = prescriptionD[0]?.medicineData.map((v) => {
-      const p = prescriptionD[0]?.PatientMedicines.find(e => e._id === v.medicineDetails)
+    const newMedicineData = prescriptionD[0]?.medicineData?.map((v) => {
+      const p = prescriptionD[0]?.PatientMedicines.find(e => e?._id === v.medicineDetails)
       return { ...v, medicineData: p }
     })
     return {
@@ -60,9 +61,9 @@ const OldPrescriptions = ({ patientIds }) => {
   });
 
 
-  const handleDateClick = (visit) => {
+  const handleDateClick = (visit, visitDate) => {
     setSelectedVisit(visit);
-
+    setSelectedVisitDate(visitDate);
   };
 
   return (
@@ -72,9 +73,12 @@ const OldPrescriptions = ({ patientIds }) => {
         <div className="card-body">
           <div className="col">
             <h5>Patient Details</h5>
-            <h6> Patient Name: {patientDataPrescription.patientInfo.name}</h6>
-            <h6>Weight: {patientDataPrescription.patientInfo.weight}</h6>
-            {/* <h6>Sex: {patientDataPrescription.patientInfo.gender}</h6> */}
+            <h6> Patient Name: {patientDataPrescription.patientInfo?.name}</h6>
+            <h6>Weight: {patientDataPrescription.patientInfo?.weight}</h6>
+            <Alert variant='success' style={{ width: "359px", margin: "-4px" }}>
+              Note: Click on the dates to see symptoms & medicines
+            </Alert>
+            {/* <h5 style={{backgroundColor:"#badbcc",color:"#0f5132"}}>Note: Click on the dates to see symptoms & medicines</h5> */}
           </div>
         </div>
       </div>
@@ -85,34 +89,40 @@ const OldPrescriptions = ({ patientIds }) => {
             <Card.Header>Visit Dates</Card.Header>
             <ListGroup variant="flush">
               {visits.map((visit, index) => (
-                <ListGroup.Item key={index} onClick={() => handleDateClick(visit)}>
+                <ListGroup.Item key={index}
+                  onClick={() => handleDateClick(visit, visit.visitDate)}
+                  className={visit.visitDate === selectedVisitDate ? 'selected-date' : ''}
+                >
                   {visit.visitDate}
                 </ListGroup.Item>
               ))}
             </ListGroup>
           </Card>
-          {selectedVisit && (
-            <div className="symptoms-medicines-container">
-              <Card className="symptoms-medicines-card">
-                <Card.Header>Symptoms</Card.Header>
-                <ListGroup variant="flush">
-                  {selectedVisit.symptomObserved?.map((symptom, index) => (
-                    <ListGroup.Item key={index}>{symptom}</ListGroup.Item>
-                  ))}
-                </ListGroup>
-              </Card>
-              <Card className="symptoms-medicines-card">
-                <Card.Header>Medicines</Card.Header>
-                <ListGroup variant="flush">
-                  {selectedVisit.medicinePrescribed?.map((medicine, index) => (
-                    <ListGroup.Item key={index}>
-                      {medicine.medicineData.medicineName} ({medicine.dose})
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-              </Card>
-            </div>
-          )}
+          <Card>
+            {selectedVisit && (
+              <div className="symptoms-medicines-container">
+                <Card className="symptoms-medicines-card">
+                  <Card.Header>Symptoms</Card.Header>
+                  <ListGroup variant="flush">
+                    {selectedVisit.symptomObserved?.map((symptom, index) => (
+                      <ListGroup.Item key={index}>{symptom}</ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                </Card>
+                <Card className="symptoms-medicines-card">
+                  <Card.Header>Medicines</Card.Header>
+                  <ListGroup variant="flush">
+                    {selectedVisit.medicinePrescribed?.map((medicine, index) => (
+                      <ListGroup.Item key={index}>
+                        {medicine.medicineData?.medicineName} ({medicine?.dose})
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                </Card>
+              </div>
+            )}
+          </Card>
+
         </div>
       </CardGroup>
       <div style={{ display: "none" }}>

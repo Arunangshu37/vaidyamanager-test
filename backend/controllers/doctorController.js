@@ -1,66 +1,87 @@
-
 import asyncHandler from 'express-async-handler'
 import Doctor from '../models/doctorsModel.js'
 import mongoose from 'mongoose'
+// const multer = require('multer')
+import multer from 'multer';
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true)
+    } else {
+        cb(new Error('Invalid file type. Only JPEG and PNG image files are allowed.'), false)
+    }
+}
+
+const upload = multer({
+    storage: storage,
+    fileFilter: fileFilter
+})
 
 const addDoctors = asyncHandler(async (req, res) => {
-
     const {
         name,
-        qualification,
+        speciality,
+        licenseNumber,
         experience,
         email_id,
         phone_no,
         consultation_fee,
         profilePictureURL
-
     } = req.body
-
 
     const doctor = new Doctor({
         name,
-        qualification,
+        speciality,
+        licenseNumber,
         experience,
         email_id,
         phone_no,
         consultation_fee,
         profilePictureURL
-
     })
-
     const createdDoctor = await doctor.save()
-
     res.status(201).json(createdDoctor)
-
+    // try {
+    //     const createdDoctor = await doctor.save();
+    //     res.status(201).json(createdDoctor);
+    //   } catch (error) {
+    //     console.log(error);
+    //     res.status(500).json({ message: 'Server Error' });
+    //   }
 })
 
 
 // get doctors
 const getDoc = asyncHandler(async (req, res) => {
     //  Get all the doctors from MongoDB
-
-    // res.json("worked")
     const doctors = await Doctor.find({});
-    res.json(doctors)
+    res.json(doctors);
 })
 
 // add the consultant dates into db
 const updateDoctor = asyncHandler(async (req, res) => {
     // Get data from DB
-    const doctor = await Doctor.findById(req.params.id)
+    const doctor = await Doctor.findById(req.params.id);
     // const date = doctor.consultant_date.find((a) => a._id === req.params.dateid)
     if (doctor) {
         doctor.name = req.body.name
-        doctor.qualification = req.body.qualification
+        doctor.speciality = req.body.speciality,
+        doctor.licenseNumber = req.body.licenseNumber,
         doctor.experience = req.body.experience
-        doctor.consultant_date = req.body.consultant_date
-        // doctor.consultant_date1 = req.body.consultant_date1
         doctor.email_id = req.body.email_id
         doctor.phone_no = req.body.phone_no
+        doctor.consultation_fee = req.body.consultation_fee
 
-        const updateDoctors = await doctor.save()
-
+        const updateDoctors = await doctor.save();
         // Send back updated doctors
         res.json(updateDoctors)
     } else {

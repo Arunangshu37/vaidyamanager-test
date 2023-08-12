@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-// import { useNavigate } from "react-router-dom";
+import React, { useEffect } from 'react';
 import { styled } from "@mui/material/styles";
 import { Grid, Button, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -8,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux';
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -18,8 +17,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 // import "../../App.css";
-import { listConsultants } from '../actions/consultationActions.js'
-import { listDoctors } from '../actions/productActions'
+import { listConsultants } from '../actions/consultationActions.js';
+import { listDoctors } from '../actions/productActions';
 import { isArray } from 'jquery';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

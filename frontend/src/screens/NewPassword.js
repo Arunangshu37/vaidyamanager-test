@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { useParams } from "react-router-dom";
 // Bootstrap Components
-import { Form, Button,Component } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import '../bootstrap.min.css'
 import Toast from 'react-bootstrap/Toast';
 import M from 'materialize-css'
@@ -45,7 +45,7 @@ const NewPassword = ({ location, history }) => {
         }
          else {
             // Dispatch Register
-            fetch("http://localhost:8000/api/users/new-password",{
+            fetch("https://vaidyabackend.vercel.app/api/users/new-password",{
                 method:"post",
                 headers:{
                     "Content-Type":"application/json"

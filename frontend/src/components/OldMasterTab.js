@@ -39,7 +39,7 @@ const OldMasterTab = () => {
 
 
   return (
-    <div style={{ marginTop: "4rem" }}>
+    <div style={{ marginTop: "6rem" }}>
       <Tabs
         id="controlled-tab-example"
         activeKey={key}

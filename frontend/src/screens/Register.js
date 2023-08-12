@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,333 +7,277 @@ import '../register.css'
 import { register } from '../actions/userActions'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Button, Image, Form } from 'react-bootstrap';
+import { Button, Image, Form, InputGroup, Row, Col } from 'react-bootstrap';
 
 
+const Register = () => {
+  const RegisterData = {
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    address: "",
+    date: new Date(),
+    age: "",
+    weight: "",
+    gender: "",
+    reference: "",
+    profilePictureURL: "",
+    isAdmin: false,
+  }
+  const [registrationForm, setRegistrationForm] = useState(RegisterData)
+  const [message, setMessage] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const dispatch = useDispatch();
+  // Get user login info from Redux state
+  const userRegister = useSelector((state) => state.userRegister)
+  const { loading, error, userInfo } = userRegister
 
+  const registrationResponse = useSelector(s => s.userRegisterReducer)
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (registrationForm.password !== registrationForm.confirmPassword) {
+      setMessage("Passwords do not match");
+    } else {
+      try {
+        dispatch(
+          register(
+            registrationForm.name,
+            registrationForm.email,
+            registrationForm.phone,
+            registrationForm.password,
+            registrationForm.address,
+            registrationForm.age,
+            registrationForm.gender,
+            registrationForm.weight,
+            registrationForm.reference,
+            registrationForm.date,
+            registrationForm.isAdmin,
+            registrationForm.profilePictureURL,
+            registrationForm.registrationFor
+          )
+        ).then((e) => {
+          // console.log("Register DAta",registrationForm);
+          if (e.payload.success) {
+            toast.success(
+              `Registration Successfully!\nPatient RegistrationNo: ${e.payload.patientRegistrationNo}`,
+              {
+                position: toast.POSITION.TOP_CENTER,
+                className: 'toast-message'
+              }
+            );
 
-const Register = ({ location, history }) => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [message, setMessage] = useState(null)
-    const [age, setAge] = useState('');
-    const [gender, setGender] = useState('');
-    const [address, setAddress] = useState('');
-    const [weight, setWeight] = useState('');
-    const [reference, setReference] = useState('');
-    const [profilePictureURL, setprofilePictureURL] = useState('')
-    // const [dob, setDob] = useState();
-    const [date, setDate] = useState(new Date());
-
-
-    const dispatch = useDispatch();
-
-
-
-    // Get user login info from Redux state
-    const userRegister = useSelector((state) => state.userRegister)
-    const { loading, error, userInfo } = userRegister
-
-    // const redirect = location.search ? location.search.split('=')[1] : '/'
-
-    //calculate the age
-    // const getAge = (dob) => {
-    //     // console.log("do", dob)
-    //     var today = dayjs();
-    //     var birthdate = dayjs(dob)
-    //     var patitentAge = today.diff(birthdate, 'year')
-    //     // console.log("patient age is", patitentAge)
-    //     setAge(parseInt (patitentAge))
-    // }
-    // useEffect(() => {
-    //     getAge(dob)
-    // }, [dob])
-
-    // useEffect(() => {
-    //     // If there is user info then redirect
-    //     if (userInfo) {
-    //         history.push(redirect)
-    //     }
-    // }, [history, userInfo, redirect])
-
-    // // Handler that logs in the user
-    const submitHandler = (e) => {
-        e.preventDefault()
-        // Check if passwords are the same
-        if (password !== confirmPassword) {
-            setMessage('Passwords do not match')
-        } else {
-
-            // Dispatch Register
-            dispatch(register(name, email, phone, password, address, age, gender, weight, reference, date, false, profilePictureURL))
-            toast.success('Registration Successfully!', {
-                position: toast.POSITION.TOP_CENTER
-            });
-            localStorage.setItem('isLogin', true)
-            setName('');
-            setEmail('');
-            setPhone('');
-            setAge('');
-            setGender('');
-            setAddress('');
-            setWeight('');
-          
-        }
+          }
+        })
+        localStorage.setItem("isLogin", true);
+        setRegistrationForm(RegisterData);
+      } catch (error) {
+        console.error(error);
+      }
     }
+  };
 
-    return (
-        <>
-            {/* <FormContainer>  */}
-            <h1 style={{ marginLeft: " 127px", fontSize: "22px" }}>Sign Up</h1>
-            {/* {error && <Message variant='danger'>{error}</Message>}
-                    {message && <Message variant='danger'>{message}</Message>}
-                    {loading && <Loader />} */}
+  return (
+    <>
+      <h1 style={{ marginLeft: "-69px" }}>Registration</h1>
+      <Form onSubmit={submitHandler} className='registerform' >
+        <Row>
+          <Col md={6}>
+            <Form.Group controlId='name'>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Full Name'
+                value={registrationForm.name}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, name: e.target.value })}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId='Date'>
+              <Form.Label>Date</Form.Label>
+              <div className='date-input'>
+                <DatePicker
+                  selected={registrationForm.date}
+                  onChange={(date) => setRegistrationForm({ ...registrationForm, date: date })}
+                  peekNextMonth
+                  showMonthDropdown
+                  dropdownMode="select"
+                  placeholderText="Date"
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                />
+              </div>
+            </Form.Group>
+          </Col>
 
-            <Form onSubmit={submitHandler} className='registerform'>
-                <table>
-                    <tr>
-                        <td>
-                            <label> Name</label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId='name' className='registerform-group'>
-                                <Form.Control
-                                    type='text'
-                                    placeholder='Full Name'
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                ></Form.Control>
-                            </Form.Group>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Date</label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId='Date' className='registerform-group'>
-                                <div >
-                                    <DatePicker
-                                        selected={date}
-                                        onChange={(date) => setDate(date)}
-                                        peekNextMonth
-                                        showMonthDropdown
-                                        dropdownMode="select"
-                                        placeholderText="Date"
-                                        dateFormat="MMMM d, yyyy h:mm aa"
-                                    />
-                                </div>
-                            </Form.Group>
-                        </td>
-                    </tr>
+        </Row>
+        <Row>
+          <Col md={6}>
+            <Form.Group controlId='email'>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type='email'
+                placeholder='Email'
+                value={registrationForm.email}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, email: e.target.value })}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId='phone'>
+              <Form.Label>Phone Number</Form.Label>
+              <Form.Control
+                type='tel'
+                placeholder='Phone Number'
+                maxLength="10"
+                value={registrationForm.phone}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, phone: e.target.value })}
+              // required
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6}>
+            <Form.Group controlId='Age'>
+              <Form.Label>Age</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Age'
+                value={registrationForm.age}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, age: e.target.value })}
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId='gender'>
+              <Form.Label>Gender</Form.Label>
+              <Form.Control
+                as='select'
+                value={registrationForm.gender}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, gender: e.target.value })}
+                required
+              >
+                <option value=''>Choose...</option>
+                <option value='male'>Male</option>
+                <option value='female'>Female</option>
+                <option value='other'>Other</option>
+              </Form.Control>
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId='Weight'>
+              <Form.Label>Weight</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Weight in Kg'
+                value={registrationForm.weight}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, weight: e.target.value })}
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId='address'>
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={1}
+                type='text'
+                placeholder='Address'
+                value={registrationForm.address}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, address: e.target.value })}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
 
-                    <tr>
-                        <td>
-                            <label>Age</label>
-                        </td>
-                        <td>
-                            <Form.Group controlId='Age' className='registerform-group'>
-                                <Form.Control
-                                    type='text'
-                                    placeholder='Age'
-                                    value={age}
-                                    onChange={(e) => setAge(e.target.value)}
-
-                                ></Form.Control>
-                            </Form.Group>
-                        </td>
-
-
-                        <td>
-                            <label>
-                                Gender
-                            </label>
-                        </td>
-                        <td>
-                            <Form.Group controlId='Gender' className='registerform-group'>
-                                <Form.Control as="select"
-                                    value={gender}
-                                    type='text'
-                                    placeholder='Gender'
-                                    onChange={(e) => setGender(e.target.value)}
-                                >
-                                    <option value="">Sex</option>
-                                    <option value="FEMALE">FEMALE</option>
-                                    <option value="MALE">MALE</option>
-                                </Form.Control>
-                            </Form.Group>
-                        </td>
-
-                        <td>
-                            <label>Weight</label>
-                        </td>
-                        <td>
-                            <Form.Group controlId='Weight' className='registerform-group'>
-                                <Form.Control
-                                    type='text'
-                                    placeholder='Weight in Kg'
-                                    value={weight}
-                                    onChange={(e) => setWeight(e.target.value)}
-
-                                ></Form.Control>
-                            </Form.Group>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Address
-                            </label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId="address" className='registerform-group'>
-
-                                <Form.Control as="textarea" rows={2}
-                                    type='text'
-                                    placeholder='Address'
-                                    value={address}
-                                    onChange={(e) => setAddress(e.target.value)}
-                                />
-                            </Form.Group>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Email Id</label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId='email' className='registerform-group'>
-                                <Form.Control
-                                    type='email'
-                                    placeholder='email@example.com'
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                ></Form.Control>
-                            </Form.Group>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>
-                                Contact No.
-                            </label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId='phone' className='registerform-group'>
-                                <Form.Control
-                                    type="phone"
-                                    maxLength="10"
-                                    placeholder='10 digit mobile number'
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
-                                ></Form.Control>
-                            </Form.Group>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>
-                                Reference of Vaidya Manager?
-                            </label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId='reference' className='registerform-group'>
-                                <Form.Control
-                                    as="select"
-                                    type='text'
-                                    placeholder='Reference for vaidya manager?'
-                                    value={reference}
-                                    onChange={(e) => setReference(e.target.value)}
-
-                                >
-                                    <option value="">Select</option>
-                                    <option value="Newspaper">Newspaper</option>
-                                    <option value="Internet">Internet</option>
-                                    <option value="Call Center">Call Center</option>
-                                    <option value="Friend/Relative">Friend/Relative</option>
-                                    <option value="Other">Other</option>
-                                </Form.Control>
-                            </Form.Group>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Password</label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId='password' className='registerform-group'>
-                                <Form.Control
-                                    type='password'
-                                    placeholder='Enter password'
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                ></Form.Control>
-                            </Form.Group>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>Confirm Password</label>
-                        </td>
-                        <td colSpan={5}>
-                            <Form.Group controlId='confirmPassword' className='registerform-group'>
-                                <Form.Control
-                                    type='password'
-                                    placeholder='Confirm password'
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                ></Form.Control>
-                            </Form.Group>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>  <Button type='submit' variant='primary'>
-                            Register
-                        </Button>
-                            <ToastContainer />
-                        </td>
-                        <td>
-                            <Button t variant='primary'>
-                                Reset
-                            </Button></td>
-                    </tr>
-
-                    {/* <div className="userimage-upload">
-                            <label for="file-input">
-                                <img src={"/images/user(1).png"} alt="image" />
-                            </label>
-
-                            <input id="file-input" type="file" />
-                        </div>
-
-                    */}
-
-
-
-                </table>
-            </Form >
-            {/* <Row className='py-3'>
-                        <Col style={{ color: "black" }}>
-                            Have an Account?{' '}
-
-                            <Link style={{ backgroundColor: "white" }}
-                                to={redirect ? `/login?redirect=${redirect}` : '/login'}
-                            >
-                                Login
-                            </Link>
-                        </Col>
-                    </Row> */}
-            {/* </FormContainer>  */}
-        </>
-    )
+        <Row>
+          <Col md={6}>
+            <Form.Group controlId='password'>
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='Password'
+                value={registrationForm.password}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, password: e.target.value })}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId='confirmPassword'>
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control
+                type='password'
+                placeholder='Confirm Password'
+                value={registrationForm.confirmPassword}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, confirmPassword: e.target.value })}
+                required
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6}>
+            <Form.Group controlId='reference' >
+              <Form.Label>Reference for vaidya manager?</Form.Label>
+              <Form.Control
+                as="select"
+                type='text'
+                placeholder='Reference for vaidya manager?'
+                value={registrationForm.reference}
+                onChange={(e) => setRegistrationForm({ ...registrationForm, reference: e.target.value })}
+              >
+                <option value="">Reference</option>
+                <option value="Newspaper">Newspaper</option>
+                <option value="Internet">Internet</option>
+                <option value="Call Center">Call Center</option>
+                <option value="Friend/Relative">Friend/Relative</option>
+                <option value="Other">Other</option>
+              </Form.Control>
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Group controlId='registrationFor'>
+              <Form.Label>Registration For?</Form.Label>
+              <div>
+                <Form.Check
+                  inline
+                  type='radio'
+                  label='Therapy'
+                  name='registrationFor'
+                  id='therapy'
+                  value='Therapy'
+                  // checked={registrationForm.registrationFor === 'therapy'}
+                  onChange={(e) => setRegistrationForm({ ...registrationForm, registrationFor: e.target.value })}
+                  required
+                />
+                <Form.Check
+                  inline
+                  type='radio'
+                  label='Inquiry'
+                  name='registrationFor'
+                  id='inquiry'
+                  value='Inquiry'
+                  // checked={registrationForm.gender === 'female'}
+                  onChange={(e) => setRegistrationForm({ ...registrationForm, registrationFor: e.target.value })}
+                  required
+                />
+              </div>
+            </Form.Group>
+          </Col>
+        </Row>
+        <Button type='submit' variant='primary' className='mb-1'>
+          Sign Up
+        </Button>
+        <ToastContainer autoClose={10000} />
+      </Form>
+    </>
+  )
 }
 
 export default Register

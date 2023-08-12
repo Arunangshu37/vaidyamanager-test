@@ -1,17 +1,14 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import dotenv from 'dotenv'
 
-/**
- * Method that connects our MongoDB database.
- */
 const connectDB = async () => {
 try {
-        // const atlasURI =`mongodb+srv://User:OEIAgxSAYPOH5d5u@cluster0.lhx2giy.mongodb.net/test`;
-        // const atlasURI = `mongodb+srv://root:root@cluster0.9xex1.mongodb.net/etestdb?retryWrites=true&w=majority`;
-        // const atlasURI = `mongodb+srv://root:root@cluster0.9xex1.mongodb.net/mindvein?retryWrites=true&w=majority`;
-        // const atlasURI = `mongodb+srv://root:root@cluster1.8utxkxi.mongodb.net/vaidya_manager?retryWrites=true&w=majority`;
-// const atlasURI =`mongodb+srv://root:root@cluster1.8utxkxi.mongodb.net/vaidya_manager?authMechanism=SCRAM-SHA-1`
-        const atlasURI =`mongodb://localhost:27017/vaidya_manager`
-        const conn = await mongoose.connect(atlasURI, {
+    dotenv.config()
+    // console.log('Env loaded:', process.env.DATABASE);
+        // const DB = process.env.DATABASE;
+        // console.log('DB:', DB);
+        // const atlasURI =`mongodb://localhost:27017/vaidya_manager`
+        const conn = await mongoose.connect(process.env.DATABASE, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
             useCreateIndex: true,

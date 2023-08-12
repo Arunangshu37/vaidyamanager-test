@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Container, Row, Card, Button } from 'react-bootstrap'
+import React from 'react'
+import { Container, Card } from 'react-bootstrap'
 
 
 const PrivacyPolicy = ({ history }) => {

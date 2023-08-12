@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import DatePicker from "react-datepicker";
+import React, { useState, useEffect } from 'react';
+
 import "react-datepicker/dist/react-datepicker.css";
-import { useDispatch, useSelector } from 'react-redux'
-import '../demoreg.css'
-import '../register.css'
+import { useDispatch, useSelector } from 'react-redux';
+// import '../demoreg.css'
+// import '../register.css'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { register } from '../actions/userActions'
@@ -102,7 +101,7 @@ const DemoRegistration = ({ location, history }) => {
 
     return (
         <>
-
+            {/* 
             <div className="wrapper">
                 <div className='formContent'>
                     <FormContainer>
@@ -211,9 +210,95 @@ const DemoRegistration = ({ location, history }) => {
                     </FormContainer >
 
                 </div>
-            </div>
+            </div> */}
 
-
+            <Form onSubmit={submitHandler} className='registerform' >
+                <Row>
+                    <Col md={6}>
+                        <Form.Group controlId='name'>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                type='text'
+                                placeholder='Full Name'
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                        <Form.Group controlId='email'>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                type='email'
+                                placeholder='Email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={6}>
+                        <Form.Group controlId='phone'>
+                            <Form.Label>Phone Number</Form.Label>
+                            <Form.Control
+                                type='tel'
+                                placeholder='Phone Number'
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                        <Form.Group controlId='password'>
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                                type='password'
+                                placeholder='Password'
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={6}>
+                        <Form.Group controlId='confirmPassword'>
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control
+                                type='password'
+                                placeholder='Confirm Password'
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                        <Form.Group controlId='gender'>
+                            <Form.Label>Gender</Form.Label>
+                            <Form.Control
+                                as='select'
+                                value={gender}
+                                onChange={(e) => setGender(e.target.value)}
+                                required
+                            >
+                                <option value=''>Choose...</option>
+                                <option value='male'>Male</option>
+                                <option value='female'>Female</option>
+                                <option value='other'>Other</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Button type='submit' variant='primary'>
+                    Sign Up
+                </Button>
+            </Form>
 
         </>
     )

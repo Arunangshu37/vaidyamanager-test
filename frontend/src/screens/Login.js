@@ -1,33 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 // Bootstrap Components
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 // UI Components
 import Message from '../components/Message'
-// import Loader from '../components/Loader'
-import LoadingSpinner from '../components/LoadingSpinner'
-import FormContainer from '../components/FormContainer'
 // Redux Actions
 import { login } from '../actions/userActions'
 //css
 import "../login.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = ({ location, history }) => {
     const [isFetching, setIsFetching] = useState(true);
     const [passwordShown, setPasswordShown] = useState(false);
 
-    // useEffect(() => {
-    //     setTimeout(function () {
-    //         // console.log("Delayed for 5 second.");
-    //         setIsFetching(false);
-    //     }, 2000);
-    //     history.push('/login')
-    // }, []);
     const eye = <FontAwesomeIcon icon={faEye} />;
     // State to hold email and password
     const [email, setEmail] = useState('')
@@ -39,14 +30,6 @@ const Login = ({ location, history }) => {
     const userLogin = useSelector((state) => state.userLogin)
     const { loading, error, userInfo } = userLogin
 
-    // const redirect = location.search ? location.search.split('=')[1] : '/'
-
-    // useEffect(() => {
-    //     // If there is user info then redirect
-    //     if (userInfo) {
-    //         history.push(redirect)
-    //     }
-    // }, [history, userInfo, redirect])
 
     // Handler that logs in the user
     const submitHandler = (e) => {
@@ -54,6 +37,9 @@ const Login = ({ location, history }) => {
         // console.log("trigger")
         // Dispatch login
         dispatch(login(email, password))
+        toast.success('Registration Successfully!', {
+            position: toast.POSITION.TOP_CENTER
+          });
         localStorage.setItem('isLogin', true)
     }
     // Password toggle handler
@@ -111,23 +97,6 @@ const Login = ({ location, history }) => {
                                 >
                                     Sign In
                                 </Button>
-                                {/* <div className="divider d-flex align-items-center my-4">
-                                    <p className="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-                                </div> */}
-                                {/* <Button type="submit" className="btn btn-primary btn-lg btn-block" style={{ color:"white",backgroundColor: "#3b5998" }}
-                                >
-                                    <Link style={{ color:"white"}} to={'/otpscreen'}>
-                                    Sign In With Phone No
-                                    </Link>
-                                </Button> */}
-                                {/* <Row className='py-3'>
-                                    <Col>
-                                        New Customer{' '}
-                                        <Link to={"/mastertab"}>
-                                            Register
-                                        </Link>
-                                    </Col>
-                                </Row> */}
                             </Form>
                         </div>
                     </div>

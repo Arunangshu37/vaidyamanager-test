@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 let googleTransliterate = require("google-input-tool");
 
 const SearchSymptom = () => {

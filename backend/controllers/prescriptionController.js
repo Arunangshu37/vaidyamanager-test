@@ -43,6 +43,7 @@ const addPrescriptionDetails = asyncHandler(async (req, res) => {
         report,
         payment,
         Remark,
+     
 
     } = req.body
 
@@ -63,11 +64,14 @@ const addPrescriptionDetails = asyncHandler(async (req, res) => {
         Video,
         report,
         payment,
-        Remark
+        Remark,
 
-    })
+
+    }
+    )
+    
     const createdPrescription = await PrescripionData.save();
-    console.log("suceess")
+    // console.log("suceess")
     res.status(201).json(createdPrescription)
 
 })
@@ -85,19 +89,26 @@ const addMedicineDetails = asyncHandler(async (req, res) => {
         medicine_reciver_name,
     } = req.body
 
-    const MedicineData = new Medicine({
-        medicineName,
-        Qty,
-        Unit,
-        Gram,
-        supplierName,
-        contactNo,
-        amount,
-        medicine_reciver_name,
+      // Check if the medicine already exists
+      const existingMedicine = await Medicine.findOne({ medicineName })
 
-    })
-    const createdMedicine = await MedicineData.save();
-    res.status(201).json(createdMedicine)
+      if (existingMedicine) {
+          res.status(400).json({ message: 'Medicine name already exists' })
+      } else {
+          const MedicineData = new Medicine({
+              medicineName,
+              Qty,
+              Unit,
+              Gram,
+              supplierName,
+              contactNo,
+              amount,
+              medicine_reciver_name,
+          })
+          const createdMedicine = await MedicineData.save();
+          res.status(201).json(createdMedicine)
+       
+      }
 
 })
 

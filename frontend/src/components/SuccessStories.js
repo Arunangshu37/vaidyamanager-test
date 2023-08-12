@@ -1,17 +1,14 @@
-import React from 'react'
-// import Carousel from "react-multi-carousel";
-// import "react-multi-carousel/lib/styles.css";
+import React from 'react';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import '../stories.css'
 
 
 const SuccessStories = () => {
   
     return (
-        <>
-        
-
-            
-            {/* <Carousel
+        <> 
+            <Carousel
                 additionalTransfrom={0}
                 arrows={true} 
                 autoPlay={true}
@@ -96,7 +93,7 @@ const SuccessStories = () => {
                     <div id="image-caption">-Anonomyus</div>
                 </div>
 
-            </Carousel> */}
+            </Carousel>
         </>
     )
 }

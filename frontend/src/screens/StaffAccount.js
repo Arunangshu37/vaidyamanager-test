@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import CardGroup from 'react-bootstrap/CardGroup';
-import { Col, Button, Row, Card, ListGroup } from 'react-bootstrap'
-import { getUserInfoDetails, updateUserStaff } from '../actions/userActions'
+import {Card } from 'react-bootstrap'
+import { getUserInfoDetails} from '../actions/userActions'
 import { useDispatch, useSelector } from 'react-redux'
 
 const StaffAccount = () => {
