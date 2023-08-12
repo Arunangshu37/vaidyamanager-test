@@ -12,6 +12,7 @@ import dashboardRoutes from './routes/dashboardRoutes.js'
 import doctorRoutes from './routes/doctorRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import fs from 'fs';
+import { fileURLToPath } from 'url';
 import cors from 'cors';
 import path from 'path';
 import multer from 'multer'
@@ -21,13 +22,17 @@ dotenv.config()
 // Establish connection with MongoDB database.
 connectDB()
 const app = express();
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // Body parser to accept JSON data
 app.use(express.json({limit: '100mb'}))
 app.use(cors())
-app.get('/', (req, res) => {
-    res.send('API is running')
-})
 
+// Error handling middleware
+// app.use(notFound)
+// app.use(errorHandler)
 // User routes
 app.use('/api/users', userRoutes)
 // doctors route
@@ -53,10 +58,16 @@ const mutex = mutexify();
 var upload = multer();
 app.use(upload.array()); 
 app.use(express.urlencoded({ limit: '100000000',extended: true, parameterLimit:50000 })); 
-// Error handling middleware
-app.use(notFound)
-app.use(errorHandler)
+
+
+
 const PORT = process.env.PORT || 8000
+
+app.use(express.static('frontend/build'));
+// app.use(express.static(path.join(__dirname, '/frontend/build')));
+app.get("/*", (req, resp)=>{
+    resp.sendFile(path.resolve("frontend", "build", "index.html"));
+})
 app.listen(PORT, () => {
     console.log(
         `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.green
