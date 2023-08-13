@@ -63,10 +63,10 @@ app.use(express.urlencoded({ limit: '100000000',extended: true, parameterLimit:5
 
 const PORT = process.env.PORT || 8000
 
-app.use(express.static('./frontend/build'));
-app.use(express.static(path.join(__dirname, '/frontend/build')));
+app.use(express.static('../frontend/build'));
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 app.get("/*", (req, resp)=>{
-    resp.sendFile(path.resolve("./frontend", "build", "index.html"));
+    resp.sendFile(path.resolve("../frontend", "build", "index.html"));
 })
 app.listen(PORT, () => {
     console.log(
