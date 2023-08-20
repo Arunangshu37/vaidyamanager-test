@@ -47,11 +47,12 @@ import Signup from './screens/Signup'
 import PrescriptionLists from './components/PrescriptionLists'
 import Doctors from './screens/Doctors';
 import SuccessStories from './components/SuccessStories';
+import { HashRouter } from 'react-router-dom/cjs/react-router-dom';
 
 const App = () => {
 
     return (
-        <Router history={history}>
+        <HashRouter history={history}>
             <Header />
             <main className='py-0'>
             <Route path='/'component={HomeScreen} exact />
@@ -93,7 +94,7 @@ const App = () => {
                 </Container>
             </main>
             <Footer />
-        </Router>
+        </HashRouter>
 
     )
 }
